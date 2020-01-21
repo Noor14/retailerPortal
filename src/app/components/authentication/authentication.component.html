@@ -11,7 +11,8 @@
                     The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,
                     content here', making it look like readable English.
                     </p>
-                    <button class="btn btn-primary">Support</button>
+                    <button class="btn btn-primary mr-3">Support</button>
+                    <button class="btn btn-primary ml-3" *ngIf="signupBtnToggle" routerLink="/registration">Signup</button>
                 </div>
                 <div class="col-lg-6 col-md-12 offset-lg-1">
                     <router-outlet></router-outlet>
