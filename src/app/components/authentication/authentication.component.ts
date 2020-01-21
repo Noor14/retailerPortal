@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-authentication',
@@ -8,9 +9,15 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class AuthenticationComponent implements OnInit {
 
-  constructor() { }
+  public signupBtnToggle: boolean = false;
+  constructor(private _sharedService: SharedService) { }
 
   ngOnInit() {
+    this._sharedService.signUpBtnToggling.subscribe((res)=>{
+      if(res){
+        this.signupBtnToggle = (res =='/login')? true : false;
+      }
+    })
   }
 
 }
