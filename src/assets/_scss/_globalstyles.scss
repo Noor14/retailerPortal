@@ -5,11 +5,13 @@ html{
     padding:0;
     body{
       @extend html;
+      font-family: $baseSourceSansRegularFont;
       .pointer{
         cursor:pointer;
       }
       .title{
         color: $baseColor;
+        font-family: $baseSourceSansRegularFont;
       }
       .small-modal {
         .modal-dialog {
