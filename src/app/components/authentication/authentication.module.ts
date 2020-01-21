@@ -5,12 +5,14 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationComponent } from './authentication.component';
+import { HttpClientModule } from "@angular/common/http";
 
 
 @NgModule({
   declarations: [RegistrationComponent, LoginComponent, AuthenticationComponent],
   imports: [
     CommonModule,
+    HttpClientModule,
     AuthenticationRoutingModule
   ]
 })
