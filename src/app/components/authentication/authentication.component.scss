@@ -1,0 +1,17 @@
+.authentication{
+    background: url('../../../assets/_images/bg.jpg') no-repeat center center fixed;
+    min-height: 100vh;
+    background-size: cover;
+    .content{
+        padding: 3.5rem 0;
+        .logo{
+            background-image: url('../../../assets/_images/logo.png');
+            width: 155px;
+            height: 48px;
+            background-repeat: no-repeat;
+            background-position: left;
+
+        }
+
+    }
+}

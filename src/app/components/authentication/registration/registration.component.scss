@@ -1,0 +1,19 @@
+@import "../../../../assets/_scss/_variables";
+
+.registration{
+    padding: 20px 45px;
+    background: #fbfafa;
+    box-shadow: 0px 0px 4px 3px #e6e6e6;
+    h4.title{
+        position: relative;
+        padding-left: 15px;
+        &::before{
+        width: 2.5px;
+        height: 38px;
+        content: '';
+        background: $baseColor;
+        position: absolute;
+        left: 0;
+      }
+    }
+}
