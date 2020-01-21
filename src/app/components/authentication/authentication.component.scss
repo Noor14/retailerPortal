@@ -1,3 +1,5 @@
+@import "../../../assets/_scss/_variables";
+
 .authentication{
     background: url('../../../assets/_images/bg.jpg') no-repeat center center fixed;
     min-height: 100vh;
@@ -5,13 +7,30 @@
     .content{
         padding: 3.5rem 0;
         .logo{
-            background-image: url('../../../assets/_images/logo.png');
+            background: url('../../../assets/_images/logo.png') no-repeat left;
             width: 155px;
             height: 48px;
-            background-repeat: no-repeat;
-            background-position: left;
 
         }
-
+        .login{
+            padding: 20px 45px;
+            background: #fbfafa;
+            box-shadow: 0px 0px 4px 3px #e6e6e6;
+            h4.title{
+                position: relative;
+                padding-left: 15px;
+                &::before{
+                width: 2.5px;
+                height: 38px;
+                content: '';
+                background: $baseColor;
+                position: absolute;
+                left: 0;
+            }
+            }
+        }
+        .registration{
+            @extend .login;
+        }
     }
 }

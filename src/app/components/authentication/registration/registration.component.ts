@@ -11,6 +11,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.toastr.success('hello', 'noor')
   }
 
 }
