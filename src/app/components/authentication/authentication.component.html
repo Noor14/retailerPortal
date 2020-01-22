@@ -13,8 +13,8 @@
                     </p>
                     <button class="btn btn-primary">Support</button>
                 </div>
-                <div class="col-lg-6 col-md-12 offset-lg-1">
-                    <router-outlet></router-outlet>
+                <div class="col-lg-6 col-md-12 offset-lg-1 pages" [@fadeAnimation]="activatedRoute(outlet)">
+                    <router-outlet #outlet="outlet"></router-outlet>
                 </div>
             </div>
         </section>
