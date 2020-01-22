@@ -1,0 +1,53 @@
+@import "../../../assets/_scss/_variables";
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    nav{
+        padding: 0 15px;
+        ul{
+            .nav-item{
+              border-bottom: 1px solid #f3f3f3;
+              .nav-link{
+                padding: 20px 0;
+                color: #6D6E71;
+                position: relative;
+                padding-left: 30px;
+                 &:hover{
+                     color: #1D2025;
+                     &::before{
+                        width: 2.5px;
+                        height: 38px;
+                        content: '';
+                        background:  #6D6E71;
+                        position: absolute;
+                        left: 0;
+                        top: 15px;
+              }
+            }
+              &.active{
+                color: #1D2025;
+                &::before{
+                    width: 2.5px;
+                    height: 38px;
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 15px;
+                    background:  $baseColor;
+                }
+        
+              }
+              }
+              }
+            }
+    }
+  
+    footer{
+        text-align: center;
+        color: #6D6E71;
+        margin-bottom: 10px;
+    }
+  }
+  

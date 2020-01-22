@@ -1,0 +1,16 @@
+<app-header></app-header>
+<section class="container-fluid">
+    <div class="row">
+      <div class="col-md-2 navigation">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-md-10 main">
+      <!-- <section class="container-fluid p-0"> -->
+          <section class="pages" [@fadeAnimation]="activatedRoute(outlet)">
+            <router-outlet #outlet="outlet"></router-outlet>
+          </section>
+      <!-- </section> -->
+    </div>
+    </div>
+</section>
+
