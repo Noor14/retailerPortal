@@ -6,7 +6,7 @@ import { AppComponent } from './app.component'
 import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
  
   ],
   imports: [
