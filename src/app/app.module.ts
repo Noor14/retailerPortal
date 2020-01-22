@@ -13,7 +13,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     AppRoutingModule,
     ToastrModule.forRoot({
-      timeOut: 10000,
+      timeOut: 1000000,
       positionClass: 'toast-top-right',
       closeButton:true,
       preventDuplicates: true,
