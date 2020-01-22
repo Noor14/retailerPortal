@@ -5,11 +5,11 @@
         <app-sidebar></app-sidebar>
     </div>
     <div class="col-md-10 main">
-      <!-- <section class="container-fluid p-0"> -->
           <section class="pages" [@fadeAnimation]="activatedRoute(outlet)">
-            <router-outlet #outlet="outlet"></router-outlet>
+            <div class="container pt-4 pb-4">
+              <router-outlet #outlet="outlet"></router-outlet>
+            </div>
           </section>
-      <!-- </section> -->
     </div>
     </div>
 </section>
