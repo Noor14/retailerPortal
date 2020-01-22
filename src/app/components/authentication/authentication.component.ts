@@ -15,7 +15,7 @@ export class AuthenticationComponent implements OnInit {
   ngOnInit() {
     this._sharedService.signUpBtnToggling.subscribe((res)=>{
       if(res){
-        this.signupBtnToggle = (res =='/login')? true : false;
+        this.signupBtnToggle = (res =='/login' || res == '/')? true : false;
       }
     })
   }
