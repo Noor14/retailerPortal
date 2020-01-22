@@ -18,6 +18,7 @@
             box-shadow: 0px 0px 4px 3px #e6e6e6;
             h4.title{
                 position: relative;
+                font-family: $baseSourceSansRegularFont;
                 padding-left: 15px;
                 &::before{
                 width: 2.5px;
@@ -27,10 +28,23 @@
                 position: absolute;
                 left: 0;
             }
+            p{
+                font-family: $baseSourceSansRegularFont;
+                font-size: 14px;
+            }
             }
         }
         .registration{
             @extend .login;
         }
+        .pages {
+            position: relative;
+             router-outlet ~ * {
+                position: absolute;
+                width: 100%;
+
+              }
+          }
+        
     }
 }
