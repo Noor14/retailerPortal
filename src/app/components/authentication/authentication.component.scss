@@ -34,6 +34,12 @@
             }
             }
         }
+        .forgotPassword{
+            @extend .login;
+        }
+        .updatePassword{
+            @extend .login;
+        }
         .registration{
             @extend .login;
         }
