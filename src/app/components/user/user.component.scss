@@ -1,18 +1,13 @@
-
-.navigation{
-     box-shadow: 0px 2px 7px -2px #d6d6d6;
-     border-right: 1px solid #e7e7e8;
-     height: calc(100vh - 61px);
-     padding: 0;
-}
 .main{
-  background-color: #F8F8F8;
-    .pages {
-      position: relative;
-      router-outlet ~ * {
-        position: absolute;
-        width: 100%;
-      }
-    }
+  height: calc(100vh - 61px);
+  .navigation{
+    box-shadow: 0px 2px 7px -2px #d6d6d6;
+    border-right: 1px solid #e7e7e8;
+    padding: 0;
   }
+.contentPages{
+  background-color: #F8F8F8;
+  }
+}
+
   

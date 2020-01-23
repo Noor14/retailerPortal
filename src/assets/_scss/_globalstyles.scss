@@ -5,6 +5,7 @@ html{
     padding:0;
     body{
       @extend html;
+      height: 100%;
       font-family: $baseSourceSansRegularFont;
       .pointer{
         cursor:pointer;
