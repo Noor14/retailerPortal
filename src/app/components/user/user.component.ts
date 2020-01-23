@@ -1,6 +1,5 @@
 import { routeAnimation } from './../../constant/animations';
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -17,7 +16,5 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
   }
-  activatedRoute(outlet: RouterOutlet){
-    if(outlet.isActivated) return outlet.activatedRoute;
-  }
+  
 }

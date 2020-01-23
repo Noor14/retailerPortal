@@ -2,16 +2,16 @@ import { environment } from '../../environments/environment';
 export let baseApi :string;
 if (environment.qa) {
     // QA URL
-    baseApi = "http://10.20.1.13:8091/api/";
+    baseApi = "http://192.168.200.46:3020/api/";
 
 }
 else if (environment.dev) {
     // DEV URL
-    baseApi = "http://10.20.1.13:9091/api/";
+    baseApi = "http://192.168.200.46:3020/api/";
 }
 else if (environment.uat) {
     // UAT URL
-    baseApi = "http://10.20.1.13:7091/api/";
+    baseApi = "http://192.168.200.46:3020/api/";
 
 }
 else if (environment.prod) {
@@ -20,5 +20,5 @@ else if (environment.prod) {
 }
 else {
     // PERSONAL URL
-    baseApi = "192.168.200.51:3020/";
+    baseApi = "http://192.168.200.46:3020/";
 }

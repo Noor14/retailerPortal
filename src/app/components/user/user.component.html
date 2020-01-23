@@ -1,15 +1,13 @@
 <app-header></app-header>
 <section class="container-fluid">
-    <div class="row">
+    <div class="row main">
       <div class="col-md-2 navigation">
         <app-sidebar></app-sidebar>
     </div>
-    <div class="col-md-10 main">
-          <section class="pages" [@fadeAnimation]="activatedRoute(outlet)">
+    <div class="col-md-10 contentPages">
             <div class="container pt-4 pb-4">
-              <router-outlet #outlet="outlet"></router-outlet>
+              <router-outlet></router-outlet>
             </div>
-          </section>
     </div>
     </div>
 </section>
