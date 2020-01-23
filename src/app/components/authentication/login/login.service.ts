@@ -13,7 +13,7 @@ export class LoginService {
 
   }
     let promise = new Promise((resolve, reject) => {
-      const apiURL = `${baseApi}Token`;
+      const apiURL = `${baseApi}/Token`;
       this._http.post(apiURL, userCredentials,httpOptions)
         .toPromise()
         .then(

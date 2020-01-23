@@ -16,14 +16,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-    check(){
+    login(){
      this.loginService.login(this.userCredentials)
-     .then( data=>{
-      this.loginCredentials =data;
-       console.log(data);
-       if(this.loginCredentials.ErrorCode){
-          this.loginFailure= true;
-       }
+     .then( (data:any)=>{
+      if(data.ErrorCode){
+        this.loginFailure= true;
+      }else{
+        this.loginCredentials =data;
+      }
      })
      .catch(err =>{
        console.log(err);
