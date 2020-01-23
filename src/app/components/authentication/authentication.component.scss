@@ -5,7 +5,7 @@
     min-height: 100vh;
     background-size: cover;
     .content{
-        padding: 3.5rem 0;
+        padding: 1.8rem 0;
         .logo{
             background: url('../../../assets/_images/logo.png') no-repeat left;
             width: 155px;
@@ -37,14 +37,6 @@
         .registration{
             @extend .login;
         }
-        .pages {
-            position: relative;
-             router-outlet ~ * {
-                position: absolute;
-                width: 100%;
-
-              }
-          }
         
     }
 }
