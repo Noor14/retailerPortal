@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
 import { baseApi } from '../../../constant/baseurl';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
   constructor(private _http: HttpClient) { }
-  login() {
+  login(userCredentials :any) {
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', 'dataType': 'json' })
+
+  }
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/Token`;
-      this._http.post(apiURL, {})
+      this._http.post(apiURL, userCredentials,httpOptions)
         .toPromise()
         .then(
-          succ => { // Success
-          // succ.json().results;
-          resolve();
+          res => { // Success
+            
+            resolve(res);
           },
           err => { // Error
           reject(err);
