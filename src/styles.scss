@@ -10,10 +10,8 @@
       background-color: #fdf6ec;
       border: 1px solid #97bb3d;
       color: black !important;
-      box-shadow: 0 0 0px #999999;
-      padding: 10px 15px 10px 45px;
-    //   font-size: $font-size-base;
       background-image: unset;
+      box-shadow:unset;
       .toast-close-button {
         outline: 0;
       }
@@ -41,10 +39,8 @@
       background-color: #ffffff;
       border: 1px solid #97bb3d;
       .toast-message:before {
-        // @extend .toast-message:before;
         background-color: #97bb3d;
         color: #6d6e72;
-        // background-image: url("./assets/images/icons/icon_success_white.svg");
         background-size: 8px;
         background-position: 20%;
         background-repeat: no-repeat;
