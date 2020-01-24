@@ -28,4 +28,26 @@ export class LoginService {
     });
     return promise;
   }
+
+  registerUser(UserData){
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', 'dataType': 'json' })
+
+  }
+  
+  let promise = new Promise((resolve,reject) =>{
+    const apiURL = `${baseApi}api/retailer/Register`;
+  this._http.post(apiURL,UserData,httpOptions)
+  .toPromise()
+  .then(
+    res =>{
+      resolve(res);
+    },
+    err =>{
+      reject(err);
+    }
+  )
+  });
+  return promise;
+  }
   }
