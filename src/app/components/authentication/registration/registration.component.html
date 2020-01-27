@@ -2,29 +2,18 @@
     <h4 class="mb-4 title">Registration</h4>
     <form [formGroup]="registerForm">
       <div class="form-group">
-          <input type="text" class="form-control" required formControlName="Name" placeholder="Username">
+          <input type="text" class="form-control" formControlName="Name" placeholder="Username">
           
       </div>
-<<<<<<< HEAD
-        <div class="form-group">
-            <div class="row">
-                <div class="col-6">
-                    <input type="password" required formControlName="Password" class="form-control" autocomplete="new-password" placeholder="Password">
-                </div>
-                <div class="col-6">
-                    <input type="password" required formControlName="ConfirmPassword" class="form-control" autocomplete="new-password" placeholder="Confirm Password">
-                </div>
-=======
       <div class="row">
         <div class="col-sm-12 col-md-6">
             <div class="form-group">
-                <input type="password" class="form-control" autocomplete="new-password" placeholder="Password">
->>>>>>> bc880417164ad3e8d34f695901604df58cb38da1
+                <input type="password" class="form-control" formControlName="Password" autocomplete="new-password" placeholder="Password">
             </div>
         </div>
         <div class="col-sm-12 col-md-6">
             <div class="form-group">
-                <input type="password" class="form-control" autocomplete="new-password" placeholder="Confirm Password">
+                <input type="password" class="form-control" formControlName="ConfirmPassword" autocomplete="new-password" placeholder="Confirm Password">
             </div>
         </div>
       </div>
@@ -34,28 +23,32 @@
             <input type="text" class="form-control" formControlName="Username" placeholder="Username">
             <small *ngIf="UserExist" >Username Already Exist</small>
         </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-6">
-                    <input type="email" required class="form-control" formControlName="Email" placeholder="Email">
-                    <small *ngIf="emailExist" >Email Already Exist</small>
-                </div>
-                <div class="col-6">
-                    <input type="text"  required class="form-control" [textMask]="{mask: cnicMask}"    formControlName="CNIC" placeholder="CNIC">
-                    <small *ngIf="cnicExist" >CNIC Already Exist</small>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <input type="email" class="form-control" formControlName="Email" placeholder="Email">
+					<small *ngIf="emailExist" >Email Already Exist</small>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-6">
-                    <input type="text"     required class="form-control" [textMask]="{mask: mobileMask}" formControlName="Mobile" placeholder="Mobile No">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" [textMask]="{mask: cnicMask}" formControlName="CNIC"  placeholder="CNIC">
+					<small *ngIf="cnicExist" >CNIC Already Exist</small>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" [textMask]="{mask: mobileMask}" formControlName="Mobile" placeholder="Mobile No">
                     <small *ngIf="mobileExist" >Mobile Already Exist</small>
-                </div>
-                <div class="col-6">
-                    <input type="text" required class="form-control" formControlName="CompanyName" placeholder="Store Name">
+			</div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" formControlName="CompanyName" placeholder="Store Name">
                     <small *ngIf="companyExist" >Company Already Exist</small>
-                </div>
+				</div>
             </div>
           </div>
         <div class="form-group">
