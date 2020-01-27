@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-updatepassowrd',
@@ -8,14 +7,9 @@ import { LoginService } from '../login.service';
 })
 export class UpdatepassowrdComponent implements OnInit {
 
-  constructor(private _loginService:LoginService) { }
+  constructor() { }
 
   ngOnInit() {
   }
-
-  ChangePassword(){
-    
-  }
-
 
 }

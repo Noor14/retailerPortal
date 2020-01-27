@@ -41,7 +41,7 @@ export class RegistrationComponent implements OnInit {
   }
 
 
-  Register(){
+  register(){
     if(this.registerForm.valid){
       this._loginService.PostCalls(this.registerForm.value,"retailer/Register",null)
       .then((data:any) =>{
