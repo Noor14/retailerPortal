@@ -5,6 +5,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { AuthenticationComponent } from './authentication.component';
 import { UpdatepassowrdComponent } from './updatepassowrd/updatepassowrd.component';
 import { ForgetpassowrdComponent } from './forgetpassowrd/forgetpassowrd.component';
+import { EULAComponent } from './eula/eula.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'registration', component: RegistrationComponent },
     { path: 'forgetPassword', component: ForgetpassowrdComponent },
-    { path: 'updatePassword', component: UpdatepassowrdComponent },
+    { path: 'updatePasswcord', component: UpdatepassowrdComponent },
+    { path: 'eula', component: EULAComponent },
     { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]
   }

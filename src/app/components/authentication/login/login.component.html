@@ -8,7 +8,7 @@
     <div class="form-group">
       <input type="password"  required [(ngModel)]="userCredentials.Password" (click)="loginFailure=false" name="password"
         class="form-control" autocomplete="new-password" placeholder="Password">
-      <span class="errorMessage" *ngIf="loginFailure">Invalid Login Credentials</span>
+      <p class="errorMessage"> <span *ngIf="loginFailure"> Invalid Login Credentials</span></p>
     </div>
     <div class="d-flex justify-content-center">
 

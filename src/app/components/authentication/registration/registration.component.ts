@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Validators, FormControl, FormGroup} from '@angular/forms';
 import { AppMasks , AppPattern } from '../../../shared/app.mask'
-import { LoginService } from '../login/login.service';
+import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -31,8 +31,8 @@ export class RegistrationComponent implements OnInit {
       Name:new FormControl(null,[Validators.required]),
       Email:new FormControl(null,[Validators.required,Validators.pattern(AppPattern.email_Pattern)]),
       Mobile:new FormControl(null,[Validators.required,Validators.pattern(AppPattern.mobile_Pattern)]),
-      Password:new FormControl(null,[Validators.required]),
-      ConfirmPassword:new FormControl(null,[Validators.required]),
+      Password:new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
+      ConfirmPassword:new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
       Username:new FormControl(null,[Validators.required]),
       CNIC:new FormControl(null,[Validators.required,Validators.pattern(AppPattern.cnic_Pattern)]),
       CompanyName:new FormControl(null,[Validators.required]),
@@ -43,7 +43,7 @@ export class RegistrationComponent implements OnInit {
 
   Register(){
     if(this.registerForm.valid){
-      this._loginService.registerUser(this.registerForm.value)
+      this._loginService.PostCalls(this.registerForm.value,"retailer/Register",null)
       .then((data:any) =>{
         if(data.Found){
           this.emailExist = data.Email;

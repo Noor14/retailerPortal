@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { LoginService } from './login.service';
+import { LoginService } from '../login.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,14 +14,14 @@ export class LoginComponent implements OnInit {
   userCredentials = { "grant_type": "password" };
   loginCredentials: any = {};
   loginFailure: boolean = false;
-  constructor(private loginService: LoginService, private toast: ToastrService,
-    private modalService: NgbModal) { }
+  constructor(private _loginService: LoginService, private _toast: ToastrService,
+    private _router : Router) { }
 
-  ngOnInit() {
+  ngOnInit() { 
   }
   check(status) {
     if (status) {
-      this.loginService.login(this.userCredentials)
+      this._loginService.login(this.userCredentials)
         .then(data => {
           this.loginCredentials = data;
           console.log(data);
@@ -29,7 +30,9 @@ export class LoginComponent implements OnInit {
           }
           else {
             if (this.loginCredentials.UserAccount.IsTermAndConditionAccepted == 0) {
-              this.modalService.open(this.longContent, { scrollable: true, size: 'lg' });
+              sessionStorage.setItem('UserIdentity', JSON.stringify( this.loginCredentials.UserIdentity)); // can be used if you want to use session storage other chnge would be in Authentication Guard and home
+              localStorage.setItem('getSessionStorage', JSON.stringify( this.loginCredentials.UserIdentity));
+              this._router.navigate(['/eula'])
             }
           }
         })
