@@ -16,7 +16,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'registration', component: RegistrationComponent },
     { path: 'forgetPassword', component: ForgetpassowrdComponent },
-    { path: 'updatePasswcord', component: UpdatepassowrdComponent },
+    { path: 'updatePassword', component: UpdatepassowrdComponent },
     { path: 'eula', component: EULAComponent },
     { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]
