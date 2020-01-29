@@ -1,5 +1,4 @@
-import { routeAnimation } from './../../constant/animations';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
@@ -8,17 +7,21 @@ import { SharedService } from 'src/app/services/shared.service';
   styleUrls: ['./authentication.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AuthenticationComponent implements OnInit {
+export class AuthenticationComponent implements OnInit, OnDestroy {
 
-  public signupBtnToggle: boolean = false;
+  public signupBtnToggle: boolean = true;
+  private signupBTnSubscription: any;
   constructor(private _sharedService: SharedService) { }
 
   ngOnInit() {
-    this._sharedService.signUpBtnToggling.subscribe((res)=>{
+    this.signupBTnSubscription = this._sharedService.signUpBtnToggling.subscribe((res)=>{
       if(res){
-        this.signupBtnToggle = (res =='/login' || res == '/')? true : false;
+        this.signupBtnToggle = (res =='/registration')? false : true;
       }
     })
+  }
+  ngOnDestroy(){
+    this.signupBTnSubscription.unsubscribe();
   }
 
 }

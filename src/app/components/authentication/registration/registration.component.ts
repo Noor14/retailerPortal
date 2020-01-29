@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { AppMasks, AppPattern } from '../../../shared/app.mask'
-import { LoginService } from '../login.service';
+import { LoginService } from '../login/login.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,11 +14,11 @@ export class RegistrationComponent implements OnInit {
   public registerForm: FormGroup;
   public cnicMask = AppMasks.cnic_Mask;
   public mobileMask = AppMasks.mobile_Mask;
-  emailExist = false;
-  UserExist = false;
-  cnicExist = false;
-  companyExist = false;
-  mobileExist = false;
+  public emailExist = false;
+  public userExist = false;
+  public cnicExist = false;
+  public companyExist = false;
+  public mobileExist = false;
 
   constructor(
     private _toastr: ToastrService,
@@ -41,14 +41,14 @@ export class RegistrationComponent implements OnInit {
   }
 
 
-  Register() {
+  register() {
     if (this.registerForm.valid) {
       if (this.registerForm.value.Password === this.registerForm.value.ConfirmPassword) {
         this._loginService.PostCalls(this.registerForm.value, "retailer/Register", null)
           .then((data: any) => {
             if (data.Found) {
               this.emailExist = data.Email;
-              this.UserExist = data.Username;
+              this.userExist = data.Username;
               this.cnicExist = data.CNIC;
               this.mobileExist = data.Mobile;
               this.companyExist = data.Company;
@@ -62,10 +62,6 @@ export class RegistrationComponent implements OnInit {
           .catch(err => {
             this._toastr.error("h", "h");
           })
-      }
-      else{
-        this._toastr.error("password", "h");
-
       }
     }
   }
