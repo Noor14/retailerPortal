@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component'
 import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -14,7 +15,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     AppRoutingModule,
     ToastrModule.forRoot({
-      timeOut: 10000000,
+      timeOut: 10000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     })

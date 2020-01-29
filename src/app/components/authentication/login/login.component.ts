@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,26 +10,44 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  userCredentials = { "grant_type": "password"};
-  loginCredentials :any={};
-  loginFailure: boolean=false;
-  constructor(private loginService :LoginService,private toast:ToastrService) { }
+  public loginForm : FormGroup
+  public loginFailure: boolean = false;
+  constructor(
+    private _loginService: LoginService,
+    private _toast: ToastrService,
+    private _router: Router) {
+  }
 
   ngOnInit() {
+    this.loginForm = new FormGroup ({
+      Username: new FormControl(null, [Validators.required]),
+      Password: new FormControl(null, [Validators.required]),
+      grant_type: new FormControl("password")
+    });
   }
-    check(){
-     this.loginService.login(this.userCredentials)
-     .then( data=>{
-      this.loginCredentials =data;
-       console.log(data);
-       if(this.loginCredentials.ErrorCode){
-          this.loginFailure= true;
-       }
-     })
-     .catch(err =>{
-       console.log(err);
-     })
-  
 
+  login() {
+    if (this.loginForm.valid) {
+      this._loginService.login(this.loginForm.value)
+        .then((data:any) => {
+          if (data.ErrorCode) {
+            this.loginFailure = true;
+          }
+          else {
+            if (!data.UserAccount.IsTermAndConditionAccepted) {
+              sessionStorage.setItem('userIdentity', JSON.stringify(data)); // can be used if you want to use session storage other chnge would be in Authentication Guard and home
+              this._router.navigate(['/eula'])
+            }
+            else {
+              this._router.navigate(['/user/dashboard'])
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
+
+  }
+
 }

@@ -3,8 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AuthenticationComponent } from './authentication.component';
-import { UpdatepassowrdComponent } from './updatepassowrd/updatepassowrd.component';
-import { ForgetpassowrdComponent } from './forgetpassowrd/forgetpassowrd.component';
+import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
+import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
+import { EULAComponent } from './eula/eula.component';
 
 const routes: Routes = [
   {
@@ -14,8 +15,9 @@ const routes: Routes = [
     children: [
     { path: 'login', component: LoginComponent },
     { path: 'registration', component: RegistrationComponent },
-    { path: 'forgetPassword', component: ForgetpassowrdComponent },
-    { path: 'updatePassword', component: UpdatepassowrdComponent },
+    { path: 'forgetPassword', component: ForgetpasswordComponent },
+    { path: 'updatePassword', component: UpdatepasswordComponent },
+    { path: 'eula', component: EULAComponent },
     { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]
   }
