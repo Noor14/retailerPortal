@@ -7,9 +7,6 @@ import { baseApi } from 'src/app/constant/baseurl';
 export class LoginService {
   userIdentity: any;
   constructor(private _http: HttpClient) {
-    if(sessionStorage.getItem('UserIdentity') !=null){
-      this.userIdentity = JSON.parse(sessionStorage.getItem('UserIdentity') );
-    }
    }
   login(userCredentials: any) {
     let httpOptions = {
@@ -22,9 +19,6 @@ export class LoginService {
         .toPromise()
         .then(
           (res: any[]) => { // Success
-            // if (res.UserAccount) {
-              this.userIdentity = res;
-            // }
             resolve(res);
           },
           err => { // Error
@@ -35,22 +29,27 @@ export class LoginService {
     return promise;
   }
 
-  PostCalls(UserData, recourseName,rightId) {
+  PostCalls(UserData, recourseName, rightId) {
     let httpOptions :any;
-    if (sessionStorage.getItem('UserIdentity') !=null ) {
+    let obj:any = { 
+      content_type: 'application/json; charset=utf-8', 
+      dataType: 'json', 
+    };
+    if (sessionStorage.getItem('userIdentity') !=null) {
+      obj.authorization = 'Bearer ' + JSON.parse(sessionStorage.getItem('userIdentity')).access_token;
+      obj.rightid = rightId;
        httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', 'dataType': 'json', 'Authorization': 'Bearer ' + this.userIdentity.access_token, 'rightid': rightId })
-
+        headers: new HttpHeaders(obj)
       }
     }
     else {
       httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', 'dataType': 'json' })
+        headers: new HttpHeaders(obj)
 
       }
     }
     let promise = new Promise((resolve, reject) => {
-      const apiURL = `${baseApi}/api/` + recourseName;
+      const apiURL = `${baseApi}/api/${recourseName}`;
       this._http.post(apiURL, UserData, httpOptions)
         .toPromise()
         .then(

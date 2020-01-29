@@ -25,13 +25,13 @@
 
         <div class="form-group">
             <input type="text" class="form-control" formControlName="Username" placeholder="Username">
-            <small *ngIf="UserExist" >Username Already Exist</small>
+            <small class="errorMessage" *ngIf="userExist" >Username Already Exist</small>
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <input type="email" class="form-control" formControlName="Email" placeholder="Email">
-					<small *ngIf="emailExist" >Email Already Exist</small>
+					<small class="errorMessage" *ngIf="emailExist" >Email Already Exist</small>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">
@@ -45,13 +45,13 @@
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <input type="text" class="form-control" [textMask]="{mask: mobileMask}" formControlName="Mobile" placeholder="Mobile No">
-                    <small *ngIf="mobileExist" >Mobile Already Exist</small>
+                    <small class="errorMessage" *ngIf="mobileExist" >Mobile Already Exist</small>
 			</div>
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <input type="text" class="form-control" formControlName="CompanyName" placeholder="Store Name">
-                    <small *ngIf="companyExist" >Company Already Exist</small>
+                    <small class="errorMessage" *ngIf="companyExist" >Company Already Exist</small>
 				</div>
             </div>
           </div>

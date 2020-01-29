@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { LoginService } from '../login.service';
+import { Component, OnInit } from '@angular/core';
+import { LoginService } from './login.service';
 import { ToastrService } from 'ngx-toastr';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
@@ -11,36 +10,32 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  @ViewChild('longContent', { static: false }) longContent: ElementRef;
-  loginForm : FormGroup
-  userCredentials = { "grant_type": "password" };
-  loginCredentials: any = {};
-  loginFailure: boolean = false;
-  constructor(private _loginService: LoginService, private _toast: ToastrService,
+  public loginForm : FormGroup
+  public loginFailure: boolean = false;
+  constructor(
+    private _loginService: LoginService,
+    private _toast: ToastrService,
     private _router: Router) {
-    this.logout();
   }
 
   ngOnInit() {
     this.loginForm = new FormGroup ({
-      Username: new FormControl("",[Validators.required]),
-      Password: new FormControl("",[Validators.required,Validators.minLength(6)]),
+      Username: new FormControl(null, [Validators.required]),
+      Password: new FormControl(null, [Validators.required]),
       grant_type: new FormControl("password")
     });
   }
-  check(status) {
-    if (status) {
+
+  login() {
+    if (this.loginForm.valid) {
       this._loginService.login(this.loginForm.value)
-        .then(data => {
-          this.loginCredentials = data;
-          console.log(data);
-          if (this.loginCredentials.ErrorCode) {
+        .then((data:any) => {
+          if (data.ErrorCode) {
             this.loginFailure = true;
           }
           else {
-            if (this.loginCredentials.UserAccount.IsTermAndConditionAccepted == 0) {
-              sessionStorage.setItem('UserIdentity', JSON.stringify(this.loginCredentials)); // can be used if you want to use session storage other chnge would be in Authentication Guard and home
-              localStorage.setItem('getSessionStorage', JSON.stringify(this.loginCredentials));
+            if (!data.UserAccount.IsTermAndConditionAccepted) {
+              sessionStorage.setItem('userIdentity', JSON.stringify(data)); // can be used if you want to use session storage other chnge would be in Authentication Guard and home
               this._router.navigate(['/eula'])
             }
             else {
@@ -52,16 +47,7 @@ export class LoginComponent implements OnInit {
           console.log(err);
         })
     }
-    else {
-      this.loginFailure = true;
-
-    }
-
-
 
   }
-  logout() {
-    sessionStorage.removeItem('UserIdentity');
-    localStorage.removeItem('UserIdentity');
-  }
+
 }
