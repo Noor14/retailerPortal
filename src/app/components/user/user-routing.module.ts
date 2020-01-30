@@ -1,3 +1,4 @@
+import { PaymentComponent } from './../../shared/payment/payment.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -11,9 +12,9 @@ const routes: Routes = [
     // pathMatch: 'full',
     children: [
     { path: 'dashboard', component: DashboardComponent },
-    // { path: 'messages', component: MessagesComponent },
-    // { path: 'calls', component: CallsComponent },
-    // { path: 'reminders', component: RemindersComponent },
+    { path: 'payment', component: PaymentComponent },
+    { path: 'editPayment/:id', component: PaymentComponent },
+    // { path: 'paymentDetail/:id', component: RemindersComponent },
     // { path: 'schedulers', component: SchedulersComponent },
     // { path: 'settings', component: SettingsComponent },
     { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }

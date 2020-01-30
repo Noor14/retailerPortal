@@ -4,13 +4,15 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogServiceService } from './dialog-modal/dialog-service';
+import { PaymentComponent } from './payment/payment.component';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,

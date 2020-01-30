@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserRoutingModule } from './user-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user.component';
+import { PaymentComponent } from '../../shared/payment/payment.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { UserComponent } from './user.component';
     DashboardComponent,
     UserComponent, 
     HeaderComponent,
+    PaymentComponent,
     SidebarComponent],
   imports: [
     CommonModule,
