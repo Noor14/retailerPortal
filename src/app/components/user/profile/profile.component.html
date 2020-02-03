@@ -1,0 +1,116 @@
+<section class="dashboard">
+    <ngb-tabset>
+        <ngb-tab>
+            <ng-template ngbTabTitle>Profile</ng-template>
+            <ng-template ngbTabContent>
+                <h3>Profile Information</h3>
+                <form [formGroup]="profileFormGroup">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="RetailerCode" readonly class="form-control"
+                                    formControlName="RetailerCode" id="RetailerCode">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <input type="text" name="Name" class="form-control" formControlName="Name" id="Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group position-relative">
+                                <input type="text" name="Email" class="form-control" formControlName="Email" id="Email">
+                                <img src="../../../../assets/_images/bell.svg" width="10px"
+                                    class="mr-3 position-absolute" style="right: 5px;
+                top: 45%;" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="CNIC" class="form-control" formControlName="CNIC"
+                                    [textMask]="{mask: cnicMask}" id="CNIC">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="Mobile" [textMask]="{mask: mobileMask}" class="form-control"
+                                    formControlName="Mobile" id="Mobile">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="CreatedDate" class="form-control" formControlName="CreatedDate"
+                                    id="CreatedDate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" name="Address" class="form-control" formControlName="Address"
+                                    id="Address">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="d-flex flex-row-reverse">
+                        <button class="btn btn-lg btn-primary ml-3" type="button" (click)="updateProfile()" [disabled]="!profileFormGroup.valid" >Update</button>
+                    </div>
+                </form>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab>
+            <ng-template ngbTabTitle>Account & Wallet</ng-template>
+            <ng-template ngbTabContent>
+
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab>
+            <ng-template ngbTabTitle>Change Password</ng-template>
+            <ng-template ngbTabContent>
+                <form [formGroup]="passwordFormGroup">
+
+                <h4>Enter old password</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group position-relative">
+                            <input type="password" name="Password" class="form-control" formControlName="Password" id="Password">
+                            <img src="../../../../assets/_images/bell.svg" width="10px" class="mr-3 position-absolute"
+                                style="right: 10px;
+                    top: 45%;" />
+                        </div>
+                    </div>
+                </div>
+                <h4>Enter new password</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group position-relative">
+                            <input type="password" name="ConfirmPassword" class="form-control" formControlName="ConfirmPassword" id="ConfirmPassword">
+                            <img src="../../../../assets/_images/bell.svg" width="10px" class="mr-3 position-absolute" style="right: 10px;
+                            top: 45%;"/>
+                            <img src="../../../../assets/_images/bell.svg" width="10px" class="position-absolute" style="right: 10px;
+                            top: 45%;"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group position-relative">
+                            <input type="password" name="NewPassword" class="form-control" formControlName="NewPassword" id="NewPassword">
+                            <img src="../../../../assets/_images/bell.svg" width="10px" class="mr-3 position-absolute"
+                                style="right: 10px;
+                    top: 45%;" />
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-row-reverse">
+                    <button class="btn btn-lg btn-primary ml-3" type="button" (click)="changePassword()" [disabled]="!passwordFormGroup.valid" >Update Password</button>
+                </div>
+                </form>
+            </ng-template>
+        </ngb-tab>
+
+    </ngb-tabset>
+</section>

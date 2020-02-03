@@ -2,6 +2,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -11,7 +12,7 @@ const routes: Routes = [
     // pathMatch: 'full',
     children: [
     { path: 'dashboard', component: DashboardComponent },
-    // { path: 'messages', component: MessagesComponent },
+    { path: 'profile', component: ProfileComponent },
     // { path: 'calls', component: CallsComponent },
     // { path: 'reminders', component: RemindersComponent },
     // { path: 'schedulers', component: SchedulersComponent },
