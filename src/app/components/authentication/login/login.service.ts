@@ -32,12 +32,12 @@ export class LoginService {
   PostCalls(UserData, recourseName, rightId) {
     let httpOptions :any;
     let obj:any = { 
-      content_type: 'application/json; charset=utf-8', 
-      dataType: 'json', 
+      "Content-Type": 'application/json; charset=utf-8', 
+      "dataType": 'json', 
     };
     if (sessionStorage.getItem('userIdentity') !=null) {
-      obj.authorization = 'Bearer ' + JSON.parse(sessionStorage.getItem('userIdentity')).access_token;
-      obj.rightid = rightId;
+      obj["authorization"] = 'Bearer ' + JSON.parse(sessionStorage.getItem('userIdentity')).access_token;
+      obj["rightid"] = rightId;
        httpOptions = {
         headers: new HttpHeaders(obj)
       }

@@ -11,10 +11,13 @@ export class EULAComponent implements OnInit {
 
   private userIdentity:any;
 
-  constructor(private _loginService : LoginService,private _route:Router) { }
+  constructor(private _loginService : LoginService,private _route:Router) {
+    this.userIdentity= JSON.parse(sessionStorage.getItem('userIdentity') );
+    console.log(this.userIdentity);
+
+   }
   // users/termsandcondition
   ngOnInit() {
-    this.userIdentity= JSON.parse(sessionStorage.getItem('UserIdentity') );
   }
 
   agreeTermsAndConditions(){
