@@ -78,8 +78,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group position-relative">
-                            <input type="password" name="Password" class="form-control" formControlName="Password" id="Password">
-                            <img src="../../../../assets/_images/bell.svg" width="10px" class="mr-3 position-absolute"
+                            <input [type]="passToggle ? 'text':'password'" name="Password" class="form-control" formControlName="Password" id="Password">
+                            <img src="../../../../assets/_images/bell.svg" (click)="passToggle=!passToggle" width="10px" class="mr-3 position-absolute"
                                 style="right: 10px;
                     top: 45%;" />
                         </div>
@@ -89,8 +89,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group position-relative">
-                            <input type="password" name="ConfirmPassword" class="form-control" formControlName="ConfirmPassword" id="ConfirmPassword">
-                            <img src="../../../../assets/_images/bell.svg" width="10px" class="mr-3 position-absolute" style="right: 10px;
+                            <input [type]="newToggle ? 'text':'password'" name="ConfirmPassword" class="form-control" formControlName="ConfirmPassword" id="ConfirmPassword">
+                            <img src="../../../../assets/_images/bell.svg" (click)="newToggle=!newToggle"  width="10px" class="mr-3 position-absolute" style="right: 10px;
                             top: 45%;"/>
                             <img src="../../../../assets/_images/bell.svg" width="10px" class="position-absolute" style="right: 10px;
                             top: 45%;"/>
@@ -98,8 +98,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group position-relative">
-                            <input type="password" name="NewPassword" class="form-control" formControlName="NewPassword" id="NewPassword">
-                            <img src="../../../../assets/_images/bell.svg" width="10px" class="mr-3 position-absolute"
+                            <input type="password" [type]="confirmToggle ? 'text':'password'"  name="NewPassword" class="form-control" formControlName="NewPassword" id="NewPassword">
+                            <img src="../../../../assets/_images/bell.svg" (click)="confirmToggle=!confirmToggle"  width="10px" class="mr-3 position-absolute"
                                 style="right: 10px;
                     top: 45%;" />
                         </div>

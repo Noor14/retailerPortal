@@ -13,6 +13,9 @@ export class ProfileComponent implements OnInit {
   objProfile: any;
   profileFormGroup: FormGroup;
   passwordFormGroup: FormGroup;
+  passToggle = false;
+  newToggle = false;
+  confirmToggle = false;
   public cnicMask = AppMasks.cnic_Mask;
   public mobileMask = AppMasks.mobile_Mask;
   constructor(private _profileService: ProfileService,private _toastr:ToastrService) { }
