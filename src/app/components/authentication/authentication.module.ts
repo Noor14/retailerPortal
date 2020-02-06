@@ -11,6 +11,8 @@ import { UpdatepasswordComponent } from './updatepassword/updatepassword.compone
 import { EULAComponent } from './eula/eula.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
+import { SupportComponent } from './support/support.component';
+import { SupportService } from './support/support.service';
 @NgModule({
   declarations: [
     RegistrationComponent,
@@ -18,7 +20,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     AuthenticationComponent, 
     ForgetpasswordComponent, 
     UpdatepasswordComponent, 
-    EULAComponent],
+    EULAComponent, SupportComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -26,6 +28,6 @@ import { TextMaskModule } from 'angular2-text-mask';
     ReactiveFormsModule,
     TextMaskModule
   ],
-  providers:[LoginService]
+  providers:[LoginService,SupportService]
 })
 export class AuthenticationModule { }
