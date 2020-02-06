@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-dialog',
@@ -10,6 +10,11 @@ export class DialogComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+
+  createModal(){
+
   }
 
 }

@@ -6,6 +6,7 @@ import { AuthenticationComponent } from './authentication.component';
 import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
 import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
 import { EULAComponent } from './eula/eula.component';
+import { SupportComponent } from './support/support.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
     { path: 'forgetPassword', component: ForgetpasswordComponent },
     { path: 'updatePassword', component: UpdatepasswordComponent },
     { path: 'eula', component: EULAComponent },
+    { path: 'support', component: SupportComponent },
     { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]
   }
