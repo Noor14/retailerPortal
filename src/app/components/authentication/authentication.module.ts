@@ -27,6 +27,7 @@ import { SupportService } from './support/support.service';
     AuthenticationRoutingModule,
     ReactiveFormsModule,
     TextMaskModule
+    // SharedModule
   ],
   providers:[LoginService,SupportService]
 })

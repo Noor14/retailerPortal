@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SupportgridComponent } from './support/supportgrid/supportgrid.component';
+import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
 
 
 const routes: Routes = [
@@ -13,8 +15,8 @@ const routes: Routes = [
     children: [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'profile', component: ProfileComponent },
-    // { path: 'calls', component: CallsComponent },
-    // { path: 'reminders', component: RemindersComponent },
+    { path: 'support', component: SupportgridComponent },
+    { path: 'support/:id', component: SupportscreenComponent },
     // { path: 'schedulers', component: SchedulersComponent },
     // { path: 'settings', component: SettingsComponent },
     { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }

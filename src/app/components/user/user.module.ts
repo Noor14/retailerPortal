@@ -11,6 +11,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { ProfileService } from './profile/profile.service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SupportgridComponent } from './support/supportgrid/supportgrid.component';
+import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
+import { SupportSignInService } from './support/supportsign.service';
+import { TableComponent } from 'src/app/shared/table/table.component';
 
 @NgModule({
   declarations: [
@@ -18,16 +22,21 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserComponent, 
     HeaderComponent,
     SidebarComponent,
-    ProfileComponent],
+    ProfileComponent,
+    SupportgridComponent,
+    SupportscreenComponent,
+    TableComponent
+  ],
   imports: [
     CommonModule,
     UserRoutingModule,
     NgbModule,
     HttpClientModule,
     TextMaskModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // SharedModule
   ],
-  providers:[ProfileService]
+  providers:[ProfileService,SupportSignInService]
 
 })
 export class UserModule { }
