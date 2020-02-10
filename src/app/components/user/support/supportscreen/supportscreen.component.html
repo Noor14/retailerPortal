@@ -43,8 +43,10 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Email" formControlName="Email">
+                        <div class="form-group  position-relative">  
+                            <input type="text" class="form-control" placeholder="Email" [readonly]="EmailEdit" formControlName="Email">
+                            <img src="../../../../assets/_images/bell.svg" width="10px" (click)="EmailEdit= !EmailEdit" 
+                            *ngIf="supportForm.value.ID==0"  class="mr-3 position-absolute" style="right: 5px; top: 45%;" />
                         </div>
                     </div>
                 </div>
@@ -52,10 +54,12 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Mobile No"
+                        <div class="form-group  position-relative">  
+                            <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Mobile No"
                                 [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
-
+                                <img src="../../../../assets/_images/bell.svg" (click)="mobileEdit= !mobileEdit" 
+                                *ngIf="supportForm.value.ID==0" width="10px"
+                                class="mr-3 position-absolute" style="right: 5px; top: 45%;" />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -75,7 +79,7 @@
                         <div class="form-group">
                             <select name="IssueType" class="form-control" formControlName="Criticality"
                                 placeholder="Criticality">
-                                <option value="" disabled selected>Issue Type</option>
+                                <option value="" disabled selected>Criticality</option>
                                 <option *ngFor="let critical of criticality" [value]="critical.key"> {{critical.value}}
                                 </option>
                             </select>
