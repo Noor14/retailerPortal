@@ -6,6 +6,9 @@
         <li class="breadcrumb-item">
             <a class="breadcrumb-item">Support</a>
         </li>
+        <li class="breadcrumb-item">
+            <a class="breadcrumb-item"> {{breadcrumbSupport}} </a>
+        </li>
     </ol>
 
     <div class="container">
@@ -18,81 +21,97 @@
             </div>
         </div>
 
-        <div class="col-md-12">
-            <h6>Welcome to Haball Support Center</h6>
+        <div class="col-md-12 row">
+            <div class="col-md-6">
+                <h6 *ngIf="supportForm.value.ID==0">Welcome to Haball Support Center</h6>
+                <p *ngIf="supportForm.value.ID!=0"> Ticket ID :{{supportForm.value.TicketNumber}} </p>
+
+            </div>
+            <div class="col-md-6">
+                <p class="errorMessage" *ngIf="Message">Invalid Ticket Number</p>
+
+            </div>
         </div>
 
-        <form  [formGroup]="supportForm">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Contact Name"  formControlName="ContactName">
+        <form [formGroup]="supportForm">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" disabled placeholder="Contact Name"
+                                formControlName="ContactName">
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Email"  formControlName="Email">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control"  [textMask]="{mask: mobileMask}" formControlName="MobileNumber" >
-                  
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <select name="IssueType" class="form-control" formControlName="IssueType"
-                        placeholder="Issue Type">
-                        <option value="" disabled selected>Issue Type</option>
-                        <option *ngFor="let issue of issueType" [value]="issue.key"> {{issue.value}} </option>
-                    </select>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Email" formControlName="Email">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <select name="IssueType" class="form-control" formControlName="Criticality"
-                placeholder="Criticality">
-                <option value="" disabled selected>Issue Type</option>
-                <option *ngFor="let critical of criticality" [value]="critical.key"> {{critical.value}} </option>
-            </select>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Mobile No"
+                                [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <select name="IssueType" class="form-control" formControlName="PreferredContactMethod"
-                        placeholder="Contact Method">
-                        <option value="" disabled selected>Contact Method</option>
-                        <option *ngFor="let contact of contacting" [value]="contact.key"> {{contact.value}} </option>
-                    </select>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select name="IssueType" class="form-control" formControlName="IssueType"
+                                placeholder="Issue Type">
+                                <option value="" disabled selected>Issue Type</option>
+                                <option *ngFor="let issue of issueType" [value]="issue.key"> {{issue.value}} </option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-12">
-                <div class="form-group">
-                   <textarea name="description"  formControlName="Description" id="" cols="140" rows="5"></textarea>
-                </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select name="IssueType" class="form-control" formControlName="Criticality"
+                                placeholder="Criticality">
+                                <option value="" disabled selected>Issue Type</option>
+                                <option *ngFor="let critical of criticality" [value]="critical.key"> {{critical.value}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select name="IssueType" class="form-control" formControlName="PreferredContactMethod"
+                                placeholder="Contact Method">
+                                <option value="" disabled selected>Contact Method</option>
+                                <option *ngFor="let contact of contacting" [value]="contact.key"> {{contact.value}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="d-flex flex-row-reverse">
-            <button class="btn btn-lg btn-primary ml-3" type="button" (click)="save()"
-                [disabled]="!supportForm.valid">Submit</button>
-        </div>
-        {{supportForm.value | json}}
-    </form>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <textarea name="description" placeholder="Description" formControlName="Description" id=""
+                                cols="140" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-row-reverse">
+                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="save()" *ngIf="(supportForm.value.ID==0 )"
+                    [disabled]="!supportForm.valid">Submit</button>
+                <button class="btn btn-lg btn-primary ml-3" type="button" routerLink="/user/support"  
+                     >Close</button>
+                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="Delete()"
+                    *ngIf="(supportForm.value.ID!=0 && !Message && supportForm.value.Status==0)">Delete</button>
+            </div>
+        </form>
 
     </div>
 </section>
