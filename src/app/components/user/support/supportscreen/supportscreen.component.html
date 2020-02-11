@@ -14,7 +14,7 @@
     <div class="content">
         <h5 class="contentHeader">Support</h5>
         <div class="contentArea bg-white p-4">
-        <h6 *ngIf="!supportForm.value.ID">Welcome to Haball Support Center</h6>
+        <h6 class="contentSubTitle" *ngIf="!supportForm.value.ID">Welcome to Haball Support Center</h6>
         <p *ngIf="supportForm.value.ID"> Ticket ID :{{supportForm.value.TicketNumber}} </p>
         <p class="errorMessage" *ngIf="message">Invalid Ticket Number</p>
         <form [formGroup]="supportForm">
