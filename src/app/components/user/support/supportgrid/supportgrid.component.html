@@ -36,7 +36,7 @@
             <tr *ngFor="let check of lstSupport">
                 <td> {{check.TicketNumber}} </td>
                 <td> {{check.IssueType}} </td>
-                <td> {{check.CreatedDate}} </td>
+                <td> {{check.CreatedDate |  date: 'dd/MM/yy'}} </td>
                 <td> {{check.Status}} </td>
                 <td></td>
             </tr>

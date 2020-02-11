@@ -19,13 +19,16 @@ export class SupportscreenComponent implements OnInit {
   breadcrumbSupport: string;
   Message: boolean = false;
   readonlyCheck: boolean = false
+  EmailEdit: boolean = true;
+  mobileEdit: boolean = true;
   constructor(private _supportService: SupportSignInService, private _router: Router,
     private _route: ActivatedRoute) {
     this._route.params.subscribe(params => {
       this.supportID = +params['id'];
       if (this.supportID == 0) {
         this.breadcrumbSupport = "Add Ticket";
-
+        // this.EmailEdit = true
+        // this.mobileEdit = true
       }
       else {
         this.breadcrumbSupport = "Edit Ticket";
@@ -39,15 +42,9 @@ export class SupportscreenComponent implements OnInit {
     this.getLookups();
     this.supportForm = new FormGroup({
       ID: new FormControl(0,[]),
-      MobileNumber: new FormControl({
-        value: JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.RetailerMobile,
-        disabled: this.readonlyCheck
-      }, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
+      MobileNumber: new FormControl(JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.RetailerMobile , [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
 
-      Email: new FormControl({
-        value: JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.RetailerEmail,
-        disabled: this.readonlyCheck
-      }, [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
+      Email: new FormControl( JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.RetailerEmail , [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
 
       ContactName: new FormControl( JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.CompanyName , [Validators.required]),
       PreferredContactMethod: new FormControl({value:"",disabled: this.readonlyCheck}, [Validators.required]),
@@ -98,7 +95,7 @@ export class SupportscreenComponent implements OnInit {
         })
         this.supportForm.addControl("TicketNumber",new FormControl(data.TicketNumber,[]));
         this.supportForm.addControl("Status",new FormControl(data.Status,[]));
-
+      
       })
       .catch(err => {
         this.supportForm.reset();
