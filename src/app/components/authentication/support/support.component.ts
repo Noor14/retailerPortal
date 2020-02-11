@@ -46,7 +46,6 @@ export class SupportComponent implements OnInit {
   save(){
     this._supportService.postCalls('support/PublicSave',this.supportForm.value)
     .then((data:any)=>{
-      console.log(data.TicketNumber);
       this._route.navigate(["/login"]);
     })
     .catch(err=>{
