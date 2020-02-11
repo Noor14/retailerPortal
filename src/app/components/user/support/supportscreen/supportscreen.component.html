@@ -12,37 +12,23 @@
     </ol>
 
     <div class="container">
-        <div class="col-md-12 contentHeader">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Support</h5>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="col-md-12 row">
-            <div class="col-md-6">
+        
+                <h5 class="contentHeader">Support</h5>
                 <h6 *ngIf="supportForm.value.ID==0">Welcome to Haball Support Center</h6>
                 <p *ngIf="supportForm.value.ID!=0"> Ticket ID :{{supportForm.value.TicketNumber}} </p>
-
-            </div>
-            <div class="col-md-6">
                 <p class="errorMessage" *ngIf="Message">Invalid Ticket Number</p>
+                
 
-            </div>
-        </div>
 
         <form [formGroup]="supportForm">
-            <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <input type="text" class="form-control" disabled placeholder="Contact Name"
                                 formControlName="ContactName">
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group  position-relative">  
                             <input type="text" class="form-control" placeholder="Email" [readonly]="EmailEdit" formControlName="Email">
                             <img src="../../../../assets/_images/bell.svg" width="10px" (click)="EmailEdit= !EmailEdit" 
@@ -50,10 +36,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
+        
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group  position-relative">  
                             <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Mobile No"
                                 [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
@@ -62,7 +47,7 @@
                                 class="mr-3 position-absolute" style="right: 5px; top: 45%;" />
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <select name="IssueType" class="form-control" formControlName="IssueType"
                                 placeholder="Issue Type">
@@ -72,10 +57,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <select name="IssueType" class="form-control" formControlName="Criticality"
                                 placeholder="Criticality">
@@ -85,7 +68,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <select name="IssueType" class="form-control" formControlName="PreferredContactMethod"
                                 placeholder="Contact Method">
@@ -96,19 +79,16 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <textarea name="description" placeholder="Description" formControlName="Description" id=""
+                            <textarea name="description" placeholder="Description" formControlName="Description" 
                                 cols="140" rows="5"></textarea>
                         </div>
                     </div>
                 </div>
-            </div>
             <div class="d-flex flex-row-reverse">
-                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="save()" *ngIf="(supportForm.value.ID==0 )"
+                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="save()" *ngIf="!supportForm.value.ID"
                     [disabled]="!supportForm.valid">Submit</button>
                 <button class="btn btn-lg btn-primary ml-3" type="button" routerLink="/user/support"  
                      >Close</button>
