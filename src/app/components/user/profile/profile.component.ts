@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {

@@ -76,6 +76,7 @@ html{
     padding: 16px;
   }
   .content{
+ 
     &Header {
       padding-bottom: 2px;
       border-bottom: 1px solid #ccc;
@@ -83,6 +84,12 @@ html{
     }
     &Area{
       border: 1px solid #BCBEC0;
+      .contentSubTitle{
+        margin-left: -5px;
+        color: #6d6e71;
+        font-size: 17px;
+        margin-bottom: 18px;
+      }
   }
   .gridArea{
     .table{
