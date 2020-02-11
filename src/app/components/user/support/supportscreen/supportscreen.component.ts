@@ -17,7 +17,7 @@ export class SupportscreenComponent implements OnInit {
   public mobileMask = AppMasks.mobile_Mask;
   supportID: number;
   breadcrumbSupport: string;
-  Message: boolean = false;
+  public message: boolean = false;
   readonlyCheck: boolean = false
   EmailEdit: boolean = true;
   mobileEdit: boolean = true;
@@ -99,7 +99,7 @@ export class SupportscreenComponent implements OnInit {
       })
       .catch(err => {
         this.supportForm.reset();
-        this.Message = true;
+        this.message = true;
       })
   }
 

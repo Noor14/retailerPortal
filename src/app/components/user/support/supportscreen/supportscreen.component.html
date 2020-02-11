@@ -1,4 +1,5 @@
-<section class="dashboard">
+<section class="internalSupport">
+    <div class="container-fluid">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a [routerLink]="['users/dashboard']">Dashboard</a>
@@ -10,16 +11,12 @@
             <a class="breadcrumb-item"> {{breadcrumbSupport}} </a>
         </li>
     </ol>
-
-    <div class="container">
-        
-                <h5 class="contentHeader">Support</h5>
-                <h6 *ngIf="supportForm.value.ID==0">Welcome to Haball Support Center</h6>
-                <p *ngIf="supportForm.value.ID!=0"> Ticket ID :{{supportForm.value.TicketNumber}} </p>
-                <p class="errorMessage" *ngIf="Message">Invalid Ticket Number</p>
-                
-
-
+    <div class="content">
+        <h5 class="contentHeader">Support</h5>
+        <div class="contentArea bg-white p-4">
+        <h6 *ngIf="supportForm.value.ID==0">Welcome to Haball Support Center</h6>
+        <p *ngIf="supportForm.value.ID!=0"> Ticket ID :{{supportForm.value.TicketNumber}} </p>
+        <p class="errorMessage" *ngIf="message">Invalid Ticket Number</p>
         <form [formGroup]="supportForm">
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
@@ -82,20 +79,22 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <textarea name="description" placeholder="Description" formControlName="Description" 
+                            <textarea name="description" class="form-control" placeholder="Description" formControlName="Description" 
                                 cols="140" rows="5"></textarea>
                         </div>
                     </div>
                 </div>
-            <div class="d-flex flex-row-reverse">
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-lg btn-primary" type="button" routerLink="/user/support"  
+                    >Close</button>
                 <button class="btn btn-lg btn-primary ml-3" type="button" (click)="save()" *ngIf="!supportForm.value.ID"
-                    [disabled]="!supportForm.valid">Submit</button>
-                <button class="btn btn-lg btn-primary ml-3" type="button" routerLink="/user/support"  
-                     >Close</button>
+                    [disabled]="supportForm.invalid">Submit</button>
+                
                 <button class="btn btn-lg btn-primary ml-3" type="button" (click)="Delete()"
-                    *ngIf="(supportForm.value.ID!=0 && !Message && supportForm.value.Status==0)">Delete</button>
+                    *ngIf="supportForm.value.ID && !Message && !supportForm.value.Status">Delete</button>
             </div>
-        </form>
-
+        </form>             
+        </div>
+    </div>
     </div>
 </section>

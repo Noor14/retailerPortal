@@ -75,8 +75,13 @@ html{
   .tab-content {
     padding: 16px;
   }
-  .contentHeader {
-    padding-bottom: 2px;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 10px;
+  .content{
+    &Header {
+      padding-bottom: 2px;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 24px;
+    }
+    &Area{
+      border: 1px solid #BCBEC0;
+  }
   }
