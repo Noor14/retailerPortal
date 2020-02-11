@@ -14,8 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SupportgridComponent } from './support/supportgrid/supportgrid.component';
 import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
 import { SupportSignInService } from './support/supportsign.service';
-import { TableComponent } from 'src/app/shared/table/table.component';
-
+import { TableComponent } from '../../shared/table/table.component';
+import { PaymentComponent } from '../../shared/payment/payment.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -25,7 +25,8 @@ import { TableComponent } from 'src/app/shared/table/table.component';
     ProfileComponent,
     SupportgridComponent,
     SupportscreenComponent,
-    TableComponent
+    TableComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,
