@@ -1,0 +1,19 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th  *ngFor="let col of lstCol" >{{col.name}}</th>
+
+    </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-list [ngForOf]="lstObject" let-i="index">
+            <div>
+                Index: {{ i }}, Name: {{ season.name }}, month: {{ season.month }}
+              </div>
+          </ng-template>
+
+   <tr  style="text-align: center;"  *ngIf="loadAvailable">
+    <td colspan="5"> <a  href="javascript:void(0);" (click)="search()" > Load More</a></td>
+</tr>
+    </tbody>
+</table>

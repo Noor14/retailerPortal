@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SupportgridComponent } from './support/supportgrid/supportgrid.component';
+import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
 
 
 const routes: Routes = [
@@ -15,6 +17,8 @@ const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'payment', component: PaymentComponent },
     { path: 'profile', component: ProfileComponent },
+    { path: 'support', component: SupportgridComponent },
+    { path: 'support/:id', component: SupportscreenComponent },
     //{ path: 'editPayment/:id', component: PaymentComponent },
     // { path: 'paymentDetail/:id', component: RemindersComponent },
     // { path: 'schedulers', component: SchedulersComponent },
