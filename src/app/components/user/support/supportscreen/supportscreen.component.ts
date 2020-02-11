@@ -103,7 +103,7 @@ export class SupportscreenComponent implements OnInit {
       })
   }
 
-  Delete(){
+  delete(){
     this._supportService.postCalls('support/Delete',{ID:this.supportForm.value.ID},7)
     .then(res=>{
       this._router.navigate(["/user/support"]);

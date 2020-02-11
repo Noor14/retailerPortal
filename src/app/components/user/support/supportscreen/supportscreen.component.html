@@ -90,7 +90,7 @@
                 <button class="btn btn-lg btn-primary ml-3" type="button" (click)="save()" *ngIf="!supportForm.value.ID"
                     [disabled]="supportForm.invalid">Submit</button>
                 
-                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="Delete()"
+                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="delete()"
                     *ngIf="supportForm.value.ID && !Message && !supportForm.value.Status">Delete</button>
             </div>
         </form>             
