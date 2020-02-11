@@ -84,4 +84,12 @@ html{
     &Area{
       border: 1px solid #BCBEC0;
   }
+  .gridArea{
+    .table{
+      th{
+        border-top: unset;
+
+      }
+    }
+  }
   }
