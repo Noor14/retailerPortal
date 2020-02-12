@@ -11,45 +11,45 @@
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" name="RetailerCode" readonly class="form-control" formControlName="RetailerCode" id="RetailerCode">
+                                        <input type="text" disabled class="form-control" formControlName="RetailerCode">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    <div class="form-group ">
-                                        <input type="text" name="Name" class="form-control" formControlName="Name" id="Name">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="Name" >
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group position-relative">
-                                        <input type="text" name="Email" class="form-control" formControlName="Email" id="Email">
+                                        <input type="text"  class="form-control" formControlName="Email" >
                                         <img src="../../../../assets/_images/bell.svg" width="10px" class="mr-3 position-absolute" style="right: 5px;  top: 45%;"
                                         />
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" name="CNIC" class="form-control" formControlName="CNIC" [textMask]="{mask: cnicMask}" id="CNIC">
+                                        <input type="text"  class="form-control" formControlName="CNIC" [textMask]="{mask: cnicMask}" >
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" name="Mobile" [textMask]="{mask: mobileMask}" class="form-control" formControlName="Mobile" id="Mobile">
+                                        <input type="text" [textMask]="{mask: mobileMask}" class="form-control" formControlName="Mobile" >
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" name="CreatedDate" class="form-control" formControlName="CreatedDate" id="CreatedDate">
+                                        <input type="text"  class="form-control" formControlName="CreatedDate" >
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" name="Address" class="form-control" formControlName="Address" id="Address">
+                                        <input type="text"  class="form-control" formControlName="Address" >
                                     </div>
                                 </div>
 
@@ -84,7 +84,7 @@
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group position-relative">
-                                        <input [type]="passToggle ? 'text':'password'" name="Password" class="form-control" formControlName="Password" id="Password">
+                                        <input [type]="passToggle ? 'text':'password'" class="form-control" formControlName="Password">
                                         <img src="../../../../assets/_images/bell.svg" (click)="passToggle=!passToggle" width="10px" class="mr-3 position-absolute"
                                             style="right: 10px; top: 45%;" />
                                     </div>
@@ -94,8 +94,7 @@
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group position-relative">
-                                        <input [type]="newToggle ? 'text':'password'" name="ConfirmPassword" class="form-control" formControlName="ConfirmPassword"
-                                            id="ConfirmPassword">
+                                        <input [type]="newToggle ? 'text':'password'" class="form-control" formControlName="ConfirmPassword">
                                         <img src="../../../../assets/_images/bell.svg" (click)="newToggle=!newToggle" width="10px" class="mr-3 position-absolute"
                                             style="right: 10px; top: 45%;" />
                                         <img src="../../../../assets/_images/bell.svg" width="10px" class="position-absolute" style="right: 10px; top: 45%;" />
@@ -103,8 +102,7 @@
                                 </div>
                                 <div class="col-md-6 ">
                                     <div class="form-group position-relative">
-                                        <input type="password" [type]="confirmToggle ? 'text':'password'" name="NewPassword" class="form-control" formControlName="NewPassword"
-                                            id="NewPassword">
+                                        <input  [type]="confirmToggle ? 'text':'password'"  class="form-control" formControlName="NewPassword">
                                         <img src="../../../../assets/_images/bell.svg" (click)="confirmToggle=!confirmToggle" width="10px" class="mr-3 position-absolute"
                                             style="right: 10px; top: 45%;" />
                                     </div>

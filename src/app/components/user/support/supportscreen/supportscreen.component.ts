@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { SupportSignInService } from '../supportsign.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -10,6 +10,7 @@ import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
 })
 export class SupportscreenComponent implements OnInit {
 
+  public supportDetail:any={};
   issueType: any[];
   criticality: any[];
   contacting: any[];
@@ -21,11 +22,14 @@ export class SupportscreenComponent implements OnInit {
   readonlyCheck: boolean = false
   EmailEdit: boolean = true;
   mobileEdit: boolean = true;
-  constructor(private _supportService: SupportSignInService, private _router: Router,
+  constructor(
+    private _supportService: SupportSignInService,
+    private _router: Router,
     private _route: ActivatedRoute) {
+
     this._route.params.subscribe(params => {
       this.supportID = +params['id'];
-      if (this.supportID == 0) {
+      if (!this.supportID) {
         this.breadcrumbSupport = "Add Ticket";
         // this.EmailEdit = true
         // this.mobileEdit = true
@@ -39,29 +43,35 @@ export class SupportscreenComponent implements OnInit {
   }
 
   ngOnInit() {
+    let userObj = JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount
+   
     this.getLookups();
     this.supportForm = new FormGroup({
-      ID: new FormControl(0,[]),
-      MobileNumber: new FormControl(JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.RetailerMobile , [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
-
-      Email: new FormControl( JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.RetailerEmail , [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
-
-      ContactName: new FormControl( JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.CompanyName , [Validators.required]),
-      PreferredContactMethod: new FormControl({value:"",disabled: this.readonlyCheck}, [Validators.required]),
-      Criticality: new FormControl({value:"",disabled: this.readonlyCheck},  [Validators.required]),
-      IssueType: new FormControl({value:"",disabled: this.readonlyCheck},  [Validators.required]),
-      Description: new FormControl({value:"",disabled: this.readonlyCheck}, [])
+      ID: new FormControl(0),
+      MobileNumber: new FormControl(userObj.RetailerMobile , [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
+      Email: new FormControl(userObj.RetailerEmail , [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
+      ContactName: new FormControl( userObj.CompanyName , [Validators.required]),
+      PreferredContactMethod: new FormControl({value:null, disabled: this.readonlyCheck}, [Validators.required]),
+      Criticality: new FormControl({value:null, disabled: this.readonlyCheck},  [Validators.required]),
+      IssueType: new FormControl({value:null, disabled: this.readonlyCheck},  [Validators.required]),
+      Description: new FormControl({value:null, disabled: this.readonlyCheck})
     });
   }
+
   getLookups() {
     this._supportService.getCalls('support/PrivateUsers', 5)
       .then((data: any) => {
-        this.contacting = data[0];
-        this.criticality = data[1];
-        this.issueType = data[2];
-        if (this.supportID > 0)
+        if(data.CONTACTING_METHOD && data.CONTACTING_METHOD.length){
+          this.contacting = data.CONTACTING_METHOD;
+        } 
+        if(data.CRITICALITY_PRIVATE && data.CRITICALITY_PRIVATE.length){
+          this.criticality = data.CRITICALITY_PRIVATE;
+        }
+        if(data.ISSUE_TYPE_PRIVATE && data.ISSUE_TYPE_PRIVATE.length){
+          this.issueType = data.ISSUE_TYPE_PRIVATE;
+        }
+        if (this.supportID)
           this.getByID(this.supportID);
-
       })
       .catch(err => {
 
@@ -81,21 +91,8 @@ export class SupportscreenComponent implements OnInit {
   getByID(supportID) {
     this._supportService.getCalls('support/TicketById/' + supportID, 5)
       .then((data: any) => {
-        console.log(data);
-
-        this.supportForm.setValue({
-          ID:data.ID,
-          MobileNumber: data.MobileNumber,
-          Email: data.Email,
-          ContactName: data.Email,
-          PreferredContactMethod: data.PreferredContactMethod,
-          Criticality: data.Criticality,
-          IssueType: data.IssueType,
-          Description: data.Description
-        })
-        this.supportForm.addControl("TicketNumber",new FormControl(data.TicketNumber,[]));
-        this.supportForm.addControl("Status",new FormControl(data.Status,[]));
-      
+        this.supportDetail = data;
+        this.supportForm.patchValue(this.supportDetail);
       })
       .catch(err => {
         this.supportForm.reset();
@@ -103,7 +100,7 @@ export class SupportscreenComponent implements OnInit {
       })
   }
 
-  Delete(){
+  delete(){
     this._supportService.postCalls('support/Delete',{ID:this.supportForm.value.ID},7)
     .then(res=>{
       this._router.navigate(["/user/support"]);
