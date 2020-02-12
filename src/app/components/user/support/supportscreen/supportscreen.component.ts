@@ -21,11 +21,14 @@ export class SupportscreenComponent implements OnInit {
   readonlyCheck: boolean = false
   EmailEdit: boolean = true;
   mobileEdit: boolean = true;
-  constructor(private _supportService: SupportSignInService, private _router: Router,
+  constructor(
+    private _supportService: SupportSignInService,
+    private _router: Router,
     private _route: ActivatedRoute) {
+
     this._route.params.subscribe(params => {
       this.supportID = +params['id'];
-      if (this.supportID == 0) {
+      if (!this.supportID) {
         this.breadcrumbSupport = "Add Ticket";
         // this.EmailEdit = true
         // this.mobileEdit = true
@@ -39,18 +42,18 @@ export class SupportscreenComponent implements OnInit {
   }
 
   ngOnInit() {
+    let userObj = JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount
+   
     this.getLookups();
     this.supportForm = new FormGroup({
-      ID: new FormControl(0,[]),
-      MobileNumber: new FormControl(JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.RetailerMobile , [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
-
-      Email: new FormControl( JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.RetailerEmail , [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
-
-      ContactName: new FormControl( JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.CompanyName , [Validators.required]),
-      PreferredContactMethod: new FormControl({value:"",disabled: this.readonlyCheck}, [Validators.required]),
-      Criticality: new FormControl({value:"",disabled: this.readonlyCheck},  [Validators.required]),
-      IssueType: new FormControl({value:"",disabled: this.readonlyCheck},  [Validators.required]),
-      Description: new FormControl({value:"",disabled: this.readonlyCheck}, [])
+      ID: new FormControl(0),
+      MobileNumber: new FormControl(userObj.RetailerMobile , [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
+      Email: new FormControl(userObj.RetailerEmail , [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
+      ContactName: new FormControl( userObj.CompanyName , [Validators.required]),
+      PreferredContactMethod: new FormControl({value:null, disabled: this.readonlyCheck}, [Validators.required]),
+      Criticality: new FormControl({value:null, disabled: this.readonlyCheck},  [Validators.required]),
+      IssueType: new FormControl({value:null, disabled: this.readonlyCheck},  [Validators.required]),
+      Description: new FormControl({value:null, disabled: this.readonlyCheck})
     });
   }
   getLookups() {
@@ -59,9 +62,8 @@ export class SupportscreenComponent implements OnInit {
         this.contacting = data[0];
         this.criticality = data[1];
         this.issueType = data[2];
-        if (this.supportID > 0)
+        if (this.supportID)
           this.getByID(this.supportID);
-
       })
       .catch(err => {
 

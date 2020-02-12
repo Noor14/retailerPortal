@@ -14,8 +14,8 @@
     <div class="content">
         <h5 class="contentHeader">Support</h5>
         <div class="contentArea bg-white p-4">
-        <h6 class="contentSubTitle" *ngIf="!supportForm.value.ID">Welcome to Haball Support Center</h6>
-        <p *ngIf="supportForm.value.ID"> Ticket ID :{{supportForm.value.TicketNumber}} </p>
+        <h6 class="contentSubTitle" *ngIf="!supportDetail.ID">Welcome to Haball Support Center</h6>
+        <p *ngIf="supportDetail.ID"> Ticket ID :{{supportDetail.TicketNumber}} </p>
         <p class="errorMessage" *ngIf="message">Invalid Ticket Number</p>
         <form [formGroup]="supportForm">
                 <div class="row">
@@ -29,7 +29,7 @@
                         <div class="form-group  position-relative">  
                             <input type="text" class="form-control" placeholder="Email" [readonly]="EmailEdit" formControlName="Email">
                             <img src="../../../../assets/_images/bell.svg" width="10px" (click)="EmailEdit= !EmailEdit" 
-                            *ngIf="!supportForm.value.ID"  class="mr-3 position-absolute" style="right: 5px; top: 45%;" />
+                            *ngIf="!supportDetail.ID"  class="mr-3 position-absolute" style="right: 5px; top: 45%;" />
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                             <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Mobile No"
                                 [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
                                 <img src="../../../../assets/_images/bell.svg" (click)="mobileEdit= !mobileEdit" 
-                                *ngIf="!supportForm.value.ID" width="10px"
+                                *ngIf="!supportDetail.ID" width="10px"
                                 class="mr-3 position-absolute" style="right: 5px; top: 45%;" />
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         <div class="form-group">
                             <select name="IssueType" class="form-control" formControlName="IssueType"
                                 placeholder="Issue Type">
-                                <option value="" disabled selected>Issue Type</option>
+                                <option value="null" disabled selected>Issue Type</option>
                                 <option *ngFor="let issue of issueType" [value]="issue.key"> {{issue.value}} </option>
                             </select>
                         </div>
@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <select name="IssueType" class="form-control" formControlName="Criticality"
                                 placeholder="Criticality">
-                                <option value="" disabled selected>Criticality</option>
+                                <option value="null" disabled selected>Criticality</option>
                                 <option *ngFor="let critical of criticality" [value]="critical.key"> {{critical.value}}
                                 </option>
                             </select>
@@ -69,7 +69,7 @@
                         <div class="form-group">
                             <select name="IssueType" class="form-control" formControlName="PreferredContactMethod"
                                 placeholder="Contact Method">
-                                <option value="" disabled selected>Contact Method</option>
+                                <option value="null" disabled selected>Contact Method</option>
                                 <option *ngFor="let contact of contacting" [value]="contact.key"> {{contact.value}}
                                 </option>
                             </select>
@@ -87,11 +87,10 @@
             <div class="d-flex justify-content-end">
                 <button class="btn btn-lg btn-primary" type="button" routerLink="/user/support"  
                     >Close</button>
-                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="save()" *ngIf="!supportForm.value.ID"
+                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="save()" *ngIf="!supportDetail.ID"
                     [disabled]="supportForm.invalid">Submit</button>
-                
                 <button class="btn btn-lg btn-primary ml-3" type="button" (click)="delete()"
-                    *ngIf="supportForm.value.ID && !Message && !supportForm.value.Status">Delete</button>
+                    *ngIf="supportDetail.ID && !Message && !supportDetail.Status">Delete</button>
             </div>
         </form>             
         </div>
