@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { SupportSignInService } from '../supportsign.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -10,6 +10,7 @@ import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
 })
 export class SupportscreenComponent implements OnInit {
 
+  public supportDetail:any={};
   issueType: any[];
   criticality: any[];
   contacting: any[];
@@ -56,12 +57,19 @@ export class SupportscreenComponent implements OnInit {
       Description: new FormControl({value:null, disabled: this.readonlyCheck})
     });
   }
+
   getLookups() {
     this._supportService.getCalls('support/PrivateUsers', 5)
       .then((data: any) => {
-        this.contacting = data[0];
-        this.criticality = data[1];
-        this.issueType = data[2];
+        if(data.CONTACTING_METHOD && data.CONTACTING_METHOD.length){
+          this.contacting = data.CONTACTING_METHOD;
+        } 
+        if(data.CRITICALITY_PRIVATE && data.CRITICALITY_PRIVATE.length){
+          this.criticality = data.CRITICALITY_PRIVATE;
+        }
+        if(data.ISSUE_TYPE_PRIVATE && data.ISSUE_TYPE_PRIVATE.length){
+          this.issueType = data.ISSUE_TYPE_PRIVATE;
+        }
         if (this.supportID)
           this.getByID(this.supportID);
       })
@@ -83,21 +91,8 @@ export class SupportscreenComponent implements OnInit {
   getByID(supportID) {
     this._supportService.getCalls('support/TicketById/' + supportID, 5)
       .then((data: any) => {
-        console.log(data);
-
-        this.supportForm.setValue({
-          ID:data.ID,
-          MobileNumber: data.MobileNumber,
-          Email: data.Email,
-          ContactName: data.Email,
-          PreferredContactMethod: data.PreferredContactMethod,
-          Criticality: data.Criticality,
-          IssueType: data.IssueType,
-          Description: data.Description
-        })
-        this.supportForm.addControl("TicketNumber",new FormControl(data.TicketNumber,[]));
-        this.supportForm.addControl("Status",new FormControl(data.Status,[]));
-      
+        this.supportDetail = data;
+        this.supportForm.patchValue(this.supportDetail);
       })
       .catch(err => {
         this.supportForm.reset();
