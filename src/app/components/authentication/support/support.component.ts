@@ -52,13 +52,12 @@ export class SupportComponent implements OnInit {
       this.issueType = data["ISSUE_TYPE_PUBLIC"];
     }
   }
-  save() {
-    this._supportService.postCalls('support/PublicSave', this.supportForm.value)
-      .then((data: any) => {
-        console.log(data.TicketNumber);
-        this._route.navigate(["/login"]);
-      })
-      .catch(err => {
+  save(){
+    this._supportService.postCalls('support/PublicSave',this.supportForm.value)
+    .then((data:any)=>{
+      this._route.navigate(["/login"]);
+    })
+    .catch(err=>{
 
       })
   }

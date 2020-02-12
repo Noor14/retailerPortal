@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
@@ -22,15 +23,15 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.profileFormGroup = new FormGroup({
-      ID: new FormControl("", [Validators.required, Validators.min(0)]),
-      Name: new FormControl("", [Validators.required]),
-      RetailerCode: new FormControl({value:"",disabled:true}, [Validators.required]),
-      Email: new FormControl("", [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
-      Mobile: new FormControl("", [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
-      CNIC: new FormControl("", [Validators.required, Validators.pattern(AppPattern.cnic_Pattern)]),
-      Address: new FormControl("", [Validators.required]),
-      CreatedDate: new FormControl("", [Validators.required]),
-      CompanyName: new FormControl("", [Validators.required]),
+      ID: new FormControl(null, [Validators.required, Validators.min(0)]),
+      Name: new FormControl(null, [Validators.required]),
+      RetailerCode: new FormControl({value:null, disabled:true}, Validators.required),
+      Email: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
+      Mobile: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
+      CNIC: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.cnic_Pattern)]),
+      Address: new FormControl(null, [Validators.required]),
+      CreatedDate: new FormControl(null, [Validators.required]),
+      CompanyName: new FormControl(null, [Validators.required]),
       
     });
      

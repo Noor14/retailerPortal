@@ -1,41 +1,37 @@
-<section class="registration">
+<section class="support">
     <h4 class="mb-4 title">Welcome to Haball support center</h4>
     <form [formGroup]="supportForm">
-        <div class="col-md-12">
-            <div class="form-group">
-                <input type="text" class="form-control" formControlName="ContactName" placeholder="Full Name">
+        <div class="form-group">
+            <input type="text" class="form-control" formControlName="ContactName" placeholder="Full Name">
 
-            </div>
         </div>
-        <div class="col-md-12">
+        
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-sm-12 col-md-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" formControlName="Email" placeholder="Email">
+                        <input type="email" class="form-control" formControlName="Email" placeholder="Email">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-sm-12 col-md-6">
                     <div class="form-group">
                         <input type="text" class="form-control" [textMask]="{mask: mobileMask}" formControlName="MobileNumber" placeholder="Mobile No">
                        
                     </div>
                 </div>
-
             </div>
-        </div>
+        
 
-        <div class="col-md-12">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-sm-12 col-md-6">
                     <div class="form-group">
-                        <select name="IssueType" class="form-control" formControlName="PreferredContactMethod"
+                        <select name="PreferredContactMethod" class="form-control" formControlName="PreferredContactMethod"
                         placeholder="Contact Method">
                         <option value="" disabled selected>Contact Method</option>
                         <option *ngFor="let contact of contacting" [value]="contact.key"> {{contact.value}} </option>
                     </select>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-sm-12 col-md-6">
                     <div class="form-group">
                         <select name="IssueType" class="form-control" formControlName="IssueType"
                             placeholder="Issue Type">
@@ -44,23 +40,20 @@
                         </select>
                     </div>
                 </div>
-
             </div>
-        </div>
-        <div class="col-md-12">
             <div class="form-group">
-                <select name="IssueType" class="form-control" formControlName="Criticality"
+                <select name="Criticality" class="form-control" formControlName="Criticality"
                 placeholder="Criticality">
                 <option value="" disabled selected>Issue Type</option>
                 <option *ngFor="let critical of criticality" [value]="critical.key"> {{critical.value}} </option>
             </select>
             </div>
-        </div>
-        <div class="col-md-12">
+       
+       
             <div class="form-group">
-                <textarea rows="4" cols="58"  formControlName="Description">  </textarea>
+                <textarea rows="4" cols="58" class="form-control" placeholder="Address" formControlName="Description" resize='none'>  </textarea>
             </div>
-        </div>
+       
         <div class="d-flex justify-content-center">
             <button class="btn btn-lg btn-primary mr-3" type="button" routerLink="/login">Login</button>
             <button class="btn btn-lg btn-primary ml-3" type="button" (click)="save()"
