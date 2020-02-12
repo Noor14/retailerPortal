@@ -15,17 +15,21 @@ import { SupportgridComponent } from './support/supportgrid/supportgrid.componen
 import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
 import { SupportSignInService } from './support/supportsign.service';
 import { TableComponent } from 'src/app/shared/table/table.component';
+import { NoWhiteSpace } from 'src/app/shared/pipes-directives/singlespace';
+import { NoDualSpaceSpecial } from 'src/app/shared/pipes-directives/dualspacespecialcharacter';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     UserComponent, 
     HeaderComponent,
-    SidebarComponent,
+    SidebarComponent, 
     ProfileComponent,
     SupportgridComponent,
     SupportscreenComponent,
-    TableComponent
+    TableComponent,
+    NoWhiteSpace,
+    NoDualSpaceSpecial
   ],
   imports: [
     CommonModule,

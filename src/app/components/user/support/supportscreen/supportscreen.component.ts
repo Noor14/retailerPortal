@@ -9,7 +9,6 @@ import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
   styleUrls: ['./supportscreen.component.scss']
 })
 export class SupportscreenComponent implements OnInit {
-
   issueType: any[];
   criticality: any[];
   contacting: any[];
@@ -54,18 +53,27 @@ export class SupportscreenComponent implements OnInit {
     });
   }
   getLookups() {
-    this._supportService.getCalls('support/PrivateUsers', 5)
+    if (this._supportService.privateData == null) {
+      this._supportService.getCalls('support/PrivateUsers', 5)
       .then((data: any) => {
-        this.contacting = data[0];
-        this.criticality = data[1];
-        this.issueType = data[2];
+        this.contacting = data["CONTACTING_METHOD"];
+        this.criticality = data["CRITICALITY_PRIVATE"];
+        this.issueType = data["ISSUE_TYPE_PRIVATE"];
+        this._supportService.privateData =data;
         if (this.supportID > 0)
           this.getByID(this.supportID);
-
       })
       .catch(err => {
 
       })
+    }
+    else{
+      let data = this._supportService.privateData;
+      this.contacting = data["CONTACTING_METHOD"];
+      this.criticality = data["CRITICALITY_PRIVATE"];
+      this.issueType = data["ISSUE_TYPE_PRIVATE"];
+    }
+
   }
   save() {
     this._supportService.postCalls('support/PrivateSave', this.supportForm.value, 8)
