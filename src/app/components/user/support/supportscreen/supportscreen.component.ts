@@ -59,23 +59,27 @@ export class SupportscreenComponent implements OnInit {
   }
 
   getLookups() {
-    this._supportService.getCalls('support/PrivateUsers', 5)
+    if (!this._supportService.privateData) {
+      this._supportService.getCalls('support/PrivateUsers', 5)
       .then((data: any) => {
-        if(data.CONTACTING_METHOD && data.CONTACTING_METHOD.length){
-          this.contacting = data.CONTACTING_METHOD;
-        } 
-        if(data.CRITICALITY_PRIVATE && data.CRITICALITY_PRIVATE.length){
-          this.criticality = data.CRITICALITY_PRIVATE;
-        }
-        if(data.ISSUE_TYPE_PRIVATE && data.ISSUE_TYPE_PRIVATE.length){
-          this.issueType = data.ISSUE_TYPE_PRIVATE;
-        }
-        if (this.supportID)
+        this.contacting = data["CONTACTING_METHOD"];
+        this.criticality = data["CRITICALITY_PRIVATE"];
+        this.issueType = data["ISSUE_TYPE_PRIVATE"];
+        this._supportService.privateData = data;
+        if (this.supportID > 0)
           this.getByID(this.supportID);
       })
       .catch(err => {
 
       })
+    }
+    else{
+      let data = this._supportService.privateData;
+      this.contacting = data["CONTACTING_METHOD"];
+      this.criticality = data["CRITICALITY_PRIVATE"];
+      this.issueType = data["ISSUE_TYPE_PRIVATE"];
+    }
+
   }
   save() {
     this._supportService.postCalls('support/PrivateSave', this.supportForm.value, 8)

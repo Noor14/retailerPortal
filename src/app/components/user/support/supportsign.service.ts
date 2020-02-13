@@ -6,7 +6,7 @@ import { baseApi } from 'src/app/constant/baseurl';
   providedIn: 'root'
 })
 export class SupportSignInService {
-
+  privateData:any=null;
   constructor(private _http :HttpClient) { }
 
   getCalls(resourceName,rightId ){

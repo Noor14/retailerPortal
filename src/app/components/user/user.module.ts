@@ -14,6 +14,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SupportgridComponent } from './support/supportgrid/supportgrid.component';
 import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
 import { SupportSignInService } from './support/supportsign.service';
+import { NoWhiteSpace } from 'src/app/shared/pipes-directives/singlespace';
+import { NoDualSpaceSpecial } from 'src/app/shared/pipes-directives/dualspacespecialcharacter';
+
 import { TableComponent } from '../../shared/table/table.component';
 import { PaymentComponent } from '../../shared/payment/payment.component';
 @NgModule({
@@ -21,11 +24,13 @@ import { PaymentComponent } from '../../shared/payment/payment.component';
     DashboardComponent,
     UserComponent, 
     HeaderComponent,
-    SidebarComponent,
+    SidebarComponent, 
     ProfileComponent,
     SupportgridComponent,
     SupportscreenComponent,
     TableComponent,
+    NoWhiteSpace,
+    NoDualSpaceSpecial,
     PaymentComponent
   ],
   imports: [

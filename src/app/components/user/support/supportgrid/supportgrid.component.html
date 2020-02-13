@@ -16,27 +16,36 @@
         </div>
         <div class="gridArea">
             <div class="table-responsive" style="overflow-y: auto;height: 387px;"  id="nav-scrollbar">
-                <table class="table table-striped">
+                <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">Token ID</th>
-                        <th scope="col">Issue Type</th>
-                        <th scope="col">Created Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th>Token ID</th>
+                        <th>Issue Type</th>
+                        <th>Created Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let check of lstSupport">
-                        <td> {{check.TicketNumber}} </td>
-                        <td> {{check.IssueType}} </td>
-                        <td> {{check.CreatedDate |  date: 'dd/MM/yy'}} </td>
-                        <td> {{check.Status}} </td>
-                        <td></td>
+                    <tr *ngFor="let item of lstSupport; let i = index">
+                        <td> {{item.TicketNumber}} </td>
+                        <td> {{item.IssueType}} </td>
+                        <td> {{item.CreatedDate |  date: 'dd/MM/yy'}} </td>
+                        <td> {{item.Status}} </td>
+                        <td>
+                            <div ngbDropdown class="d-inline" placement="bottom-right">
+                            <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
+                            <div ngbDropdownMenu>
+                                <button ngbDropdownItem (click)="gotoView(item.ID)">View</button>
+                                <button ngbDropdownItem>Delete</button>
+                              </div>
+                            </div>
+                           
+                        </td>
                     </tr>
-                <tr  style="text-align: center;"  *ngIf="loadAvailable">
-                    <td colspan="5"> <a  href="javascript:void(0);" (click)="search()" > Load More</a></td>
-                </tr>
+                    <tr  class="text-center" *ngIf="loadAvailable">
+                        <td colspan="5"> <button class="btn" (click)="search()" >Load More</button></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

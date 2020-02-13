@@ -1,6 +1,8 @@
 header{
-    box-shadow: 0px 0px 7px -2px #d6d6d6;
-    border-bottom: 1px solid #f3f3f3;
+  box-shadow: 0px 0px 7px -2px #7a7979;
+  border-bottom: 1.5px solid #a7a7a7;
+  z-index: 2;
+  position: relative;
     .navbar-brand{
       .logo{
           width: 115px;
