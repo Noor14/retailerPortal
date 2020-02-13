@@ -43,13 +43,7 @@ export class SupportgridComponent implements OnInit {
     this._supportService.postCalls("support/Search", this.searchObj, 7)
       .then((data: any) => {
         this.lstSupport = [...this.lstSupport, ...data[0]];
-        console.log(data[1].RecordCount)
-        if (this.lstSupport.length == data[1].RecordCount) {
-          this.loadAvailable = false
-        }
-        else {
-          this.loadAvailable = true;
-        }
+        this.loadAvailable = (this.lstSupport.length == data[1].RecordCount)? false : true;
       })
       .catch(err => {
         console.log(err);
