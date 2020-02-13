@@ -9,13 +9,14 @@ import { Router } from '@angular/router';
 })
 export class SupportgridComponent implements OnInit {
   lstSupport = [];
-
   issueType: any[];
   criticality: any[];
   contacting: any[];
   searchObj: any = null;
   loadAvailable: boolean;
-  constructor(private _supportService: SupportSignInService, private _route: Router) { }
+  constructor(
+    private _supportService: SupportSignInService,
+    private _router: Router) { }
   col = [
     { name: "Token ID", fieldName: "TicketNumber" },
     { name: "Issue Type", fieldName: "IssueType" },
@@ -75,4 +76,9 @@ export class SupportgridComponent implements OnInit {
       this.issueType = data["ISSUE_TYPE_PRIVATE"];
     }
   }
+
+  gotoView(id:Number){
+    this._router.navigate(['/user/support/', id])
+  }
+
 }

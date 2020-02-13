@@ -59,13 +59,13 @@ export class SupportscreenComponent implements OnInit {
   }
 
   getLookups() {
-    if (this._supportService.privateData == null) {
+    if (!this._supportService.privateData) {
       this._supportService.getCalls('support/PrivateUsers', 5)
       .then((data: any) => {
         this.contacting = data["CONTACTING_METHOD"];
         this.criticality = data["CRITICALITY_PRIVATE"];
         this.issueType = data["ISSUE_TYPE_PRIVATE"];
-        this._supportService.privateData =data;
+        this._supportService.privateData = data;
         if (this.supportID > 0)
           this.getByID(this.supportID);
       })
