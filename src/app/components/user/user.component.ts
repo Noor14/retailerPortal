@@ -1,5 +1,8 @@
 import { routeAnimation } from './../../constant/animations';
 import { Component, OnInit } from '@angular/core';
+import { SupportService } from '../authentication/support/support.service';
+import { SharedService } from 'src/app/services/shared.service';
+import { SupportSignInService } from './support/supportsign.service';
 
 @Component({
   selector: 'app-user',
@@ -12,9 +15,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _supportService :SupportSignInService,private _sharedService : SharedService) { }
 
   ngOnInit() {
+    this._supportService.getCalls("support/PrivateUsers",7)
+    .then((data:any)=>{
+      this._sharedService.setDropDownValue(data);
+
+    })
   }
   
 }

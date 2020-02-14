@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
 import { SupportService } from './support.service';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-support',
@@ -11,11 +12,11 @@ import { Router } from '@angular/router';
 })
 export class SupportComponent implements OnInit {
   supportForm: FormGroup;
-  issueType: any[];
-  criticality: any[];
-  contacting: any[];
+  private issueType: any[];
+  private criticality: any[];
+  private contacting: any[];
   public mobileMask = AppMasks.mobile_Mask;
-  constructor(private _supportService: SupportService, private _route: Router) { }
+  constructor(private _supportService: SupportService, private _route: Router,private _sharedService : SharedService) { }
 
   ngOnInit() {
     this.supportForm = new FormGroup({
@@ -32,25 +33,11 @@ export class SupportComponent implements OnInit {
 
 
   getLookups() {
-    if (this._supportService.publicData == null) {
-      this._supportService.getCalls('support/PublicUsers')
-        .then((data: any) => {
-
-          this.contacting = data["CONTACTING_METHOD"];
-          this.criticality = data["CRITICALITY_PUBLIC"];
-          this.issueType = data["ISSUE_TYPE_PUBLIC"];
-          this._supportService.publicData = data;
-        })
-        .catch(err => {
-
-        })
-    }
-    else{
-      let data = this._supportService.publicData;
-      this.contacting = data["CONTACTING_METHOD"];
-      this.criticality = data["CRITICALITY_PUBLIC"];
-      this.issueType = data["ISSUE_TYPE_PUBLIC"];
-    }
+    let data =  this._sharedService.getDropDownValue();
+    this.contacting = data["CONTACTING_METHOD"];
+    this.criticality = data["CRITICALITY_PUBLIC"];
+    this.issueType = data["ISSUE_TYPE_PUBLIC"];
+    
   }
   save(){
     this._supportService.postCalls('support/PublicSave',this.supportForm.value)

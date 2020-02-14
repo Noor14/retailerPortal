@@ -6,43 +6,46 @@ import { baseApi } from 'src/app/constant/baseurl';
   providedIn: 'root'
 })
 export class SupportSignInService {
-  privateData:any=null;
-  constructor(private _http :HttpClient) { }
+  public privateData: any = null;
+  private newRecord = null;
+  private gridData: any[] = null
+  private changeDetect = false;
+  constructor(private _http: HttpClient) { }
 
-  getCalls(resourceName,rightId ){
-   let httpOptions = {
+  getCalls(resourceName, rightId) {
+    let httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8', 
+        'Content-Type': 'application/json; charset=utf-8',
         'dataType': 'json',
-        'authorization':'Bearer ' + JSON.parse(sessionStorage.getItem('userIdentity')).access_token,
-        'rightid':rightId
+        'authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem('userIdentity')).access_token,
+        'rightid': rightId
       })
     };
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${resourceName}`;
-      this._http.get(apiURL,httpOptions)
-      .toPromise()
-      .then(res=>{
-        resolve(res);
-      })
-      .catch(err=>{
-        reject(err);
-      })
+      this._http.get(apiURL, httpOptions)
+        .toPromise()
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        })
 
     });
   }
-  postCalls(recourseName,obj,rightId) {
+  postCalls(recourseName, obj, rightId) {
     let httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8', 
+        'Content-Type': 'application/json; charset=utf-8',
         'dataType': 'json',
-        'authorization':'Bearer ' + JSON.parse(sessionStorage.getItem('userIdentity')).access_token,
-        'rightid':rightId
+        'authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem('userIdentity')).access_token,
+        'rightid': rightId
       })
     };
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${recourseName}`;
-      this._http.post(apiURL,obj, httpOptions)
+      this._http.post(apiURL, obj, httpOptions)
         .toPromise()
         .then(
           res => {
@@ -55,4 +58,5 @@ export class SupportSignInService {
     });
     return promise;
   }
+
 }
