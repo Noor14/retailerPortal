@@ -19,6 +19,7 @@ import { NoDualSpaceSpecial } from 'src/app/shared/pipes-directives/dualspacespe
 
 import { TableComponent } from '../../shared/table/table.component';
 import { SharedService } from 'src/app/services/shared.service';
+import { DialogComponent } from 'src/app/shared/dialog-modal/dialog/dialog.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -31,6 +32,10 @@ import { SharedService } from 'src/app/services/shared.service';
     TableComponent,
     NoWhiteSpace,
     NoDualSpaceSpecial,
+    DialogComponent,
+  ],
+  entryComponents:[
+    DialogComponent
   ],
   imports: [
     CommonModule,

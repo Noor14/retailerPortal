@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SupportSignInService } from '../supportsign.service';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DialogComponent } from 'src/app/shared/dialog-modal/dialog/dialog.component';
 
 @Component({
   selector: 'app-supportgrid',
@@ -14,16 +16,13 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   public lstSupport = [];
   public issueType: any[];
   searchObj: any = null;
-  loadAvailable: boolean;
-  constructor(private _supportService: SupportSignInService,
-     private _sharedService: SharedService, private _router: Router) { }
-  col = [
-    { name: "Token ID", fieldName: "TicketNumber" },
-    { name: "Issue Type", fieldName: "IssueType" },
-    { name: "Created Date", fieldName: "CreatedDate" },
-    { name: "Status", fieldName: "Status" },
-    { name: "Actions", fieldName: "" },
-  ]
+  public loadAvailable: boolean;
+
+  constructor(
+    private _supportService: SupportSignInService,
+    private _sharedService: SharedService,
+    private _router: Router,
+    private _modalService: NgbModal) { }
 
   ngOnInit() {
     this.getLookups();
@@ -65,6 +64,19 @@ export class SupportgridComponent implements OnInit, OnDestroy {
 
   gotoView(id:Number){
     this._router.navigate(['/user/support/', id])
+  }
+  openDialog(id :Number){
+    const modalRef = this._modalService.open(DialogComponent,{ 
+      centered: true,
+      keyboard: false,
+      backdrop:'static'
+     });
+    modalRef.componentInstance.name = id;
+    modalRef.result.then((result) => {
+      // this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
 }

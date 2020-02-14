@@ -10,10 +10,6 @@ import { DialogComponent } from './dialog-modal/dialog/dialog.component';
   declarations: [
     HeaderComponent,
     SidebarComponent,
-    DialogComponent,
-  ],
-  entryComponents:[
-    DialogComponent
   ],
   imports: [
     CommonModule,
