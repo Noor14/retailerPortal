@@ -13,7 +13,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 import { SupportComponent } from './support/support.component';
 import { SupportService } from './support/support.service';
-import { SharedService } from 'src/app/services/shared.service';
 @NgModule({
   declarations: [
     RegistrationComponent,
@@ -28,8 +27,7 @@ import { SharedService } from 'src/app/services/shared.service';
     AuthenticationRoutingModule,
     ReactiveFormsModule,
     TextMaskModule
-    // SharedModule
   ],
-  providers:[LoginService,SupportService,]
+  providers:[LoginService, SupportService]
 })
 export class AuthenticationModule { }

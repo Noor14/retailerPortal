@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SupportSignInService } from '../supportsign.service';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared.service';
@@ -8,14 +8,16 @@ import { SharedService } from 'src/app/services/shared.service';
   templateUrl: './supportgrid.component.html',
   styleUrls: ['./supportgrid.component.scss']
 })
-export class SupportgridComponent implements OnInit {
-  lstSupport = [];
-  issueType: any[];
-  criticality: any[];
-  contacting: any[];
+export class SupportgridComponent implements OnInit, OnDestroy {
+
+  private supportDropDownSubscriber:any;
+  public lstSupport = [];
+  public issueType: any[];
+  public criticality: any[];
+  public contacting: any[];
   searchObj: any = null;
   loadAvailable: boolean;
-  constructor(private _supportService: SupportSignInService, private _route: Router,
+  constructor(private _supportService: SupportSignInService,
      private _sharedService: SharedService, private _router: Router) { }
   col = [
     { name: "Token ID", fieldName: "TicketNumber" },
@@ -28,6 +30,9 @@ export class SupportgridComponent implements OnInit {
   ngOnInit() {
     this.getLookups();
     this.search();
+  }
+  ngOnDestroy(){
+    this.supportDropDownSubscriber.unsubscribe()
   }
   search() {
     if (this.searchObj == null) {
@@ -44,12 +49,7 @@ export class SupportgridComponent implements OnInit {
         .then((data: any) => {
 
           this.lstSupport = [...this.lstSupport, ...data[0]];
-          if (this.lstSupport.length == data[1].RecordCount) {
-            this.loadAvailable = false
-          }
-          else {
-            this.loadAvailable = true;
-          }
+          this.loadAvailable = (this.lstSupport.length == data[1].RecordCount)? false : true;
         })
         .catch(err => {
           console.log(err);
@@ -58,10 +58,13 @@ export class SupportgridComponent implements OnInit {
 
   }
   getLookups() {
-    let data = this._sharedService.getDropDownValue();
-    this.contacting = data["CONTACTING_METHOD"];
-    this.criticality = data["CRITICALITY_PRIVATE"];
-    this.issueType = data["ISSUE_TYPE_PRIVATE"];
+    this.supportDropDownSubscriber = this._sharedService.supportDropdownValues.subscribe((res:any)=>{
+      if(res){
+        this.contacting = res.CONTACTING_METHOD;
+        this.criticality = res.CRITICALITY_PRIVATE;
+        this.issueType = res.ISSUE_TYPE_PRIVATE;
+      }
+    });
   }
 
   gotoView(id:Number){
