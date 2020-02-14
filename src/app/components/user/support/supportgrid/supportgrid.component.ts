@@ -13,8 +13,6 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   private supportDropDownSubscriber:any;
   public lstSupport = [];
   public issueType: any[];
-  public criticality: any[];
-  public contacting: any[];
   searchObj: any = null;
   loadAvailable: boolean;
   constructor(private _supportService: SupportSignInService,
@@ -60,8 +58,6 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   getLookups() {
     this.supportDropDownSubscriber = this._sharedService.supportDropdownValues.subscribe((res:any)=>{
       if(res){
-        this.contacting = res.CONTACTING_METHOD;
-        this.criticality = res.CRITICALITY_PRIVATE;
         this.issueType = res.ISSUE_TYPE_PRIVATE;
       }
     });
