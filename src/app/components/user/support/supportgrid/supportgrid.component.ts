@@ -15,7 +15,7 @@ export class SupportgridComponent implements OnInit {
   contacting: any[];
   searchObj: any = null;
   loadAvailable: boolean;
-  constructor(private _supportService: SupportSignInService, private _route: Router,
+  constructor(private _supportService: SupportSignInService,
      private _sharedService: SharedService, private _router: Router) { }
   col = [
     { name: "Token ID", fieldName: "TicketNumber" },
@@ -44,12 +44,7 @@ export class SupportgridComponent implements OnInit {
         .then((data: any) => {
 
           this.lstSupport = [...this.lstSupport, ...data[0]];
-          if (this.lstSupport.length == data[1].RecordCount) {
-            this.loadAvailable = false
-          }
-          else {
-            this.loadAvailable = true;
-          }
+          this.loadAvailable = (this.lstSupport.length == data[1].RecordCount)? false : true;
         })
         .catch(err => {
           console.log(err);
