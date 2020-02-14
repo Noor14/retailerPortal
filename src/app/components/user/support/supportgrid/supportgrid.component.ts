@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SupportSignInService } from '../supportsign.service';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-supportgrid',
@@ -14,9 +15,8 @@ export class SupportgridComponent implements OnInit {
   contacting: any[];
   searchObj: any = null;
   loadAvailable: boolean;
-  constructor(
-    private _supportService: SupportSignInService,
-    private _router: Router) { }
+  constructor(private _supportService: SupportSignInService, private _route: Router,
+     private _sharedService: SharedService, private _router: Router) { }
   col = [
     { name: "Token ID", fieldName: "TicketNumber" },
     { name: "Issue Type", fieldName: "IssueType" },
@@ -30,45 +30,38 @@ export class SupportgridComponent implements OnInit {
     this.search();
   }
   search() {
-
     if (this.searchObj == null) {
-      this.searchObj = {};
-      this.searchObj.TotalRecords = 10;
-      this.searchObj.PageNumber = 0;
-    }
-    else {
-      this.searchObj.TotalRecords = 10;
-      this.searchObj.PageNumber++;
-    }
-    this._supportService.postCalls("support/Search", this.searchObj, 7)
-      .then((data: any) => {
-        this.lstSupport = [...this.lstSupport, ...data[0]];
-        this.loadAvailable = (this.lstSupport.length == data[1].RecordCount)? false : true;
-      })
-      .catch(err => {
-        console.log(err);
-      })
+        this.searchObj = {};
+        this.searchObj.TotalRecords = 10;
+        this.searchObj.PageNumber = 0;
+      }
+      else {
+        this.searchObj.TotalRecords = 10;
+        this.searchObj.PageNumber++;
+      }
+
+      this._supportService.postCalls("support/Search", this.searchObj, 7)
+        .then((data: any) => {
+
+          this.lstSupport = [...this.lstSupport, ...data[0]];
+          if (this.lstSupport.length == data[1].RecordCount) {
+            this.loadAvailable = false
+          }
+          else {
+            this.loadAvailable = true;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
+  
 
   }
   getLookups() {
-    if (this._supportService.privateData == null) {
-      this._supportService.getCalls('support/PrivateUsers', 5)
-      .then((data: any) => {
-        this.contacting = data["CONTACTING_METHOD"];
-        this.criticality = data["CRITICALITY_PRIVATE"];
-        this.issueType = data["ISSUE_TYPE_PRIVATE"];
-        this._supportService.privateData =data;
-      })
-      .catch(err => {
-
-      })
-    }
-    else{
-      let data = this._supportService.privateData;
-      this.contacting = data["CONTACTING_METHOD"];
-      this.criticality = data["CRITICALITY_PRIVATE"];
-      this.issueType = data["ISSUE_TYPE_PRIVATE"];
-    }
+    let data = this._sharedService.getDropDownValue();
+    this.contacting = data["CONTACTING_METHOD"];
+    this.criticality = data["CRITICALITY_PRIVATE"];
+    this.issueType = data["ISSUE_TYPE_PRIVATE"];
   }
 
   gotoView(id:Number){

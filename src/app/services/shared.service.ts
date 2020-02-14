@@ -5,7 +5,15 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedService {
-
+  private supportDropdownValues :any[];
   constructor() { }
+
   public signUpBtnToggling = new BehaviorSubject<any>(null);
+
+  setDropDownValue(data){
+    this.supportDropdownValues = data;
+  }
+  getDropDownValue(){
+    return this.supportDropdownValues;
+  }
 }

@@ -19,6 +19,7 @@ import { NoDualSpaceSpecial } from 'src/app/shared/pipes-directives/dualspacespe
 
 import { TableComponent } from '../../shared/table/table.component';
 import { PaymentComponent } from '../../shared/payment/payment.component';
+import { SharedService } from 'src/app/services/shared.service';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -42,7 +43,7 @@ import { PaymentComponent } from '../../shared/payment/payment.component';
     ReactiveFormsModule,
     // SharedModule
   ],
-  providers:[ProfileService,SupportSignInService]
+  providers:[ProfileService,SupportSignInService,SharedService]
 
 })
 export class UserModule { }

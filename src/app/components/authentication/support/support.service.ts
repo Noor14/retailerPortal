@@ -5,7 +5,6 @@ import { baseApi } from 'src/app/constant/baseurl';
   providedIn: 'root'
 })
 export class SupportService {
-  publicData:any=null;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8', 'dataType': 'json'
