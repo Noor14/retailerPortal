@@ -6,10 +6,7 @@ import { baseApi } from 'src/app/constant/baseurl';
   providedIn: 'root'
 })
 export class SupportSignInService {
-  public privateData: any = null;
-  private newRecord = null;
-  private gridData: any[] = null
-  private changeDetect = false;
+
   constructor(private _http: HttpClient) { }
 
   getCalls(resourceName, rightId) {

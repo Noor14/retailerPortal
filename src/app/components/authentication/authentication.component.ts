@@ -22,8 +22,9 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     })
     this._supportService.getCalls("support/PublicUsers")
     .then((data:any)=>{
-      this._sharedService.setDropDownValue(data);
-
+      if(data && Object.keys(data).length){
+        this._sharedService.supportDropdownValues.next(data);
+      }
     })
   }
   ngOnDestroy(){

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { SupportSignInService } from '../supportsign.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -9,12 +9,13 @@ import { SharedService } from 'src/app/services/shared.service';
   templateUrl: './supportscreen.component.html',
   styleUrls: ['./supportscreen.component.scss']
 })
-export class SupportscreenComponent implements OnInit {
+export class SupportscreenComponent implements OnInit, OnDestroy {
 
+  private supportDropDownSubscriber:any;
   public supportDetail: any = {};
-  private issueType: any[];
-  private criticality: any[];
-  private contacting: any[];
+  public issueType: any[];
+  public criticality: any[];
+  public contacting: any[];
   supportForm: FormGroup;
   public mobileMask = AppMasks.mobile_Mask;
   supportID: number;
@@ -62,12 +63,18 @@ export class SupportscreenComponent implements OnInit {
       Description: new FormControl({ value: null, disabled: this.readonlyCheck })
     });
   }
+  ngOnDestroy(){
+    this.supportDropDownSubscriber.unsubscribe()
+  }
 
   getLookups() {
-    let data = this._sharedService.getDropDownValue();
-    this.contacting = data["CONTACTING_METHOD"];
-    this.criticality = data["CRITICALITY_PRIVATE"];
-    this.issueType = data["ISSUE_TYPE_PRIVATE"];
+    this.supportDropDownSubscriber = this._sharedService.supportDropdownValues.subscribe((res:any)=>{
+      if(res){
+        this.contacting = res.CONTACTING_METHOD;
+        this.criticality = res.CRITICALITY_PRIVATE;
+        this.issueType = res.ISSUE_TYPE_PRIVATE;
+      }
+    });
   }
   save() {
     this._supportService.postCalls('support/PrivateSave', this.supportForm.value, 8)

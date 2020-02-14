@@ -20,8 +20,8 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this._supportService.getCalls("support/PrivateUsers",7)
     .then((data:any)=>{
-      this._sharedService.setDropDownValue(data);
-
+      if(data && Object.keys(data).length)
+      this._sharedService.supportDropdownValues.next(data);
     })
   }
   
