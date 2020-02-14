@@ -18,7 +18,6 @@ import { NoWhiteSpace } from 'src/app/shared/pipes-directives/singlespace';
 import { NoDualSpaceSpecial } from 'src/app/shared/pipes-directives/dualspacespecialcharacter';
 
 import { TableComponent } from '../../shared/table/table.component';
-import { PaymentComponent } from '../../shared/payment/payment.component';
 import { SharedService } from 'src/app/services/shared.service';
 @NgModule({
   declarations: [
@@ -32,7 +31,6 @@ import { SharedService } from 'src/app/services/shared.service';
     TableComponent,
     NoWhiteSpace,
     NoDualSpaceSpecial,
-    PaymentComponent
   ],
   imports: [
     CommonModule,

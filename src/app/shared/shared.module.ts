@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PaymentComponent } from './payment/payment.component';
 import { DialogComponent } from './dialog-modal/dialog/dialog.component';
 
 
@@ -12,7 +11,6 @@ import { DialogComponent } from './dialog-modal/dialog/dialog.component';
     HeaderComponent,
     SidebarComponent,
     DialogComponent,
-    PaymentComponent
   ],
   entryComponents:[
     DialogComponent
