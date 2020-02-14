@@ -72,8 +72,56 @@ html{
       }
     }
   }
-  .tab-content {
-    padding: 16px;
+  ngb-tabset{
+    .nav-tabs{
+        .nav-item{
+            &:first-child {
+                .nav-link{
+                    padding-left: 0px;
+                }
+               
+            }
+            .nav-link{
+                border: unset;
+              
+                &:hover{
+                    border: unset;
+
+                }
+
+                &.active{
+                    background-color: transparent;
+                    border: unset;
+                    color: $baseColor;
+                    border-bottom: 1px solid $baseColor;
+                }
+            }
+        }
+    }
+
+    .tab-content
+    {
+      padding: 15px 0;
+        
+    }
+}
+  .dropdown{
+    &-toggle::after{
+      display:none;
+    }
+    &-item:active{
+      background-color: #afafaf;
+    }
+    &-item:focus{
+      outline: unset;
+    }
+    &-menu{
+      left: auto !important;
+      right: 0px !important;
+      top: auto !important;
+      transform: unset !important;
+
+    }
   }
   .content{
  
@@ -93,9 +141,17 @@ html{
   }
   .gridArea{
     .table{
+      text-align: center;
       th{
         border-top: unset;
+        background-color: #e9ecef;
 
+      }
+      tr:nth-child(odd) {
+        background-color: #fff;
+      }
+      tr:nth-child(even) {
+        background-color: #e9ecef;
       }
     }
   }

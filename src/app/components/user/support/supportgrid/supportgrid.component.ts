@@ -10,13 +10,13 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class SupportgridComponent implements OnInit {
   lstSupport = [];
-
   issueType: any[];
   criticality: any[];
   contacting: any[];
   searchObj: any = null;
   loadAvailable: boolean;
-  constructor(private _supportService: SupportSignInService, private _route: Router, private _sharedService: SharedService) { }
+  constructor(private _supportService: SupportSignInService, private _route: Router,
+     private _sharedService: SharedService, private _router: Router) { }
   col = [
     { name: "Token ID", fieldName: "TicketNumber" },
     { name: "Issue Type", fieldName: "IssueType" },
@@ -63,4 +63,9 @@ export class SupportgridComponent implements OnInit {
     this.criticality = data["CRITICALITY_PRIVATE"];
     this.issueType = data["ISSUE_TYPE_PRIVATE"];
   }
+
+  gotoView(id:Number){
+    this._router.navigate(['/user/support/', id])
+  }
+
 }
