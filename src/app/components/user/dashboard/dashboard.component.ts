@@ -23,8 +23,12 @@ export class DashboardComponent implements OnInit {
   getPaymentList(){
     this._dashboardService.postCalls("prepaidrequests/search", this.searchObj, 7)
     .then((data: any) => {
+      if(data.PrePaidRequestCount){
 
-      this.paymentsList = [...this.paymentsList, ...data[0]];
+      }
+
+      this.paymentsList = data.PrePaidRequestData;
+      console.log(this.paymentsList)
       // this.loadAvailable = (this.lstSupport.length == data[1].RecordCount)? false : true;
     })
     .catch(err => {

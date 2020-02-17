@@ -30,7 +30,7 @@
                     <tr *ngFor="let item of lstSupport; let i = index">
                         <td> {{item.TicketNumber}} </td>
                         <td> {{item.IssueType}} </td>
-                        <td> {{item.CreatedDate |  date: 'dd/MM/yy'}} </td>
+                        <td> {{item.CreatedDate |  date: 'dd-MM-yyyy'}} </td>
                         <td> {{item.Status}} </td>
                         <td>
                             <div ngbDropdown class="d-inline" placement="bottom-right">
