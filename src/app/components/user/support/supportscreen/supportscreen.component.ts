@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { SupportSignInService } from '../supportsign.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,30 +13,30 @@ import { SharedService } from 'src/app/services/shared.service';
 export class SupportscreenComponent implements OnInit, OnDestroy {
 
   private supportDropDownSubscriber:any;
+  private routeSubscriber: any
   public supportDetail: any = {};
   public issueType: any[];
   public criticality: any[];
   public contacting: any[];
-  supportForm: FormGroup;
+  public supportForm: FormGroup;
   public mobileMask = AppMasks.mobile_Mask;
   supportID: number;
-  breadcrumbSupport: string;
+  public breadcrumbSupport: string;
   public message: boolean = false;
-  readonlyCheck: boolean = false
-  EmailEdit: boolean = true;
-  mobileEdit: boolean = true;
+  private readonlyCheck: boolean = false
+  public emailEdit: boolean = true;
+  public mobileEdit: boolean = true;
   constructor(
     private _supportService: SupportSignInService,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _sharedService: SharedService) {
+    private _sharedService: SharedService,
+    private _toast : ToastrService) {
 
-    this._route.params.subscribe(params => {
+   this.routeSubscriber= this._route.params.subscribe(params => {
       this.supportID = +params['id'];
       if (!this.supportID) {
         this.breadcrumbSupport = "Add Ticket";
-        // this.EmailEdit = true
-        // this.mobileEdit = true
       }
       else {
         this.breadcrumbSupport = "Edit Ticket";
@@ -64,7 +65,8 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(){
-    this.supportDropDownSubscriber.unsubscribe()
+    this.supportDropDownSubscriber.unsubscribe();
+    this.routeSubscriber.unsubscribe();
   }
 
   getLookups() {
@@ -79,7 +81,12 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
   save() {
     this._supportService.postCalls('support/PrivateSave', this.supportForm.value, 8)
       .then((data: any) => {
-        this._router.navigate(["/user/support"]);
+        if(data.ID){
+          this._toast.success('Ticket successfully generated');
+          this._router.navigate(["/user/support"]);
+
+        }
+
       })
       .catch(err => { 
 
@@ -101,6 +108,7 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
   delete() {
     this._supportService.postCalls('support/Delete', { ID: this.supportForm.value.ID }, 7)
       .then((res: any) => {
+        this._toast.success('Token successfully deleted')
         this._router.navigate(["/user/support"]);
       })
       .catch(err => {

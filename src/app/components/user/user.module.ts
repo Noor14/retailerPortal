@@ -18,8 +18,9 @@ import { NoWhiteSpace } from 'src/app/shared/pipes-directives/singlespace';
 import { NoDualSpaceSpecial } from 'src/app/shared/pipes-directives/dualspacespecialcharacter';
 
 import { TableComponent } from '../../shared/table/table.component';
-import { SharedService } from 'src/app/services/shared.service';
-import { DialogComponent } from 'src/app/shared/dialog-modal/dialog/dialog.component';
+import { SharedService } from '../../services/shared.service';
+import { DialogComponent } from '../../shared/dialog-modal/dialog/dialog.component';
+import { DashboardService } from './dashboard/dashboard.service';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -46,7 +47,11 @@ import { DialogComponent } from 'src/app/shared/dialog-modal/dialog/dialog.compo
     ReactiveFormsModule,
     // SharedModule
   ],
-  providers:[ProfileService,SupportSignInService,SharedService]
+  providers:[
+    ProfileService,
+    SupportSignInService,
+    SharedService,
+    DashboardService]
 
 })
 export class UserModule { }

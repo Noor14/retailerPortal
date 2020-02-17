@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,9 +9,27 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  public searchObj: any = {
+    TotalRecords: 10,
+    PageNumber : 0
+  };
+  public paymentsList: any[];
+  constructor(private _dashboardService: DashboardService) { }
 
   ngOnInit() {
+    this.getPaymentList();
+  }
+
+  getPaymentList(){
+    this._dashboardService.postCalls("prepaidrequests/search", this.searchObj, 7)
+    .then((data: any) => {
+
+      this.paymentsList = [...this.paymentsList, ...data[0]];
+      // this.loadAvailable = (this.lstSupport.length == data[1].RecordCount)? false : true;
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
 }

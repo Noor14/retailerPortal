@@ -39,7 +39,7 @@ html{
       .btn{
         &:focus, &:disabled, &:not(:disabled):not(.disabled):active:focus{
           box-shadow: unset;
-          background: $baseColor;
+          // background: $baseColor;
 
         }
         &-primary{

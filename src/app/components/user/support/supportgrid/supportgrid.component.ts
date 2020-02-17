@@ -26,12 +26,12 @@ export class SupportgridComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getLookups();
-    this.search();
+    this.getSupportList();
   }
   ngOnDestroy(){
     this.supportDropDownSubscriber.unsubscribe()
   }
-  search() {
+  getSupportList() {
     if (this.searchObj == null) {
         this.searchObj = {};
         this.searchObj.TotalRecords = 10;
@@ -71,9 +71,12 @@ export class SupportgridComponent implements OnInit, OnDestroy {
       keyboard: false,
       backdrop:'static'
      });
-    modalRef.componentInstance.name = id;
+    modalRef.componentInstance.obj = {id : id, title: 'Delete Ticket', detail:'Are you sure, you want to delete this ticket? '};
     modalRef.result.then((result) => {
-      // this.closeResult = `Closed with: ${result}`;
+      if(result){
+        let index = this.lstSupport.findIndex(obj => obj.ID == result)
+        this.lstSupport.splice(index, 1)
+      }
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
