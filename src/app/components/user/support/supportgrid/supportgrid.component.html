@@ -44,14 +44,15 @@
                         </td>
                     </tr>
                     <tr  class="text-center" *ngIf="loadAvailable">
-                        <td colspan="5"> <button class="btn" (click)="search()" >Load More</button></td>
+                        <td colspan="5"> <button class="btn" (click)="getSupportList()" >Load More</button></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!lstSupport.length">No Data Available</span>
+            <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!lstSupport.length && !showSpinner">No Data Available</span>
         </div>
     <!-- <app-table></app-table> -->
     </div>
 </div>
 </section>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

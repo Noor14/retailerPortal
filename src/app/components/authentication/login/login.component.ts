@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
       this.showSpinner = true;
       this._loginService.login(this.loginForm.value)
         .then((data:any) => {
+          this.showSpinner = false;
           if (data.ErrorCode) {
             this.loginFailure = true;
           }
@@ -44,7 +45,6 @@ export class LoginComponent implements OnInit {
             else {
               this._router.navigate(['/user/dashboard'])
             }
-            this.showSpinner = false;
           }
         })
         .catch(err => {
