@@ -1,10 +1,10 @@
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { SupportSignInService } from '../supportsign.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
-import { SharedService } from 'src/app/services/shared.service';
+import { SharedService } from '../../../../services/shared.service';
+import { TicketSupportService } from '../ticket-support.service';
 @Component({
   selector: 'app-supportscreen',
   templateUrl: './supportscreen.component.html',
@@ -27,7 +27,7 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
   public emailEdit: boolean = true;
   public mobileEdit: boolean = true;
   constructor(
-    private _supportService: SupportSignInService,
+    private _supportService: TicketSupportService,
     private _router: Router,
     private _route: ActivatedRoute,
     private _sharedService: SharedService,

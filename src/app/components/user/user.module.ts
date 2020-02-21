@@ -13,7 +13,6 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SupportgridComponent } from './support/supportgrid/supportgrid.component';
 import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
-import { SupportSignInService } from './support/supportsign.service';
 import { NoWhiteSpace } from 'src/app/shared/pipes-directives/singlespace';
 import { NoDualSpaceSpecial } from 'src/app/shared/pipes-directives/dualspacespecialcharacter';
 
@@ -21,6 +20,11 @@ import { TableComponent } from '../../shared/table/table.component';
 import { SharedService } from '../../services/shared.service';
 import { DialogComponent } from '../../shared/dialog-modal/dialog/dialog.component';
 import { DashboardService } from './dashboard/dashboard.service';
+import { TicketSupportService } from './support/ticket-support.service';
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentService } from './payment/payment.service';
+import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -34,6 +38,7 @@ import { DashboardService } from './dashboard/dashboard.service';
     NoWhiteSpace,
     NoDualSpaceSpecial,
     DialogComponent,
+    PaymentComponent,
   ],
   entryComponents:[
     DialogComponent
@@ -45,13 +50,15 @@ import { DashboardService } from './dashboard/dashboard.service';
     HttpClientModule,
     TextMaskModule,
     ReactiveFormsModule,
-    // SharedModule
+    NgxSpinnerModule
+
   ],
   providers:[
     ProfileService,
-    SupportSignInService,
+    TicketSupportService,
     SharedService,
-    DashboardService]
+    DashboardService,
+    PaymentService]
 
 })
 export class UserModule { }

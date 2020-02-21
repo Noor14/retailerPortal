@@ -15,7 +15,7 @@ export class UpdatepasswordComponent implements OnInit {
   constructor(
     private _loginService: LoginService,
     private _route:Router,
-    private _toastr: ToastrService
+    private _toast: ToastrService
     ) {
 
    }
@@ -37,7 +37,7 @@ export class UpdatepasswordComponent implements OnInit {
             this._route.navigate(['/login'])
         }
         else{
-          this._toastr.success("ac", "Password not updated please try after some few minutes");
+          this._toast.success("ac", "Password not updated please try after some few minutes");
           this._route.navigate(['/user/dashboard']);
         }
       })

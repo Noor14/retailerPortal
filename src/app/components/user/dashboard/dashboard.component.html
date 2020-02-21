@@ -14,14 +14,13 @@
           <ng-template ngbTabContent>
             <div class="content">
               <div class="gridArea">
-                <div class="table-responsive">
-                  <table class="table table-striped">
+                <div class="table-responsive" id="nav-scrollbar" *ngIf="paymentsList.length" >
+                  <table class="table">
                       <thead>
                       <tr>
                           <th>Payment ID</th>
                           <th>Company</th>
                           <th>Created Date</th>
-                          <th>Transaction Date</th>
                           <th>Status</th>
                           <th>Amount</th>
                           <th>Action</th>
@@ -32,23 +31,27 @@
                           <td>{{payment.PrePaidNumber}}</td>
                           <td>{{payment.CompanyName}}</td>
                           <td>{{payment.CreatedDate |  date: 'dd-MM-yyyy'}}</td>
-                          <td>@mdo</td>
                           <td>{{(payment.Status)? 'Paid' : 'Unpaid'}}</td>
                           <td>{{payment.PaidAmount}}</td>
-                              <td>
+                          <td>
                             <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
                                 <button ngbDropdownItem>View</button>
-                                <button ngbDropdownItem>Delete</button>
+                                <button ngbDropdownItem>Edit</button>
+                                <button ngbDropdownItem>Cancel</button>
                               </div>
                             </div>
                            
                         </td>
                       </tr>
+                      <tr  class="text-center" *ngIf="loadAvailable">
+                        <td colspan="6"> <button class="btn" (click)="search()" >Load More</button></td>
+                     </tr>
                       </tbody>
                   </table>
-              </div>
+                </div>
+                <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!paymentsList.length">No Data Available</span>
               </div>
           
             </div>
@@ -69,3 +72,4 @@
       </ngb-tabset>
     </div>
 </section>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

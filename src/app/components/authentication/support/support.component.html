@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <select name="PreferredContactMethod" class="form-control" formControlName="PreferredContactMethod"
                         placeholder="Contact Method">
-                        <option value="" disabled selected>Contact Method</option>
+                        <option value="null" disabled selected>Contact Method</option>
                         <option *ngFor="let contact of contacting" [value]="contact.key"> {{contact.value}} </option>
                     </select>
                     </div>
@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <select name="IssueType" class="form-control" formControlName="IssueType"
                             placeholder="Issue Type">
-                            <option value="" disabled selected>Issue Type</option>
+                            <option value="null" disabled selected>Issue Type</option>
                             <option *ngFor="let issue of issueType" [value]="issue.key"> {{issue.value}} </option>
                         </select>
                     </div>
@@ -44,7 +44,7 @@
             <div class="form-group">
                 <select name="Criticality" class="form-control" formControlName="Criticality"
                 placeholder="Criticality">
-                <option value="" disabled selected>Issue Type</option>
+                <option value="null" disabled selected>Criticality Type</option>
                 <option *ngFor="let critical of criticality" [value]="critical.key"> {{critical.value}} </option>
             </select>
             </div>

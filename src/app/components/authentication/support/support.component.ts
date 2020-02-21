@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
 import { SupportService } from './support.service';
 import { Router } from '@angular/router';
-import { SharedService } from 'src/app/services/shared.service';
+import { SharedService } from '../../../services/shared.service';
 
 @Component({
   selector: 'app-support',
@@ -44,8 +44,8 @@ export class SupportComponent implements OnInit, OnDestroy {
     this.supportDropDownSubscriber = this._sharedService.supportDropdownValues.subscribe((res:any)=>{
       if(res){
         this.contacting = res.CONTACTING_METHOD;
-        this.criticality = res.CRITICALITY_PRIVATE;
-        this.issueType = res.ISSUE_TYPE_PRIVATE;
+        this.criticality = res.CRITICALITY_PUBLIC;
+        this.issueType = res.ISSUE_TYPE_PUBLIC;
       }
     });
   }

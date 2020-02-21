@@ -5,7 +5,7 @@ import { baseApi } from 'src/app/constant/baseurl';
 @Injectable({
   providedIn: 'root'
 })
-export class SupportSignInService {
+export class TicketSupportService {
 
   constructor(private _http: HttpClient) { }
 

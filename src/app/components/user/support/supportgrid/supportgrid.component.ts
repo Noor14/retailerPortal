@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SupportSignInService } from '../supportsign.service';
+import { TicketSupportService } from '../ticket-support.service';
 import { Router } from '@angular/router';
-import { SharedService } from 'src/app/services/shared.service';
+import { SharedService } from '../../../../services/shared.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DialogComponent } from 'src/app/shared/dialog-modal/dialog/dialog.component';
 
@@ -19,7 +19,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   public loadAvailable: boolean;
 
   constructor(
-    private _supportService: SupportSignInService,
+    private _supportService: TicketSupportService,
     private _sharedService: SharedService,
     private _router: Router,
     private _modalService: NgbModal) { }

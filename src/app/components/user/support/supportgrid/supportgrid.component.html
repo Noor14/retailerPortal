@@ -15,7 +15,7 @@
                 <button class="btn btn-lg btn-primary ml-3" type="button" routerLink="/user/support/0">Add Ticket</button>
         </div>
         <div class="gridArea">
-            <div class="table-responsive" style="overflow-y: auto;height: 387px;"  id="nav-scrollbar">
+            <div class="table-responsive" id="nav-scrollbar">
                 <table class="table">
                     <thead>
                     <tr>
@@ -49,6 +49,7 @@
                     </tbody>
                 </table>
             </div>
+            <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!lstSupport.length">No Data Available</span>
         </div>
     <!-- <app-table></app-table> -->
     </div>

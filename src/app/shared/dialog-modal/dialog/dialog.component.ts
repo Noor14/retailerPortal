@@ -1,7 +1,7 @@
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SupportSignInService } from '../../../components/user/support/supportsign.service';
+import { TicketSupportService } from './../../../components/user/support/ticket-support.service';
 
 @Component({
   selector: 'app-dialog',
@@ -15,7 +15,7 @@ export class DialogComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private _supportService: SupportSignInService,
+    private _supportService: TicketSupportService,
     private _toast: ToastrService) { }
 
   ngOnInit() {

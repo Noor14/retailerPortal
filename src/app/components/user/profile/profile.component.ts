@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   confirmToggle = false;
   public cnicMask = AppMasks.cnic_Mask;
   public mobileMask = AppMasks.mobile_Mask;
-  constructor(private _profileService: ProfileService,private _toastr:ToastrService) { }
+  constructor(private _profileService: ProfileService,private _toast:ToastrService) { }
 
   ngOnInit() {
     this.profileFormGroup = new FormGroup({
@@ -37,9 +37,9 @@ export class ProfileComponent implements OnInit {
      
       this.passwordFormGroup = new FormGroup ({
         Username: new FormControl(JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.Username,[Validators.required]),
-        Password: new FormControl("",[Validators.required,Validators.pattern(AppPattern.password)]),
-        ConfirmPassword: new FormControl("",[Validators.required,Validators.pattern(AppPattern.password)]),
-        NewPassword: new FormControl("",[Validators.required,Validators.pattern(AppPattern.password)]),
+        Password: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
+        ConfirmPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
+        NewPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
 
         
       })
@@ -78,7 +78,7 @@ export class ProfileComponent implements OnInit {
     .catch(err=>{
       console.log(err);
       if(err.error.status==405){
-        this._toastr.error(err.error.message,"Error")
+        this._toast.error(err.error.message,"Error")
       }
     })
   }
@@ -91,7 +91,7 @@ export class ProfileComponent implements OnInit {
     .catch(err=>{
       console.log(err);
       if(err.error.status==405){
-        this._toastr.error(err.error.message,"Error")
+        this._toast.error(err.error.message,"Error")
       }
     })
   }

@@ -13,6 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 import { SupportComponent } from './support/support.component';
 import { SupportService } from './support/support.service';
+import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
+
 @NgModule({
   declarations: [
     RegistrationComponent,
@@ -26,7 +28,9 @@ import { SupportService } from './support/support.service';
     HttpClientModule,
     AuthenticationRoutingModule,
     ReactiveFormsModule,
-    TextMaskModule
+    TextMaskModule,
+    NgxSpinnerModule
+
   ],
   providers:[LoginService, SupportService]
 })
