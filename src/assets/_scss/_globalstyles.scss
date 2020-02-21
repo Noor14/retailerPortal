@@ -56,6 +56,12 @@ html{
         }
   
       }
+      .breadcrumb
+      {
+        background-color: unset;
+        padding: .75rem 0rem;
+        color: $baseFontColor;
+      }
 
 
       perfect-scrollbar{
