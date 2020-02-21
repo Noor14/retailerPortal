@@ -14,7 +14,7 @@ export class PaymentComponent implements OnInit {
   public showSpinner:boolean;
   public paymentForm: FormGroup; 
   public distributorList:any[];
-  public paymentID:number = undefined;
+  public paymentPrepaidNumber:number = undefined;
   constructor(
     private _paymentService: PaymentService,
     private _toast: ToastrService
@@ -56,7 +56,7 @@ export class PaymentComponent implements OnInit {
     this.showSpinner=false;
       if(data && data.ID){
         this._toast.success("Payment created");
-        this.paymentID = data.ID;
+        this.paymentPrepaidNumber = data.PrePaidNumber;
       }
     })
     .catch(err=>{
