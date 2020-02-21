@@ -1,3 +1,4 @@
+import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
@@ -19,13 +20,16 @@ export class RegistrationComponent implements OnInit {
   public cnicExist = false;
   public companyExist = false;
   public mobileExist = false;
+  public spinnerConfig:any;
+  public showSpinner: boolean;
 
   constructor(
-    private _toastr: ToastrService,
+    private _toast: ToastrService,
     private _loginService: LoginService,
     private _router: Router) { }
 
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
     this.registerForm = new FormGroup({
       ID: new FormControl(0, [Validators.required]),
       Name: new FormControl(null, [Validators.required]),
@@ -44,8 +48,10 @@ export class RegistrationComponent implements OnInit {
   register() {
     if (this.registerForm.valid) {
       if (this.registerForm.value.Password === this.registerForm.value.ConfirmPassword) {
+      this.showSpinner = true;
         this._loginService.PostCalls(this.registerForm.value, "retailer/Register", null)
           .then((data: any) => {
+            this.showSpinner = false;
             if (data.Found) {
               this.emailExist = data.Email;
               this.userExist = data.Username;
@@ -54,13 +60,13 @@ export class RegistrationComponent implements OnInit {
               this.companyExist = data.Company;
             }
             else {
-              this._toastr.success("ac", "acacacac");
+              this._toast.success("Registered successfully");
               this._router.navigate(['/login'])
             }
-
           })
           .catch(err => {
-            this._toastr.error("h", "h");
+            this.showSpinner = false;
+            this._toast.error("h", "h");
           })
       }
     }

@@ -1,7 +1,8 @@
+import { loadingConfig } from './../../../../constant/globalfunction';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SupportSignInService } from '../supportsign.service';
+import { TicketSupportService } from '../ticket-support.service';
 import { Router } from '@angular/router';
-import { SharedService } from 'src/app/services/shared.service';
+import { SharedService } from '../../../../services/shared.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DialogComponent } from 'src/app/shared/dialog-modal/dialog/dialog.component';
 
@@ -11,27 +12,31 @@ import { DialogComponent } from 'src/app/shared/dialog-modal/dialog/dialog.compo
   styleUrls: ['./supportgrid.component.scss']
 })
 export class SupportgridComponent implements OnInit, OnDestroy {
-
+  public showSpinner: boolean;
+  public spinnerConfig: any;
   private supportDropDownSubscriber:any;
   public lstSupport = [];
   public issueType: any[];
-  searchObj: any = null;
+  public searchObj: any = null;
   public loadAvailable: boolean;
 
   constructor(
-    private _supportService: SupportSignInService,
+    private _supportService: TicketSupportService,
     private _sharedService: SharedService,
     private _router: Router,
     private _modalService: NgbModal) { }
 
   ngOnInit() {
-    this.getLookups();
-    this.search();
+    this.spinnerConfig = loadingConfig;
+
+    this.getdropDownList();
+    this.getSupportList();
   }
   ngOnDestroy(){
     this.supportDropDownSubscriber.unsubscribe()
   }
-  search() {
+  getSupportList() {
+    this.showSpinner=true;
     if (this.searchObj == null) {
         this.searchObj = {};
         this.searchObj.TotalRecords = 10;
@@ -44,17 +49,19 @@ export class SupportgridComponent implements OnInit, OnDestroy {
 
       this._supportService.postCalls("support/Search", this.searchObj, 7)
         .then((data: any) => {
+          this.showSpinner=false;
 
           this.lstSupport = [...this.lstSupport, ...data[0]];
           this.loadAvailable = (this.lstSupport.length == data[1].RecordCount)? false : true;
         })
         .catch(err => {
+          this.showSpinner=false;
           console.log(err);
         })
   
 
   }
-  getLookups() {
+  getdropDownList() {
     this.supportDropDownSubscriber = this._sharedService.supportDropdownValues.subscribe((res:any)=>{
       if(res){
         this.issueType = res.ISSUE_TYPE_PRIVATE;
@@ -71,9 +78,12 @@ export class SupportgridComponent implements OnInit, OnDestroy {
       keyboard: false,
       backdrop:'static'
      });
-    modalRef.componentInstance.name = id;
+    modalRef.componentInstance.obj = {id : id, title: 'Delete Ticket', detail:'Are you sure, you want to delete this ticket? '};
     modalRef.result.then((result) => {
-      // this.closeResult = `Closed with: ${result}`;
+      if(result){
+        let index = this.lstSupport.findIndex(obj => obj.ID == result)
+        this.lstSupport.splice(index, 1)
+      }
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });

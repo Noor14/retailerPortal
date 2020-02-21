@@ -15,7 +15,7 @@
                 <button class="btn btn-lg btn-primary ml-3" type="button" routerLink="/user/support/0">Add Ticket</button>
         </div>
         <div class="gridArea">
-            <div class="table-responsive" style="overflow-y: auto;height: 387px;"  id="nav-scrollbar">
+            <div class="table-responsive" id="nav-scrollbar">
                 <table class="table">
                     <thead>
                     <tr>
@@ -30,7 +30,7 @@
                     <tr *ngFor="let item of lstSupport; let i = index">
                         <td> {{item.TicketNumber}} </td>
                         <td> {{item.IssueType}} </td>
-                        <td> {{item.CreatedDate |  date: 'dd/MM/yy'}} </td>
+                        <td> {{item.CreatedDate |  date: 'dd-MM-yyyy'}} </td>
                         <td> {{item.Status}} </td>
                         <td>
                             <div ngbDropdown class="d-inline" placement="bottom-right">
@@ -44,13 +44,15 @@
                         </td>
                     </tr>
                     <tr  class="text-center" *ngIf="loadAvailable">
-                        <td colspan="5"> <button class="btn" (click)="search()" >Load More</button></td>
+                        <td colspan="5"> <button class="btn" (click)="getSupportList()" >Load More</button></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+            <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!lstSupport.length && !showSpinner">No Data Available</span>
         </div>
     <!-- <app-table></app-table> -->
     </div>
 </div>
 </section>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

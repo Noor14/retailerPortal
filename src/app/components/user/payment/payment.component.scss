@@ -1,0 +1,13 @@
+.payment{
+    .paymentIdBox{
+      position: relative;
+      input{
+        padding-left: 100px;
+      }
+      span{
+          position: absolute;
+        top: 12px;
+        left: 12px;
+      }
+    }
+}

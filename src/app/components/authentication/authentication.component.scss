@@ -49,6 +49,9 @@
         .registration{
             @extend .login;
         }
+        .support{
+            @extend .login;
+        }
         
     }
 

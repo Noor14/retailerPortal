@@ -1,0 +1,10 @@
+.dialogBox{
+    .modal-header{
+        .close{
+            &:focus{
+                outline: unset;
+            }
+        }
+    }
+
+}

@@ -2,7 +2,7 @@
     <h4 class="mb-4 title">Registration</h4>
     <form [formGroup]="registerForm">
       <div class="form-group">
-          <input type="text" class="form-control" formControlName="Name" placeholder="Username">
+          <input type="text" class="form-control" formControlName="Name" placeholder="Name">
           
       </div>
       <div class="row">
@@ -64,6 +64,8 @@
         </div>
 
     </form>
-  </section>
+</section>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>
+
   
   

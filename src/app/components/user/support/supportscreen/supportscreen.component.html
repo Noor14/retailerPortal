@@ -27,8 +27,8 @@
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group  position-relative">  
-                            <input type="text" class="form-control" placeholder="Email" [readonly]="EmailEdit" formControlName="Email">
-                            <img src="../../../../assets/_images/bell.svg" width="10px" (click)="EmailEdit= !EmailEdit" 
+                            <input type="text" class="form-control" placeholder="Email" [readonly]="emailEdit" formControlName="Email">
+                            <img src="../../../../assets/_images/bell.svg" width="10px" (click)="emailEdit= !emailEdit" 
                             *ngIf="!supportDetail.ID"  class="mr-3 position-absolute" style="right: 5px; top: 45%;" />
                         </div>
                     </div>
@@ -97,3 +97,4 @@
     </div>
     </div>
 </section>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

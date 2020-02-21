@@ -1,3 +1,4 @@
+import { loadingConfig } from './../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
@@ -11,19 +12,21 @@ import { Router } from '@angular/router';
 })
 export class UpdatepasswordComponent implements OnInit {
   public updatePasswordForm: FormGroup;
-
+  public showSpinner: boolean;
+  public spinnerConfig: any;
   constructor(
     private _loginService: LoginService,
     private _route:Router,
-    private _toastr: ToastrService
+    private _toast: ToastrService
     ) {
 
    }
 
   ngOnInit() {
-    let userObj = JSON.parse(sessionStorage.getItem('UserIdentity'));
+    this.spinnerConfig = loadingConfig;
+    let userObj = JSON.parse(sessionStorage.getItem('userIdentity'));
     this.updatePasswordForm = new FormGroup({
-      Username: new FormControl(userObj.UserAccount.Username, [Validators.required]),
+      Username: new FormControl(userObj.UserAccount.Username, Validators.required),
       NewPassword: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.password)]),
       ConfirmPassword: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.password)]),
     })
@@ -31,18 +34,21 @@ export class UpdatepasswordComponent implements OnInit {
 
   updatePassword() {
     if(this.updatePasswordForm.valid){
+      this.showSpinner=true;
     this._loginService.PostCalls(this.updatePasswordForm.value, "users/UpdatePassword", 8)
       .then(data => {
+      this.showSpinner=false;
+
         if (data) {
             this._route.navigate(['/login'])
         }
         else{
-          this._toastr.success("ac", "Password not updated please try after some few minutes");
+          this._toast.success("Password not updated please try after some few minutes");
           this._route.navigate(['/user/dashboard']);
         }
       })
       .catch(err => {
-
+        this.showSpinner=false;
       })
     }
   }

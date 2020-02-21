@@ -39,7 +39,7 @@ html{
       .btn{
         &:focus, &:disabled, &:not(:disabled):not(.disabled):active:focus{
           box-shadow: unset;
-          background: $baseColor;
+          // background: $baseColor;
 
         }
         &-primary{
@@ -49,7 +49,7 @@ html{
           padding-top: 8px;
           padding-bottom: 8px;
           border: unset;
-          &:active, &:hover, &:disabled, &:not(:disabled):not(.disabled):active{
+          &:focus, &:active, &:hover, &:disabled, &:not(:disabled):not(.disabled):active{
             border: unset;
             background: $baseColor;
           }
@@ -63,19 +63,6 @@ html{
         color: $baseFontColor;
       }
 
-
-      perfect-scrollbar{
-        .ps__rail-y{
-          &:hover, &:focus{
-            width: 10px !important;
-            background: unset !important;
-            .ps__thumb-y{
-              width: 6px !important;
-            }
-          }
-  
-        }
-      }
     }
   }
   ngb-tabset{
@@ -146,19 +133,28 @@ html{
       }
   }
   .gridArea{
-    .table{
-      text-align: center;
-      th{
-        border-top: unset;
-        background-color: #e9ecef;
-
-      }
-      tr:nth-child(odd) {
-        background-color: #fff;
-      }
-      tr:nth-child(even) {
-        background-color: #e9ecef;
+    height: 450px;
+    .table-responsive{
+      max-height: 390px;
+      .table{
+        text-align: center;
+        margin: 0;
+        th{
+          border-top: unset;
+          background-color: #e9ecef;
+  
+        }
+        tbody{
+          tr:nth-child(odd) {
+            background-color: #fff;
+          }
+          tr:nth-child(even) {
+            background-color: #e9ecef;
+          }
+        }
+      
       }
     }
+   
   }
   }
