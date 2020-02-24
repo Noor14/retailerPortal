@@ -20,5 +20,5 @@ else if (environment.prod) {
 }
 else {
     // PERSONAL URL
-    baseApi = "http://192.168.200.17:3020";
+    baseApi = "http://192.168.200.51:3020";
 }

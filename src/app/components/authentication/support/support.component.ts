@@ -25,7 +25,7 @@ export class SupportComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit() {
-    this.getLookups();
+    this.getdropDownList();
     this.supportForm = new FormGroup({
       MobileNumber: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
       Email: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
@@ -40,7 +40,7 @@ export class SupportComponent implements OnInit, OnDestroy {
     this.supportDropDownSubscriber.unsubscribe()
   }
 
-  getLookups() {
+  getdropDownList() {
     this.supportDropDownSubscriber = this._sharedService.supportDropdownValues.subscribe((res:any)=>{
       if(res){
         this.contacting = res.CONTACTING_METHOD;
