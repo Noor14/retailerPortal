@@ -14,9 +14,8 @@
                 <h5>Support</h5>
                 <button class="btn btn-lg btn-primary ml-3" type="button" routerLink="/user/support/0">Add Ticket</button>
         </div>
-        <div class="gridArea">
-            <div class="table-responsive" id="nav-scrollbar">
-                <table class="table">
+        <div class="gridArea table-responsive" id="nav-scrollbar">
+                <table class="table" *ngIf="lstSupport && lstSupport.length">
                     <thead>
                     <tr>
                         <th>Token ID</th>
@@ -48,7 +47,6 @@
                     </tr>
                     </tbody>
                 </table>
-            </div>
             <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!lstSupport.length && !showSpinner">No Data Available</span>
         </div>
     <!-- <app-table></app-table> -->

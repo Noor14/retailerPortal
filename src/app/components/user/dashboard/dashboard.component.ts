@@ -32,7 +32,6 @@ export class DashboardComponent implements OnInit {
 
       if(data.PrePaidRequestCount){
         this.paymentsList = data.PrePaidRequestData;
-        console.log(this.paymentsList)
         this.loadAvailable = (this.paymentsList.length == data.PrePaidRequestCount)? false : true;
       }
     })

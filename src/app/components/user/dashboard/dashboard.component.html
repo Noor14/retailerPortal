@@ -13,9 +13,8 @@
           <ng-template ngbTabTitle>Payment</ng-template>
           <ng-template ngbTabContent>
             <div class="content">
-              <div class="gridArea">
-                <div class="table-responsive" id="nav-scrollbar" *ngIf="paymentsList.length" >
-                  <table class="table">
+              <div class="gridArea table-responsive" id="nav-scrollbar">
+                  <table class="table" *ngIf="paymentsList && paymentsList.length">
                       <thead>
                       <tr>
                           <th>Payment ID</th>
@@ -50,7 +49,6 @@
                      </tr>
                       </tbody>
                   </table>
-                </div>
                 <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!paymentsList.length && !showSpinner">No Data Available</span>
               </div>
           
