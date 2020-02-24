@@ -22,12 +22,11 @@ export class SidebarComponent implements OnInit {
     this.showSpinner=true;
     this._userService.logoutUser()
     .then((res:boolean)=>{
-    this.showSpinner=false;
-
       if(res){
         localStorage.clear();
         this._route.navigate(['/login'])
       }    
+      this.showSpinner=false;
     })
     .catch(err=>{
     this.showSpinner=false;

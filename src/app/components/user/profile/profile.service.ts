@@ -7,7 +7,7 @@ import { baseApi } from 'src/app/constant/baseurl';
 export class ProfileService {
   constructor(private _http: HttpClient) { }
 
-  getById(obj, rightId, resourceName) {
+  getById(fetchingId, rightId, resourceName) {
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8',
@@ -17,8 +17,8 @@ export class ProfileService {
       })
     };
     let promise = new Promise((resolve, reject) => {
-      const apiURL = `${baseApi}/api/${resourceName}`;
-      this._http.get(apiURL + obj, httpOptions)
+      const apiURL = `${baseApi}/api/${resourceName}/${fetchingId}`;
+      this._http.get(apiURL, httpOptions)
         .toPromise()
         .then(res => {
           resolve(res);
