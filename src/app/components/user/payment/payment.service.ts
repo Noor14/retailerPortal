@@ -6,22 +6,21 @@ import { baseApi } from 'src/app/constant/baseurl';
   providedIn: 'root'
 })
 export class PaymentService {
-  private head: any = {
-    "Content-Type": 'application/json; charset=utf-8',
-    "dataType": 'json',
-    "authorization": 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token
 
-  };
   constructor(private _http: HttpClient) { }
 
   makePayment(obj, rightId, resourceName) {
-    this.head["rightid"] = rightId;
-    let httphead = {
-      headers: new HttpHeaders(this.head)
-    }
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'dataType': 'json',
+        'authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token,
+        'rightid': rightId
+      })
+    };
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${resourceName}`;
-      this._http.post(apiURL, obj, httphead)
+      this._http.post(apiURL, obj, httpOptions)
         .toPromise()
         .then(res => {
           resolve(res);
@@ -34,12 +33,17 @@ export class PaymentService {
   }
 
   getDistributorsList(){
-    let httphead = {
-      headers: new HttpHeaders(this.head)
-    }
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'dataType': 'json',
+        'authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token,
+      })
+    };
+   
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/prepaidrequests/GetByRetailerCode`;
-      this._http.get(apiURL, httphead)
+      this._http.get(apiURL, httpOptions)
         .toPromise()
         .then(res => {
           resolve(res);

@@ -10,18 +10,16 @@ export class UserService {
   constructor(private _http: HttpClient) { }
 
   logoutUser() {
-    let obj={
-      "Content-Type": 'application/json; charset=utf-8',
-      "dataType": 'json',
-      "authorization": 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token
-  
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'dataType': 'json',
+        'authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token,
+      })
     };
-    let httphead = {
-      headers: new HttpHeaders(obj)
-    }
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/users/logout`;
-      this._http.post(apiURL,{}, httphead)
+      this._http.post(apiURL,{}, httpOptions)
         .toPromise()
         .then(res => {
           resolve(res);

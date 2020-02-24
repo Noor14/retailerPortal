@@ -5,22 +5,20 @@ import { baseApi } from 'src/app/constant/baseurl';
   providedIn: 'root'
 })
 export class ProfileService {
-  private head: any = {
-    "Content-Type": 'application/json; charset=utf-8',
-    "dataType": 'json',
-    "authorization": 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token
-
-  };
   constructor(private _http: HttpClient) { }
 
   getById(obj, rightId, resourceName) {
-    this.head["rightid"] = rightId;
-    let httphead = {
-      headers: new HttpHeaders(this.head)
-    }
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'dataType': 'json',
+        'authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token,
+        'rightid': rightId
+      })
+    };
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${resourceName}`;
-      this._http.get(apiURL + obj, httphead)
+      this._http.get(apiURL + obj, httpOptions)
         .toPromise()
         .then(res => {
           resolve(res);
@@ -33,13 +31,17 @@ export class ProfileService {
   }
 
   postCalls(obj, rightId, resourceName) {
-    this.head["rightid"] = rightId;
-    let httphead = {
-      headers: new HttpHeaders(this.head)
-    }
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'dataType': 'json',
+        'authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token,
+        'rightid': rightId
+      })
+    };
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${resourceName}`;
-      this._http.post(apiURL, obj, httphead)
+      this._http.post(apiURL, obj, httpOptions)
         .toPromise()
         .then(res => {
           resolve(res);

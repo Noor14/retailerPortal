@@ -13,8 +13,6 @@ export class SupportService {
   };
   constructor(private _http: HttpClient) {}
 
-
-
   getCalls(recourseName) {
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${recourseName}`;
