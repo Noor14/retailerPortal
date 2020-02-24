@@ -1,13 +1,27 @@
 .payment{
+  .makePaymentBtn{
+    margin-top: -16px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
     .paymentIdBox{
       position: relative;
-      input{
+      input[readonly]{
         padding-left: 100px;
+        background-color: transparent;
       }
       span{
           position: absolute;
         top: 12px;
         left: 12px;
+      }
+  
+    }
+    .bankingChannelBtn{
+      img{
+        width: 20px;
+        margin-right: 5px;
+        vertical-align: top;
       }
     }
 }

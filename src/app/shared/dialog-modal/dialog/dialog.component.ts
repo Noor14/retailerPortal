@@ -10,7 +10,7 @@ import { TicketSupportService } from './../../../components/user/support/ticket-
 })
 export class DialogComponent implements OnInit {
 
-  @Input() obj:any
+  @Input() obj:any;
   public dialogBoxObject: any={};
 
   constructor(
@@ -20,7 +20,7 @@ export class DialogComponent implements OnInit {
 
   ngOnInit() {
     if(this.obj && Object.keys(this.obj).length){
-      this.dialogBoxObject= this.obj
+      this.dialogBoxObject = this.obj;
     }
   }
 

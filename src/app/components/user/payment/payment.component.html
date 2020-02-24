@@ -12,6 +12,9 @@
             <div class="contentHeader">
                 <h5>Payment</h5>
             </div>
+            <div class="text-right makePaymentBtn">
+                <button class="btn btn-primary" type="button" *ngIf="paymentPrepaidNumber" (click)="resetForm()">Make New Payment</button>
+            </div>
             <div class="contentArea bg-white p-4">
                 <form [formGroup]="paymentForm">
                     <div class="row">
@@ -31,7 +34,10 @@
                     </div>
 
                     <div class="text-right">
-                        <button class="btn btn-primary" type="button" [disabled]="paymentForm.invalid" (click)="savePayment()" >Next</button>
+                        <button class="btn btn-primary" type="button" *ngIf="!paymentPrepaidNumber" [disabled]="paymentForm.invalid" (click)="savePayment()" >Next</button>
+                        <button class="btn btn-primary mr-3" type="button" *ngIf="paymentPrepaidNumber" [disabled]="paymentForm.invalid" >View Voucher</button>
+                        <button class="btn btn-primary ml-3" type="button" *ngIf="paymentPrepaidNumber && !updateBtn" routerLink="/user/dashboard">Back</button>
+                        <button class="btn btn-primary ml-3" type="button" *ngIf="paymentPrepaidNumber && updateBtn" [disabled]="paymentForm.invalid"  (click)="savePayment()">Update</button>
                     </div>
 
                 </form>
@@ -45,6 +51,8 @@
                             </div>
                         </div>
                     </div>
+                    <h6 class="contentSubTitle">Payment Options</h6>
+                    <button class="btn btn-outline-light bankingChannelBtn" (click)= "openDialog()"><img src="../../../../assets/_images/bank.svg" alt="icon"> Banking Channel</button>
             </div>
       </div>
     </div>

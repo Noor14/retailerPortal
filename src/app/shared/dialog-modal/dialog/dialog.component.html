@@ -1,14 +1,14 @@
 <section class="dialogBox">
-<div class="modal-header">
-    <h4 class="modal-title" id="modal-title">{{dialogBoxObject.title}}</h4>
-    <button type="button" class="close" aria-describedby="modal-title" (click)="activeModal.dismiss()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p class="text-center">{{dialogBoxObject.detail}}</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-danger" (click)="delete()">Yes, I want</button>
-  </div>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">{{dialogBoxObject.title}}</h4>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="activeModal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p class="text-center">{{dialogBoxObject.detail}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="delete()">Yes, I want</button>
+    </div>
 </section>

@@ -42,6 +42,14 @@ html{
           // background: $baseColor;
 
         }
+        &-outline-light{
+          color: #212529;
+          background-color: transparent;
+          border-color: #cccccc;
+          &:hover{
+          border-color: #cccccc;
+          }
+        }
         &-primary{
           font-size: 16px;
           background: $baseColor;
