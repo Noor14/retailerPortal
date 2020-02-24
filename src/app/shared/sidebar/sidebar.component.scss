@@ -42,6 +42,9 @@
         
               }
               }
+              .btnLogout{
+                @extend .nav-link
+              }
               }
             }
     }

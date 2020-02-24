@@ -14,7 +14,7 @@ export class TicketSupportService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8',
         'dataType': 'json',
-        'authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem('userIdentity')).access_token,
+        'authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token,
         'rightid': rightId
       })
     };
@@ -36,7 +36,7 @@ export class TicketSupportService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8',
         'dataType': 'json',
-        'authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem('userIdentity')).access_token,
+        'authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token,
         'rightid': rightId
       })
     };

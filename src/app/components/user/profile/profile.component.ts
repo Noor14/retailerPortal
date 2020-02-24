@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
     });
      
       this.passwordFormGroup = new FormGroup ({
-        Username: new FormControl(JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.Username,[Validators.required]),
+        Username: new FormControl(JSON.parse(localStorage.getItem('userIdentity')).UserAccount.Username,[Validators.required]),
         Password: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
         ConfirmPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
         NewPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit {
   }
 
   loadProfile() {
-    this._profileService.getById(JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount.RetailerID, 1, "retailer/")
+    this._profileService.getById(JSON.parse(localStorage.getItem('userIdentity')).UserAccount.RetailerID, 1, "retailer/")
       .then((data: any) => {
         this.objProfile = data;
         this.profileFormGroup.setValue(

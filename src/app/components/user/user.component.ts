@@ -25,6 +25,8 @@ export class UserComponent implements OnInit {
       if(data && Object.keys(data).length)
       this._sharedService.supportDropdownValues.next(data);
     })
+    .catch(err=>{
+      })
 
   }
   

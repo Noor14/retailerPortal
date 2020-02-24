@@ -1,3 +1,4 @@
+import { UserService } from './user.service';
 import { PaymentInstructionComponent } from './../../shared/dialog-modal/payment-instruction/payment-instruction.component';
 import { SidebarComponent } from './../../shared/sidebar/sidebar.component';
 import { HeaderComponent } from './../../shared/header/header.component';
@@ -61,7 +62,8 @@ import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
     TicketSupportService,
     SharedService,
     DashboardService,
-    PaymentService]
+    PaymentService,
+    UserService]
 
 })
 export class UserModule { }

@@ -1,4 +1,7 @@
+import { loadingConfig } from './../../constant/globalfunction';
+import { UserService } from './../../components/user/user.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private _userService : UserService, private _route: Router) { }
+  public showSpinner:boolean
+  public spinnerConfig:any;
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
+
   }
 
+  logout(){
+    this.showSpinner=true;
+    this._userService.logoutUser()
+    .then((res:boolean)=>{
+    this.showSpinner=false;
+
+      if(res){
+        localStorage.clear();
+        this._route.navigate(['/login'])
+      }    
+    })
+    .catch(err=>{
+    this.showSpinner=false;
+
+      })
+  }
 }
