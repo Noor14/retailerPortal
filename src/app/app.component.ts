@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this._router.events.subscribe((event:Event) => {
       if(event instanceof NavigationEnd){
-        this._sharedService.signUpBtnToggling.next(event.url);
+        this._sharedService.btnToggling.next(event.url);
       }
     });
     

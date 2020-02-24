@@ -35,8 +35,8 @@ export class LoginService {
       "Content-Type": 'application/json; charset=utf-8', 
       "dataType": 'json', 
     };
-    if (sessionStorage.getItem('userIdentity') !=null) {
-      obj["authorization"] = 'Bearer ' + JSON.parse(sessionStorage.getItem('userIdentity')).access_token;
+    if (localStorage.getItem('userIdentity') !=null) {
+      obj["authorization"] = 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token;
       obj["rightid"] = rightId;
        httpOptions = {
         headers: new HttpHeaders(obj)

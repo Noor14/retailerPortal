@@ -1,0 +1,15 @@
+.dialogBox{
+    .modal-header{
+        position: relative;
+        padding: 17px 25px;
+        .closeBtn{
+            position: absolute;
+            right: 7px;
+            top: 1px;
+            &:focus{
+                outline: unset;
+            }
+        }
+    }
+
+}

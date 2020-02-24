@@ -51,7 +51,7 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     this.getdropDownList();
-    let userObj = JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount
+    let userObj = JSON.parse(localStorage.getItem('userIdentity')).UserAccount
     if (this.supportID) {
       this.getByID(this.supportID);
     }

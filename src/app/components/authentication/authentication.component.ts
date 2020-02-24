@@ -11,13 +11,15 @@ import { SupportService } from './support/support.service';
 export class AuthenticationComponent implements OnInit, OnDestroy {
 
   public signupBtnToggle: boolean = true;
-  private signupBTnSubscription: any;
+  public supportBtnToggle: boolean = true;
+  private btnTogglingSubscription: any;
   constructor(private _sharedService: SharedService,private _supportService: SupportService) { }
 
   ngOnInit() {
-    this.signupBTnSubscription = this._sharedService.signUpBtnToggling.subscribe((res)=>{
+    this.btnTogglingSubscription = this._sharedService.btnToggling.subscribe((res)=>{
       if(res){
         this.signupBtnToggle = (res =='/registration')? false : true;
+        this.supportBtnToggle = (res =='/support')? false : true;
       }
     })
     this._supportService.getCalls("support/PublicUsers")
@@ -28,7 +30,7 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     })
   }
   ngOnDestroy(){
-    this.signupBTnSubscription.unsubscribe();
+    this.btnTogglingSubscription.unsubscribe();
   }
 
 }

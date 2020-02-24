@@ -12,7 +12,7 @@ export class EULAComponent implements OnInit {
   private userIdentity:any;
 
   constructor(private _loginService : LoginService,private _route:Router) {
-    this.userIdentity= JSON.parse(sessionStorage.getItem('userIdentity') );
+    this.userIdentity= JSON.parse(localStorage.getItem('userIdentity') );
     console.log(this.userIdentity);
 
    }

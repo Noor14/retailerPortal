@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
             this.loginFailure = true;
           }
           else {
-            sessionStorage.setItem('userIdentity', JSON.stringify(data)); // can be used if you want to use session storage other chnge would be in Authentication Guard and home
+            localStorage.setItem('userIdentity', JSON.stringify(data)); // can be used if you want to use session storage other chnge would be in Authentication Guard and home
             if (!data.UserAccount.IsTermAndConditionAccepted) {
               this._router.navigate(['/eula'])
             }

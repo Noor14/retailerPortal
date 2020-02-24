@@ -6,10 +6,10 @@ import { baseApi } from 'src/app/constant/baseurl';
   providedIn: 'root'
 })
 export class PaymentService {
-  head: any = {
+  private head: any = {
     "Content-Type": 'application/json; charset=utf-8',
     "dataType": 'json',
-    "authorization": 'Bearer ' + JSON.parse(sessionStorage.getItem('userIdentity')).access_token
+    "authorization": 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token
 
   };
   constructor(private _http: HttpClient) { }
