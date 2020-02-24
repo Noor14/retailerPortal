@@ -17,9 +17,9 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
   private supportDropDownSubscriber:any;
   private routeSubscriber: any
   public supportDetail: any = {};
-  public issueType: any[];
-  public criticality: any[];
-  public contacting: any[];
+  public issueType: any[] = [];
+  public criticality: any[] = [];
+  public contacting: any[] = [];
   public supportForm: FormGroup;
   public mobileMask = AppMasks.mobile_Mask;
   private supportID: number;

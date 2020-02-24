@@ -1,3 +1,4 @@
+import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
@@ -13,9 +14,11 @@ import { SharedService } from '../../../services/shared.service';
 export class SupportComponent implements OnInit, OnDestroy {
   private supportDropDownSubscriber:any;
   public supportForm: FormGroup;
-  public issueType: any[];
-  public criticality: any[];
-  public contacting: any[];
+  public issueType: any[] = [];
+  public criticality: any[] = [];
+  public contacting: any[] = [];
+  public spinnerConfig:any;
+  public showSpinner: boolean;
   public mobileMask = AppMasks.mobile_Mask;
 
   constructor(
@@ -37,6 +40,7 @@ export class SupportComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(){
+    this.spinnerConfig = loadingConfig;
     this.supportDropDownSubscriber.unsubscribe()
   }
 
@@ -50,12 +54,14 @@ export class SupportComponent implements OnInit, OnDestroy {
     });
   }
   save(){
+    this.showSpinner = true;
     this._supportService.postCalls('support/PublicSave',this.supportForm.value)
     .then((data:any)=>{
+    this.showSpinner = false;
       this._router.navigate(["/login"]);
     })
     .catch(err=>{
-
+      this.showSpinner = false;
       })
   }
 }
