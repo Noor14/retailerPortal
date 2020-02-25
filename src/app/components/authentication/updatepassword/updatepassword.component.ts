@@ -40,6 +40,7 @@ export class UpdatepasswordComponent implements OnInit {
       this.showSpinner=false;
 
         if (data) {
+          this._toast.success("Password has been updated");
             this._route.navigate(['/login'])
         }
         else{

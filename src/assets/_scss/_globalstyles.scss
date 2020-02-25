@@ -30,12 +30,17 @@ html{
       }
       .form-control{
         height: 48px;
+        color: #7e7e7e;
+        &[readonly]{
+          background-color: transparent;
+        }
         &:focus{
           border-color: #ced4da;
           box-shadow: unset;
         }
 
       }
+   
       .btn{
         &:focus, &:disabled, &:not(:disabled):not(.disabled):active:focus{
           box-shadow: unset;

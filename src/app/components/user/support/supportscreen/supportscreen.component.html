@@ -28,8 +28,8 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group  position-relative">  
                             <input type="text" class="form-control" placeholder="Email" [readonly]="emailEdit" formControlName="Email">
-                            <img src="../../../../assets/_images/bell.svg" width="10px" (click)="emailEdit= !emailEdit" 
-                            *ngIf="!supportDetail.ID"  class="mr-3 position-absolute" style="right: 5px; top: 45%;" />
+                            <img src="../../../../assets/_images/edit.svg" width="15px" (click)="emailEdit= !emailEdit" 
+                            *ngIf="!supportDetail.ID"  class="mr-3 position-absolute" style="right: 5px; top: 35%;" />
                         </div>
                     </div>
                 </div>
@@ -39,9 +39,9 @@
                         <div class="form-group  position-relative">  
                             <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Mobile No"
                                 [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
-                                <img src="../../../../assets/_images/bell.svg" (click)="mobileEdit= !mobileEdit" 
-                                *ngIf="!supportDetail.ID" width="10px"
-                                class="mr-3 position-absolute" style="right: 5px; top: 45%;" />
+                                <img src="../../../../assets/_images/edit.svg" (click)="mobileEdit= !mobileEdit" 
+                                *ngIf="!supportDetail.ID" width="15px"
+                                class="mr-3 position-absolute" style="right: 5px; top: 35%;" />
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">

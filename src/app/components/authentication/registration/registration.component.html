@@ -55,9 +55,10 @@
 				</div>
             </div>
           </div>
-        <div class="form-group">
-            <input type="text" class="form-control" formControlName="Address" placeholder="Address">
+          <div class="form-group">
+            <textarea rows="2" cols="58" class="form-control" placeholder="Address" formControlName="Address"></textarea>
         </div>
+
         <div class="d-flex justify-content-center">
             <button class="btn btn-lg btn-primary mr-3" type="button" routerLink="/login">Back</button>
             <button class="btn btn-lg btn-primary ml-3" type="button" (click)="register()" [disabled]="!registerForm.valid" >Signup</button>

@@ -1,3 +1,4 @@
+import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
@@ -13,9 +14,11 @@ import { SharedService } from '../../../services/shared.service';
 export class SupportComponent implements OnInit, OnDestroy {
   private supportDropDownSubscriber:any;
   public supportForm: FormGroup;
-  public issueType: any[];
-  public criticality: any[];
-  public contacting: any[];
+  public issueType: any[] = [];
+  public criticality: any[] = [];
+  public contacting: any[] = [];
+  public spinnerConfig:any;
+  public showSpinner: boolean;
   public mobileMask = AppMasks.mobile_Mask;
 
   constructor(
@@ -25,7 +28,7 @@ export class SupportComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit() {
-    this.getLookups();
+    this.getdropDownList();
     this.supportForm = new FormGroup({
       MobileNumber: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
       Email: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
@@ -37,10 +40,11 @@ export class SupportComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(){
+    this.spinnerConfig = loadingConfig;
     this.supportDropDownSubscriber.unsubscribe()
   }
 
-  getLookups() {
+  getdropDownList() {
     this.supportDropDownSubscriber = this._sharedService.supportDropdownValues.subscribe((res:any)=>{
       if(res){
         this.contacting = res.CONTACTING_METHOD;
@@ -50,12 +54,14 @@ export class SupportComponent implements OnInit, OnDestroy {
     });
   }
   save(){
+    this.showSpinner = true;
     this._supportService.postCalls('support/PublicSave',this.supportForm.value)
     .then((data:any)=>{
+    this.showSpinner = false;
       this._router.navigate(["/login"]);
     })
     .catch(err=>{
-
+      this.showSpinner = false;
       })
   }
 }

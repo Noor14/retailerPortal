@@ -19,7 +19,7 @@ export class UserService {
     };
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/users/logout`;
-      this._http.post(apiURL,{}, httpOptions)
+      this._http.delete(apiURL, httpOptions)
         .toPromise()
         .then(res => {
           resolve(res);
