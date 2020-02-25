@@ -26,6 +26,7 @@ import { TicketSupportService } from './support/ticket-support.service';
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentService } from './payment/payment.service';
 import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -40,7 +41,7 @@ import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
     NoDualSpaceSpecial,
     DialogComponent,
     PaymentComponent,
-    PaymentInstructionComponent,
+    PaymentInstructionComponent
   ],
   entryComponents:[
     DialogComponent,
