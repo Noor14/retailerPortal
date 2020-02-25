@@ -45,9 +45,9 @@ html{
         &-outline-light{
           color: #212529;
           background-color: transparent;
-          border-color: #cccccc;
+          border-color: $baseFontColor;
           &:hover{
-          border-color: #cccccc;
+          border-color: $baseFontColor;
           }
         }
         &-primary{
@@ -84,10 +84,9 @@ html{
             }
             .nav-link{
                 border: unset;
-              
+                color: $tabInputColor;
                 &:hover{
                     border: unset;
-
                 }
 
                 &.active{
@@ -128,14 +127,15 @@ html{
  
     &Header {
       padding-bottom: 2px;
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid $baseFontColor;
       margin-bottom: 24px;
+      color: $baseFontColor;
     }
     &Area{
       border: 1px solid #BCBEC0;
       .contentSubTitle{
         margin-left: -5px;
-        color: #6d6e71;
+        color: $baseFontColor;
         font-size: 17px;
         margin-bottom: 18px;
       }
