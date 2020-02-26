@@ -12,7 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from "@angular/common/http";
 import { ProfileService } from './profile/profile.service';
 import { TextMaskModule } from 'angular2-text-mask';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SupportgridComponent } from './support/supportgrid/supportgrid.component';
 import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
 import { NoWhiteSpace } from 'src/app/shared/pipes-directives/singlespace';
@@ -57,7 +57,8 @@ import { NetworkService } from './network/network.service';
     HttpClientModule,
     TextMaskModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FormsModule
 
   ],
   providers:[
