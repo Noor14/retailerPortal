@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
     AmountMax:null,
     PrePaidNumber:null,
   };
-  private modifySearchObj:any;
+  private modifySearchObj = Object.assign({}, this.searchObj);
   public searchingOption:string = '';
   public loadAvailable:boolean = true; 
   public paymentsList: any[]= [];
@@ -70,7 +70,8 @@ export class DashboardComponent implements OnInit {
   }
 
   selectSearch(){
-    this.changeDetectorRef.detectChanges();
+    if(this.searchingOption){
+      this.changeDetectorRef.detectChanges();
       fromEvent(this.search.nativeElement, 'keyup').pipe(
         // get value
         map((event: any) => {
@@ -111,19 +112,22 @@ export class DashboardComponent implements OnInit {
                   this.getPaymentList(this.modifySearchObj);
                   break;
 
-                default:
-                    if(this.search.nativeElement.value){
-                      this.getPaymentList(this.searchObj);
-                    }
+               
               }
              
              }
              else{
               this.getPaymentList(this.searchObj);
+              this.modifySearchObj = Object.assign({}, this.searchObj);
             }
           
         });
-
+      }else{
+        if(this.search.nativeElement.value){
+          this.getPaymentList(this.searchObj);
+          this.modifySearchObj = Object.assign({}, this.searchObj);
+        }
+      }
   }
 
   onDateSelection(date: NgbDateStruct) {
@@ -148,13 +152,30 @@ export class DashboardComponent implements OnInit {
     this.renderer.setProperty(this.myRangeInput.nativeElement, 'value', parsed);
   }
 
+  filterByStatus(elem){
+    if(this.searchingOption){
+      if(elem.value){
+        this.modifySearchObj = Object.assign({}, this.searchObj);
+        this.modifySearchObj.Status = Number(elem.value)
+        this.getPaymentList(this.modifySearchObj);
+       }
+       else{
+        this.getPaymentList(this.searchObj);
+        this.modifySearchObj = Object.assign({}, this.searchObj);
+      }
+      }
+  }
 
   getPaymentList(searchObj){
     this.showSpinner=true;
     this._dashboardService.postCalls("prepaidrequests/search", searchObj, 7)
     .then((data: any) => {
     this.showSpinner=false;
-    this.paymentsList = [...this.paymentsList, ...data.PrePaidRequestData];
+    if(!searchObj.PageNumber){
+      this.paymentsList = data.PrePaidRequestData;
+    }else{
+      this.paymentsList = this.paymentsList.concat(data.PrePaidRequestData);
+    }
     this.loadAvailable = (this.paymentsList.length == data.PrePaidRequestCount)? false : true;
     })
     .catch(err => {
