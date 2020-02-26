@@ -1,7 +1,8 @@
+import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
 import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, Renderer2, ChangeDetectorRef } from '@angular/core';
 import { DashboardService } from './dashboard.service';
-import { NgbDateStruct, NgbInputDatepicker, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbInputDatepicker, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, tap, switchAll, distinctUntilChanged } from 'rxjs/operators';
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
@@ -62,7 +63,8 @@ export class DashboardComponent implements OnInit {
     private _dashboardService: DashboardService,
     private renderer: Renderer2, 
     private _parserFormatter: NgbDateParserFormatter,
-    private changeDetectorRef: ChangeDetectorRef) { }
+    private changeDetectorRef: ChangeDetectorRef,
+    private _modalService: NgbModal) { }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
@@ -70,7 +72,7 @@ export class DashboardComponent implements OnInit {
   }
 
   selectSearch(){
-    if(this.searchingOption && this.search.nativeElement){
+    if(this.searchingOption){
       this.changeDetectorRef.detectChanges();
       fromEvent(this.search.nativeElement, 'keyup').pipe(
         // get value
@@ -187,6 +189,23 @@ export class DashboardComponent implements OnInit {
   loadMore(){
     this.modifySearchObj.PageNumber++
     this.getPaymentList(this.modifySearchObj);
+  }
+
+  openDialog(id :Number){
+    const modalRef = this._modalService.open(DialogComponent,{ 
+      centered: true,
+      keyboard: false,
+      backdrop:'static'
+     });
+    modalRef.componentInstance.obj = {id : id, title: 'Delete Payment', deleteType: 'payment', detail:'Are you sure, you want to delete this payment? '};
+    modalRef.result.then((result) => {
+      if(result){
+        let index = this.paymentsList.findIndex(obj => obj.ID == result)
+        this.paymentsList.splice(index, 1)
+      }
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
 }

@@ -33,4 +33,25 @@ export class DashboardService {
     });
     return promise;
   }
+  deletePayment(id) {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'dataType': 'json',
+        'authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token,
+      })
+    };
+    let promise = new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/prepaidrequests/Delete/${id}`;
+      this._http.delete(apiURL, httpOptions)
+        .toPromise()
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        })
+    })
+    return promise;
+  }
 }
