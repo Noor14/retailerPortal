@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
   }
 
   selectSearch(){
-    if(this.searchingOption){
+    if(this.searchingOption && this.search.nativeElement){
       this.changeDetectorRef.detectChanges();
       fromEvent(this.search.nativeElement, 'keyup').pipe(
         // get value
@@ -123,7 +123,7 @@ export class DashboardComponent implements OnInit {
           
         });
       }else{
-        if(this.search.nativeElement.value){
+        if(this.search.nativeElement && this.search.nativeElement.value){
           this.getPaymentList(this.searchObj);
           this.modifySearchObj = Object.assign({}, this.searchObj);
         }
