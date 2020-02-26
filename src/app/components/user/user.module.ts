@@ -26,6 +26,8 @@ import { TicketSupportService } from './support/ticket-support.service';
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentService } from './payment/payment.service';
 import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
+import { NetworkComponent } from './network/network.component';
+import { NetworkService } from './network/network.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
     NoDualSpaceSpecial,
     DialogComponent,
     PaymentComponent,
-    PaymentInstructionComponent
+    PaymentInstructionComponent,
+    NetworkComponent
   ],
   entryComponents:[
     DialogComponent,
@@ -63,7 +66,9 @@ import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
     SharedService,
     DashboardService,
     PaymentService,
-    UserService]
+    UserService,
+    NetworkService
+  ]
 
 })
 export class UserModule { }
