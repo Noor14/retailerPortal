@@ -30,12 +30,12 @@ export class DashboardComponent implements OnInit {
     TotalRecords: 10,
     PageNumber : 0,
     CompanyName:null,
-    CreateDateFrom:null,
-    CreateDateTo:null,
+    DateFrom:null,
+    DateTo:null,
     Status:null,
-    AmountMin:null,
-    AmountMax:null,
-    PrePaidNumber:null,
+    PaymentAmountMin:null,
+    PaymentAmountMax:null,
+    InvoiceNumber:null,
   };
   private modifySearchObj = Object.assign({}, this.searchObj);
   public searchingOption:string = '';
@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit {
                   this.getPaymentList(this.modifySearchObj);
                   break;
                 case 'Payment ID':
-                  this.modifySearchObj.PrePaidNumber = text
+                  this.modifySearchObj.InvoiceNumber = text
                   this.getPaymentList(this.modifySearchObj);
                   break;
                 
