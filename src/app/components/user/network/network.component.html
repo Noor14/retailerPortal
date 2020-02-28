@@ -13,23 +13,23 @@
                 <ng-template ngbTabTitle>My Network</ng-template>
                 <ng-template ngbTabContent>
                     <div class="content">
-                        <div class="gridArea table-responsive" id="nav-scrollbar">
-                            <div class="row">
-                                <div class="col-md-4" *ngFor="let network of lstTotalNetwork">
-                                    <div class="col-md-12 contentArea networkCard">
-                                        <h5 class="mb-2"> {{network.CompanyName}} </h5>
-                                        <span> Status : <b>{{network.Status}}</b> </span> <br>
-                                        <span> {{network.Mobile}} </span> <br>
-                                        <span> {{network.Address}} </span>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6 col-xs-12 mb-4" *ngFor="let network of lstTotalNetwork">
+                                <div class="card" >
+                                    <div class="card-body">
+                                      <h5 class="card-title">{{network.CompanyName}}</h5>
+                                      <small>Status : <b>{{network.Status}}</b></small><br>
+                                      <small>{{network.Mobile}}</small><br>
+                                      <small>{{network.Address}}</small>
                                     </div>
-                                </div>
+                                  </div>
                             </div>
-                            <div class="col-md-12" *ngIf="!lstTotalNetwork.length && !showSpinner">
-                                <span class="d-flex align-items-center justify-content-center h-100">No Data Available</span>
-                            </div>
-                            <div class="col-md-12 text-center" *ngIf="loadAvailable">
-                                <button class="btn" (click)="getNetwork()" >Load More {{loadAvailable}}</button>
-                            </div>
+                        </div>
+                        <div class="col-md-12" *ngIf="!lstTotalNetwork.length && !showSpinner">
+                            <span class="d-flex align-items-center justify-content-center h-100">No Data Available</span>
+                        </div>
+                        <div class="col-md-12 text-center" *ngIf="loadAvailable">
+                            <button class="btn" (click)="getNetwork()" >Load More</button>
                         </div>
                     </div>
 
@@ -55,17 +55,7 @@
 
                 </ng-template>
             </ngb-tab>
-            <!-- <ngb-tab [disabled]="true">
-            <ng-template ngbTabTitle>Order</ng-template>
-            <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-              <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
-              craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
-              cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia
-              yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
-              shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero
-              sint qui sapiente accusamus tattooed echo park.</p>
-            </ng-template>
-          </ngb-tab> -->
+           
         </ngb-tabset>
     </div>
 </section>

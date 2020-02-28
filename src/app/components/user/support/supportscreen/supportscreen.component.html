@@ -12,7 +12,9 @@
         </li>
     </ol>
     <div class="content">
-        <h5 class="contentHeader">Support</h5>
+        <div class="contentHeader">
+            <h5>Support</h5>
+        </div>
         <div class="contentArea bg-white p-4">
         <h6 class="contentSubTitle" *ngIf="!supportDetail.ID">Welcome to Haball Support Center</h6>
         <p *ngIf="supportDetail.ID"> Ticket ID :{{supportDetail.TicketNumber}} </p>
@@ -84,13 +86,10 @@
                         </div>
                     </div>
                 </div>
-            <div class="d-flex justify-content-end">
-                <button class="btn btn-lg btn-primary" type="button" routerLink="/user/support"  
-                    >Close</button>
-                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="save()" *ngIf="!supportDetail.ID"
-                    [disabled]="supportForm.invalid">Submit</button>
-                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="delete()"
-                    *ngIf="supportDetail.ID && !Message && !supportDetail.Status">Delete</button>
+            <div class="text-right">
+                <button class="btn btn-primary" type="button" routerLink="/user/support">Close</button>
+                <button class="btn btn-primary ml-3" type="button" (click)="save()" *ngIf="!supportDetail.ID" [disabled]="supportForm.invalid">Submit</button>
+                <button class="btn btn-primary ml-3" type="button" (click)="delete()" *ngIf="supportDetail.ID && !Message && !supportDetail.Status">Delete</button>
             </div>
         </form>             
         </div>

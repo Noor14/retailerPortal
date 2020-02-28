@@ -1,5 +1,8 @@
-.networkCard{
-    padding: 13px;
-    background-color: white;
-    margin-bottom: 30px;
+.network{
+    .card{
+        min-height: 170px;
+        border: 1px solid #BCBEC0;
+        box-shadow: 0px 0px 2px 2px #f3f3f3;
+    }
+
 }
