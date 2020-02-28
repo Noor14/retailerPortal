@@ -1,4 +1,4 @@
-<section class="dashboard">
+<section class="network">
     <div class="container-fluid">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -16,8 +16,8 @@
                         <div class="gridArea table-responsive" id="nav-scrollbar">
                             <div class="row">
                                 <div class="col-md-4" *ngFor="let network of lstTotalNetwork">
-                                    <div class="col-md-12 networkCard">
-                                        <h5> {{network.CompanyName}} </h5>
+                                    <div class="col-md-12 contentArea networkCard">
+                                        <h5 class="mb-2"> {{network.CompanyName}} </h5>
                                         <span> Status : <b>{{network.Status}}</b> </span> <br>
                                         <span> {{network.Mobile}} </span> <br>
                                         <span> {{network.Address}} </span>
