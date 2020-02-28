@@ -1,0 +1,114 @@
+<section class="paymentDetail">
+    <div class="container-fluid">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a routerLink="/user/dashboard">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="breadcrumb-item">Payments</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="breadcrumb-item"> {{breadcrumbSupport}} </a>
+        </li>
+    </ol>
+    <div class="content">
+        <h5 class="contentHeader">Payments</h5>
+        <div class="contentArea bg-white p-4">
+        <!-- <h6 class="contentSubTitle" *ngIf="!supportDetail.ID">Welcome to Haball Support Center</h6> -->
+        <p *ngIf="supportDetail.ID"> Ticket ID :{{supportDetail.TicketNumber}} </p>
+        <p class="errorMessage" *ngIf="message">Invalid Ticket Number</p>
+        <form [formGroup]="paymentDetailForm">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Contact Name"
+                                formControlName="ContactName">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">  
+                            <input type="text" class="form-control" placeholder="Email" [readonly]="emailEdit" formControlName="Email">
+                            <span> Payment ID :</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">  
+                            <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Mobile No"
+                                [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                                <span> Payment ID :</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Mobile No"
+                            [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                            <span> Payment ID :</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Mobile No"
+                                [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                                <span> Payment ID :</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Mobile No"
+                                [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                                <span> Payment ID :</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group  position-relative">  
+                            <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Mobile No"
+                                [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                                <span> Payment ID :</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Mobile No"
+                            [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                            <span> Payment ID :</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Mobile No"
+                                [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                                <span> Payment ID :</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Mobile No"
+                                [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                                <span> Payment ID :</span>
+                        </div>
+                    </div>
+                </div>
+               
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-lg btn-primary" type="button" routerLink="/user/support"  
+                    >Close</button>
+                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="save()" *ngIf="!supportDetail.ID"
+                    [disabled]="supportForm.invalid">Submit</button>
+                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="delete()"
+                    *ngIf="supportDetail.ID && !Message && !supportDetail.Status">Delete</button>
+            </div>
+        </form>             
+        </div>
+    </div>
+    </div>
+</section>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

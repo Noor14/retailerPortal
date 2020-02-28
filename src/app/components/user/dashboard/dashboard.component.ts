@@ -3,8 +3,9 @@ import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, Renderer2, ChangeDetectorRef } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import { NgbDateStruct, NgbInputDatepicker, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { fromEvent } from 'rxjs';
+import { Observable, fromEvent } from 'rxjs';
 import { map, filter, debounceTime, tap, switchAll, distinctUntilChanged } from 'rxjs/operators';
+import { Router } from '@angular/router';
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
   one && two && two.year === one.year && two.month === one.month && two.day === one.day;
 
@@ -64,17 +65,17 @@ export class DashboardComponent implements OnInit {
     private renderer: Renderer2, 
     private _parserFormatter: NgbDateParserFormatter,
     private changeDetectorRef: ChangeDetectorRef,
+    private _router: Router,
     private _modalService: NgbModal) { }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     this.getPaymentList(this.searchObj);
   }
-
   selectSearch(){
     if(this.searchingOption){
       this.changeDetectorRef.detectChanges();
-      fromEvent(this.search.nativeElement, 'keyup').pipe(
+      fromEvent(this.search && this.search.nativeElement, 'keyup').pipe(
         // get value
         map((event: any) => {
           return event.target.value;
@@ -158,7 +159,7 @@ export class DashboardComponent implements OnInit {
     if(this.searchingOption){
       if(elem.value){
         this.modifySearchObj = Object.assign({}, this.searchObj);
-        this.modifySearchObj.Status = Number(elem.value)
+        this.modifySearchObj.Status = elem.value
         this.getPaymentList(this.modifySearchObj);
        }
        else{
@@ -178,7 +179,7 @@ export class DashboardComponent implements OnInit {
     }else{
       this.paymentsList = this.paymentsList.concat(data.PrePaidRequestData);
     }
-    this.loadAvailable = (this.paymentsList.length == data.PrePaidRequestCount)? false : true;
+    this.loadAvailable = (this.paymentsList.length == data.RecordCount)? false : true;
     })
     .catch(err => {
     this.showSpinner=false;
@@ -190,7 +191,7 @@ export class DashboardComponent implements OnInit {
     this.modifySearchObj.PageNumber++
     this.getPaymentList(this.modifySearchObj);
   }
-
+ 
   openDialog(id :Number){
     const modalRef = this._modalService.open(DialogComponent,{ 
       centered: true,
@@ -200,7 +201,7 @@ export class DashboardComponent implements OnInit {
     modalRef.componentInstance.obj = {id : id, title: 'Delete Payment', deleteType: 'payment', detail:'Are you sure, you want to delete this payment? '};
     modalRef.result.then((result) => {
       if(result){
-        let index = this.paymentsList.findIndex(obj => obj.ID == result)
+        let index = this.paymentsList.findIndex(obj => obj.RetailerInvoiceId == result)
         this.paymentsList.splice(index, 1)
       }
     }, (reason) => {

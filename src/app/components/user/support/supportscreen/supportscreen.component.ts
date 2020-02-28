@@ -15,7 +15,7 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
   public showSpinner: boolean;
   public spinnerConfig: any;
   private supportDropDownSubscriber:any;
-  private routeSubscriber: any
+  private routeSubscriber: any;
   public supportDetail: any = {};
   public issueType: any[] = [];
   public criticality: any[] = [];

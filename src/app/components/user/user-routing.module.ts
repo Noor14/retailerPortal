@@ -7,6 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SupportgridComponent } from './support/supportgrid/supportgrid.component';
 import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
 import { NetworkComponent } from './network/network.component';
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 
 
 const routes: Routes = [
@@ -20,9 +21,9 @@ const routes: Routes = [
     { path: 'support', component: SupportgridComponent },
     { path: 'support/:id', component: SupportscreenComponent },
     { path: 'payment', component: PaymentComponent },
+    { path: 'editPaymentDetail/:id', component: PaymentDetailsComponent },
+    { path: 'paymentDetail/:id/:viewType', component: PaymentDetailsComponent },
     { path: 'network', component: NetworkComponent },
-    // { path: 'schedulers', component: SchedulersComponent },
-    // { path: 'settings', component: SettingsComponent },
     { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   }

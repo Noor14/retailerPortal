@@ -60,8 +60,8 @@
                   <div class="form-group" *ngSwitchCase="'Status'">
                     <select class="form-control" #search (change)="filterByStatus(search)">
                       <option value="" selected>Status</option>
-                      <option value="1">Paid</option>
-                      <option value="0">UnPaid</option>
+                      <option>Paid</option>
+                      <option>UnPaid</option>
                     </select>
                   </div>
 
@@ -90,18 +90,18 @@
                       </thead>
                       <tbody>
                       <tr *ngFor="let payment of paymentsList; let i = index">
-                          <td>{{payment.PrePaidNumber}}</td>
+                          <td>{{payment.InvoiceNumber}}</td>
                           <td>{{payment.CompanyName}}</td>
                           <td>{{payment.CreatedDate |  date: 'dd-MM-yyyy'}}</td>
-                          <td>{{(payment.Status)? 'Paid' : 'Unpaid'}}</td>
-                          <td>{{payment.PaidAmount}}</td>
+                          <td>{{payment.Status}}</td>
+                          <td>{{payment.TotalPrice}}</td>
                           <td>
                             <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
-                                <button ngbDropdownItem>View</button>
-                                <button ngbDropdownItem>Edit</button>
-                                <button ngbDropdownItem (click)="openDialog(payment.ID)">Delete</button>
+                                <button ngbDropdownItem [routerLink] = "['/user/paymentDetail', payment.RetailerInvoiceId, payment.IsEditable]">View</button>
+                                <button ngbDropdownItem *ngIf="payment.IsEditable" [routerLink] = "['/user/editPaymentDetail', payment.RetailerInvoiceId]">Edit</button>
+                                <button ngbDropdownItem (click)="openDialog(payment.RetailerInvoiceId)">Delete</button>
                               </div>
                             </div>
                            

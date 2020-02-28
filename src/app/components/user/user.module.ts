@@ -28,6 +28,8 @@ import { PaymentService } from './payment/payment.service';
 import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
 import { NetworkComponent } from './network/network.component';
 import { NetworkService } from './network/network.service';
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+import { PaymentDetailService } from './payment-details/payment-detail.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { NetworkService } from './network/network.service';
     DialogComponent,
     PaymentComponent,
     PaymentInstructionComponent,
-    NetworkComponent
+    NetworkComponent,
+    PaymentDetailsComponent
   ],
   entryComponents:[
     DialogComponent,
@@ -68,7 +71,8 @@ import { NetworkService } from './network/network.service';
     DashboardService,
     PaymentService,
     UserService,
-    NetworkService
+    NetworkService,
+    PaymentDetailService
   ]
 
 })
