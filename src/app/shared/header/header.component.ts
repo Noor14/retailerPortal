@@ -13,17 +13,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private _sharedService : SharedService) { }
 
   ngOnInit() {
-      this.userInfoSubscriber = this._sharedService.userInfo.subscribe((res:any)=>{
-        if(res){
-          this.userDetail = res;
-        }else{
-         let info = localStorage.getItem('userIdentity');
-         if(info){
-          this.userDetail = JSON.parse(info).UserAccount;
-         }
+    this.userDetail = this._sharedService.getUser();
+        if(!this.userDetail){
+          let info = localStorage.getItem('userIdentity');
+          if(info){
+           this.userDetail = JSON.parse(info).UserAccount;
+          }
         }
-      });
-  }
+    }
   ngOnDestroy(){
     if(this.userInfoSubscriber)
     this.userInfoSubscriber.unsubscribe();

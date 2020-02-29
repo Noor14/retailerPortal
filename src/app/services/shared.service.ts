@@ -7,8 +7,16 @@ import { BehaviorSubject } from 'rxjs';
 export class SharedService {
   public supportDropdownValues= new BehaviorSubject<any>(undefined);
   public btnToggling = new BehaviorSubject<any>(undefined);
-  public userInfo = new BehaviorSubject<any>(undefined);
+  
+  private userInfo = new BehaviorSubject<any>(undefined);
+  public getUserInfo = this.userInfo.asObservable();
 
   constructor() { }
 
+  setUser(data) {
+    this.userInfo.next(data);
+  }
+  getUser() {
+    return this.userInfo.getValue();
+  }
 }

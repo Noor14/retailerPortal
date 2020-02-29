@@ -13,7 +13,9 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   public signupBtnToggle: boolean = true;
   public supportBtnToggle: boolean = true;
   private btnTogglingSubscription: any;
-  constructor(private _sharedService: SharedService,private _supportService: SupportService) { }
+  constructor(
+    private _sharedService: SharedService,
+    private _supportService: SupportService) { }
 
   ngOnInit() {
     this.btnTogglingSubscription = this._sharedService.btnToggling.subscribe((res)=>{

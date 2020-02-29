@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
             }
             else {
               this._router.navigate(['/user/dashboard']);
-              this._sharedService.userInfo.next(data.UserAccount);
+              this._sharedService.setUser(data.UserAccount);
 
             }
           }
