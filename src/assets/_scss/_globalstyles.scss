@@ -30,10 +30,15 @@ html{
       }
       .form-group{
         margin-bottom: 1.5rem;
+        textarea{
+          resize: unset;
+          height: unset !important;
+      }
       }
       .form-control{
         height: 48px;
         color: #7e7e7e;
+     
         &[readonly]{
           background-color: transparent;
         }
