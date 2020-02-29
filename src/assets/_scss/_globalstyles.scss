@@ -178,6 +178,7 @@ html{
     }
     &Area{
       border: 1px solid #BCBEC0;
+      border-radius: 3px;
       .has-float-label{
         label::after{
           background-color: #fff;
