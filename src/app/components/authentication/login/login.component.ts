@@ -1,3 +1,4 @@
+import { SharedService } from './../../../services/shared.service';
 import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   public loginFailure: boolean = false;
   constructor(
     private _loginService: LoginService,
+    private _sharedService: SharedService,
     private _router: Router) {
   }
 
@@ -45,6 +47,8 @@ export class LoginComponent implements OnInit {
             }
             else {
               this._router.navigate(['/user/dashboard']);
+              this._sharedService.userInfo.next(data.UserAccount);
+
             }
           }
         })

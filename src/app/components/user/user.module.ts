@@ -19,7 +19,6 @@ import { NoWhiteSpace } from 'src/app/shared/pipes-directives/singlespace';
 import { NoDualSpaceSpecial } from 'src/app/shared/pipes-directives/dualspacespecialcharacter';
 
 import { TableComponent } from '../../shared/table/table.component';
-import { SharedService } from '../../services/shared.service';
 import { DialogComponent } from '../../shared/dialog-modal/dialog/dialog.component';
 import { DashboardService } from './dashboard/dashboard.service';
 import { TicketSupportService } from './support/ticket-support.service';
@@ -68,7 +67,6 @@ import { InterceptorService } from 'src/app/services/interceptor.service';
   providers:[
     ProfileService,
     TicketSupportService,
-    SharedService,
     DashboardService,
     PaymentService,
     UserService,

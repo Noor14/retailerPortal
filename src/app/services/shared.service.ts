@@ -5,8 +5,9 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedService {
-  public supportDropdownValues= new BehaviorSubject<any>(null);
-  public btnToggling = new BehaviorSubject<any>(null);
+  public supportDropdownValues= new BehaviorSubject<any>(undefined);
+  public btnToggling = new BehaviorSubject<any>(undefined);
+  public userInfo = new BehaviorSubject<any>(undefined);
 
   constructor() { }
 

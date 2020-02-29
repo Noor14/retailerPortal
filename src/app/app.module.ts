@@ -1,11 +1,10 @@
+import { SharedService } from './services/shared.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component'
 import { ToastrModule } from 'ngx-toastr';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InterceptorService } from './services/interceptor.service';
 @NgModule({
   declarations: [
     AppComponent
@@ -21,7 +20,7 @@ import { InterceptorService } from './services/interceptor.service';
       preventDuplicates: true,
     })
   ],
-  providers: [],
+  providers: [SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
