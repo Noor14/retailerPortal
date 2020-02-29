@@ -66,7 +66,7 @@ export class RegistrationComponent implements OnInit {
           })
           .catch(err => {
             this.showSpinner = false;
-            this._toast.error("h", "h");
+            this._toast.error(err);
           })
       }
     }

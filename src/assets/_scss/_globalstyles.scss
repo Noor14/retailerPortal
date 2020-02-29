@@ -141,6 +141,7 @@ html{
      border-radius: .25rem; 
   }
 } 
+
 .has-float-label input:placeholder-shown:not(:focus)+*, .has-float-label select:placeholder-shown:not(:focus)+*, .has-float-label textarea:placeholder-shown:not(:focus)+*{
   font-size: 15px;
   top: .8em;
@@ -177,6 +178,11 @@ html{
     }
     &Area{
       border: 1px solid #BCBEC0;
+      .has-float-label{
+        label::after{
+          background-color: #fff;
+          }
+        }
       .contentSubTitle{
         margin-left: -5px;
         color: $baseFontColor;
