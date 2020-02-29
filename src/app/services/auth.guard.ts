@@ -6,7 +6,7 @@ import { SharedService } from './shared.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardGuard implements CanActivate, CanActivateChild, CanLoad {
+export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   constructor(private _sharedService: SharedService,
     private _route: Router){
