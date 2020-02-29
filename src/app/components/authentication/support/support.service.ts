@@ -1,22 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { baseApi } from 'src/app/constant/baseurl';
 @Injectable({
   providedIn: 'root'
 })
 export class SupportService {
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8', 'dataType': 'json'
-    })
-
-  };
   constructor(private _http: HttpClient) {}
 
   getCalls(recourseName) {
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${recourseName}`;
-      this._http.get(apiURL, this.httpOptions)
+      this._http.get(apiURL)
         .toPromise()
         .then(
           res => {
@@ -29,10 +23,10 @@ export class SupportService {
     });
     return promise;
 }
-postCalls(recourseName,obj) {
+postCalls(recourseName, obj) {
   let promise = new Promise((resolve, reject) => {
     const apiURL = `${baseApi}/api/${recourseName}`;
-    this._http.post(apiURL,obj, this.httpOptions)
+    this._http.post(apiURL,obj)
       .toPromise()
       .then(
         res => {

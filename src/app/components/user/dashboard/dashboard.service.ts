@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { baseApi } from '../../../constant/baseurl';
 
 @Injectable({
@@ -9,18 +9,10 @@ export class DashboardService {
 
   constructor(private _http: HttpClient) { }
   
-  postCalls(recourseName, obj, rightId) {
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8',
-        'dataType': 'json',
-        'authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token,
-        'rightid': rightId
-      })
-    };
+  postCalls(recourseName, obj) {
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${recourseName}`;
-      this._http.post(apiURL, obj, httpOptions)
+      this._http.post(apiURL, obj)
         .toPromise()
         .then(
           res => {
@@ -34,16 +26,9 @@ export class DashboardService {
     return promise;
   }
   deletePayment(id) {
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8',
-        'dataType': 'json',
-        'authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userIdentity')).access_token,
-      })
-    };
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/prepaidrequests/Delete/${id}`;
-      this._http.delete(apiURL, httpOptions)
+      this._http.delete(apiURL)
         .toPromise()
         .then(res => {
           resolve(res);

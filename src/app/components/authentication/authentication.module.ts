@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationComponent } from './authentication.component';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { LoginService } from './login/login.service';
 import { RegistrationComponent } from './registration/registration.component';
 import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
@@ -14,6 +14,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { SupportComponent } from './support/support.component';
 import { SupportService } from './support/support.service';
 import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
+import { InterceptorService } from 'src/app/services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,13 @@ import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
     NgxSpinnerModule
 
   ],
-  providers:[LoginService, SupportService]
+  providers:[
+    LoginService, 
+    SupportService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }]
 })
 export class AuthenticationModule { }

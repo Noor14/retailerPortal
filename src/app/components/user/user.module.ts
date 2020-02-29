@@ -9,7 +9,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user.component';
 import { ProfileComponent } from './profile/profile.component';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ProfileService } from './profile/profile.service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -30,6 +30,7 @@ import { NetworkComponent } from './network/network.component';
 import { NetworkService } from './network/network.service';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { PaymentDetailService } from './payment-details/payment-detail.service';
+import { InterceptorService } from 'src/app/services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,12 @@ import { PaymentDetailService } from './payment-details/payment-detail.service';
     PaymentService,
     UserService,
     NetworkService,
-    PaymentDetailService
+    PaymentDetailService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
   ]
 
 })

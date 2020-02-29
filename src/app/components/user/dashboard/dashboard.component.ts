@@ -171,7 +171,7 @@ export class DashboardComponent implements OnInit {
 
   getPaymentList(searchObj){
     this.showSpinner=true;
-    this._dashboardService.postCalls("prepaidrequests/search", searchObj, 7)
+    this._dashboardService.postCalls("prepaidrequests/search", searchObj)
     .then((data: any) => {
     this.showSpinner=false;
     if(!searchObj.PageNumber){

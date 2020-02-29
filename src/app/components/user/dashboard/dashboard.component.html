@@ -99,9 +99,9 @@
                             <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
-                                <button ngbDropdownItem [routerLink] = "['/user/paymentDetail', payment.RetailerInvoiceId, payment.IsEditable]">View</button>
-                                <button ngbDropdownItem *ngIf="payment.IsEditable" [routerLink] = "['/user/payment', payment.RetailerInvoiceId]">Edit</button>
-                                <button ngbDropdownItem (click)="openDialog(payment.RetailerInvoiceId)">Delete</button>
+                                <button ngbDropdownItem *ngIf="payment.Status == 'Paid'" [routerLink] = "['/user/paymentDetail', payment.RetailerInvoiceId, payment.IsEditable]">View</button>
+                                <button ngbDropdownItem *ngIf="payment.IsEditable && payment.Status == 'Un-paid'" [routerLink] = "['/user/payment', payment.RetailerInvoiceId]">Edit</button>
+                                <button ngbDropdownItem *ngIf="payment.IsEditable && payment.Status == 'Un-paid'" (click)="openDialog(payment.RetailerInvoiceId)">Delete</button>
                               </div>
                             </div>
                            
