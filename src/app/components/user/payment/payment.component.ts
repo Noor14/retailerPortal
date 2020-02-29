@@ -5,6 +5,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PaymentService } from './payment.service';
 import { PaymentInstructionComponent } from '../../../shared/dialog-modal/payment-instruction/payment-instruction.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute } from '@angular/router';
+import { PaymentDetailService } from '../payment-details/payment-detail.service';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -18,14 +20,22 @@ export class PaymentComponent implements OnInit, OnDestroy{
   public paymentPrepaidNumber:number = undefined;
   private paymentFormSubscriber:any;
   public updateBtn:boolean = false;
+  private requestId:Number;
   constructor(
     private _paymentService: PaymentService,
     private _toast: ToastrService,
-    private _modalService: NgbModal
-    ) { }
+    private _modalService: NgbModal,
+    private activatedRoute: ActivatedRoute,
+   private _paymentDetailService: PaymentDetailService
+    ) {
+      this.requestId = Number(this.activatedRoute.snapshot.url[1].path)
+     }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
+    if(this.requestId){
+      this.getPaymentDetails('prepaidrequests', this.requestId);
+    }
 
     this.getDistributionList();
     this.paymentForm= new FormGroup ({
@@ -34,6 +44,19 @@ export class PaymentComponent implements OnInit, OnDestroy{
       PaidAmount: new FormControl(null,Validators.required)
     })
   }
+
+  getPaymentDetails(resourceName, requestId){
+    this.showSpinner=true;
+    this._paymentDetailService.getDetail(resourceName, requestId).then((data: any) => {
+    this.showSpinner=false;
+    this.paymentForm.patchValue(data);
+    this.paymentPrepaidNumber = data.PrePaidNumber;
+    this.onChanges();
+  })
+  .catch(err => {
+    this.showSpinner=false;
+  })
+}
   ngOnDestroy(){
     if(this.paymentFormSubscriber){
       this.paymentFormSubscriber.unsubscribe();
@@ -66,7 +89,6 @@ export class PaymentComponent implements OnInit, OnDestroy{
         }
       })
   }
-
 
   savePayment(){
     this.showSpinner=true;

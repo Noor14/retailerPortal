@@ -55,8 +55,6 @@ export class PaymentDetailsComponent implements OnInit {
     .catch(err => {
       this.showSpinner=false;
     })
-    console.log(resourceName, requestId)
-
   }
 
 }
