@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PaymentService } from './payment.service';
 import { PaymentInstructionComponent } from '../../../shared/dialog-modal/payment-instruction/payment-instruction.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentDetailService } from '../payment-details/payment-detail.service';
 @Component({
   selector: 'app-payment',
@@ -26,9 +26,10 @@ export class PaymentComponent implements OnInit, OnDestroy{
     private _toast: ToastrService,
     private _modalService: NgbModal,
     private activatedRoute: ActivatedRoute,
-   private _paymentDetailService: PaymentDetailService
+    private _paymentDetailService: PaymentDetailService,
+    private _route: Router
     ) {
-      this.requestId = Number(this.activatedRoute.snapshot.url[1].path)
+      this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path)
      }
 
   ngOnInit() {
@@ -117,6 +118,9 @@ export class PaymentComponent implements OnInit, OnDestroy{
     this.paymentPrepaidNumber = undefined;
     this.paymentForm.reset();
     this.paymentForm.controls['ID'].setValue(0);
+    // if(this.requestId){
+    //   this._route.navigate(['/user/payment'])
+    // }
   }
 
   openDialog(id :Number){
