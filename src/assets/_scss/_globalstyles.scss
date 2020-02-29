@@ -155,7 +155,7 @@ html{
       @extend input; 
     } 
   } 
-  input:placeholder-shown:not(:focus)+*, .has-float-label select:placeholder-shown:not(:focus)+*, .has-float-label textarea:placeholder-shown:not(:focus)+*{
+  input:placeholder-shown:not(:focus)+*, select:placeholder-shown:not(:focus)+*, textarea:placeholder-shown:not(:focus)+*{
     font-size: 15px;
     top: .8em;
     color:black;
