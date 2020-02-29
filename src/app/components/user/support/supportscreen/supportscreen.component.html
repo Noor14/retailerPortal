@@ -22,14 +22,16 @@
         <form [formGroup]="supportForm">
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                            <input type="text" class="form-control" disabled placeholder="Contact Name"
+                        <div class="form-group has-float-label">
+                            <input type="text" id="contactname" class="form-control" disabled placeholder="Contact Name"
                                 formControlName="ContactName">
+                                <label for="contactname">Contact Name</label>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <div class="form-group  position-relative">  
-                            <input type="text" class="form-control" placeholder="Email" [readonly]="emailEdit" formControlName="Email">
+                        <div class="form-group has-float-label position-relative">  
+                            <input type="text" class="form-control" id="email" placeholder="Email" [readonly]="emailEdit" formControlName="Email">
+                            <label for="email">Email</label>                            
                             <img src="../../../../assets/_images/edit.svg" width="15px" (click)="emailEdit= !emailEdit" 
                             *ngIf="!supportDetail.ID"  class="mr-3 position-absolute" style="right: 5px; top: 35%;" />
                         </div>
@@ -38,51 +40,56 @@
         
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
-                        <div class="form-group  position-relative">  
-                            <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Mobile No"
+                        <div class="form-group has-float-label position-relative">  
+                            <input type="text" class="form-control" id="mobile" [readonly]="mobileEdit"  placeholder="Mobile No"
                                 [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                                 <label for="mobile">Mobile No</label>                                                        
                                 <img src="../../../../assets/_images/edit.svg" (click)="mobileEdit= !mobileEdit" 
                                 *ngIf="!supportDetail.ID" width="15px"
                                 class="mr-3 position-absolute" style="right: 5px; top: 35%;" />
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                            <select name="IssueType" class="form-control" formControlName="IssueType"
+                        <div class="form-group has-float-label">
+                            <select name="IssueType" id="issuetype" class="form-control" formControlName="IssueType"
                                 placeholder="Issue Type">
                                 <option value="null" disabled selected>Issue Type</option>
                                 <option *ngFor="let issue of issueType" [value]="issue.key"> {{issue.value}} </option>
                             </select>
+                            <label for="issuetype">Issue Type</label>                                                                                    
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                            <select name="IssueType" class="form-control" formControlName="Criticality"
+                        <div class="form-group has-float-label">
+                            <select name="IssueType" id="criticality" class="form-control" formControlName="Criticality"
                                 placeholder="Criticality">
                                 <option value="null" disabled selected>Criticality</option>
                                 <option *ngFor="let critical of criticality" [value]="critical.key"> {{critical.value}}
                                 </option>
                             </select>
+                            <label for="criticality">Criticality</label> 
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                            <select name="IssueType" class="form-control" formControlName="PreferredContactMethod"
+                        <div class="form-group has-float-label">
+                            <select name="IssueType" id="contactmethod" class="form-control" formControlName="PreferredContactMethod"
                                 placeholder="Contact Method">
                                 <option value="null" disabled selected>Contact Method</option>
                                 <option *ngFor="let contact of contacting" [value]="contact.key"> {{contact.value}}
                                 </option>
                             </select>
+                            <label for="contactmethod">Contact Method</label> 
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <textarea name="description" class="form-control" placeholder="Description" formControlName="Description" 
+                        <div class="form-group has-float-label">
+                            <textarea name="description" id="Description" class="form-control" placeholder="Description" formControlName="Description" 
                                 cols="140" rows="5"></textarea>
+                                <label for="description">Description</label> 
                         </div>
                     </div>
                 </div>
