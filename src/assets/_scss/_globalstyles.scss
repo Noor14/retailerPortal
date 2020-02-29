@@ -30,10 +30,15 @@ html{
       }
       .form-group{
         margin-bottom: 1.5rem;
+        textarea{
+          resize: unset;
+          height: unset !important;
+      }
       }
       .form-control{
         height: 48px;
         color: #7e7e7e;
+     
         &[readonly]{
           background-color: transparent;
         }
@@ -140,16 +145,26 @@ html{
      border: 1px solid #ced4da; 
      border-radius: .25rem; 
   }
+  input:-webkit-autofill {
+     +label { 
+       border: unset;
+       top: -15px;
+       &::after{
+        top: 64%;
+       }
+      @extend input; 
+    } 
+  } 
+  input:placeholder-shown:not(:focus)+*, .has-float-label select:placeholder-shown:not(:focus)+*, .has-float-label textarea:placeholder-shown:not(:focus)+*{
+    font-size: 15px;
+    top: .8em;
+    color:black;
+    &::after{
+      background-color:transparent;
+    }
+  }
 } 
 
-.has-float-label input:placeholder-shown:not(:focus)+*, .has-float-label select:placeholder-shown:not(:focus)+*, .has-float-label textarea:placeholder-shown:not(:focus)+*{
-  font-size: 15px;
-  top: .8em;
-  color:black;
-  &::after{
-    background-color:transparent;
-  }
-}
   .dropdown{
     &-toggle::after{
       display:none;
