@@ -12,7 +12,7 @@ import { PaymentDetailService } from './payment-detail.service';
 })
 export class PaymentDetailsComponent implements OnInit {
 
-  private editable: boolean =false;
+  private editable: boolean = true;
   public showSpinner: boolean;
   public spinnerConfig: any;
   public paymentDetailForm: FormGroup;
@@ -22,8 +22,6 @@ export class PaymentDetailsComponent implements OnInit {
    private activatedRoute: ActivatedRoute,
    private _paymentDetailService: PaymentDetailService
    ) {
-      let activeRoute = this.activatedRoute.snapshot.url[0].path;
-      this.editable = (activeRoute == 'editPaymentDetail')? true :  false;
       this.requestId = Number(this.activatedRoute.snapshot.url[1].path)
       
    }
@@ -31,13 +29,11 @@ export class PaymentDetailsComponent implements OnInit {
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     let userObj = JSON.parse(localStorage.getItem('userIdentity')).UserAccount
-    if(!this.editable){
       if(Number(this.activatedRoute.snapshot.url[2].path)){
         this.getPaymentDetails('prepaidrequests', this.requestId);
       }else{
         this.getPaymentDetails('invoicerequests', this.requestId);
       }
-    }
     this.paymentDetailForm = new FormGroup({
       ID: new FormControl(0),
       MobileNumber: new FormControl(userObj.RetailerMobile, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
@@ -53,7 +49,6 @@ export class PaymentDetailsComponent implements OnInit {
       this.showSpinner=true;
     this._paymentDetailService.getDetail(resourceName, requestId).then((data: any) => {
       this.showSpinner=false;
-      // this.supportDetail = data;
       console.log(data)
       this.paymentDetailForm.patchValue(data);
     })

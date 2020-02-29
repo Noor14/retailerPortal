@@ -19,22 +19,18 @@
             <button class="btn btn-primary" type="button" routerLink = "/user/payment" >Make New Payment</button>
         </div>
         <div class="contentArea bg-white p-4">
-        <!-- <h6 class="contentSubTitle" *ngIf="!supportDetail.ID">Welcome to Haball Support Center</h6> -->
-        <p *ngIf="supportDetail.ID"> Ticket ID :{{supportDetail.TicketNumber}} </p>
-        <p class="errorMessage" *ngIf="message">Invalid Ticket Number</p>
         <form [formGroup]="paymentDetailForm">
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">
-                            <input type="text" class="form-control" id="companyName" placeholder="Company Name"
-                                formControlName="ContactName">
+                            <input type="text" class="form-control" id="companyName" placeholder="Company Name" >
                             <label for="companyName"> Company Name </label>
 
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">  
-                            <input type="text" id="psID" class="form-control" placeholder="PS-ID" [readonly]="emailEdit" formControlName="Email">
+                            <input type="text" id="psID" class="form-control" placeholder="PS-ID" >
                             <label for="psID"> PS-ID </label>
                         </div>
                     </div>
@@ -43,15 +39,13 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">  
-                            <input type="text" id="authID" class="form-control" [readonly]="mobileEdit"  placeholder="Auth ID"
-                                [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                            <input type="text" id="authID" class="form-control" placeholder="Auth ID" >
                                 <label for="authID">Auth ID </label>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">
-                            <input type="text" id="createdDate" class="form-control" [readonly]="mobileEdit"  placeholder="Created Date"
-                            [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                            <input type="text" id="createdDate" class="form-control" placeholder="Created Date" >
                             <label for="createdDate"> Created Date </label>
                         </div>
                     </div>
@@ -59,16 +53,14 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">
-                            <input type="text" id = "transactionDate" class="form-control" [readonly]="mobileEdit"  placeholder="Transaction Date"
-                                [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                            <input type="text" id = "transactionDate" class="form-control" placeholder="Transaction Date">
                                 <label for="transactionDate"> Transaction Date </label>
 
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">
-                            <input type="text" class="form-control" id="transactionTime" [readonly]="mobileEdit"  placeholder="Transaction Time"
-                                [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                            <input type="text" class="form-control" id="transactionTime" placeholder="Transaction Time">
                                 <label for="transactionTime"> Transaction Time</label>
                         </div>
                     </div>
@@ -76,15 +68,13 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">  
-                            <input type="text" class="form-control" [readonly]="mobileEdit"  placeholder="Bank name"
-                                [textMask]="{mask: mobileMask}" id="bankName" formControlName="MobileNumber">
+                            <input type="text" class="form-control" placeholder="Bank name" id="bankName" >
                                 <label for="bankName"> Bank name </label>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">
-                            <input type="text" class="form-control" id="settlementID" [readonly]="mobileEdit"  placeholder="Settlement ID"
-                            [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                            <input type="text" class="form-control" id="settlementID" placeholder="Settlement ID">
                             <label for="settlementID "> Settlement ID </label>
                         </div>
                     </div>
@@ -92,8 +82,7 @@
                 <div class="row">
                     <div class="col-md-6 ">
                         <div class="form-group has-float-label">
-                            <input type="text" class="form-control" id="amount" [readonly]="mobileEdit"  placeholder="Amount"
-                                [textMask]="{mask: mobileMask}" formControlName="MobileNumber">
+                            <input type="text" class="form-control" id="amount" placeholder="Amount">
                                 <label for="amount"> Amount </label>
                         </div>
                     </div>

@@ -28,6 +28,7 @@ export class SupportComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
     this.getdropDownList();
     this.supportForm = new FormGroup({
       MobileNumber: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
@@ -40,8 +41,7 @@ export class SupportComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(){
-    this.spinnerConfig = loadingConfig;
-    this.supportDropDownSubscriber.unsubscribe()
+    this.supportDropDownSubscriber.unsubscribe();
   }
 
   getdropDownList() {
