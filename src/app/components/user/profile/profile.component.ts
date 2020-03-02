@@ -1,9 +1,11 @@
+import { Router } from '@angular/router';
 import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +24,9 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private _profileService: ProfileService,
-    private _toast:ToastrService
+    private _toast:ToastrService,
+    private _userService: UserService,
+    private _route :Router
     ) { }
 
   ngOnInit() {
@@ -69,7 +73,8 @@ export class ProfileComponent implements OnInit {
     this.showSpinner = true;
     this._profileService.postCalls(this.passwordFormGroup.value,8,"users/ChangePassword")
     .then((data:any)=>{
-      this.showSpinner = false;
+      this._toast.success("Profile has been changed successfully");
+      this.logout();
 
     })
     .catch(err=>{
@@ -79,12 +84,28 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
+  logout(){
+    this._userService.logoutUser()
+    .then((res:boolean)=>{
+      if(res){
+        localStorage.clear();
+        this._route.navigate(['/login'])
+      }    
+      this.showSpinner=false;
+    })
+    .catch(err=>{
+    this.showSpinner=false;
+
+      })
+  }
 
   updateProfile(){
     this.showSpinner = true;
     this._profileService.postCalls(this.profileFormGroup.value, 8 ,"retailer/Save")
     .then((data:any)=>{
       this.showSpinner = false;
+      this._toast.success("Profile has been updated")
+
     })
     .catch(err=>{
       this.showSpinner = false;
