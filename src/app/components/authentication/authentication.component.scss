@@ -15,9 +15,9 @@
             height: 48px;
 
         }
-       
+
         .login{
-            padding: 20px 45px;
+            padding: 20px 1.8em;
             background: #f8f8f8;
             box-shadow: 0px 0px 5px 3px #e5e5e5;
             h4.title{
@@ -52,7 +52,7 @@
         .support{
             @extend .login;
         }
-        
+
     }
 
 }
