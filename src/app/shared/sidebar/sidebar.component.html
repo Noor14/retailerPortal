@@ -1,7 +1,7 @@
 <section class="sidebar">
     <nav>
       <div class="d-flex d-lg-none justify-content-between  navbar-light navbar-expand-lg mb-3">
-        <a class="navbar-brand" routerLink="/user/dashboard">
+        <a class="navbar-brand" routerLink="/user/dashboard" (click)="navToggle()">
           <img src="../../../assets/_images/logo.png" width="90" class="logo" alt="logo">
          </a>
          <button class="navbar-toggler" type="button" (click)="navToggle()">
@@ -11,27 +11,27 @@
 
         <ul class="navbar-nav">
           <li class="nav-item" >
-            <a class="nav-link" routerLink="/user/dashboard" routerLinkActive="active">
+            <a class="nav-link" routerLink="/user/dashboard" (click)="navToggle()" routerLinkActive="active">
               Dashboard
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/user/network" routerLinkActive="active">
+            <a class="nav-link" routerLink="/user/network" (click)="navToggle()" routerLinkActive="active">
              My Network
             </a>
           </li>    
           <li class="nav-item">
-            <a class="nav-link" routerLink="/user/payment" routerLinkActive="active">
+            <a class="nav-link" routerLink="/user/payment" (click)="navToggle()" routerLinkActive="active">
               Make Payment
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/user/profile" routerLinkActive="active">
+            <a class="nav-link" routerLink="/user/profile" (click)="navToggle()" routerLinkActive="active">
               Profile
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/user/support" routerLinkActive="active">
+            <a class="nav-link" routerLink="/user/support" (click)="navToggle()" routerLinkActive="active">
               Support
             </a>
           </li>

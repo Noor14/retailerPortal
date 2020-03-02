@@ -25,6 +25,7 @@ export class SidebarComponent implements OnInit {
     this._userService.logoutUser()
     .then((res:boolean)=>{
       if(res){
+        this.navToggle();
         localStorage.clear();
         this._route.navigate(['/login'])
       }    
@@ -35,7 +36,8 @@ export class SidebarComponent implements OnInit {
 
       })
   }
+
   navToggle() {
     this.navToggling.emit(false);
-}
+  }
 }
