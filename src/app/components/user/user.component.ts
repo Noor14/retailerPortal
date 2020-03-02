@@ -1,5 +1,5 @@
 import { SharedService } from 'src/app/services/shared.service';
-import { routeAnimation } from './../../constant/animations';
+import { slideInOut } from './../../constant/animations';
 import { Component, OnInit } from '@angular/core';
 import { TicketSupportService } from './support/ticket-support.service';
 
@@ -8,12 +8,13 @@ import { TicketSupportService } from './support/ticket-support.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
   animations: [
-    routeAnimation
+    slideInOut
     // animation triggers go here
   ]
 })
 export class UserComponent implements OnInit {
 
+  public navigationToggle:boolean=false
   constructor(
     private _supportService :TicketSupportService, 
     private _sharedService : SharedService)
@@ -29,5 +30,6 @@ export class UserComponent implements OnInit {
       })
 
   }
+
   
 }

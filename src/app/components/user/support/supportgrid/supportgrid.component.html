@@ -15,7 +15,7 @@
                 <button class="btn btn-lg btn-primary ml-3" type="button" routerLink="/user/support/0">Add Ticket</button>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-md-3">
               <div class="form-group">
                 <select class="form-control" [(ngModel)]="searchingOption" (change)="selectSearch()">
                   <option value="" selected>Select Criteria</option>
@@ -24,7 +24,7 @@
               </div>
             </div>
 
-            <div class="col-4" [ngSwitch]="searchingOption">
+            <div class="col-md-4" [ngSwitch]="searchingOption">
               <div class="form-group" *ngSwitchCase="'Token ID'">
                 <input class="form-control" #search placeholder="Token ID" />
               </div>

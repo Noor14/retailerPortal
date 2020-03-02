@@ -1,6 +1,6 @@
 import { loadingConfig } from './../../constant/globalfunction';
 import { UserService } from './../../components/user/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,6 +13,8 @@ export class SidebarComponent implements OnInit {
   constructor(private _userService : UserService, private _route: Router) { }
   public showSpinner:boolean
   public spinnerConfig:any;
+  @Output() navToggling = new EventEmitter();
+
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
 
@@ -33,4 +35,7 @@ export class SidebarComponent implements OnInit {
 
       })
   }
+  navToggle() {
+    this.navToggling.emit(false);
+}
 }

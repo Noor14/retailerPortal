@@ -9,6 +9,13 @@ header{
           vertical-align: top;
       }
     }
+    .navbar-toggler{
+      border: unset;
+      &:focus{
+        border: unset;
+        outline: unset;
+      }
+    }
   
   }
   
