@@ -92,8 +92,8 @@
                       <tr *ngFor="let payment of paymentsList; let i = index">
                           <td>{{payment.InvoiceNumber}}</td>
                           <td>{{payment.CompanyName}}</td>
-                          <td>{{payment.CreatedDate |  date: 'dd-MM-yyyy'}}</td>
-                          <td>{{payment.Status}}</td>
+                          <td class="createDateWidth">{{payment.CreatedDate |  date: 'dd-MM-yyyy'}}</td>
+                          <td class="statusWidth">{{payment.Status}}</td>
                           <td>{{payment.TotalPrice}}</td>
                           <td>
                             <div ngbDropdown class="d-inline" placement="bottom-right">
