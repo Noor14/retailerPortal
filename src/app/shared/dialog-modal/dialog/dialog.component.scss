@@ -1,10 +1,28 @@
+@import "../../../../assets/_scss/_variables";
+
 .dialogBox{
     .modal-header{
+        border-bottom: unset;
         .close{
             &:focus{
                 outline: unset;
             }
         }
+            h4.title{
+                position: relative;
+                font-family: $baseSourceSansproSemiBold;
+                font-size: 20px;
+                padding-left: 15px;
+                &::before{
+                width: 2px;
+                height: 30px;
+                content: '';
+                background: #ffc107;
+                position: absolute;
+                left: 0;
+        
+        }
     }
-
+ }
 }
+
