@@ -92,7 +92,7 @@
                         </div>
                     </div>
                 </div>
-            <div class="text-right">
+            <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
                 <button class="btn btn-primary" type="button" routerLink="/user/support">Close</button>
                 <button class="btn btn-primary ml-3" type="button" (click)="save()" *ngIf="!supportDetail.ID" [disabled]="supportForm.invalid">Submit</button>
                 <button class="btn btn-primary ml-3" type="button" (click)="delete()" *ngIf="supportDetail.ID && !Message && !supportDetail.Status">Delete</button>
