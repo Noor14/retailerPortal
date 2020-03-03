@@ -37,7 +37,7 @@
                     </div>
                     <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
                         <button class="btn btn-primary" type="button" *ngIf="!paymentPrepaidNumber" [disabled]="paymentForm.invalid" (click)="savePayment()" >Next</button>
-                        <button class="btn btn-primary mr-3" type="button" *ngIf="paymentPrepaidNumber" [disabled]="paymentForm.invalid" >View Voucher</button>
+                        <button class="btn btn-primary mr-3" type="button" *ngIf="paymentPrepaidNumber" [disabled]="paymentForm.invalid" (click)="viewVoucher()" >View Voucher</button>
                         <button class="btn btn-primary ml-3" type="button" *ngIf="paymentPrepaidNumber && !updateBtn" routerLink="/user/dashboard">Back</button>
                         <button class="btn btn-primary ml-3" type="button" *ngIf="paymentPrepaidNumber && updateBtn" [disabled]="paymentForm.invalid"  (click)="savePayment()">Update</button>
                     </div>

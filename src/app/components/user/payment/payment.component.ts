@@ -123,6 +123,23 @@ export class PaymentComponent implements OnInit, OnDestroy{
     // }
   }
 
+  viewVoucher(){
+    this.showSpinner=true;
+    this._paymentService.getVoucher(this.requestId)
+    .then((succ:any)=>{
+      this.showSpinner=false;
+      if(succ){
+        console.log(succ)
+      }
+    })
+    .catch(err=>{
+      this.showSpinner=false;
+        if(err.error){
+          this._toast.error(err.error.message, "Error")
+        }
+      })
+  }
+
   openDialog(id :Number){
     const modalRef = this._modalService.open(PaymentInstructionComponent,{ 
       centered: true,

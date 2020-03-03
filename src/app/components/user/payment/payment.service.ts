@@ -23,7 +23,20 @@ export class PaymentService {
     })
     return promise;
   }
-
+  getVoucher(id){
+    let promise = new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/prepaidrequests/printRecipt/${id}`;
+      this._http.get(apiURL)
+        .toPromise()
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        })
+    })
+    return promise;
+  }
   getDistributorsList(){
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/prepaidrequests/GetByRetailerCode`;
