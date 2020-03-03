@@ -38,8 +38,8 @@ html{
       .form-control{
         height: 48px;
         color: #7e7e7e;
-
-        &[readonly]{
+     
+        &[readonly], &[disabled]{
           background-color: transparent;
         }
         &:focus{
@@ -129,6 +129,14 @@ html{
 }
 
 .has-float-label{
+  select{
+    background: inherit;
+    background-color: #fff;
+    padding-right: .75rem;
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist; 
+    appearance: menulist;
+  }
   label{
     left: 13px;
     top: -9px;

@@ -42,6 +42,7 @@
                                     <div class="form-group has-float-label">
                                         <input type="text" id="mobile" [textMask]="{mask: mobileMask}" class="form-control" formControlName="Mobile" placeholder="Mobile No" >
                                         <label for="mobile">Mobile No</label> 
+                                        <img src="../../../../assets/_images/edit.svg" width="15px" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" />                                        
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
@@ -56,9 +57,9 @@
                                     <div class="form-group has-float-label">
                                         <textarea rows="2" id="address" cols="58" class="form-control" placeholder="Address" formControlName="Address"></textarea>
                                         <label for="address">Address</label>
+                                        <img src="../../../../assets/_images/edit.svg" width="15px" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" />                                        
                                     </div>
                                 </div>
-
                             </div>
                             <div class="text-right">
                                 <button class="btn btn-primary" type="button" (click)="updateProfile()" [disabled]="!profileFormGroup.valid">Update</button>
