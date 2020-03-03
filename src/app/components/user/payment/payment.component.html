@@ -2,10 +2,10 @@
     <div class="container-fluid">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a routerLink="/user/payment">Payment</a>
+                <a routerLink="/user/dashboard">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-                <a class="breadcrumb-item">Support</a>
+                <a class="breadcrumb-item">Payment</a>
             </li>
         </ol>
         <div class="content">
@@ -24,7 +24,7 @@
                                     <option value="null" disabled selected>Select Company</option>
                                     <option *ngFor="let distributor of distributorList" [value]="distributor.DealerCode">{{distributor.CompanyName}}</option>
                                 </select>
-                                <label for="company">Issue Type</label>
+                                <label for="company">Company</label>
                                 
                             </div>
                         </div>
