@@ -95,6 +95,7 @@ export class PaymentComponent implements OnInit, OnDestroy{
   }
 
   savePayment(){
+    if(this.paymentForm.valid){
     this.showSpinner=true;
     this._paymentService.makePayment(this.paymentForm.value,8,"prepaidrequests/save")
     .then((data:any)=>{
@@ -116,6 +117,7 @@ export class PaymentComponent implements OnInit, OnDestroy{
         this._toast.error(err.error.message, "Error")
       }
     })
+  }
   }
   resetForm(){
     this.paymentPrepaidNumber = undefined;

@@ -14,8 +14,8 @@ import { UserService } from '../user.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  public profileFormGroup: FormGroup;
-  public passwordFormGroup: FormGroup;
+  public profileForm: FormGroup;
+  public passwordForm: FormGroup;
   private userObject: any;
   public cnicMask = AppMasks.cnic_Mask;
   public mobileMask = AppMasks.mobile_Mask;
@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     this.userObject = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
-    this.profileFormGroup = new FormGroup({
+    this.profileForm = new FormGroup({
       ID: new FormControl(null, [Validators.required, Validators.min(0)]),
       Name: new FormControl(null, [Validators.required]),
       RetailerCode: new FormControl({value:null, disabled:true}, Validators.required),
@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
       
     });
      
-      this.passwordFormGroup = new FormGroup ({
+      this.passwordForm = new FormGroup ({
         Username: new FormControl(this.userObject.Username,[Validators.required]),
         Password: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
         ConfirmPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
@@ -53,15 +53,15 @@ export class ProfileComponent implements OnInit {
 
         
       })
-    this.loadProfile();
+    this.getProfile();
   }
 
-  loadProfile() {
+  getProfile() {
     this.showSpinner = true;
     this._profileService.getById(this.userObject.RetailerID, 1, "retailer")
       .then((data: any) => {
       this.showSpinner = false;
-        this.profileFormGroup.patchValue(data)
+        this.profileForm.patchValue(data)
       })
       .catch(err => {
       this.showSpinner = false;
@@ -70,8 +70,9 @@ export class ProfileComponent implements OnInit {
   }
 
   changePassword(){
+    if(this.passwordForm.valid){
     this.showSpinner = true;
-    this._profileService.postCalls(this.passwordFormGroup.value,8,"users/ChangePassword")
+    this._profileService.postCalls(this.passwordForm.value,8,"users/ChangePassword")
     .then((data:any)=>{
       this._toast.success("Profile has been changed successfully");
       this.logout();
@@ -83,6 +84,7 @@ export class ProfileComponent implements OnInit {
         this._toast.error(err.error.message,"Error")
       }
     })
+  }
   }
   logout(){
     this._userService.logoutUser()
@@ -100,8 +102,9 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile(){
+    if(this.profileForm.valid){
     this.showSpinner = true;
-    this._profileService.postCalls(this.profileFormGroup.value, 8 ,"retailer/Save")
+    this._profileService.postCalls(this.profileForm.value, 8 ,"retailer/Save")
     .then((data:any)=>{
       this.showSpinner = false;
       this._toast.success("Profile has been updated")
@@ -113,6 +116,7 @@ export class ProfileComponent implements OnInit {
         this._toast.error(err.error.message,"Error")
       }
     })
+  }
   }
 
 }

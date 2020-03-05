@@ -82,22 +82,25 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
     });
   }
   save() {
-    this.showSpinner=true;
-    this._supportService.postCalls('support/PrivateSave', this.supportForm.value, 8)
-      .then((data: any) => {
-         this.showSpinner=false;
-
-        if(data.ID){
-          this._toast.success('Ticket successfully generated');
-          this._router.navigate(["/user/support"]);
-
-        }
-
-      })
-      .catch(err => { 
-        this.showSpinner=false;
-
-      })
+    if(this.supportForm.valid){
+      this.showSpinner=true;
+      this._supportService.postCalls('support/PrivateSave', this.supportForm.value, 8)
+        .then((data: any) => {
+           this.showSpinner=false;
+  
+          if(data.ID){
+            this._toast.success('Ticket successfully generated');
+            this._router.navigate(["/user/support"]);
+  
+          }
+  
+        })
+        .catch(err => { 
+          this.showSpinner=false;
+  
+        })
+    }
+ 
   }
 
   getByID(supportID) {
