@@ -38,10 +38,9 @@ export class UpdatepasswordComponent implements OnInit {
     this._loginService.PostCalls(this.updatePasswordForm.value, "users/UpdatePassword", 8)
       .then(data => {
       this.showSpinner=false;
-
         if (data) {
           this._toast.success("Password has been updated");
-            this._route.navigate(['/login'])
+          this._route.navigate(['/login'])
         }
         else{
           this._toast.success("Password not updated please try after some few minutes");

@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -24,7 +25,8 @@ export class SupportComponent implements OnInit, OnDestroy {
   constructor(
     private _supportService: SupportService,
     private _router: Router,
-    private _sharedService : SharedService
+    private _sharedService : SharedService,
+    private _toast: ToastrService
     ) { }
 
   ngOnInit() {
@@ -58,7 +60,10 @@ export class SupportComponent implements OnInit, OnDestroy {
     this._supportService.postCalls('support/PublicSave',this.supportForm.value)
     .then((data:any)=>{
     this.showSpinner = false;
+    if(data.ID){
+      this._toast.success('Ticket successfully generated');
       this._router.navigate(["/login"]);
+    }
     })
     .catch(err=>{
       this.showSpinner = false;
