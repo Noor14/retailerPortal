@@ -27,7 +27,7 @@ export class PaymentComponent implements OnInit, OnDestroy{
     private _modalService: NgbModal,
     private activatedRoute: ActivatedRoute,
     private _paymentDetailService: PaymentDetailService,
-    private _route: Router
+    private _route: Router,
     ) {
       this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path)
      }
@@ -126,11 +126,22 @@ export class PaymentComponent implements OnInit, OnDestroy{
   viewVoucher(){
     this.showSpinner=true;
     this._paymentService.getVoucher(this.requestId)
-    .then((succ:any)=>{
+    .then((res:any)=>{
       this.showSpinner=false;
-      if(succ){
-        console.log(succ)
+      if(res.data && res.data.length){
+        let typedArray = new Uint8Array(res.data);
+        const stringChar = typedArray.reduce((data, byte)=> {
+          return data + String.fromCharCode(byte);
+          }, '')
+        let base64String = btoa(stringChar);
+        let doc = `data:application/octet-stream;base64, ${base64String}`;
+        const downloadLink = document.createElement("a");
+        const fileName = "voucher.pdf";
+        downloadLink.href = doc;
+        downloadLink.download = fileName;
+        downloadLink.click();
       }
+
     })
     .catch(err=>{
       this.showSpinner=false;
