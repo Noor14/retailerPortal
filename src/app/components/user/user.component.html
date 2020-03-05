@@ -1,4 +1,4 @@
-<div class="overlay" *ngIf="navigationToggle" (click)="navigationToggle=false"></div>
+<div class="overlay d-lg-none" *ngIf="navigationToggle" (click)="navigationToggle=false"></div>
 <app-header [navigationState]="navigationToggle" (navToggling)='navigationToggle = $event'></app-header>
 <section class="container-fluid">
     <div class="row main">
