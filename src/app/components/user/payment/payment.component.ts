@@ -1,12 +1,14 @@
 import { loadingConfig } from './../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, SecurityContext } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PaymentService } from './payment.service';
 import { PaymentInstructionComponent } from '../../../shared/dialog-modal/payment-instruction/payment-instruction.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentDetailService } from '../payment-details/payment-detail.service';
+import { DomSanitizer } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -28,6 +30,7 @@ export class PaymentComponent implements OnInit, OnDestroy{
     private activatedRoute: ActivatedRoute,
     private _paymentDetailService: PaymentDetailService,
     private _route: Router,
+    private _domSanitizer: DomSanitizer
     ) {
       this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path)
      }
@@ -134,7 +137,8 @@ export class PaymentComponent implements OnInit, OnDestroy{
           return data + String.fromCharCode(byte);
           }, '')
         let base64String = btoa(stringChar);
-        let doc = `data:application/octet-stream;base64, ${base64String}`;
+        let doc = this._domSanitizer.bypassSecurityTrustUrl(`data:application/octet-stream;base64, ${base64String}`) as string;
+        doc = this._domSanitizer.sanitize(SecurityContext.URL, doc) ;
         const downloadLink = document.createElement("a");
         const fileName = "voucher.pdf";
         downloadLink.href = doc;
