@@ -56,17 +56,19 @@ export class SupportComponent implements OnInit, OnDestroy {
     });
   }
   save(){
-    this.showSpinner = true;
-    this._supportService.postCalls('support/PublicSave',this.supportForm.value)
-    .then((data:any)=>{
-    this.showSpinner = false;
-    if(data.ID){
-      this._toast.success('Ticket successfully generated');
-      this._router.navigate(["/login"]);
-    }
-    })
-    .catch(err=>{
+    if(this.supportForm.valid){
+      this.showSpinner = true;
+      this._supportService.postCalls('support/PublicSave',this.supportForm.value)
+      .then((data:any)=>{
       this.showSpinner = false;
+      if(data.ID){
+        this._toast.success('Ticket successfully generated');
+        this._router.navigate(["/login"]);
+      }
       })
+      .catch(err=>{
+        this.showSpinner = false;
+        })
+    }
   }
 }
