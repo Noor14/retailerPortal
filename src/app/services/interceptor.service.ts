@@ -3,13 +3,15 @@ import { Router } from '@angular/router';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InterceptorService implements HttpInterceptor {
   constructor(
-    private _router: Router
+    private _router: Router,
+    private _toast: ToastrService
   ) { }
   intercept(
     request: HttpRequest<any>, next: HttpHandler
@@ -28,15 +30,21 @@ export class InterceptorService implements HttpInterceptor {
       });
     }
     return next.handle(request).pipe(
-      catchError((error: HttpErrorResponse) => {
+      catchError((err: HttpErrorResponse) => {
         // Checking if it is an Authentication Error (401)
-        if (error.status === 401) {
+        if (err.status === 401 || err.status === 498) {
           // <Log the user out of your application code>
+          if(err.status === 498){
+            this._toast.error(err.error);
+            
+          }
+          localStorage.clear()
           this._router.navigate([ '/login' ]);
-          // return throwError(error);
+         
+          // return throwError(err);
         }
         // If it is not an authentication error, just throw it
-        return throwError(error);
+        return throwError(err);
       })
     );
   }
