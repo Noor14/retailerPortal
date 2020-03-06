@@ -1,5 +1,5 @@
 import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { AppMasks, AppPattern } from '../../../shared/app.mask'
@@ -9,7 +9,8 @@ import { ReCaptcha2Component } from 'ngx-captcha';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class RegistrationComponent implements OnInit {
   public registerForm: FormGroup;

@@ -16,6 +16,8 @@ import { SupportService } from './support/support.service';
 import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
 import { InterceptorService } from 'src/app/services/interceptor.service';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     RegistrationComponent,
@@ -33,7 +35,8 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     ReactiveFormsModule,
     TextMaskModule,
     NgxSpinnerModule,
-    NgxCaptchaModule 
+    NgxCaptchaModule,
+    NgbModule
 
   ],
   providers:[

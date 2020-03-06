@@ -1,0 +1,18 @@
+.registration{
+    ngb-tooltip-window{
+        top:5px !important;
+        .arrow{
+            right: 0.1rem !important;
+            &::before{
+                border-bottom-color: #a7a7a7;
+            }
+        }
+        .tooltip-inner{
+            opacity: 1;
+            font-size: 12px;
+            max-width: 300px;
+            background-color: #c1c1c1;
+            color:#fff;
+        }
+    }
+}
