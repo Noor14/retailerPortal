@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button class="btn btn-primary" type="button" (click)="updateProfile()" [disabled]="!profileFormGroup.valid">Update</button>
+                                <button class="btn btn-primary" type="button" (click)="updateProfile()" [disabled]="profileForm.invalid">Update</button>
                             </div>
 
                         </form>
@@ -127,7 +127,7 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button class="btn btn-primary" type="button" (click)="changePassword()" [disabled]="!passwordFormGroup.valid">Update Password</button>
+                                <button class="btn btn-primary" type="button" (click)="changePassword()" [disabled]="passwordForm.invalid">Update Password</button>
                             </div>
                         </form>
                     </div>

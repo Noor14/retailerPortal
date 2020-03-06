@@ -1,6 +1,9 @@
 .registration{
     ngb-tooltip-window{
         top:5px !important;
+        &.show{
+            opacity: 1;
+        }
         .arrow{
             right: 0.1rem !important;
             &::before{
@@ -8,7 +11,6 @@
             }
         }
         .tooltip-inner{
-            opacity: 1;
             font-size: 12px;
             max-width: 300px;
             background-color: #c1c1c1;
