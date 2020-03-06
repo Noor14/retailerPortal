@@ -1,6 +1,6 @@
 import { SharedService } from './../../../services/shared.service';
-import { loadingConfig } from './../../../constant/globalfunction';
-import { Component, OnInit } from '@angular/core';
+import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -9,11 +9,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   public showSpinner: boolean;
   public spinnerConfig: any;
   public loginForm : FormGroup
   public loginFailure: boolean = false;
+  private loginFormSubscriber: any
   constructor(
     private _loginService: LoginService,
     private _sharedService: SharedService,
@@ -30,14 +31,27 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(){
+    this.loginFormSubscriber.unsubscribe();
+  }
+
+  onChanges():void{
+    this.loginFormSubscriber = this.loginForm.valueChanges.subscribe(val => {
+      if(val && Object.keys(val).length){
+          this.loginFailure = false;
+      }
+    });
+  }
   login() {
     if (this.loginForm.valid) {
+      this.loginFailure = false;
       this.showSpinner = true;
       this._loginService.login(this.loginForm.value)
         .then((data:any) => {
           this.showSpinner = false;
           if (data.ErrorCode) {
             this.loginFailure = true;
+            this.onChanges();
           }
           else {
             localStorage.setItem('userIdentity', JSON.stringify(data)); // can be used if you want to use session storage other chnge would be in Authentication Guard and home
@@ -56,6 +70,9 @@ export class LoginComponent implements OnInit {
           this.showSpinner = false;
           console.log(err);
         })
+    }else{
+     this.loginFormSubscriber.unsubscribe();
+      validateAllFormFields(this.loginForm);
     }
 
   }

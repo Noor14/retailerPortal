@@ -2,13 +2,21 @@
   <h4 class="mb-4 title">Login</h4>
   <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="form-group has-float-label">
-      <input type="text" id="username" formControlName="Username"  class="form-control" placeholder="Username">
+      <input type="text" id="username" formControlName="Username" class="form-control" placeholder="Username"
+      [ngClass]="{'validationError': loginFailure || loginForm.controls['Username'].errors && (loginForm.controls.Username.dirty || loginForm.controls.Username.touched)}">
       <label for="username">Username</label>
+      <!-- <p *ngIf="loginForm.controls['Username'].errors" class="errorMessage">
+        <small *ngIf="loginForm.controls['Username'].hasError('required') && (loginForm.controls.Username.dirty || loginForm.controls.Username.touched)">This field is required</small>
+      </p> -->
     </div>
     <div class="form-group has-float-label">
-      <input type="password" id="password" formControlName="Password" class="form-control" placeholder="Password">
+      <input type="password" id="password" formControlName="Password" class="form-control" placeholder="Password"
+      [ngClass]="{'validationError': loginFailure || loginForm.controls['Password'].errors && (loginForm.controls.Password.dirty || loginForm.controls.Password.touched)}">
       <label for="password">Password</label>
-      <small class="errorMessage" *ngIf="loginFailure">Invalid Login Credentials</small>
+      <p *ngIf="loginForm.controls['Password'].errors || loginFailure" class="errorMessage">
+        <!-- <small *ngIf="loginForm.controls['Password'].hasError('required') && (loginForm.controls.Password.dirty || loginForm.controls.Password.touched)">This field is required</small> -->
+        <small *ngIf="loginFailure && loginForm.valid">Invalid Credentials</small>
+      </p>
     </div>
     <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-center">
       <button class="btn btn-lg btn-primary mr-3" type="submit" [disabled]="loginForm.invalid">Login</button>
