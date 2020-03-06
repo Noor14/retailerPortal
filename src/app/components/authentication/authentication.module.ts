@@ -15,7 +15,7 @@ import { SupportComponent } from './support/support.component';
 import { SupportService } from './support/support.service';
 import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
 import { InterceptorService } from 'src/app/services/interceptor.service';
-
+import { NgxCaptchaModule } from 'ngx-captcha';
 @NgModule({
   declarations: [
     RegistrationComponent,
@@ -23,14 +23,17 @@ import { InterceptorService } from 'src/app/services/interceptor.service';
     AuthenticationComponent, 
     ForgetpasswordComponent, 
     UpdatepasswordComponent, 
-    EULAComponent, SupportComponent],
+    EULAComponent, 
+    SupportComponent
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
     AuthenticationRoutingModule,
     ReactiveFormsModule,
     TextMaskModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxCaptchaModule 
 
   ],
   providers:[

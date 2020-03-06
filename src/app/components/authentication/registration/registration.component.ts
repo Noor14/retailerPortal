@@ -1,11 +1,11 @@
-import { loadingConfig } from './../../../constant/globalfunction';
-import { Component, OnInit } from '@angular/core';
+import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { AppMasks, AppPattern } from '../../../shared/app.mask'
 import { LoginService } from '../login/login.service';
 import { Router } from '@angular/router';
-
+import { ReCaptcha2Component } from 'ngx-captcha';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -22,7 +22,19 @@ export class RegistrationComponent implements OnInit {
   public mobileExist = false;
   public spinnerConfig:any;
   public showSpinner: boolean;
+  @ViewChild('captchaElem', { static: false }) captchaElem: ReCaptcha2Component;
+  // @ViewChild('langInput', { static: false }) langInput: ElementRef;
 
+  public captchaIsLoaded = false;
+  public captchaSuccess = false;
+  public captchaIsExpired = false;
+  public captchaResponse?: string;
+
+  public theme: 'light' | 'dark' = 'light';
+  public size: 'compact' | 'normal' = 'normal';
+  public lang = 'en';
+  public type: 'image' | 'audio';
+ 
   constructor(
     private _toast: ToastrService,
     private _loginService: LoginService,
@@ -40,11 +52,16 @@ export class RegistrationComponent implements OnInit {
       Username: new FormControl(null, [Validators.required]),
       CNIC: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.cnic_Pattern)]),
       CompanyName: new FormControl(null, [Validators.required]),
-      Address: new FormControl(null, [Validators.required])
+      Address: new FormControl(null, [Validators.required]),
+      recaptcha: new FormControl([null, Validators.required])
     });
   }
-
-
+  handleSuccess(data) {
+    console.log(data);
+  }
+ handleReset(): void {
+    this.captchaElem.resetCaptcha();
+  }
   register() {
     if (this.registerForm.valid) {
       if (this.registerForm.value.Password === this.registerForm.value.ConfirmPassword) {
@@ -69,6 +86,8 @@ export class RegistrationComponent implements OnInit {
             this._toast.error(err);
           })
       }
+    }else{
+      validateAllFormFields(this.registerForm);
     }
   }
 }
