@@ -24,14 +24,14 @@
                   </div>
                 </div>
 
-                <div class="col-md-4" [ngSwitch]="searchingOption">
-                  <div class="form-group" *ngSwitchCase="'Payment ID'">
+                <div class="col-md-4">
+                  <div class="form-group" [hidden]="searchingOption !== 'Payment ID'">
                     <input class="form-control" #search placeholder="Payment ID" />
                   </div>
-                  <div class="form-group" *ngSwitchCase="'Company'">
+                  <div class="form-group" [hidden]="searchingOption !== 'Company'">
                     <input class="form-control" #search placeholder="Company" />
                   </div>
-                  <div class="form-group" *ngSwitchCase="'Created Date'">
+                  <div class="form-group" [hidden]="searchingOption !== 'Created Date'">
                     <input
                     #myRangeInput
                    class="form-control" 
@@ -57,18 +57,18 @@
                    </ng-template>
                   </div>
 
-                  <div class="form-group" *ngSwitchCase="'Status'">
+                  <div class="form-group" [hidden]="searchingOption !== 'Status'">
                     <select class="form-control" #search (change)="filterByStatus(search)">
                       <option value="" selected>Status</option>
                       <option>Paid</option>
                       <option>Un-paid</option>
                     </select>
                   </div>
-
-                  <div class="form-group d-flex" *ngSwitchCase="'Amount'">
-                    <input class="form-control" placeholder="Min Amount" /> 
-                    <span class="mr-2 ml-2 separator"></span> 
-                    <input class="form-control" placeholder="Max Amount" />
+                  <div class="form-group" [hidden]="searchingOption !== 'Amount'">
+                    <div class="d-flex">
+                      <input class="form-control mr-2" placeholder="Min Amount" /> 
+                      <input class="form-control" placeholder="Max Amount" />
+                    </div>
                   </div>
                 </div>
 
