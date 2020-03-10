@@ -36,7 +36,7 @@
             [ngClass]="{'validationError': userExist || (registerForm.controls['Username'].errors && (registerForm.controls.Username.dirty || registerForm.controls.Username.touched))}">
             <label for="username">Username</label>
             <p *ngIf="registerForm.controls['Username'].errors || userExist" class="errorMessage">
-                <small *ngIf="userExist && registerForm.valid">Username Already Exist</small>
+                <small *ngIf="userExist && !registerForm.controls['Username'].errors">Username Already Exist</small>
             </p>
         </div>
         <div class="row">
@@ -46,7 +46,7 @@
                 [ngClass]="{'validationError': emailExist || (registerForm.controls['Email'].errors && (registerForm.controls.Email.dirty || registerForm.controls.Email.touched))}">
                     <label for="email">Email</label>
                     <p *ngIf="registerForm.controls['Email'].errors || emailExist" class="errorMessage">
-                        <small *ngIf="emailExist && registerForm.valid">Email Already Exist</small>
+                        <small *ngIf="emailExist && !registerForm.controls['Email'].errors">Email Already Exist</small>
                     </p>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     [ngClass]="{'validationError': cnicExist || (registerForm.controls['CNIC'].errors && (registerForm.controls.CNIC.dirty || registerForm.controls.CNIC.touched))}">
                     <label for="cnic">CNIC</label>
                     <p *ngIf="registerForm.controls['CNIC'].errors || cnicExist" class="errorMessage">
-                        <small *ngIf="cnicExist && registerForm.valid">Email Already Exist</small>
+                        <small *ngIf="cnicExist && !registerForm.controls['CNIC'].errors">CNIC Already Exist</small>
                     </p>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                     [ngClass]="{'validationError': mobileExist || (registerForm.controls['Mobile'].errors && (registerForm.controls.Mobile.dirty || registerForm.controls.Mobile.touched))}">
                     <label for="mobile">Mobile No</label>
                     <p *ngIf="registerForm.controls['Mobile'].errors || mobileExist" class="errorMessage">
-                        <small *ngIf="mobileExist && registerForm.valid">Mobile Already Exist</small>
+                        <small *ngIf="mobileExist && !registerForm.controls['Mobile'].errors">Mobile Already Exist</small>
                     </p>
 			</div>
             </div>
@@ -78,7 +78,7 @@
                     [ngClass]="{'validationError': companyExist || (registerForm.controls['CompanyName'].errors && (registerForm.controls.CompanyName.dirty || registerForm.controls.CompanyName.touched))}">
                     <label for="store">Store Name</label>
                     <p *ngIf="registerForm.controls['Mobile'].errors || companyExist" class="errorMessage">
-                        <small *ngIf="companyExist && registerForm.valid">Company Already Exist</small>
+                        <small *ngIf="companyExist && !registerForm.controls['CompanyName'].errors">Company Already Exist</small>
                     </p>
 				</div>
             </div>
