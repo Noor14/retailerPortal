@@ -1,4 +1,4 @@
-import { loadingConfig } from './../../../constant/globalfunction';
+import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
@@ -50,6 +50,9 @@ export class UpdatepasswordComponent implements OnInit {
       .catch(err => {
         this.showSpinner=false;
       })
+    }
+    else{
+      validateAllFormFields(this.updatePasswordForm);
     }
   }
 

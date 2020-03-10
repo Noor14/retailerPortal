@@ -3,6 +3,7 @@ import { LoginService } from '../login/login.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AppPattern } from '../../../shared/app.mask';
 import { ToastrService } from 'ngx-toastr';
+import { validateAllFormFields } from 'src/app/constant/globalfunction';
 
 @Component({
   selector: 'app-forgetpassword',
@@ -22,6 +23,7 @@ export class ForgetpasswordComponent  implements OnInit {
   })
   }
   resetPassword(){
+    if(this.forgetPasswordForm.valid){
     this._loginService.PostCalls(this.forgetPasswordForm.value,"retailer/CheckEmail", null)
     .then(data=>{
       if(data){
@@ -31,5 +33,9 @@ export class ForgetpasswordComponent  implements OnInit {
         this.errorToggle=true;
       }
     })
+   }
+    else{
+      validateAllFormFields(this.forgetPasswordForm);
+    }
   }
 }
