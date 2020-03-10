@@ -21,12 +21,13 @@
             background-color: rgba(2, 117, 216, 0.5);
           }
       }
-  .table{
-      .createDateWidth{
-          min-width: 115px;
+    .table{
+        .createDateWidth{
+            min-width: 115px;
+        }
+        .statusWidth{
+          min-width: 80px;
       }
-      .statusWidth{
-        min-width: 80px;
     }
-  }
+
 }

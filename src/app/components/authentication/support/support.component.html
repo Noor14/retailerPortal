@@ -47,26 +47,34 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group has-float-label">
-                <select name="Criticality" id="criticality" class="form-control" formControlName="Criticality" placeholder="Criticality"
-                [ngClass]="{'validationError': supportForm.controls['Criticality'].errors && (supportForm.controls.Criticality.dirty || supportForm.controls.Criticality.touched)}">
-                <option value="null" disabled selected>Criticality Type</option>
-                <option *ngFor="let critical of criticality" [value]="critical.key"> {{critical.value}} </option>
-            </select>
-            <label for="criticality">Criticality</label>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group has-float-label">
+                        <select name="Criticality" id="criticality" class="form-control" formControlName="Criticality" placeholder="Criticality"
+                        [ngClass]="{'validationError': supportForm.controls['Criticality'].errors && (supportForm.controls.Criticality.dirty || supportForm.controls.Criticality.touched)}">
+                        <option value="null" disabled selected>Criticality Type</option>
+                        <option *ngFor="let critical of criticality" [value]="critical.key"> {{critical.value}} </option>
+                    </select>
+                    <label for="criticality">Criticality</label>
+                    </div>
+                </div>
             </div>
 
-
-            <div class="form-group has-float-label">
-                <textarea rows="4" id="address" cols="58" class="form-control" placeholder="Address" formControlName="Description"
-                [ngClass]="{'validationError': supportForm.controls['Description'].errors && (supportForm.controls.Description.dirty || supportForm.controls.Description.touched)}"></textarea>
-                <label for="address">Address</label>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group has-float-label">
+                        <textarea rows="4" id="address" cols="58" class="form-control" placeholder="Address" formControlName="Description"
+                        [ngClass]="{'validationError': supportForm.controls['Description'].errors && (supportForm.controls.Description.dirty || supportForm.controls.Description.touched)}"></textarea>
+                        <label for="address">Address</label>
+                    </div>
+                </div>
             </div>
 
-        <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-center">
-            <button class="btn btn-lg btn-primary mr-3" type="button" routerLink="/login">Login</button>
-            <button class="btn btn-lg btn-primary ml-3" type="button" (click)="save()" [disabled]="supportForm.invalid">Submit</button>
-        </div>
+            <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-center">
+                <button class="btn btn-lg btn-primary mr-3" type="button" routerLink="/login">Login</button>
+                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="save()" [disabled]="supportForm.invalid">Submit</button>
+            </div>        
+                    
     </form>
 </section>
 <ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>
