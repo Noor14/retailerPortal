@@ -35,6 +35,38 @@ html{
           resize: unset;
           height: unset !important;
       }
+      &.password{
+        position: relative;
+        input{
+          padding-right: 55px;
+        }
+        span{
+            position: absolute;
+            right: 30px;
+            top: 22%;
+            left: auto;
+            font-size: inherit;
+            cursor: pointer;
+
+        }
+        input[type="password"] + label + span{
+            &::after{
+                content: '';
+                width: 2px;
+                height: 20.5px;
+                background: #d5d4d4;
+                position: inherit;
+                transform: rotate(45deg);
+                right: 7px;
+                top: 4.5px;
+            }
+        }
+        .infoIcon{
+            right: 10px;
+            top: 38%;
+            position: absolute;
+        }
+    }
       }
       .form-control{
         height: 48px;

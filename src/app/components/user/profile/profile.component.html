@@ -113,36 +113,40 @@
 
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
-                                    <div class="form-group has-float-label position-relative">
+                                    <div class="form-group has-float-label password">
                                         <input [type]="passToggle ? 'text':'password'" id="oldpassword" class="form-control" formControlName="Password" placeholder="Old Password"
                                         [ngClass]="{'validationError': passwordForm.controls['Password'].errors && (passwordForm.controls.Password.dirty || passwordForm.controls.Password.touched)}">
                                         <label for="oldpassword">Old Password</label>
-                                        <img src="../../../../assets/_images/eye.svg" (click)="passToggle=!passToggle" width="17px" class="position-absolute"
-                                            style="right: 30px; top: 35%;" />
+                                        <span (click)="passToggle=!passToggle">
+                                            <img src="../../../../assets/_images/eye.svg"  width="17" />
+                                        </span>
+
                                     </div>
                                 </div>
                             </div>
                             <h6 class="contentSubTitle">Enter new password</h6>
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
-                                    <div class="form-group has-float-label position-relative">
+                                    <div class="form-group has-float-label password">
                                         <input [type]="newToggle ? 'text':'password'" id="newpassword" class="form-control" formControlName="NewPassword"  placeholder="New Password"
                                         [ngClass]="{'validationError': passwordForm.controls['NewPassword'].errors && (passwordForm.controls.NewPassword.dirty || passwordForm.controls.NewPassword.touched)}">
                                         <label for="newpassword">New Password</label>
-                                        <img src="../../../../assets/_images/eye.svg" width="17px" (click)="newToggle=!newToggle" class="position-absolute" style="right: 30px;
-                                        top: 35%;"/>
-                                        <img src="../../../../assets/_images/info.svg" width="14px" class="position-absolute"
-                                        triggers="click" placement="bottom-right" [autoClose]="'outside'" ngbTooltip="Password must be minimum 6 characters long including 1 numeric value and 1 special character"
-                                        style="right: 10px; top: 38%;"/>
+                                        <span (click)="newToggle=!newToggle">
+                                            <img src="../../../../assets/_images/eye.svg" width="17" />
+                                        </span>
+                                        <img src="../../../../assets/_images/info.svg" width="14" class="infoIcon"
+                                        triggers="click" placement="bottom-right" [autoClose]="'outside'" ngbTooltip="Password must be minimum 6 characters long including 1 numeric value and 1 special character"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6 ">
-                                    <div class="form-group has-float-label position-relative">
+                                    <div class="form-group has-float-label password">
                                         <input  [type]="confirmToggle ? 'text':'password'" id="confirmpassword"  class="form-control" formControlName="ConfirmPassword" placeholder="Confirm Password"
                                         [ngClass]="{'validationError': passwordForm.controls['ConfirmPassword'].errors && (passwordForm.controls.ConfirmPassword.dirty || passwordForm.controls.ConfirmPassword.touched)}">
                                         <label for="confirmpassword">Confirm Password</label>
-                                        <img src="../../../../assets/_images/eye.svg" (click)="confirmToggle=!confirmToggle" width="17px" class="position-absolute"
-                                            style="right: 30px; top: 35%;" />
+                                        <span (click)="confirmToggle=!confirmToggle">
+                                            <img src="../../../../assets/_images/eye.svg"  width="17" />
+                                        </span>
+                                        
                                     </div>
                                 </div>
                             </div>
