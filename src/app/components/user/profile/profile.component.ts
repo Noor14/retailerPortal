@@ -3,7 +3,7 @@ import { loadingConfig, validateAllFormFields } from './../../../constant/global
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
+import { AppPattern, AppMasks } from '../../../shared/app.mask';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../user.service';
 import * as moment from 'moment';

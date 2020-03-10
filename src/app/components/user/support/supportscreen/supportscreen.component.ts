@@ -1,4 +1,4 @@
-import { loadingConfig } from './../../../../constant/globalfunction';
+import { loadingConfig, validateAllFormFields } from './../../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -24,7 +24,6 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
   public mobileMask = AppMasks.mobile_Mask;
   private supportID: number;
   public breadcrumbSupport: string;
-  public message: boolean = false;
   private readonlyCheck: boolean = false
   public emailEdit: boolean = true;
   public mobileEdit: boolean = true;
@@ -100,6 +99,9 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
   
         })
     }
+    else{
+      validateAllFormFields(this.supportForm);
+    }
  
   }
 
@@ -114,7 +116,6 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
       .catch(err => {
         this.showSpinner=false;
         this.supportForm.reset();
-        this.message = true;
       })
   }
 

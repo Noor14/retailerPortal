@@ -92,7 +92,7 @@
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
                                 <button ngbDropdownItem (click)="gotoView(item.ID)">View</button>
-                                <button ngbDropdownItem (click)="openDialog(item.ID)">Delete</button>
+                                <button ngbDropdownItem *ngIf="item.Status == 'Pending'" (click)="openDialog(item.ID)">Delete</button>
                               </div>
                             </div>
                            

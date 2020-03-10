@@ -19,15 +19,15 @@ export class AppMasks {
 }
 
 export class AppPattern {
-    public static phone_Pattern = "^[0-9+]{3}-[0-9+]{8}$";
-    public static post_Code_Pattern = "^[0-9+]{5}$";
-    public static mobile_Pattern = "^[0-9+]{4}-[0-9+]{7}$";
-    public static ntn_Pattern = "^([0-9+]{7}-[0-9+]{1}|[0-9+]{7})$";
-    public static secp_Pattern = "[0-9]+";
-    public static email_Pattern = "^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$";
-    public static cnic_Pattern = "^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$";
-    public static str_Pattern = "[0-9]+";
-    public static password = "^(?=.*[a-zA-Z])((?=.*\d)|(?=.*[\.,#';\\\(\)\{\}'`/$^+=!*()@%&])).{6,}$"
-    // ^[0-9+]{7}-[0-9+]{1}$
+    public static phone_Pattern:RegExp = /^[0-9+]{3}-[0-9+]{8}$/;
+    public static post_Code_Pattern:RegExp = /^[0-9+]{5}$/;
+    public static mobile_Pattern:RegExp = /^[0-9+]{4}-[0-9+]{7}$/;
+    public static ntn_Pattern:RegExp = /^([0-9+]{7}-[0-9+]{1}|[0-9+]{7})$/;
+    public static secp_Pattern:RegExp = /[0-9]+/;
+    public static email_Pattern:RegExp = /^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+    public static cnic_Pattern:RegExp = /^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$/;
+    public static str_Pattern:RegExp = /[0-9]+/;
+    public static password:RegExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/
+    // /^[0-9+]{7}-[0-9+]{1}$/
 
 }
