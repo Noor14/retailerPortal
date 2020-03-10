@@ -20,7 +20,8 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group has-float-label">
-                                <select  class="form-control" id="company" formControlName="DealerCode">
+                                <select  class="form-control" id="company" formControlName="DealerCode"
+                                [ngClass]="{'validationError': paymentForm.controls['DealerCode'].errors && (paymentForm.controls.DealerCode.dirty || paymentForm.controls.DealerCode.touched)}">
                                     <option value="null" disabled selected>Select Company</option>
                                     <option *ngFor="let distributor of distributorList" [value]="distributor.DealerCode">{{distributor.CompanyName}}</option>
                                 </select>
@@ -30,7 +31,8 @@
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group has-float-label">
-                                <input type="text" id="amount" formControlName="PaidAmount" class="form-control" placeholder="Amount"  >
+                                <input id="amount" formControlName="PaidAmount" class="form-control" placeholder="Amount"  
+                                [ngClass]="{'validationError': paymentForm.controls['PaidAmount'].errors && (paymentForm.controls.PaidAmount.dirty || paymentForm.controls.PaidAmount.touched)}">
                                 <label for="amount">Amount</label>
                             </div>
                         </div>

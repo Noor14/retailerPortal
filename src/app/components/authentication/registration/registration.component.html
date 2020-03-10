@@ -9,10 +9,10 @@
       <div class="row">
         <div class="col-sm-12 col-md-6">
             <div class="form-group has-float-label position-relative" >
-                <input type="password" id="password" class="form-control" style="padding-right: 55px" formControlName="Password" autocomplete="new-password" placeholder="Password"
+                <input [type]="passToggle ? 'text':'password'" id="password" class="form-control" style="padding-right: 55px" formControlName="Password" autocomplete="new-password" placeholder="Password"
                 [ngClass]="{'validationError': registerForm.controls['Password'].errors && (registerForm.controls.Password.dirty || registerForm.controls.Password.touched)}">
                 <label for="password">Password</label>
-                <img src="../../../../assets/_images/eye.svg" width="17px" class="position-absolute" style="right: 30px;
+                <img src="../../../../assets/_images/eye.svg" (click)="passToggle = !passToggle" width="17px" class="position-absolute" style="right: 30px;
                 top: 35%;"/>
                 <img src="../../../../assets/_images/info.svg" width="14px" class="position-absolute"
                 triggers="click" placement="bottom-right" [autoClose]="'outside'" ngbTooltip="Click outside or press Escape to close"

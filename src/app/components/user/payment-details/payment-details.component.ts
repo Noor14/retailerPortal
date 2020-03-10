@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PaymentDetailService } from './payment-detail.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-payment-details',
@@ -12,7 +13,6 @@ import { PaymentDetailService } from './payment-detail.service';
 })
 export class PaymentDetailsComponent implements OnInit {
 
-  private editable: boolean = true;
   public showSpinner: boolean;
   public spinnerConfig: any;
   public paymentDetailForm: FormGroup;
@@ -32,24 +32,27 @@ export class PaymentDetailsComponent implements OnInit {
       if(Number(this.activatedRoute.snapshot.url[2].path)){
         this.getPaymentDetails('prepaidrequests', this.requestId);
       }else{
-        this.getPaymentDetails('invoicerequests', this.requestId);
+        this.getPaymentDetails('invoices', this.requestId);
       }
     this.paymentDetailForm = new FormGroup({
       ID: new FormControl(0),
-      MobileNumber: new FormControl(userObj.RetailerMobile, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
-      Email: new FormControl(userObj.RetailerEmail, [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
-      ContactName: new FormControl(userObj.CompanyName, [Validators.required]),
-      PreferredContactMethod: new FormControl({ value: null, disabled: !this.editable }, [Validators.required]),
-      Criticality: new FormControl({ value: null, disabled: !this.editable }, [Validators.required]),
-      IssueType: new FormControl({ value: null, disabled: !this.editable }, [Validators.required]),
-      Description: new FormControl({ value: null, disabled: !this.editable })
+      PrePaidNumber:  new FormControl({ value: null, disabled: true }, [Validators.required]),
+      PaidAmount: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      CompanyName: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      CreatedDate: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      PreferredContactMethod: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      Criticality: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      IssueType: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      Description: new FormControl({ value: null, disabled: true })
     });
   }
   getPaymentDetails(resourceName, requestId){
       this.showSpinner=true;
     this._paymentDetailService.getDetail(resourceName, requestId).then((data: any) => {
       this.showSpinner=false;
-      console.log(data)
+      console.log(data);
+      data.CreatedDate =  moment(data.CreatedDate).format('DD-MM-YYYY');
+
       this.paymentDetailForm.patchValue(data);
     })
     .catch(err => {

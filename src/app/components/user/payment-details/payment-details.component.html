@@ -7,9 +7,7 @@
         <li class="breadcrumb-item">
             <a class="breadcrumb-item">Payments</a>
         </li>
-        <li class="breadcrumb-item">
-            <a class="breadcrumb-item"> {{breadcrumbSupport}} </a>
-        </li>
+
     </ol>
     <div class="content">
         <div class="contentHeader">
@@ -23,14 +21,14 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">
-                            <input type="text" class="form-control" id="companyName" placeholder="Company Name" >
+                            <input type="text" class="form-control" id="companyName" placeholder="Company Name" formControlName="CompanyName">
                             <label for="companyName"> Company Name </label>
 
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">  
-                            <input type="text" id="psID" class="form-control" placeholder="PS-ID" >
+                            <input type="text" id="psID" class="form-control" placeholder="PS-ID" formControlName="PrePaidNumber">
                             <label for="psID"> PS-ID </label>
                         </div>
                     </div>
@@ -45,7 +43,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">
-                            <input type="text" id="createdDate" class="form-control" placeholder="Created Date" >
+                            <input type="text" id="createdDate" class="form-control" placeholder="Created Date" formControlName="CreatedDate">
                             <label for="createdDate"> Created Date </label>
                         </div>
                     </div>
@@ -82,7 +80,7 @@
                 <div class="row">
                     <div class="col-md-6 ">
                         <div class="form-group has-float-label">
-                            <input type="text" class="form-control" id="amount" placeholder="Amount">
+                            <input type="text" class="form-control" id="amount" placeholder="Amount" formControlName="PaidAmount">
                                 <label for="amount"> Amount </label>
                         </div>
                     </div>

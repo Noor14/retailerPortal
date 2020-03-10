@@ -1,4 +1,4 @@
-import { loadingConfig } from './../../../constant/globalfunction';
+import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, OnDestroy, SecurityContext } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -43,7 +43,7 @@ export class PaymentComponent implements OnInit, OnDestroy{
 
     this.getDistributionList();
     this.paymentForm= new FormGroup ({
-      ID: new FormControl(0),
+      ID: new FormControl(0, Validators.required),
       DealerCode: new FormControl(null,Validators.required),
       PaidAmount: new FormControl(null,Validators.required)
     })
@@ -118,6 +118,9 @@ export class PaymentComponent implements OnInit, OnDestroy{
       }
     })
   }
+  else{
+     validateAllFormFields(this.paymentForm);
+   }
   }
   resetForm(){
     this.paymentPrepaidNumber = undefined;
