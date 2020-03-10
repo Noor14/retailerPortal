@@ -13,22 +13,24 @@
                 <ng-template ngbTabTitle>My Network</ng-template>
                 <ng-template ngbTabContent>
                     <div class="content">
-                        <div class="row connectionDetail" id="nav-scrollbar">
-                            <div class="col-md-4 col-sm-6 col-xs-12 mb-4" *ngFor="let network of lstTotalNetwork">
-                                <div class="card" >
-                                    <div class="card-body">
-                                      <h5 class="card-title">{{network.CompanyName}}</h5>
-                                      <small>Status : <b>{{network.Status}}</b></small><br>
-                                      <small>{{network.Mobile}}</small><br>
-                                      <small>{{network.Address}}</small>
-                                    </div>
-                                  </div>
+                        <div class="connectionDetail">
+                            <div class="row networks" id="nav-scrollbar">
+                                <div class="col-md-4 col-sm-6 col-xs-12 mb-4" *ngFor="let network of lstTotalNetwork">
+                                    <div class="card" >
+                                        <div class="card-body">
+                                          <h5 class="card-title">{{network.CompanyName}}</h5>
+                                          <small>Status : <b>{{network.Status}}</b></small><br>
+                                          <small>{{network.Mobile}}</small><br>
+                                          <small>{{network.Address}}</small>
+                                        </div>
+                                      </div>
+                                </div>
                             </div>
+                          <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!lstTotalNetwork.length && !showSpinner">No Data Available</span>
                         </div>
                         <div class="col-md-12 text-center" *ngIf="loadAvailable">
                             <button class="btn" (click)="loadMore()" >Load More</button>
                         </div>
-                        <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!lstTotalNetwork.length && !showSpinner">No Data Available</span>
                     </div>
 
                 </ng-template>
