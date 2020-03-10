@@ -1,5 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { loadingConfig } from './../../../constant/globalfunction';
+import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
@@ -70,5 +70,9 @@ export class SupportComponent implements OnInit, OnDestroy {
         this.showSpinner = false;
         })
     }
+    else{
+      validateAllFormFields(this.supportForm);
+    }
+    
   }
 }

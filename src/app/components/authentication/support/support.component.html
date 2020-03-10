@@ -2,7 +2,8 @@
     <h4 class="mb-4 title">Welcome to Haball support center</h4>
     <form [formGroup]="supportForm">
         <div class="form-group has-float-label">
-            <input type="text" id="name" class="form-control" formControlName="ContactName" placeholder="Full Name">
+            <input type="text" id="name" class="form-control" formControlName="ContactName" placeholder="Full Name"
+            [ngClass]="{'validationError': supportForm.controls['ContactName'].errors && (supportForm.controls.ContactName.dirty || supportForm.controls.ContactName.touched)}">
             <label for="name">Full Name</label>
         </div>
 
