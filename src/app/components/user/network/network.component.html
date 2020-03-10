@@ -25,12 +25,10 @@
                                   </div>
                             </div>
                         </div>
-                        <div class="col-md-12" *ngIf="!lstTotalNetwork.length && !showSpinner">
-                            <span class="d-flex align-items-center justify-content-center h-100">No Data Available</span>
-                        </div>
                         <div class="col-md-12 text-center" *ngIf="loadAvailable">
                             <button class="btn" (click)="getNetwork()" >Load More</button>
                         </div>
+                        <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!lstTotalNetwork.length && !showSpinner">No Data Available</span>
                     </div>
 
                 </ng-template>
