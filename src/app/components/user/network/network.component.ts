@@ -9,35 +9,42 @@ import { loadingConfig } from 'src/app/constant/globalfunction';
 })
 export class NetworkComponent implements OnInit {
 
-  lstTotalNetwork = [ ];
+  public lstTotalNetwork:any[] = [];
   public showSpinner: boolean;
   public spinnerConfig: any;
-  public searchObj: any = null;
   public loadAvailable: boolean;
+  private searchObj: any = {
+    TotalRecords: 10,
+    PageNumber : 0,
+    CompanyName:null,
+    DateFrom:null,
+    DateTo:null,
+    Status:null,
+    PaymentAmountMin:null,
+    PaymentAmountMax:null,
+    InvoiceNumber:null,
+  };
+  private modifySearchObj = Object.assign({}, this.searchObj);
+
   constructor(private _networkService: NetworkService) { }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
-    this.getNetwork();
+    this.getNetwork(this.searchObj);
   }
 
-  getNetwork() {
+  getNetwork(searchObj) {
     this.showSpinner=true;
-    if (this.searchObj == null) {
-        this.searchObj = {};
-        this.searchObj.TotalRecords = 10;
-        this.searchObj.PageNumber = 0;
-      }
-      else {
-        this.searchObj.TotalRecords = 10;
-        this.searchObj.PageNumber++;
-      }
+
 
       this._networkService.postCalls("kyc/Search", this.searchObj, 7)
         .then((data: any) => {
           this.showSpinner=false;
-
-          this.lstTotalNetwork = [...this.lstTotalNetwork, ...data[0]];
+          if(!searchObj.PageNumber){
+            this.lstTotalNetwork = data[0];
+          }else{
+            this.lstTotalNetwork = this.lstTotalNetwork.concat(data[0]);
+          }
           this.loadAvailable = (this.lstTotalNetwork.length == data[1].kycRequestCount)? false : true;
         })
         .catch(err => {
@@ -46,6 +53,10 @@ export class NetworkComponent implements OnInit {
         })
   
 
+  }
+  loadMore(){
+    this.modifySearchObj.PageNumber++
+    this.getNetwork(this.modifySearchObj);
   }
 
 }
