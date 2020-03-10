@@ -1,12 +1,12 @@
 import { Router } from '@angular/router';
-import { loadingConfig } from './../../../constant/globalfunction';
+import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../user.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -35,12 +35,12 @@ export class ProfileComponent implements OnInit {
     this.profileForm = new FormGroup({
       ID: new FormControl(null, [Validators.required, Validators.min(0)]),
       Name: new FormControl(null, [Validators.required]),
-      RetailerCode: new FormControl({value:null, disabled:true}, Validators.required),
+      RetailerCode: new FormControl({value:null, disabled:true}, [Validators.required]),
       Email: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
       Mobile: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
       CNIC: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.cnic_Pattern)]),
       Address: new FormControl(null, [Validators.required]),
-      CreatedDate: new FormControl(null, [Validators.required]),
+      CreatedDate: new FormControl({value:null, disabled:true}, [Validators.required]),
       CompanyName: new FormControl(null, [Validators.required]),
       
     });
@@ -48,10 +48,8 @@ export class ProfileComponent implements OnInit {
       this.passwordForm = new FormGroup ({
         Username: new FormControl(this.userObject.Username,[Validators.required]),
         Password: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
-        ConfirmPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
         NewPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
-
-        
+        ConfirmPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)])
       })
     this.getProfile();
   }
@@ -61,6 +59,7 @@ export class ProfileComponent implements OnInit {
     this._profileService.getById(this.userObject.RetailerID, 1, "retailer")
       .then((data: any) => {
       this.showSpinner = false;
+      data.CreatedDate =  moment(data.CreatedDate).format('DD-MM-YYYY');
         this.profileForm.patchValue(data)
       })
       .catch(err => {
@@ -84,6 +83,9 @@ export class ProfileComponent implements OnInit {
         this._toast.error(err.error.message,"Error")
       }
     })
+  }
+  else{
+    validateAllFormFields(this.passwordForm);
   }
   }
   logout(){
@@ -116,6 +118,9 @@ export class ProfileComponent implements OnInit {
         this._toast.error(err.error.message,"Error")
       }
     })
+  }
+  else{
+    validateAllFormFields(this.profileForm);
   }
   }
 
