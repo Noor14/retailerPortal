@@ -16,20 +16,21 @@ export class PaymentDetailsComponent implements OnInit {
   public showSpinner: boolean;
   public spinnerConfig: any;
   public paymentDetailForm: FormGroup;
-  public requestId: Number;
+  private requestId: Number;
+  private requestType: Number;
 
  constructor(
    private activatedRoute: ActivatedRoute,
    private _paymentDetailService: PaymentDetailService
    ) {
-      this.requestId = Number(this.activatedRoute.snapshot.url[1].path)
-      
+      this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path)
+      this.requestType = this.activatedRoute.snapshot.url[2] && Number(this.activatedRoute.snapshot.url[2].path);
    }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
-    let userObj = JSON.parse(localStorage.getItem('userIdentity')).UserAccount
-      if(Number(this.activatedRoute.snapshot.url[2].path)){
+    // let userObj = JSON.parse(localStorage.getItem('userIdentity')).UserAccount
+      if(this.requestType){
         this.getPaymentDetails('prepaidrequests', this.requestId);
       }else{
         this.getPaymentDetails('invoices', this.requestId);

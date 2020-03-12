@@ -51,7 +51,7 @@ export class PaymentComponent implements OnInit, OnDestroy{
     this.paymentForm= new FormGroup ({
       ID: new FormControl(0, Validators.required),
       DealerCode: new FormControl({value:null, disabled: !this.requestType},Validators.required),
-      PaidAmount: new FormControl({value:null, disabled: !this.requestType},Validators.required)
+      PaidAmount: new FormControl({value:null, disabled: !this.requestType}, [Validators.required, Validators.min(500), Validators.maxLength(9)])
     })
   }
 
