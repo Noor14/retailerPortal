@@ -67,7 +67,13 @@ export class ProfileComponent implements OnInit {
         console.log(err);
       })
   }
-
+  elemFocus(elem){
+    elem.readOnly= false;
+    elem.focus()
+  }
+  elemFocusOut(elem){
+    elem.readOnly= true;
+  }
   changePassword(){
     if(this.passwordForm.valid){
     this.showSpinner = true;

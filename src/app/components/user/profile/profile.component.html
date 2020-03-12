@@ -36,10 +36,10 @@
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group has-float-label position-relative">
-                                        <input type="email" id="email"  class="form-control" formControlName="Email" placeholder="Email Address"
+                                        <input type="email" id="email" readOnly (focusout)="elemFocusOut(email)" #email class="form-control" formControlName="Email" placeholder="Email Address"
                                         [ngClass]="{'validationError': profileForm.controls['Email'].errors && (profileForm.controls.Email.dirty || profileForm.controls.Email.touched)}">
                                         <label for="Email">Email Address</label>
-                                        <img src="../../../../assets/_images/edit.svg" width="15px" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" />
+                                        <img *ngIf="email.readOnly" src="../../../../assets/_images/edit.svg" width="15px" (click)="elemFocus(email)" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" />
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
@@ -53,10 +53,10 @@
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group has-float-label">
-                                        <input type="text" id="mobile" [textMask]="{mask: mobileMask}" class="form-control" formControlName="Mobile" placeholder="Mobile No" 
+                                        <input type="text" id="mobile" readOnly (focusout)="elemFocusOut(mobile)" #mobile [textMask]="{mask: mobileMask}" class="form-control" formControlName="Mobile" placeholder="Mobile No" 
                                         [ngClass]="{'validationError': profileForm.controls['Mobile'].errors && (profileForm.controls.Mobile.dirty || profileForm.controls.Mobile.touched)}">
                                         <label for="mobile">Mobile No</label> 
-                                        <img src="../../../../assets/_images/edit.svg" width="15px" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" />                                        
+                                        <img *ngIf="mobile.readOnly" (click)="elemFocus(mobile)" src="../../../../assets/_images/edit.svg" width="15px" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" />                                        
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
@@ -77,10 +77,10 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group has-float-label">
-                                        <textarea rows="2" id="address" cols="58" class="form-control" placeholder="Address" formControlName="Address"
+                                        <textarea rows="2" id="address" readOnly (focusout)="elemFocusOut(address)" #address cols="58" class="form-control" placeholder="Address" formControlName="Address"
                                         [ngClass]="{'validationError': profileForm.controls['Address'].errors && (profileForm.controls.Address.dirty || profileForm.controls.Address.touched)}"></textarea>
                                         <label for="address">Address</label>
-                                        <img src="../../../../assets/_images/edit.svg" width="15px" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" />                                        
+                                        <img *ngIf="address.readOnly" (click)="elemFocus(address)" src="../../../../assets/_images/edit.svg" width="15px" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" />                                        
                                     </div>
                                 </div>
                             </div>

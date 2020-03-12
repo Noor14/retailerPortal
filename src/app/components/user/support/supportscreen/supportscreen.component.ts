@@ -26,7 +26,6 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
   public breadcrumbSupport: string;
   private readonlyCheck: boolean = false
   public emailEdit: boolean = true;
-  public mobileEdit: boolean = true;
   constructor(
     private _supportService: TicketSupportService,
     private _router: Router,
@@ -70,7 +69,13 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
     this.supportDropDownSubscriber.unsubscribe();
     this.routeSubscriber.unsubscribe();
   }
-
+  elemFocus(elem){
+    elem.readOnly= false;
+    elem.focus()
+  }
+  elemFocusOut(elem){
+    elem.readOnly= true;
+  }
   getdropDownList() {
     this.supportDropDownSubscriber = this._sharedService.supportDropdownValues.subscribe((res:any)=>{
       if(res){
