@@ -59,6 +59,9 @@ export class PaymentComponent implements OnInit, OnDestroy{
     this.showSpinner=true;
     this._paymentDetailService.getDetail(resourceName, requestId).then((data: any) => {
     this.showSpinner=false;
+    if(!this.requestType){
+      data = data.Invoice;
+    }
     this.paymentForm.patchValue(data);
     this.paymentPrepaidNumber = data.PrePaidNumber;
     this.onChanges();
