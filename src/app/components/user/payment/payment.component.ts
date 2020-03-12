@@ -23,6 +23,7 @@ export class PaymentComponent implements OnInit, OnDestroy{
   private paymentFormSubscriber:any;
   public updateBtn:boolean = false;
   private requestId:Number;
+  private requestType: Number;
   constructor(
     private _paymentService: PaymentService,
     private _toast: ToastrService,
@@ -32,20 +33,25 @@ export class PaymentComponent implements OnInit, OnDestroy{
     private _route: Router,
     private _domSanitizer: DomSanitizer
     ) {
-      this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path)
+      this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path);
+      this.requestType = this.activatedRoute.snapshot.url[2] && Number(this.activatedRoute.snapshot.url[2].path);
      }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     if(this.requestId){
-      this.getPaymentDetails('prepaidrequests', this.requestId);
+      if(this.requestType){
+        this.getPaymentDetails('prepaidrequests', this.requestId);
+      }else{
+        this.getPaymentDetails('invoices', this.requestId);
+      }
     }
 
     this.getDistributionList();
     this.paymentForm= new FormGroup ({
       ID: new FormControl(0, Validators.required),
-      DealerCode: new FormControl(null,Validators.required),
-      PaidAmount: new FormControl(null,Validators.required)
+      DealerCode: new FormControl({value:null, disabled: !this.requestType},Validators.required),
+      PaidAmount: new FormControl({value:null, disabled: !this.requestType},Validators.required)
     })
   }
 

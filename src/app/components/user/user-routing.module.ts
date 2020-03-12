@@ -21,7 +21,7 @@ const routes: Routes = [
     { path: 'support', component: SupportgridComponent },
     { path: 'support/:id', component: SupportscreenComponent },
     { path: 'payment', component: PaymentComponent },
-    { path: 'payment/:id', component: PaymentComponent },
+    { path: 'payment/:id/:viewType', component: PaymentComponent },
     { path: 'paymentDetail/:id/:viewType', component: PaymentDetailsComponent },
     { path: 'network', component: NetworkComponent },
     { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
