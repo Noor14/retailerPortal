@@ -53,10 +53,9 @@ export class PaymentDetailsComponent implements OnInit {
       this.showSpinner=true;
     this._paymentDetailService.getDetail(resourceName, requestId).then((data: any) => {
       this.showSpinner=false;
-      let transactionDateTime = data.TransactionDate;
       data.CreatedDate =  moment(data.CreatedDate).format('DD-MM-YYYY');
-      data.TransactionTime =  moment(transactionDateTime).format('h:mm a');
-      data.TransactionDate =  moment(transactionDateTime).format('DD-MM-YYYY');
+      data.TransactionTime =  moment(data.TransactionDate).format('h:mm a');
+      data.TransactionDate =  moment(data.TransactionDate).format('DD-MM-YYYY');
       this.paymentDetailForm.patchValue(data);
     })
     .catch(err => {
