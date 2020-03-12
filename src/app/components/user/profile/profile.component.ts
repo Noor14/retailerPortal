@@ -21,6 +21,9 @@ export class ProfileComponent implements OnInit {
   public mobileMask = AppMasks.mobile_Mask;
   public spinnerConfig: any;
   public showSpinner:boolean;
+  public passToggle:boolean;
+  public newToggle:boolean;
+  public confirmToggle:boolean;
 
   constructor(
     private _profileService: ProfileService,

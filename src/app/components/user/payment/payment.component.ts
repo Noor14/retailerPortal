@@ -166,7 +166,7 @@ export class PaymentComponent implements OnInit, OnDestroy{
       })
   }
 
-  openDialog(id :Number){
+  openDialog(){
     const modalRef = this._modalService.open(PaymentInstructionComponent,{ 
       centered: true,
       keyboard: false,

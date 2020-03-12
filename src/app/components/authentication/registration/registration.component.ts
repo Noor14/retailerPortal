@@ -23,6 +23,8 @@ export class RegistrationComponent implements OnInit {
   public mobileExist = false;
   public spinnerConfig:any;
   public showSpinner: boolean;
+  public passToggle:boolean;
+
   @ViewChild('captchaElem', { static: false }) captchaElem: ReCaptcha2Component;
   // @ViewChild('langInput', { static: false }) langInput: ElementRef;
 
