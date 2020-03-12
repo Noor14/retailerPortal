@@ -74,10 +74,11 @@ export class DashboardComponent implements OnInit {
   }
   selectSearch(){
     if(this.searchingOption){
-      // if(this.search.nativeElement && this.search.nativeElement.value){
+      if(this.search.nativeElement && this.search.nativeElement.value){
         this.getPaymentList(this.searchObj);
         this.modifySearchObj = Object.assign({}, this.searchObj);
-      // }
+        this.search.nativeElement.value= '';
+      }
       this.changeDetectorRef.detectChanges();
       fromEvent(this.search && this.search.nativeElement, 'keyup').pipe(
         // get value
