@@ -41,19 +41,22 @@ export class PaymentDetailsComponent implements OnInit {
       PaidAmount: new FormControl({ value: null, disabled: true }, [Validators.required]),
       CompanyName: new FormControl({ value: null, disabled: true }, [Validators.required]),
       CreatedDate: new FormControl({ value: null, disabled: true }, [Validators.required]),
-      PreferredContactMethod: new FormControl({ value: null, disabled: true }, [Validators.required]),
-      Criticality: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      AuthID: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      BankName: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      TransactionDate: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      TransactionTime: new FormControl({ value: null, disabled: true }, [Validators.required]),
       IssueType: new FormControl({ value: null, disabled: true }, [Validators.required]),
-      Description: new FormControl({ value: null, disabled: true })
+      SettlementID: new FormControl({ value: null, disabled: true },[Validators.required])
     });
   }
   getPaymentDetails(resourceName, requestId){
       this.showSpinner=true;
     this._paymentDetailService.getDetail(resourceName, requestId).then((data: any) => {
       this.showSpinner=false;
-      console.log(data);
+      let transactionDateTime = data.TransactionDate;
       data.CreatedDate =  moment(data.CreatedDate).format('DD-MM-YYYY');
-
+      data.TransactionTime =  moment(transactionDateTime).format('h:mm a');
+      data.TransactionDate =  moment(transactionDateTime).format('DD-MM-YYYY');
       this.paymentDetailForm.patchValue(data);
     })
     .catch(err => {
