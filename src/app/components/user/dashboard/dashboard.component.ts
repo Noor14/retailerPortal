@@ -74,11 +74,11 @@ export class DashboardComponent implements OnInit {
   }
   selectSearch(){
     if(this.searchingOption){
-      if(this.search.nativeElement && this.search.nativeElement.value){
-        this.getPaymentList(this.searchObj);
-        this.modifySearchObj = Object.assign({}, this.searchObj);
-        this.search.nativeElement.value= '';
-      }
+      // if(this.search.nativeElement && this.search.nativeElement.value){
+      //   this.getPaymentList(this.searchObj);
+      //   this.modifySearchObj = Object.assign({}, this.searchObj);
+      //   this.search.nativeElement.value= '';
+      // }
       this.changeDetectorRef.detectChanges();
       fromEvent(this.search && this.search.nativeElement, 'keyup').pipe(
         // get value
@@ -137,7 +137,19 @@ export class DashboardComponent implements OnInit {
         }
       }
   }
-
+  filterByStatus(elem){
+    if(this.searchingOption){
+      if(elem.value){
+        this.modifySearchObj = Object.assign({}, this.searchObj);
+        this.modifySearchObj.Status = elem.value
+        this.getPaymentList(this.modifySearchObj);
+       }
+       else{
+        this.getPaymentList(this.searchObj);
+        this.modifySearchObj = Object.assign({}, this.searchObj);
+      }
+      }
+  }
   onDateSelection(date: NgbDateStruct) {
     let parsed = '';
     if (!this.fromDate && !this.toDate) {
@@ -160,19 +172,7 @@ export class DashboardComponent implements OnInit {
     this.renderer.setProperty(this.myRangeInput.nativeElement, 'value', parsed);
   }
 
-  filterByStatus(elem){
-    if(this.searchingOption){
-      if(elem.value){
-        this.modifySearchObj = Object.assign({}, this.searchObj);
-        this.modifySearchObj.Status = elem.value
-        this.getPaymentList(this.modifySearchObj);
-       }
-       else{
-        this.getPaymentList(this.searchObj);
-        this.modifySearchObj = Object.assign({}, this.searchObj);
-      }
-      }
-  }
+
 
   getPaymentList(searchObj){
     this.showSpinner=true;
