@@ -26,6 +26,7 @@ import { NetworkService } from './network/network.service';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { PaymentDetailService } from './payment-details/payment-detail.service';
 import { InterceptorService } from 'src/app/services/interceptor.service';
+import { NumberDirective } from 'src/app/directives/numbers-only.directive';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { InterceptorService } from 'src/app/services/interceptor.service';
     PaymentComponent,
     PaymentInstructionComponent,
     NetworkComponent,
-    PaymentDetailsComponent
+    PaymentDetailsComponent,
+    NumberDirective
   ],
   entryComponents:[
     DialogComponent,
