@@ -41,7 +41,9 @@ export class DashboardComponent implements OnInit {
   private modifySearchObj = Object.assign({}, this.searchObj);
   public searchingOption:string = '';
   public loadAvailable:boolean = true; 
+  public loadAvailableOrder:boolean = true; 
   public paymentsList: any[]= [];
+  public orderList: any[]= [];
   public searchBY: string[]= ['Payment ID', 'Company', 'Created Date', 'Status', 'Amount'];
   startDate: NgbDateStruct;
   maxDate: NgbDateStruct;
@@ -71,6 +73,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     this.getPaymentList(this.searchObj);
+    this.getOrderList(null);
   }
   selectSearch(){
     if(this.searchingOption){
@@ -185,6 +188,23 @@ export class DashboardComponent implements OnInit {
       this.paymentsList = this.paymentsList.concat(data.PrePaidRequestData);
     }
     this.loadAvailable = (this.paymentsList.length == data.RecordCount)? false : true;
+    })
+    .catch(err => {
+    this.showSpinner=false;
+      console.log(err);
+    })
+  }
+  getOrderList(searchObj){
+    this.showSpinner=true;
+    this._dashboardService.postCalls("Orders/Search", searchObj)
+    .then((data: any) => {
+    this.showSpinner=false;
+    if(!searchObj.PageNumber){
+      this.orderList = data.PrePaidRequestData;
+    }else{
+      this.orderList = this.orderList.concat(data.PrePaidRequestData);
+    }
+    this.loadAvailableOrder = (this.orderList.length == data.RecordCount)? false : true;
     })
     .catch(err => {
     this.showSpinner=false;

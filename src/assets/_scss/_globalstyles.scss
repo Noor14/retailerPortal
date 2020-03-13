@@ -163,9 +163,6 @@ html{
                 border: unset;
                 border-bottom: 1px solid #dee2e6;
                 color: $tabInputColor;
-                &:hover{
-                    border: unset;
-                }
 
                 &.active{
                     background-color: transparent;
