@@ -35,12 +35,10 @@ export class InterceptorService implements HttpInterceptor {
         if (err.status === 401 || err.status === 498) {
           // <Log the user out of your application code>
           if(err.status === 498){
-            this._toast.error(err.error);
-            
+            this._toast.error(err.name || err.error);
           }
           localStorage.clear()
           this._router.navigate([ '/login' ]);
-         
           // return throwError(err);
         }
         // If it is not an authentication error, just throw it
