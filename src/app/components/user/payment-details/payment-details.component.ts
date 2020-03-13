@@ -37,16 +37,16 @@ export class PaymentDetailsComponent implements OnInit {
       }
     this.paymentDetailForm = new FormGroup({
       ID: new FormControl(0),
-      PrePaidNumber:  new FormControl({ value: null, disabled: true }, [Validators.required]),
-      PaidAmount: new FormControl({ value: null, disabled: true }, [Validators.required]),
-      CompanyName: new FormControl({ value: null, disabled: true }, [Validators.required]),
-      CreatedDate: new FormControl({ value: null, disabled: true }, [Validators.required]),
-      AuthID: new FormControl({ value: null, disabled: true }, [Validators.required]),
-      BankName: new FormControl({ value: null, disabled: true }, [Validators.required]),
-      TransactionDate: new FormControl({ value: null, disabled: true }, [Validators.required]),
-      TransactionTime: new FormControl({ value: null, disabled: true }, [Validators.required]),
-      IssueType: new FormControl({ value: null, disabled: true }, [Validators.required]),
-      SettlementID: new FormControl({ value: null, disabled: true },[Validators.required])
+      PrePaidNumber:  new FormControl({ value: null, readOnly: true }, [Validators.required]),
+      PaidAmount: new FormControl({ value: null, readOnly: true }, [Validators.required]),
+      CompanyName: new FormControl({ value: null, readOnly: true }, [Validators.required]),
+      CreatedDate: new FormControl({ value: null, readOnly: true }, [Validators.required]),
+      AuthID: new FormControl({ value: null, readOnly: true }, [Validators.required]),
+      BankName: new FormControl({ value: null, readOnly: true }, [Validators.required]),
+      TransactionDate: new FormControl({ value: null, readOnly: true }, [Validators.required]),
+      TransactionCharges: new FormControl({ value: null, readOnly: true }, [Validators.required]),
+      Status: new FormControl({ value: null, readOnly: true }, [Validators.required]),
+      SettlementID: new FormControl({ value: null, readOnly: true },[Validators.required])
     });
   }
   getPaymentDetails(resourceName, requestId){
@@ -54,7 +54,6 @@ export class PaymentDetailsComponent implements OnInit {
     this._paymentDetailService.getDetail(resourceName, requestId).then((data: any) => {
       this.showSpinner=false;
       data.CreatedDate =  moment(data.CreatedDate).format('DD-MM-YYYY');
-      data.TransactionTime =  moment(data.TransactionDate).format('h:mm a');
       data.TransactionDate =  moment(data.TransactionDate).format('DD-MM-YYYY');
       this.paymentDetailForm.patchValue(data);
     })
