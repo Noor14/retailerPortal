@@ -46,7 +46,8 @@ export class PaymentDetailsComponent implements OnInit {
       TransactionDate: new FormControl({ value: null, readOnly: true }, [Validators.required]),
       TransactionCharges: new FormControl({ value: null, readOnly: true }, [Validators.required]),
       Status: new FormControl({ value: null, readOnly: true }, [Validators.required]),
-      SettlementID: new FormControl({ value: null, readOnly: true },[Validators.required])
+      SettlementID: new FormControl({ value: null, readOnly: true },[Validators.required]),
+      TotalAmount: new FormControl({ value: null, readOnly: true },[Validators.required])
     });
   }
   getPaymentDetails(resourceName, requestId){

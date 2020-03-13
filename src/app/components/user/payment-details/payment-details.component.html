@@ -70,25 +70,35 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <div class="form-group has-float-label">
-                                <input type="text" class="form-control" id="amount" placeholder="Amount" formControlName="PaidAmount">
-                                <label for="amount"> Amount </label>
+                                <div class="form-group has-float-label">
+                                    <input type="text" class="form-control" id="status" placeholder="Status" formControlName="Status">
+                                    <label for="status"> Status </label>
+                                </div>
                             </div>
-                        </div>
+                  
                     </div>
                     <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                    <div class="form-group has-float-label">
+                                        <input type="text" class="form-control" id="amount" placeholder="Amount" formControlName="PaidAmount">
+                                        <label for="amount"> Amount </label>
+                                    </div>
+                                </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group has-float-label">
                                 <input type="text" class="form-control" id="transactionCharges" placeholder="Transaction Charges" formControlName="TransactionCharges">
                                 <label for="transactionCharges"> Transaction Charges</label>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group has-float-label">
-                                <input type="text" class="form-control" id="status" placeholder="Status" formControlName="Status">
-                                <label for="status"> Status </label>
-                            </div>
-                        </div>
+               
+                    </div>
+                    <div class="row">
+                            <div class="col-12">
+                                    <div class="form-group has-float-label">
+                                        <input type="text" class="form-control" id="total" placeholder="Total Amount" formControlName="TotalAmount">
+                                        <label for="total"> Total Amount </label>
+                                    </div>
+                                </div>
                     </div>
                     <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
                         <button class="btn btn-primary mr-3" type="button" [disabled]="paymentDetailForm.invalid">View Receipt</button>
