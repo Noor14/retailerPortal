@@ -17,6 +17,25 @@ html{
       h1, h2, h3, h4, h5, h6 {
         font-family: $baseSourceSansproSemiBold;
       }
+      h4.title{
+        position: relative;
+        font-family: $baseSourceSansproSemiBold;
+        font-size: 20px;
+        padding-left: 15px;
+        &::before{
+        width: 2.5px;
+        height: 26px;
+        content: '';
+        background: $baseColor;
+        position: absolute;
+        left: 0;
+    }
+    .description{
+        font-family: $baseSourceSansRegularFont;
+        font-size: 14px;
+        color: #939598;
+    }
+    }
       .errorMessage{
         color: #ff0000;
         font-size: 15px;
