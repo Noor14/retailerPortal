@@ -28,8 +28,7 @@
                                     <label for="OrderNumber">Order ID</label>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+                    
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group has-float-label position-relative">
                                     <input type="text" id="CreatedDate" class="form-control" formControlName="OrderCreatedDate" placeholder="Created Date" >
@@ -59,19 +58,143 @@
             </ngb-tab>
             <ngb-tab>
               <ng-template ngbTabTitle>Order Detail</ng-template>
-              <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-                <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
-                craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
-                cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia
-                yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
-                shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero
-                sint qui sapiente accusamus tattooed echo park.</p>
+              <ng-template ngbTabContent>
+                <div class="contentArea bg-white">
+                    <div class="gridArea table-responsive" id="nav-scrollbar">
+                      <table class="table" *ngIf="orderDetaiList && orderDetaiList.length">
+                            <thead>
+                            <tr>
+                                <th>Product Code</th>
+                                <th>Product Tilte</th>
+                                <th>Price</th>
+                                <th>Discounted Price</th>
+                                <th>UOM</th>
+                                <th>Pack Size</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let order of orderDetaiList; let i = index">
+                                <td>{{order.ProductCode}}</td>
+                                <td>{{order.ProductName}}</td>
+                                <td>{{order.UnitPrice}}</td>
+                                <td>{{order.Discount}}</td>
+                                <td>{{order.UOM}}</td>
+                                <td>{{order.PackSize}}</td>
+                                <td>{{order.OrderQty}}</td>
+                                <td>{{order.TotalPrice}}</td>
+                           
+                            </tr>
+                            </tbody>
+                 
+                        </table>
+              
+                      <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!orderDetaiList.length && !showSpinner">No Data Available</span>
+                    </div>
+                
+                  </div>
+                        <div>
+                            <table class="table">
+                                <tr>
+                                    <td colspan="1">Gross Amount: Rs. 4,154.00</td>
+                                    <td colspan="6">GST 17%: Rs. 4,154.00</td>
+                                    <td rowspan="2"><button class="btn btn-primary">Back</button></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="1">Gross Amount: Rs. 4,154.00</td>
+                                    <td colspan="6">GST 17%: Rs. 4,154.00</td>
+                                </tr>
+                            </table>
+                            <hr>
+                        </div>
               </ng-template>
             </ngb-tab>
             <ngb-tab>
               <ng-template ngbTabTitle>Payment</ng-template>
               <ng-template ngbTabContent>
-                <p>Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla facilisi. Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et odio. Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et. Sed diam urna, egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus nisl enim, nec tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet ultricies in eget neque. Phasellus nec tortor vel tellus pulvinar feugiat.</p>
+                <div class="contentArea bg-white p-4">
+                    <form [formGroup]="orderPaymentDetailForm">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group has-float-label">
+                                    <input type="text" id="invoiceCompanyName" class="form-control" formControlName="CompanyName" placeholder="Company Name">
+                                    <label for="invoiceCompanyName">Company Name</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group has-float-label">
+                                    <input type="text" id="paymentID" class="form-control" formControlName="InvoiceNumber" placeholder="Payment ID">
+                                    <label for="paymentID">Payment ID</label>
+                                </div>
+                            </div>
+                       
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group has-float-label position-relative">
+                                    <input type="text" id="invoiceCreatedDate" class="form-control" formControlName="InvoiceCreatedDate" placeholder="Created Date" >
+                                    <label for="invoiceCreatedDate">Created Date</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group has-float-label">
+                                    <input type="text"  id="transactionDate"  class="form-control" formControlName="TransactionDate"  placeholder="Transaction Date">
+                                    <label for="transactionDate">Transaction Date</label>                                        
+                                </div>
+                            </div>
+                     
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group has-float-label position-relative">
+                                    <input type="text" id="bank" class="form-control" formControlName="BankName" placeholder="Bank" >
+                                    <label for="bank">Bank</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group has-float-label">
+                                    <input type="text"  id="authID"  class="form-control" formControlName="AuthID"  placeholder="Authorization ID">
+                                    <label for="authID">Authorization ID</label>                                        
+                                </div>
+                            </div>
+                        
+                            <div class="col-md-6 col-sm-12" *ngIf="orderPaymentDetailForm.controls['SettlementID'].value">
+                                <div class="form-group has-float-label position-relative">
+                                    <input type="text" id="settlementID" class="form-control" formControlName="SettlementID" placeholder="Settlement ID" >
+                                    <label for="settlementID">Settlement ID</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group has-float-label">
+                                    <input type="text"  id="invoiceStatus"  class="form-control" formControlName="InvoiceStatus"  placeholder="Invoice Status">
+                                    <label for="invoiceStatus">Status</label>                                        
+                                </div>
+                            </div>
+                        
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group has-float-label position-relative">
+                                    <input type="text" id="paidAmount" class="form-control" formControlName="PaidAmount" placeholder="Amount" >
+                                    <label for="paidAmount">Amount</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group has-float-label">
+                                    <input type="text"  id="transactionCharges"  class="form-control" formControlName="TransactionCharges"  placeholder="Transaction Charges">
+                                    <label for="transactionCharges">Transaction Charges</label>                                        
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group has-float-label position-relative">
+                                    <input type="text" id="invoiceTotalAmount" class="form-control" formControlName="InvoiceTotalAmount" placeholder="Total Amount" >
+                                    <label for="invoiceTotalAmount">Total Amount</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
               </ng-template>
             </ngb-tab>
           </ngb-tabset>

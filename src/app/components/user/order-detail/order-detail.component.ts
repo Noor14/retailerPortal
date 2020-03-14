@@ -14,7 +14,9 @@ export class OrderDetailComponent implements OnInit {
   public showSpinner: boolean;
   public spinnerConfig: any;
   public orderDetailForm: FormGroup;
+  public orderPaymentDetailForm: FormGroup;
   private requestId: Number;
+  public orderDetaiList: any[] =[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,11 +31,24 @@ export class OrderDetailComponent implements OnInit {
       this.getOrderDetails(this.requestId);
     }
     this.orderDetailForm = new FormGroup({
-      CompanyName: new FormControl({ value: null, readOnly: true }, [Validators.required]),
-      OrderNumber: new FormControl({ value: null, readOnly: true }, [Validators.required]),
-      OrderCreatedDate: new FormControl({ value: null, readOnly: true }, [Validators.required]),
-      OrderStatus: new FormControl({ value: null, readOnly: true }, [Validators.required]),
-      Comment: new FormControl({ value: null, readOnly: true }, [Validators.required]),
+      CompanyName: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      OrderNumber: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      OrderCreatedDate: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      OrderStatus: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      Comment: new FormControl({ value: null, disabled: true }, [Validators.required]),
+    });
+    this.orderPaymentDetailForm = new FormGroup({
+      CompanyName: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      InvoiceNumber: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      InvoiceCreatedDate: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      TransactionDate: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      BankName: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      AuthID: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      SettlementID: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      InvoiceStatus: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      PaidAmount: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      TransactionCharges: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      InvoiceTotalAmount: new FormControl({ value: null, disabled: true }, [Validators.required]),
     });
   }
   getOrderDetails(requestId){
@@ -41,8 +56,12 @@ export class OrderDetailComponent implements OnInit {
   this._orderDetailService.getDetail(requestId).then((data: any) => {
     this.showSpinner=false;
     console.log(data)
-    data.OrderPaymentDetails.OrderCreatedDate =  moment(data.OrderCreatedDate).format('DD-MM-YYYY');
+    this.orderDetaiList = data.OrderDetails;
+    data.OrderPaymentDetails.OrderCreatedDate =  moment(data.OrderPaymentDetails.OrderCreatedDate).format('DD-MM-YYYY');
+    data.OrderPaymentDetails.InvoiceCreatedDate =  moment(data.OrderPaymentDetails.InvoiceCreatedDate).format('DD-MM-YYYY');
+    data.OrderPaymentDetails.TransactionDate =  moment(data.OrderPaymentDetails.TransactionDate).format('DD-MM-YYYY');
     this.orderDetailForm.patchValue(data.OrderPaymentDetails);
+    this.orderPaymentDetailForm.patchValue(data.OrderPaymentDetails);
   })
   .catch(err => {
     this.showSpinner=false;
