@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     this.getPaymentList(this.searchObj);
-    this.getOrderList(null);
+    this.getOrderList(this.searchObj);
   }
   selectSearch(){
     if(this.searchingOption){
@@ -200,11 +200,11 @@ export class DashboardComponent implements OnInit {
     .then((data: any) => {
     this.showSpinner=false;
     if(!searchObj.PageNumber){
-      this.orderList = data.PrePaidRequestData;
+      this.orderList = data[0];
     }else{
-      this.orderList = this.orderList.concat(data.PrePaidRequestData);
+      this.orderList = this.orderList.concat(data[0]);
     }
-    this.loadAvailableOrder = (this.orderList.length == data.RecordCount)? false : true;
+    this.loadAvailableOrder = (this.orderList.length == data[1].RecordCount)? false : true;
     })
     .catch(err => {
     this.showSpinner=false;
