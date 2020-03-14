@@ -35,7 +35,7 @@
                                 [ngClass]="{'validationError': paymentForm.controls['PaidAmount'].errors && (paymentForm.controls.PaidAmount.dirty || paymentForm.controls.PaidAmount.touched)}">
                                 <label for="amount">Amount</label>
                                 <p *ngIf="paymentForm.controls['PaidAmount'].errors" class="errorMessage">
-                                    <small *ngIf="paymentForm.controls['PaidAmount'].hasError('min') && (paymentForm.controls.PaidAmount.dirty || paymentForm.controls.PaidAmount.touched)">Amount cannot be less than 500</small>
+                                    <small *ngIf="!paymentForm.controls['PaidAmount'].hasError('pattern') && paymentForm.controls['PaidAmount'].hasError('min') && (paymentForm.controls.PaidAmount.dirty || paymentForm.controls.PaidAmount.touched)">Amount cannot be less than 500</small>
                                 </p>
                             </div>
                         </div>

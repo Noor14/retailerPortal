@@ -1,3 +1,4 @@
+import { AppPattern } from '../../../shared/app.mask';
 import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, OnDestroy, SecurityContext } from '@angular/core';
@@ -51,7 +52,8 @@ export class PaymentComponent implements OnInit, OnDestroy{
     this.paymentForm= new FormGroup ({
       ID: new FormControl(0, Validators.required),
       DealerCode: new FormControl({value:null, disabled: !this.requestType && this.requestId},Validators.required),
-      PaidAmount: new FormControl({value:null, disabled: !this.requestType && this.requestId}, [Validators.required, Validators.min(500), Validators.maxLength(9)])
+      PaidAmount: new FormControl({value:null, disabled: !this.requestType && this.requestId},[
+     Validators.required, Validators.min(500), Validators.maxLength(9), Validators.pattern(AppPattern.number)])
     })
   }
 
