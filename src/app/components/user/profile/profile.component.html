@@ -80,7 +80,7 @@
                                         <textarea rows="2" id="address" readOnly (focusout)="elemFocusOut(address)" #address cols="58" class="form-control" placeholder="Address" formControlName="Address"
                                         [ngClass]="{'validationError': profileForm.controls['Address'].errors && (profileForm.controls.Address.dirty || profileForm.controls.Address.touched)}"></textarea>
                                         <label for="address">Address</label>
-                                        <img *ngIf="address.readOnly" (click)="elemFocus(address)" src="../../../../assets/_images/edit.svg" width="15px" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" />                                        
+                                        <img *ngIf="address.readOnly" (click)="elemFocus(address)" src="../../../../assets/_images/edit.svg" width="15px" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" /> 
                                     </div>
                                 </div>
                             </div>

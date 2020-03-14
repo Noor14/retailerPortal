@@ -8,6 +8,7 @@ import { SupportgridComponent } from './support/supportgrid/supportgrid.componen
 import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
 import { NetworkComponent } from './network/network.component';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
     { path: 'payment', component: PaymentComponent },
     { path: 'payment/:id/:viewType', component: PaymentComponent },
     { path: 'paymentDetail/:id/:viewType', component: PaymentDetailsComponent },
+    { path: 'orderDetail/:id', component: OrderDetailComponent },
     { path: 'network', component: NetworkComponent },
     { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
     ]

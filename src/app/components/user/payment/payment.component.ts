@@ -115,6 +115,7 @@ export class PaymentComponent implements OnInit, OnDestroy{
         (this.paymentForm.value.ID)? this._toast.success("Payment updated"): this._toast.success("Payment created");
         this.paymentPrepaidNumber = data.PrePaidNumber;
         this.paymentForm.controls['ID'].setValue(data.ID);
+        this.requestId = data.ID;
         if(!this.updateBtn){
           this.onChanges();
         }else{

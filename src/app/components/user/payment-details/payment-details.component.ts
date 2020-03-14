@@ -1,4 +1,3 @@
-import { AppPattern } from './../../../shared/app.mask';
 import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
