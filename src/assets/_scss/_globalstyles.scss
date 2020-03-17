@@ -53,6 +53,7 @@ html{
         textarea{
           resize: unset;
           height: unset !important;
+          min-height: 48px;
       }
       &.password{
         position: relative;
