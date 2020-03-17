@@ -148,10 +148,10 @@
                             <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
-                                <button ngbDropdownItem [routerLink] = "['/user/orderDetail', order.ID]">View</button>
-                                <button ngbDropdownItem>Edit</button>
-                                <button ngbDropdownItem>Delete</button>
-                                <button ngbDropdownItem>Cancel</button>
+                                <button ngbDropdownItem *ngIf="order.Status != 'Draft'" [routerLink] = "['/user/orderDetail', order.ID]">View</button>
+                                <button ngbDropdownItem *ngIf="order.Status == 'Draft'">Edit</button>
+                                <button ngbDropdownItem *ngIf="order.Status == 'Draft'">Delete</button>
+                                <button ngbDropdownItem *ngIf="order.Status == 'Approved' || order.Status == 'Pending'">Cancel</button>
                               </div>
                             </div>
                            
