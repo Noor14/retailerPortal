@@ -30,7 +30,6 @@ import { NumberDirective } from 'src/app/directives/numbers-only.directive';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { OrderDetailService } from './order-detail/order-detail.service';
 import { OrderComponent } from './order/order.component';
-import { TreeTableModule } from 'ng-treetable';
 
 @NgModule({
   declarations: [
@@ -62,8 +61,7 @@ import { TreeTableModule } from 'ng-treetable';
     TextMaskModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    FormsModule,
-    TreeTableModule
+    FormsModule
 
   ],
   providers:[
