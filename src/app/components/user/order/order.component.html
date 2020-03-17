@@ -1,1 +1,43 @@
-<p>order works lorem!</p>
+<section class="network">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a routerLink="/user/dashboard">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="breadcrumb-item">Order</a>
+        </li>
+    </ol>
+    <ngb-tabset>
+        <ngb-tab>
+            <ng-template ngbTabTitle>My Network</ng-template>
+            <ng-template ngbTabContent>
+                <div class="content">
+                sss
+                </div>
+
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab [disabled]="true">
+            <ng-template ngbTabTitle>Sent</ng-template>
+            <ng-template ngbTabContent>
+                <div class="content">
+
+
+                </div>
+
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab [disabled]="true">
+            <ng-template ngbTabTitle>Received </ng-template>
+            <ng-template ngbTabContent>
+                <div class="content">
+
+
+                </div>
+
+            </ng-template>
+        </ngb-tab>
+       
+    </ngb-tabset>
+</section>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

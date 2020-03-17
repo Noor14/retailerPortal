@@ -1,6 +1,4 @@
 <section class="internalSupport">
-    <div class="container-fluid">
-
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a routerLink="/user/dashboard">Dashboard</a>
@@ -105,8 +103,6 @@
                 </table>
             <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!supportList.length && !showSpinner">No Data Available</span>
         </div>
-    <!-- <app-table></app-table> -->
     </div>
-</div>
 </section>
 <ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>
