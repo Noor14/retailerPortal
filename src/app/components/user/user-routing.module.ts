@@ -1,3 +1,4 @@
+// import { OrderComponent } from './../../order/order.component';
 import { NgModule } from '@angular/core';
 import { PaymentComponent } from './payment/payment.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -9,7 +10,7 @@ import { SupportscreenComponent } from './support/supportscreen/supportscreen.co
 import { NetworkComponent } from './network/network.component';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
-
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     { path: 'paymentDetail/:id/:viewType', component: PaymentDetailsComponent },
     { path: 'orderDetail/:id', component: OrderDetailComponent },
     { path: 'network', component: NetworkComponent },
+    { path: 'order', component: OrderComponent },
     { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   }

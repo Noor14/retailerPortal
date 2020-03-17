@@ -29,6 +29,7 @@ import { InterceptorService } from 'src/app/services/interceptor.service';
 import { NumberDirective } from 'src/app/directives/numbers-only.directive';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { OrderDetailService } from './order-detail/order-detail.service';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { OrderDetailService } from './order-detail/order-detail.service';
     NetworkComponent,
     PaymentDetailsComponent,
     NumberDirective,
-    OrderDetailComponent
+    OrderDetailComponent,
+    OrderComponent
   ],
   entryComponents:[
     DialogComponent,
