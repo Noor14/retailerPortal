@@ -17,6 +17,7 @@ export class OrderComponent implements OnInit {
   public kycList: any[]= [];
   public selectedCompany: string= undefined;
   public companyDetailForm: FormGroup;
+  
   constructor(private _orderDetailService : OrderDetailService) { }
 
   ngOnInit() {

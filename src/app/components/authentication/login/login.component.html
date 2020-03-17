@@ -2,7 +2,7 @@
   <h4 class="mb-4 title">Login</h4>
   <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="form-group has-float-label">
-      <input type="text" id="username" formControlName="Username" class="form-control" placeholder="Username"
+      <input type="text" id="username" noWhiteSpace formControlName="Username" class="form-control" placeholder="Username"
       [ngClass]="{'validationError': loginFailure || (loginForm.controls['Username'].errors && (loginForm.controls.Username.dirty || loginForm.controls.Username.touched))}">
       <label for="username">Username</label>
       <!-- <p *ngIf="loginForm.controls['Username'].errors" class="errorMessage">
@@ -10,7 +10,7 @@
       </p> -->
     </div>
     <div class="form-group has-float-label">
-      <input type="password" id="password" formControlName="Password" class="form-control" placeholder="Password"
+      <input type="password" id="password" noWhiteSpace formControlName="Password" class="form-control" placeholder="Password"
       [ngClass]="{'validationError': loginFailure || (loginForm.controls['Password'].errors && (loginForm.controls.Password.dirty || loginForm.controls.Password.touched))}">
       <label for="password">Password</label>
       <p *ngIf="loginForm.controls['Password'].errors || loginFailure" class="errorMessage">
