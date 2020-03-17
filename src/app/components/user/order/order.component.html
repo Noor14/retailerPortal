@@ -7,18 +7,69 @@
             <a class="breadcrumb-item">Order</a>
         </li>
     </ol>
-    <ngb-tabset>
-        <ngb-tab>
-            <ng-template ngbTabTitle>My Network</ng-template>
+    <ngb-tabset #tab="ngbTabset">
+        <ngb-tab id="placeOrder">
+            <ng-template ngbTabTitle>Place Order</ng-template>
             <ng-template ngbTabContent>
-                <div class="content">
-                sss
+                <div class="contentArea bg-white p-4">
+                    <h6 class="contentSubTitle">What do you want to order from?</h6>
+                    <div class="row">
+                        <div class="col-md-5 col-sm-12">
+                            <div class="form-group">
+                                <select class="form-control" [(ngModel)]="selectedCompany" (ngModelChange)="companyDetail(selectedCompany)">
+                                    <option disabled value='undefined'>Select Company</option>
+                                    <option *ngFor="let obj of kycList" [value]="obj.DealerCode">{{obj.CompanyName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12" *ngIf="selectedCompany">
+                            <form [formGroup]="companyDetailForm">
+                              <h5 class="text-muted mb-4"> {{companyDetailForm.controls['CompanyName'].value}}</h5>
+                               <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group has-float-label">
+                                        <input type="text" id="mobile" readonly class="form-control" [textMask]="{mask: mobileMask}" placeholder="Mobile No" formControlName="Mobile">
+                                        <label for="mobile">Mobile No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group has-float-label">
+                                        <input type="email" id="email" readonly class="form-control" placeholder="Email Address" formControlName="Email">
+                                        <label for="email">Email Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group has-float-label">
+                                        <input type="text" id="cnic" readonly class="form-control" [textMask]="{mask: cnicMask}" placeholder="CNIC No" formControlName="CNIC">
+                                        <label for="cnic">CNIC No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group has-float-label">
+                                        <input type="text" id="ntn" readonly class="form-control" placeholder="NTN No" formControlName="CompanyNTN">
+                                        <label for="ntn">NTN No</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group has-float-label">
+                                        <textarea readonly id="address" rows="3" class="form-control" placeholder="Address" formControlName="Address"></textarea>
+                                        <label for="address">Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-right">
+                                    <button class="btn btn-primary" (click)="companyProducts(selectedCompany)">Next</button>
+                                </div>
+                              </div>
+                            </form>
+                        </div>
+                       
+                    </div>
                 </div>
 
             </ng-template>
         </ngb-tab>
-        <ngb-tab [disabled]="true">
-            <ng-template ngbTabTitle>Sent</ng-template>
+        <ngb-tab id="OrderSummary">
+            <ng-template ngbTabTitle>Order Summary</ng-template>
             <ng-template ngbTabContent>
                 <div class="content">
 
@@ -27,17 +78,6 @@
 
             </ng-template>
         </ngb-tab>
-        <ngb-tab [disabled]="true">
-            <ng-template ngbTabTitle>Received </ng-template>
-            <ng-template ngbTabContent>
-                <div class="content">
-
-
-                </div>
-
-            </ng-template>
-        </ngb-tab>
-       
     </ngb-tabset>
 </section>
 <ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

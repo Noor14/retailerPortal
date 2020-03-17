@@ -23,6 +23,20 @@ export class OrderDetailService {
     })
     return promise;
   }
+  getKYCListDetail(apiEndPath,requestId){
+    let promise = new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/${apiEndPath}/${requestId}`;
+      this._http.get(apiURL)
+        .toPromise()
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        })
+    })
+    return promise;
+  }
 }
 
 
