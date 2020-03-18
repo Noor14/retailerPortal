@@ -1,4 +1,4 @@
-import { NoWhiteSpaceDirective } from './../../directives/no-white-space.directive';
+import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
@@ -27,8 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ForgetpasswordComponent, 
     UpdatepasswordComponent, 
     EULAComponent, 
-    SupportComponent,
-    NoWhiteSpaceDirective
+    SupportComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +37,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TextMaskModule,
     NgxSpinnerModule,
     NgxCaptchaModule,
-    NgbModule
+    NgbModule,
+    SharedModule
 
   ],
   providers:[
