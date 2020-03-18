@@ -179,7 +179,7 @@ export class PaymentComponent implements OnInit, OnDestroy{
       backdrop:'static',
       size:'lg'
      });
-    modalRef.componentInstance.obj = {PSID : this.paymentPrepaidNumber, VoucherNo: 'Delete Ticket'};
+    modalRef.componentInstance.obj = {PSID : this.paymentPrepaidNumber, VoucherNo: this.requestId};
     modalRef.result.then((result) => {
       if(result){
       }

@@ -1,7 +1,7 @@
 <section class="dialogBox">
     <div class="modal-header align-items-center">
         <h6 class="modal-title" id="modal-title">PSID: {{paymentInstructions.PSID}}</h6>
-        <button type="button" class="btn btn-primary mr-4" (click)="activeModal.dismiss()">
+        <button type="button" class="btn btn-primary mr-4" (click)="viewVoucher()">
           View Voucher
         </button>
         <button type="button" class="close closeBtn" aria-describedby="modal-title" (click)="activeModal.dismiss()">
@@ -44,6 +44,6 @@
         </ol>
         
       </div>
-  
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>
 </section>
     
