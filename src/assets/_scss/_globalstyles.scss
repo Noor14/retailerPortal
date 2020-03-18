@@ -99,7 +99,10 @@ html{
               color: #ff0000;
           }
         }
-     
+        &.totalAmount
+        {
+          background-color: #f8f8f8 !important;
+        }
         &[readonly], &[disabled]{
           background-color: transparent;
         }
