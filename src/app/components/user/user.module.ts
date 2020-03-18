@@ -26,7 +26,7 @@ import { InterceptorService } from 'src/app/services/interceptor.service';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { OrderDetailService } from './order-detail/order-detail.service';
 import { OrderComponent } from './order/order.component';
-
+import {TreeTableModule} from "ng-treetable";
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -50,7 +50,8 @@ import { OrderComponent } from './order/order.component';
     ReactiveFormsModule,
     NgxSpinnerModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    TreeTableModule
   ],
   providers:[
     ProfileService,

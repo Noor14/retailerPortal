@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import './assets/_fonts/_source_sans_fonts.css';
 @import './assets/_scss/_globalstyles';
-
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
 .toast-container {
     .ngx-toastr:hover {
       box-shadow:unset;
@@ -103,3 +103,7 @@
     -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, .3);
     background-color: #96BB3C;
   }
+
+
+
+
