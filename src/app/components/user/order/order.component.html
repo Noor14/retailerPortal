@@ -56,7 +56,7 @@
                                         <label for="address">Address</label>
                                     </div>
                                 </div>
-                                <div class="col-12 text-right">
+                                <div class="text-right">
                                     <button class="btn btn-primary" (click)="companyProducts(selectedCompany)">Next</button>
                                 </div>
                               </div>
@@ -72,17 +72,7 @@
             <ng-template ngbTabTitle>Order Summary</ng-template>
             <ng-template ngbTabContent>
                 <div class="content">
-                    <ay-treeTable [value]="nodes.data"
-                    selectionMode="single" 
-                    [tableStyle]="{'table-layout': 'auto'}">
-        <ay-column field="name" header="Name">
-          <ng-template let-col let-node="rowData" pTemplate="body">
-            <span>{{node.data[col.field]}}</span>
-          </ng-template>
-        </ay-column>
-        <ay-column field="size" header="Size"></ay-column>
-        <ay-column field="type" header="Type"></ay-column>
-    </ay-treeTable>
+                     Order Summary
                 </div>
 
             </ng-template>
