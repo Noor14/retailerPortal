@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <div class="form-group has-float-label">
-                        <input type="email" id="email" class="form-control" formControlName="Email" placeholder="Email"
+                        <input type="email" id="email" noWhiteSpace class="form-control" formControlName="Email" placeholder="Email"
                         [ngClass]="{'validationError': supportForm.controls['Email'].errors && (supportForm.controls.Email.dirty || supportForm.controls.Email.touched)}">
                         <label for="email">Email</label>
                     </div>

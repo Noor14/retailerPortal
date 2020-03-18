@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label position-relative">  
-                            <input type="email" class="form-control" id="email" placeholder="Email" (focusout)="elemFocusOut(email)" #email readonly formControlName="Email"
+                            <input type="email" noWhiteSpace class="form-control" id="email" placeholder="Email" (focusout)="elemFocusOut(email)" #email readonly formControlName="Email"
                             [ngClass]="{'validationError': supportForm.controls['Email'].errors && (supportForm.controls.Email.dirty || supportForm.controls.Email.touched)}">
                             <label for="email">Email</label>                            
                             <img src="../../../../assets/_images/edit.svg" width="15px" (click)="elemFocus(email)" 
