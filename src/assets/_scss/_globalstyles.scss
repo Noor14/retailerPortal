@@ -7,6 +7,7 @@ html{
       @extend html;
       height: 100%;
       font-family: $baseSourceSansRegularFont;
+      font-size: 15px;
       .pointer{
         cursor:pointer;
       }
@@ -53,7 +54,7 @@ html{
         textarea{
           resize: unset;
           height: unset !important;
-          min-height: 48px;
+          min-height: 45px;
       }
       &.password{
         position: relative;
@@ -63,7 +64,7 @@ html{
         span{
             position: absolute;
             right: 30px;
-            top: 22%;
+            top: 18%;
             left: auto;
             font-size: inherit;
             cursor: pointer;
@@ -83,13 +84,13 @@ html{
         }
         .infoIcon{
             right: 10px;
-            top: 38%;
+            top: 34%;
             position: absolute;
         }
     }
       }
       .form-control{
-        height: 48px;
+        height: 45px;
         color: #7e7e7e;
         &.validationError{
           border-color: #ff0000;
@@ -183,6 +184,7 @@ html{
                 border: unset;
                 border-bottom: 1px solid #dee2e6;
                 color: $tabInputColor;
+                font-size: 18px;
 
                 &.active{
                     background-color: transparent;
@@ -221,7 +223,7 @@ html{
       display: block;
       position: absolute;
       background-color: #f8f8f8;
-      height: 1px;
+      height: 4px;
       top: 50%;
       left: -.2em;
       right: -.2em;
@@ -247,7 +249,7 @@ html{
   }
   input:placeholder-shown:not(:focus)+*, select:placeholder-shown:not(:focus)+*, textarea:placeholder-shown:not(:focus)+*{
     font-size: 15px;
-    top: .8em;
+    top: 0.7em;
     color:black;
     &::after{
       background-color:transparent;

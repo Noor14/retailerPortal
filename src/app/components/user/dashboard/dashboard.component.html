@@ -1,5 +1,5 @@
 <section class="dashboard">
-    <ol class="breadcrumb">
+    <ol class="breadcrumb m-0">
       <li class="breadcrumb-item">
           <a routerLink="/user/dashboard">Dashboard</a>
       </li>
@@ -82,7 +82,7 @@
                       <tr>
                           <th>Payment ID</th>
                           <th>Company</th>
-                          <th>Created Date</th>
+                          <!-- <th>Created Date</th> -->
                           <th>Status</th>
                           <th>Amount</th>
                           <th>Action</th>
@@ -92,7 +92,7 @@
                       <tr *ngFor="let payment of paymentsList; let i = index">
                           <td>{{payment.InvoiceNumber}}</td>
                           <td>{{payment.CompanyName}}</td>
-                          <td class="createDateWidth">{{payment.CreatedDate |  date: 'dd-MM-yyyy'}}</td>
+                          <!-- <td class="createDateWidth">{{payment.CreatedDate |  date: 'dd-MM-yyyy'}}</td> -->
                           <td class="statusWidth">{{payment.Status}}</td>
                           <td>{{payment.TotalPrice}}</td>
                           <td>
