@@ -1,4 +1,4 @@
-<section class="registration">
+<section class="registration" id="nav-scrollbar">
     <h4 class="mb-4 title">Registration</h4>
     <form [formGroup]="registerForm">
       <div class="form-group has-float-label">
@@ -84,7 +84,7 @@
             </div>
           </div>
           <div class="form-group has-float-label">
-            <textarea rows="2" cols="58" id="address" class="form-control" placeholder="Address" formControlName="Address"
+            <textarea rows="1" cols="58" id="address" class="form-control" placeholder="Address" formControlName="Address"
             [ngClass]="{'validationError': registerForm.controls['Address'].errors && (registerForm.controls.Address.dirty || registerForm.controls.Address.touched)}"></textarea>
             <label for="address">Address</label>
           </div>

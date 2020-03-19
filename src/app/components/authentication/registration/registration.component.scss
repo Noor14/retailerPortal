@@ -1,4 +1,6 @@
 .registration{
+        max-height: 440px;
+        overflow-x: auto;
     ngb-tooltip-window{
         top:5px !important;
         &.show{
