@@ -8,6 +8,9 @@ import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
 import { DialogComponent } from './dialog-modal/dialog/dialog.component';
 import { PaymentInstructionComponent } from './dialog-modal/payment-instruction/payment-instruction.component';
 import { RouterModule } from '@angular/router';
+import { SearchingComponent } from './searching/searching.component';
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   
@@ -18,11 +21,14 @@ import { RouterModule } from '@angular/router';
     SidebarComponent, 
     DialogComponent,
     PaymentInstructionComponent,
+    SearchingComponent,
   ],
   imports: [
     CommonModule,
     NgxSpinnerModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    NgbModule,
   ],
   entryComponents:[
     DialogComponent,
@@ -31,7 +37,8 @@ import { RouterModule } from '@angular/router';
   exports:[
     HeaderComponent,
     SidebarComponent,
-    NoWhiteSpaceDirective, 
+    SearchingComponent,
+    NoWhiteSpaceDirective,
     NumberDirective],
 
   providers:[]

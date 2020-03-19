@@ -24,7 +24,6 @@ export class TicketSupportService {
     });
   }
   postCalls(recourseName, obj, rightId) {
-
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${recourseName}`;
       this._http.post(apiURL, obj)

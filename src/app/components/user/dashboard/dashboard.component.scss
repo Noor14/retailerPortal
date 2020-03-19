@@ -1,27 +1,4 @@
 .dashboard{
-    .custom-day {
-        text-align: center;
-        padding: 0.185rem 0.25rem;
-        display: inline-block;
-        height: 2rem;
-        width: 2rem;
-        &.focused {
-            background-color: #e6e6e6;
-          }
-          &.range, &:hover {
-            background-color: #97bb3d;
-            color: white;
-          }
-          &.faded {
-            background-color: rgba(15, 248, 85, 0.5);
-          }
-      }
-      .btn-link {
-        color: #97bb3d;
-        &:hover {
-            color: #97bb3d;
-        }
-    }
     .table{
         .createDateWidth{
             min-width: 115px;

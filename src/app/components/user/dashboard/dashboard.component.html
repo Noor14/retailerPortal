@@ -7,76 +7,14 @@
           <a class="breadcrumb-item">Payment</a>
       </li>
   </ol>
+
     <ngb-tabset>
         <ngb-tab>
           <ng-template ngbTabTitle>Payment</ng-template>
           <ng-template ngbTabContent>
             <div class="content">
-
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <select class="form-control" [(ngModel)]="searchingOption" (change)="selectSearch()">
-                      <option value="" selected>Select Criteria</option>
-                      <option *ngFor="let option of searchBY">{{option}}</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="col-md-4" [ngSwitch]="searchingOption">
-                  <div class="form-group" *ngSwitchCase="'Payment ID'">
-                    <input class="form-control" #search placeholder="Payment ID" />
-                  </div>
-                  <div class="form-group" *ngSwitchCase="'Company'">
-                    <input class="form-control" #search placeholder="Company" />
-                  </div>
-                  <div class="form-group" *ngSwitchCase="'Created Date'">
-                    <input
-                    #myRangeInput
-                   class="form-control" 
-                   placeholder="mm-dd-yyyy - mm-dd-yyyy"
-                    name="dp" [displayMonths]="2" [navigation]="'select'" [outsideDays]="'visible'"
-                    [showWeekNumbers]="false" ngbDatepicker #d="ngbDatepicker" [dayTemplate]="t" (click)="d.toggle()" [autoClose]="'outside'"
-                   [(ngModel)]="model" 
-                   ngbDatepicker 
-                   [maxDate]="maxDate"
-                   [minDate]="minDate"
-                   autocomplete="off">
-           
-                   <ng-template #t let-date="date" let-focused="focused">
-                       <span class="custom-day"
-                           [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
-                           [class.faded]="isHovered(date) || isInside(date)"
-                           (click)="onDateSelection(date)"
-                           (mouseenter)="hoveredDate = date"
-                           (mouseleave)="hoveredDate = null"
-                           >
-                       {{ date.day }}
-                       </span>
-                   </ng-template>
-                  </div>
-
-                  <div class="form-group" *ngSwitchCase="'Status'">
-                    <select class="form-control" #search (change)="filterByStatus(search)">
-                      <option value="" selected>Status</option>
-                      <option>Paid</option>
-                      <option>Un-paid</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group d-flex" *ngSwitchCase="'Amount'">
-                    <input class="form-control" placeholder="Min Amount" /> 
-                    <span class="mr-2 ml-2 separator"></span> 
-                    <input class="form-control" placeholder="Max Amount" />
-                  </div>
-                </div>
-
-
-              </div>
-              
-
+              <app-searching [searchingCriteria]='searchObjPayment'></app-searching>
               <div class="gridArea table-responsive" id="nav-scrollbar">
-
                 <table class="table" *ngIf="paymentsList && paymentsList.length">
                       <thead>
                       <tr>
@@ -108,7 +46,7 @@
                         </td>
                       </tr>
                       <tr  class="text-center" *ngIf="loadAvailable">
-                        <td colspan="6"> <button class="btn" (click)="loadMore()" >Load More</button></td>
+                        <td colspan="6"> <button class="btn" (click)="loadMore(searchObjPayment.searchMode)" >Load More</button></td>
                      </tr>
                       </tbody>
                   </table>
@@ -123,7 +61,7 @@
           <ng-template ngbTabTitle>Order</ng-template>
           <ng-template ngbTabContent>
             <div class="content">
-
+              <app-searching [searchingCriteria]='searchObjOrder'></app-searching>
               <div class="gridArea table-responsive" id="nav-scrollbar">
                 <table class="table" *ngIf="paymentsList && paymentsList.length">
                       <thead>
@@ -157,7 +95,7 @@
                         </td>
                       </tr>
                       <tr  class="text-center" *ngIf="loadAvailableOrder">
-                        <td colspan="6"> <button class="btn" (click)="loadMore()" >Load More</button></td>
+                        <td colspan="6"> <button class="btn" (click)="loadMore(searchObjOrder.searchMode)" >Load More</button></td>
                      </tr>
                       </tbody>
                   </table>

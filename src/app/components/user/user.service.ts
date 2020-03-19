@@ -23,4 +23,18 @@ export class UserService {
     })
     return promise;
   }
+  getCalls(resourceName) {
+    return new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/${resourceName}`;
+      this._http.get(apiURL)
+        .toPromise()
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        })
+
+    });
+  }
 }
