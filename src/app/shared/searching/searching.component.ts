@@ -30,7 +30,7 @@ export class SearchingComponent implements OnInit {
 
   public statuses:any[]=[];
   public selectedObject:any={};
-
+  private searchingobj:any= {}
 
 
   startDate: NgbDateStruct;
@@ -60,7 +60,17 @@ export class SearchingComponent implements OnInit {
 
   selectedOption(option){
     this.selectedObject = this.searchingCriteria.searchBy.find(obj=> obj.key == option);
-    console.log(this.filteredData)
+    if(Object.keys(this.searchingobj).length){
+      if(this.searchingCriteria.TotalRecords){
+        this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
+      }
+      if(this.searchingCriteria.PageNumber.hasOwnProperty(this.searchingCriteria.PageNumber)){
+        this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
+      }else{
+        this.searchingobj = {}
+      }
+      this.filter(this.searchingobj);
+    }
   }
   // selectSearch(){
   //   if(this.searchingOption){
@@ -129,16 +139,16 @@ export class SearchingComponent implements OnInit {
   // }
     searchOnChange(elem){
           if(elem.value){
-          let obj:any = {
+          this.searchingobj = {
             [this.selectedObject.key] : elem.value,
           };
             if(this.searchingCriteria.TotalRecords){
-              obj.TotalRecords = this.searchingCriteria.TotalRecords;
+              this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
             }
             if(this.searchingCriteria.PageNumber){
-              obj.PageNumber = this.searchingCriteria.PageNumber;
+              this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
             }
-          this.filter(obj);
+          this.filter(this.searchingobj);
         }
     }
 
