@@ -42,7 +42,7 @@
           <div class="form-group" *ngSwitchCase="'dropdown'">
             <select class="form-control" #search >
               <option value="" selected>{{selectedObject.placeholder}}</option>
-              <option *ngFor="let obj of statuses">{{obj.value}}</option>
+              <option *ngFor="let obj of selectedObject.filterBy">{{obj.value}}</option>
             </select>
           </div>
 

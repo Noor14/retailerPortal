@@ -1,5 +1,5 @@
 import { SharedService } from 'src/app/services/shared.service';
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, ChangeDetectorRef, ViewEncapsulation, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, ChangeDetectorRef, ViewEncapsulation, Input } from '@angular/core';
 import { NgbDateStruct, NgbInputDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, fromEvent } from 'rxjs';
 import { map, filter, debounceTime, tap, switchAll, distinctUntilChanged } from 'rxjs/operators';
@@ -19,7 +19,7 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./searching.component.scss']
 })
-export class SearchingComponent implements OnInit,OnDestroy {
+export class SearchingComponent implements OnInit {
   @Input() searchingCriteria: any;
   private statusDropDownSubscriber:any;
   public statuses:any[]=[];
@@ -49,27 +49,9 @@ export class SearchingComponent implements OnInit,OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,) { }
 
   ngOnInit() {
-    this.getdropDownList()
   }
-  getdropDownList() {
-    this.statusDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
-      if(res){
-        if(this.searchingCriteria.searchMode == 'payment' && res.PREPAID_STATUS && res.INVOICE_STATUS){
-          let arr = res.PREPAID_STATUS.concat(res.INVOICE_STATUS);
-           this.statuses = [...new Map(arr.map(item =>
-            [item['value'], item])).values()];
-        }
-        else if(this.searchingCriteria.searchMode == 'order'){
-          this.statuses = res.ORDER_STATUS
-        }
-      }
-    });
-  }
-  ngOnDestroy(){
-    if(this.statusDropDownSubscriber){
-      this.statusDropDownSubscriber.unsubscribe();
-    }
-  }
+
+  
   selectedOption(option){
     this.selectedObject = this.searchingCriteria.searchBy.find(obj=> obj.key == option);
   }

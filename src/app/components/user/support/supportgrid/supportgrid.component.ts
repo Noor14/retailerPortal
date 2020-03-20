@@ -18,20 +18,22 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   public spinnerConfig: any;
   private supportDropDownSubscriber:any;
   public supportList:any[] = [];
-  public issueType: any[];
   public loadAvailable: boolean;
 
-  public searchObj: any = {
+  private searchObj: any = {
     TotalRecords: 10,
     PageNumber : 0,
+   
+  };
+  public filterObj = {
     searchBy:[
       {name:'Token ID', placeholder: 'Token ID', type: 'typing', key: 'TicketNumber'},
-      {name:'Status', placeholder: 'Status', type: 'dropdown', key: 'Status'},
+      {name:'Status', placeholder: 'Status', type: 'dropdown', key: 'Status', filterBy : undefined},
       {name:'Created Date', placeholder: 'Created Date', type: 'dateRange', key: ['DateFrom', 'DateTo']},
-      {name:'Issue Type', placeholder: 'Issue Type', type: 'dropdown', key: 'IssueType'}
+      {name:'Issue Type', placeholder: 'Issue Type', type: 'dropdown', key: 'IssueType', filterBy : undefined}
      ],
     searchMode:'support'
-  };
+   }
   constructor(
     private _supportService: TicketSupportService,
     private _sharedService: SharedService,
@@ -69,7 +71,16 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   getdropDownList() {
     this.supportDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
       if(res){
-        this.issueType = res.ISSUE_TYPE_PRIVATE;
+
+        let objstatus = this.filterObj.searchBy.find(obj => obj.key == 'Status');
+        let ind = this.filterObj.searchBy.findIndex(obj => obj.key == 'Status');
+        objstatus.filterBy = res.SUPPORT_STATUS;
+        this.filterObj.searchBy.splice(ind,1, objstatus);
+
+        let objIssueType = this.filterObj.searchBy.find(obj => obj.key == 'IssueType');
+        let index = this.filterObj.searchBy.findIndex(obj => obj.key == 'IssueType');
+        objIssueType.filterBy = res.ISSUE_TYPE_PRIVATE;
+        this.filterObj.searchBy.splice(index, 1, objIssueType);
       }
     });
   }

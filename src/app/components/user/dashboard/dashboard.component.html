@@ -13,7 +13,7 @@
           <ng-template ngbTabTitle>Payment</ng-template>
           <ng-template ngbTabContent>
             <div class="content">
-              <app-searching [searchingCriteria]='searchObjPayment'></app-searching>
+              <app-searching [searchingCriteria]='filterObjPayment'></app-searching>
               <div class="gridArea table-responsive" id="nav-scrollbar">
                 <table class="table" *ngIf="paymentsList && paymentsList.length">
                       <thead>
@@ -46,7 +46,7 @@
                         </td>
                       </tr>
                       <tr  class="text-center" *ngIf="loadAvailable">
-                        <td colspan="6"> <button class="btn" (click)="loadMore(searchObjPayment.searchMode)" >Load More</button></td>
+                        <td colspan="6"> <button class="btn" (click)="loadMore(filterObjPayment.searchMode)" >Load More</button></td>
                      </tr>
                       </tbody>
                   </table>
@@ -61,7 +61,7 @@
           <ng-template ngbTabTitle>Order</ng-template>
           <ng-template ngbTabContent>
             <div class="content">
-              <app-searching [searchingCriteria]='searchObjOrder'></app-searching>
+              <app-searching [searchingCriteria]='filterObjOrder'></app-searching>
               <div class="gridArea table-responsive" id="nav-scrollbar">
                 <table class="table" *ngIf="paymentsList && paymentsList.length">
                       <thead>
@@ -95,7 +95,7 @@
                         </td>
                       </tr>
                       <tr  class="text-center" *ngIf="loadAvailableOrder">
-                        <td colspan="6"> <button class="btn" (click)="loadMore(searchObjOrder.searchMode)" >Load More</button></td>
+                        <td colspan="6"> <button class="btn" (click)="loadMore(filterObjOrder.searchMode)" >Load More</button></td>
                      </tr>
                       </tbody>
                   </table>
