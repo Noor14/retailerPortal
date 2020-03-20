@@ -21,15 +21,6 @@ export class UserComponent implements OnInit {
     { }
 
   ngOnInit() {
-      this._userService.getCalls("support/PrivateUsers")
-      .then((data:any)=>{
-        if(data && Object.keys(data).length)
-        this._sharedService.supportDropdownValues.next(data);
-      })
-      .catch(err=>{
-        console.log(err)
-        })
-
       this._userService.getCalls("lookup/null")
       .then((data:any)=>{
         if(data && data.length){
@@ -37,7 +28,7 @@ export class UserComponent implements OnInit {
             r[a.type] = [...r[a.type] || [], a];
             return r;
            }, {});
-          this._sharedService.statusDropDownValues.next(obj);
+          this._sharedService.dropDownValues.next(obj);
           console.log(obj)
         }
       })

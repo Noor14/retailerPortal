@@ -52,7 +52,7 @@ export class SearchingComponent implements OnInit,OnDestroy {
     this.getdropDownList()
   }
   getdropDownList() {
-    this.statusDropDownSubscriber = this._sharedService.statusDropDownValues.subscribe((res:any)=>{
+    this.statusDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
       if(res){
         if(this.searchingCriteria.searchMode == 'payment'){
           let arr = res.PREPAID_STATUS.concat(res.INVOICE_STATUS);

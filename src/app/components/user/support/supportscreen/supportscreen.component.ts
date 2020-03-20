@@ -77,7 +77,7 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
     elem.readOnly= true;
   }
   getdropDownList() {
-    this.supportDropDownSubscriber = this._sharedService.supportDropdownValues.subscribe((res:any)=>{
+    this.supportDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
       if(res){
         this.contacting = res.CONTACTING_METHOD;
         this.criticality = res.CRITICALITY_PRIVATE;

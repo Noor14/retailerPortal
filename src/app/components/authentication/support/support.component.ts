@@ -47,7 +47,7 @@ export class SupportComponent implements OnInit, OnDestroy {
   }
 
   getdropDownList() {
-    this.supportDropDownSubscriber = this._sharedService.supportDropdownValues.subscribe((res:any)=>{
+    this.supportDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
       if(res){
         this.contacting = res.CONTACTING_METHOD;
         this.criticality = res.CRITICALITY_PUBLIC;

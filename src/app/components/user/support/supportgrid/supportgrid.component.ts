@@ -142,7 +142,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
         })
   }
   getdropDownList() {
-    this.supportDropDownSubscriber = this._sharedService.supportDropdownValues.subscribe((res:any)=>{
+    this.supportDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
       if(res){
         this.issueType = res.ISSUE_TYPE_PRIVATE;
       }
