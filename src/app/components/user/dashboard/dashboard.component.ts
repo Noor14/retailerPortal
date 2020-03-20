@@ -16,14 +16,13 @@ export class DashboardComponent implements OnInit {
   public searchObjPayment: any = {
     TotalRecords: 10,
     PageNumber : 0,
-    CompanyName:null,
-    DateFrom:null,
-    DateTo:null,
-    Status:null,
-    PaymentAmountMin:null,
-    PaymentAmountMax:null,
-    InvoiceNumber:null,
-    searchBY:['Payment ID', 'Company', 'Created Date', 'Status', 'Amount'],
+    searchBy:[
+      {placeholder: 'Payment ID', type: 'typing', key: 'InvoiceNumber'},
+      {placeholder: 'Company', type: 'typing', key: 'CompanyName'},
+      {placeholder: 'Status', type: 'dropdown', key: 'Status'},
+      {placeholder: 'Created Date', type: 'date', key: ['DateFrom', 'DateTo']},
+      {placeholder: 'Amount', type: 'range', key: ['PaymentAmountMin', 'PaymentAmountMax']}
+     ],
     searchMode:'payment'
   };
   public searchObjOrder: any = {
@@ -36,7 +35,13 @@ export class DashboardComponent implements OnInit {
     PaymentAmountMin:null,
     PaymentAmountMax:null,
     OrderNumber:null,
-    searchBY:['Order ID', 'Company', 'Created Date', 'Status', 'Amount'],
+    searchBy:[
+      {placeholder: 'Order ID', type: 'typing', key: 'OrderNumber'},
+      {placeholder: 'Company', type: 'typing', key: 'CompanyName'},
+      {placeholder: 'Status', type: 'dropdown', key: 'Status'},
+      {placeholder: 'Created Date', type: 'date', key: ['DateFrom', 'DateTo']},
+      {placeholder: 'Amount', type: 'range', key: ['PaymentAmountMin', 'PaymentAmountMax']}
+     ],
     searchMode:'order'
   };
   public showSpinner: boolean;

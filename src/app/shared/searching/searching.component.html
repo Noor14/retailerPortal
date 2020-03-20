@@ -2,24 +2,18 @@
     <div class="row">
         <div class="col-md-3">
           <div class="form-group">
-            <select class="form-control" [(ngModel)]="searchingOption" >
+            <select class="form-control" [(ngModel)]="searchingOption" (change)="selectedOption(searchingOption)">
               <option value="undefined" selected>Select Criteria</option>
-              <option *ngFor="let option of searchingCriteria?.searchBY">{{option}}</option>
+              <option *ngFor="let option of searchingCriteria?.searchBy" [value]="option.key">{{option.placeholder}}</option>
             </select>
           </div>
         </div>
 
-        <div class="col-md-4" [ngSwitch]="searchingOption">
-          <div class="form-group" *ngSwitchCase="'Payment ID'">
-            <input class="form-control" #search placeholder="Payment ID" />
+        <div class="col-md-4" [ngSwitch]="selectedObject.type">
+          <div class="form-group" *ngSwitchCase="'typing'">
+            <input class="form-control" #search [placeholder]="selectedObject.placeholder" />
           </div>
-          <div class="form-group" *ngSwitchCase="'Order ID'">
-            <input class="form-control" #search placeholder="Order ID" />
-          </div>
-          <div class="form-group" *ngSwitchCase="'Company'">
-            <input class="form-control" #search placeholder="Company" />
-          </div>
-          <div class="form-group" *ngSwitchCase="'Created Date'">
+          <div class="form-group" *ngSwitchCase="'date'">
             <input
             #myRangeInput
            class="form-control" 
@@ -45,14 +39,14 @@
            </ng-template>
           </div>
 
-          <div class="form-group" *ngSwitchCase="'Status'">
+          <div class="form-group" *ngSwitchCase="'dropdown'">
             <select class="form-control" #search >
-              <option value="" selected>Status</option>
+              <option value="" selected>{{selectedObject.placeholder}}</option>
               <option *ngFor="let obj of statuses">{{obj.value}}</option>
             </select>
           </div>
 
-          <div class="form-group d-flex" *ngSwitchCase="'Amount'">
+          <div class="form-group d-flex" *ngSwitchCase="'range'">
             <input class="form-control" placeholder="Min Amount" /> 
             <span class="mr-2 ml-2 separator"></span> 
             <input class="form-control" placeholder="Max Amount" />

@@ -23,6 +23,10 @@ export class SearchingComponent implements OnInit,OnDestroy {
   @Input() searchingCriteria: any;
   private statusDropDownSubscriber:any;
   public statuses:any[]=[];
+  public selectedObject:any={};
+
+
+
   startDate: NgbDateStruct;
   maxDate: NgbDateStruct;
   minDate: NgbDateStruct;
@@ -65,6 +69,9 @@ export class SearchingComponent implements OnInit,OnDestroy {
     if(this.statusDropDownSubscriber){
       this.statusDropDownSubscriber.unsubscribe();
     }
+  }
+  selectedOption(option){
+    this.selectedObject = this.searchingCriteria.searchBy.find(obj=> obj.key == option);
   }
   // selectSearch(){
   //   if(this.searchingOption){
