@@ -54,7 +54,7 @@ export class SearchingComponent implements OnInit,OnDestroy {
   getdropDownList() {
     this.statusDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
       if(res){
-        if(this.searchingCriteria.searchMode == 'payment'){
+        if(this.searchingCriteria.searchMode == 'payment' && res.PREPAID_STATUS && res.INVOICE_STATUS){
           let arr = res.PREPAID_STATUS.concat(res.INVOICE_STATUS);
            this.statuses = [...new Map(arr.map(item =>
             [item['value'], item])).values()];

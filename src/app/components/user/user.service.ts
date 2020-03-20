@@ -8,6 +8,20 @@ import { baseApi } from 'src/app/constant/baseurl';
 export class UserService {
 
   constructor(private _http: HttpClient) { }
+  getCalls(resourceName) {
+    return new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/${resourceName}`;
+      this._http.get(apiURL)
+        .toPromise()
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        })
+
+    });
+  }
   logoutUser() {
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/users/logout`;
