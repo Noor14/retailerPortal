@@ -30,16 +30,13 @@ html{
         background: $baseColor;
         position: absolute;
         left: 0;
+      }
     }
     .description{
-        font-family: $baseSourceSansRegularFont;
-        font-size: 14px;
-        color: #939598;
-    }
+      color: #939598;
     }
       .errorMessage{
         color: #ff0000;
-        font-size: 15px;
         position: absolute;
         margin: 0;
       }
@@ -152,12 +149,12 @@ html{
           }
         }
         &-primary{
-          font-size: 16px;
           background: $baseColor;
           min-width: 150px;
           padding-top: 7px;
           padding-bottom: 7px;
           border: unset;
+          font-size: 1rem;
           &:focus, &:active, &:hover, &:disabled, &:not(:disabled):not(.disabled):active{
             border: unset;
             background: $baseColor;
@@ -251,8 +248,8 @@ html{
     }
   }
   input:placeholder-shown:not(:focus)+*, select:placeholder-shown:not(:focus)+*, textarea:placeholder-shown:not(:focus)+*{
-    font-size: 15px;
-    top: 0.7em;
+    font-size: 14px;
+    top: 0.8em;
     color:black;
     &::after{
       background-color:transparent;
