@@ -21,18 +21,18 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   public supportList:any[] = [];
   public issueType: any[];
   public loadAvailable: boolean;
-  public searchingOption:string = '';
-  public searchBY: string[]= ['Token ID', 'Issue Type', 'Created Date', 'Status'];
-  private searchObj: any = {
+
+  public searchObj: any = {
     TotalRecords: 10,
     PageNumber : 0,
-    TicketNumber:null,
-    DateFrom:null,
-    DateTo:null,
-    Status:null,
-    IssueType:null
+    searchBy:[
+      {name:'Token ID', placeholder: 'Token ID', type: 'typing', key: 'TicketNumber'},
+      {name:'Status', placeholder: 'Status', type: 'dropdown', key: 'Status'},
+      {name:'Created Date', placeholder: 'Created Date', type: 'dateRange', key: ['DateFrom', 'DateTo']},
+      {name:'Issue Type', placeholder: 'Issue Type', type: 'dropdown', key: 'IssueType'}
+     ],
+    searchMode:'support'
   };
-  private modifySearchObj = Object.assign({}, this.searchObj);
   constructor(
     private _supportService: TicketSupportService,
     private _sharedService: SharedService,
@@ -50,80 +50,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
     this.supportDropDownSubscriber.unsubscribe();
   }
 
-  selectSearch(){
-    if(this.searchingOption){
-      this.changeDetectorRef.detectChanges();
-      fromEvent(this.search.nativeElement, 'keyup').pipe(
-        // get value
-        map((event: any) => {
-          return event.target.value;
-        })
-        // if character length greater then 2
-        // ,filter(res => res.length > 2)
-        // Time in milliseconds between key events
-        ,debounceTime(1000)        
-        // If previous query is diffent from current   
-        ,distinctUntilChanged()
-        // subscription for response
-        ).subscribe((text: string) => {
-             if(text){
-              this.modifySearchObj = Object.assign({}, this.searchObj);
-              switch(this.searchingOption) {
-                case 'Token ID':
-                  this.modifySearchObj.TicketNumber = text
-                  this.getSupportList(this.modifySearchObj);
-                  break;
-                
-                case 'Issue Type':
-                  this.modifySearchObj.IssueType = text
-                  this.getSupportList(this.modifySearchObj);
-                  break;
-
-                case 'Status':
-                  this.modifySearchObj.Status = text
-                  this.getSupportList(this.modifySearchObj);
-                  break;
-
-                case 'Created Date':
-                  this.modifySearchObj.CreatedDate = text
-                  this.getSupportList(this.modifySearchObj);
-                  break;
-
-               
-              }
-             
-             }
-             else{
-              this.getSupportList(this.searchObj);
-              this.modifySearchObj = Object.assign({}, this.searchObj);
-            }
-          
-        });
-      }else{
-        if(this.search.nativeElement && this.search.nativeElement.value){
-          this.getSupportList(this.searchObj);
-          this.modifySearchObj = Object.assign({}, this.searchObj);
-        }
-      }
-  }
-  
-  filterByStatus(elem){
-    if(this.searchingOption){
-      if(elem.value){
-        this.modifySearchObj = Object.assign({}, this.searchObj);
-        if(this.searchingOption =='Issue Type'){
-          this.modifySearchObj.IssueType = Number(elem.value)
-        }else{
-          this.modifySearchObj.Status = Number(elem.value)
-        }
-        this.getSupportList(this.modifySearchObj);
-       }
-       else{
-        this.getSupportList(this.searchObj);
-        this.modifySearchObj = Object.assign({}, this.searchObj);
-      }
-      }
-  }
+ 
   getSupportList(searchObj) {
     this.showSpinner=true;
       this._supportService.postCalls("support/Search", searchObj, 7)
@@ -153,8 +80,8 @@ export class SupportgridComponent implements OnInit, OnDestroy {
     this._router.navigate(['/user/support/', id])
   }
   loadMore(){
-    this.modifySearchObj.PageNumber++
-    this.getSupportList(this.modifySearchObj);
+    this.searchObj.PageNumber++
+    this.getSupportList(this.searchObj);
   }
   openDialog(id :Number){
     const modalRef = this._modalService.open(DialogComponent,{ 
