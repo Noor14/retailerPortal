@@ -6,11 +6,10 @@ import { baseApi } from 'src/app/constant/baseurl';
 })
 export class SupportService {
   constructor(private _http: HttpClient) {}
-
-  getCalls(recourseName) {
+  postCalls(recourseName, obj) {
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${recourseName}`;
-      this._http.get(apiURL)
+      this._http.post(apiURL,obj)
         .toPromise()
         .then(
           res => {
@@ -22,21 +21,5 @@ export class SupportService {
         )
     });
     return promise;
-}
-postCalls(recourseName, obj) {
-  let promise = new Promise((resolve, reject) => {
-    const apiURL = `${baseApi}/api/${recourseName}`;
-    this._http.post(apiURL,obj)
-      .toPromise()
-      .then(
-        res => {
-          resolve(res);
-        },
-        err => {
-          reject(err);
-        }
-      )
-  });
-  return promise;
-}
+  }
 }

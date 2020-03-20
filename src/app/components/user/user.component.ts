@@ -1,7 +1,5 @@
-import { SharedService } from './../../services/shared.service';
 import { slideInOut } from './../../constant/animations';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './user.service';
 
 @Component({
   selector: 'app-user',
@@ -15,28 +13,10 @@ import { UserService } from './user.service';
 export class UserComponent implements OnInit {
 
   public navigationToggle:boolean=false
-  constructor(
-    private _sharedService :SharedService, 
-    private _userService : UserService)
+  constructor()
     { }
 
-  ngOnInit() {
-      this._userService.getCalls("lookup/null")
-      .then((data:any)=>{
-        if(data && data.length){
-          let obj = data.reduce((r, a) => {
-            r[a.type] = [...r[a.type] || [], a];
-            return r;
-           }, {});
-          this._sharedService.dropDownValues.next(obj);
-          console.log(obj)
-        }
-      })
-      .catch(err=>{
-        console.log(err)
-        })
-
-  }
+  ngOnInit() {}
 
   
 }
