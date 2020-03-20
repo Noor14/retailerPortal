@@ -4,7 +4,7 @@
           <div class="form-group">
             <select class="form-control" [(ngModel)]="searchingOption" (change)="selectedOption(searchingOption)">
               <option value="undefined" selected>Select Criteria</option>
-              <option *ngFor="let option of searchingCriteria?.searchBy" [value]="option.key">{{option.placeholder}}</option>
+              <option *ngFor="let option of searchingCriteria?.searchBy" [value]="option.key">{{option.name}}</option>
             </select>
           </div>
         </div>
@@ -13,7 +13,7 @@
           <div class="form-group" *ngSwitchCase="'typing'">
             <input class="form-control" #search [placeholder]="selectedObject.placeholder" />
           </div>
-          <div class="form-group" *ngSwitchCase="'date'">
+          <div class="form-group" *ngSwitchCase="'dateRange'">
             <input
             #myRangeInput
            class="form-control" 

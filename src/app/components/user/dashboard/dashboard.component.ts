@@ -17,11 +17,11 @@ export class DashboardComponent implements OnInit {
     TotalRecords: 10,
     PageNumber : 0,
     searchBy:[
-      {placeholder: 'Payment ID', type: 'typing', key: 'InvoiceNumber'},
-      {placeholder: 'Company', type: 'typing', key: 'CompanyName'},
-      {placeholder: 'Status', type: 'dropdown', key: 'Status'},
-      {placeholder: 'Created Date', type: 'date', key: ['DateFrom', 'DateTo']},
-      {placeholder: 'Amount', type: 'range', key: ['PaymentAmountMin', 'PaymentAmountMax']}
+      {name:'Payment ID', placeholder: 'Payment ID', type: 'typing', key: 'InvoiceNumber'},
+      {name:'Company', placeholder: 'Company', type: 'typing', key: 'CompanyName'},
+      {name:'Status', placeholder: 'Status', type: 'dropdown', key: 'Status'},
+      {name:'Created Date',placeholder: 'Created Date', type: 'dateRange', key: ['DateFrom', 'DateTo']},
+      {name:'Amount' ,placeholder: 'Amount', type: 'range', key: ['PaymentAmountMin', 'PaymentAmountMax']}
      ],
     searchMode:'payment'
   };
@@ -36,11 +36,11 @@ export class DashboardComponent implements OnInit {
     PaymentAmountMax:null,
     OrderNumber:null,
     searchBy:[
-      {placeholder: 'Order ID', type: 'typing', key: 'OrderNumber'},
-      {placeholder: 'Company', type: 'typing', key: 'CompanyName'},
-      {placeholder: 'Status', type: 'dropdown', key: 'Status'},
-      {placeholder: 'Created Date', type: 'date', key: ['DateFrom', 'DateTo']},
-      {placeholder: 'Amount', type: 'range', key: ['PaymentAmountMin', 'PaymentAmountMax']}
+      {name:'Order ID', placeholder: 'Order ID', type: 'typing', key: 'OrderNumber'},
+      {name:'Company', placeholder: 'Company', type: 'typing', key: 'CompanyName'},
+      {name:'Status', placeholder: 'Status', type: 'dropdown', key: 'Status'},
+      {name:'Created Date', placeholder: 'Created Date', type: 'dateRange', key: ['DateFrom', 'DateTo']},
+      {name:'Amount', placeholder: 'Amount', type: 'range', key: ['PaymentAmountMin', 'PaymentAmountMax']}
      ],
     searchMode:'order'
   };
