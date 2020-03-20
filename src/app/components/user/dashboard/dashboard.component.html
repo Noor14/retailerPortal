@@ -13,7 +13,7 @@
           <ng-template ngbTabTitle>Payment</ng-template>
           <ng-template ngbTabContent>
             <div class="content">
-              <app-searching [searchingCriteria]='filterObjPayment'></app-searching>
+              <app-searching [searchingCriteria]='filterObjPayment' (filteredData)="onSearchResult($event)"></app-searching>
               <div class="gridArea table-responsive" id="nav-scrollbar">
                 <table class="table" *ngIf="paymentsList && paymentsList.length">
                       <thead>
@@ -61,9 +61,9 @@
           <ng-template ngbTabTitle>Order</ng-template>
           <ng-template ngbTabContent>
             <div class="content">
-              <app-searching [searchingCriteria]='filterObjOrder'></app-searching>
+              <app-searching [searchingCriteria]='filterObjOrder' (filteredData)="onSearchResult($event)"></app-searching>
               <div class="gridArea table-responsive" id="nav-scrollbar">
-                <table class="table" *ngIf="paymentsList && paymentsList.length">
+                <table class="table" *ngIf="orderList && orderList.length">
                       <thead>
                       <tr>
                           <th>Order ID</th>

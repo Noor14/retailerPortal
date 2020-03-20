@@ -30,7 +30,10 @@ export class DashboardComponent implements OnInit {
       {name:'Created Date', placeholder: 'Created Date', type: 'dateRange', key: ['DateFrom', 'DateTo']},
       {name:'Amount', placeholder: 'Amount', type: 'range', key: ['PaymentAmountMin', 'PaymentAmountMax']}
      ],
-    searchMode:'order'
+    searchMode:'order',
+    apiEndPoint:'Orders/Search',
+    TotalRecords: 10,
+    PageNumber : 0
    }
    public filterObjPayment = {
     searchBy:[
@@ -40,7 +43,10 @@ export class DashboardComponent implements OnInit {
       {name:'Created Date', placeholder: 'Created Date', type: 'dateRange', key: ['DateFrom', 'DateTo']},
       {name:'Amount', placeholder: 'Amount', type: 'range', key: ['PaymentAmountMin', 'PaymentAmountMax']}
      ],
-    searchMode:'payment'
+     TotalRecords: 10,
+     PageNumber : 0,
+     apiEndPoint:'prepaidrequests/search',
+     searchMode:'payment'
    }
   public showSpinner: boolean;
   public spinnerConfig: any;
@@ -124,16 +130,25 @@ export class DashboardComponent implements OnInit {
   }
 
   loadMore(mode){
-    if(mode=='payment'){
+    if(mode =='payment'){
       this.searchObjPayment.PageNumber++
       this.getPaymentList(this.searchObjPayment);
     }else{
       this.searchObjOrder.PageNumber++
       this.getOrderList(this.searchObjOrder);
     }
-   
   }
  
+  onSearchResult(event){
+    if(event.searchMode == "payment"){
+      this.paymentsList = event.data.PrePaidRequestData;
+      this.loadAvailable = (this.paymentsList.length == event.data.RecordCount)? false : true;
+    }else{
+      this.orderList = event.data[0];
+      this.loadAvailableOrder = (this.orderList.length == event.data[1].RecordCount)? false : true;
+    }
+    console.log(event)
+  }
   openDialog(id :Number){
     const modalRef = this._modalService.open(DialogComponent,{ 
       centered: true,

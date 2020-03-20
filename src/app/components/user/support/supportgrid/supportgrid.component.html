@@ -12,7 +12,7 @@
                 <h5>Support</h5>
                 <button class="btn btn-primary mb-2 ml-3" type="button" routerLink="/user/support/0">Add Ticket</button>
         </div>
-        <app-searching [searchingCriteria]='filterObj'></app-searching>
+        <app-searching [searchingCriteria]='filterObj' (filteredData)="onSearchResult($event)"></app-searching>
         <div class="gridArea table-responsive" id="nav-scrollbar">
                 <table class="table" *ngIf="supportList && supportList.length">
                     <thead>

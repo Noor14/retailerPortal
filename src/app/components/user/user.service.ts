@@ -8,6 +8,22 @@ import { baseApi } from 'src/app/constant/baseurl';
 export class UserService {
 
   constructor(private _http: HttpClient) { }
+  postCalls(recourseName, obj) {
+    let promise = new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/${recourseName}`;
+      this._http.post(apiURL, obj)
+        .toPromise()
+        .then(
+          res => {
+            resolve(res);
+          },
+          err => {
+            reject(err);
+          }
+        )
+    });
+    return promise;
+  }
   getCalls(resourceName) {
     return new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${resourceName}`;

@@ -32,7 +32,10 @@ export class SupportgridComponent implements OnInit, OnDestroy {
       {name:'Created Date', placeholder: 'Created Date', type: 'dateRange', key: ['DateFrom', 'DateTo']},
       {name:'Issue Type', placeholder: 'Issue Type', type: 'dropdown', key: 'IssueType', filterBy : undefined}
      ],
-    searchMode:'support'
+     TotalRecords: 10,
+     PageNumber : 0,
+     apiEndPoint:'support/Search',
+     searchMode:'support'
    }
   constructor(
     private _supportService: TicketSupportService,
@@ -49,7 +52,11 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.supportDropDownSubscriber.unsubscribe();
   }
-
+  onSearchResult(event){
+    this.supportList = event.data[0];
+    this.loadAvailable = (this.supportList.length == event.data[1].RecordCount)? false : true;
+    console.log(event)
+  }
  
   getSupportList(searchObj) {
     this.showSpinner=true;

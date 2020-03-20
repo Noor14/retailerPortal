@@ -9,9 +9,9 @@
           </div>
         </div>
 
-        <div class="col-md-4" [ngSwitch]="selectedObject.type">
+        <div class="col-md-4" [ngSwitch]="selectedObject?.type">
           <div class="form-group" *ngSwitchCase="'typing'">
-            <input class="form-control" #search [placeholder]="selectedObject.placeholder" />
+            <input class="form-control" #search [placeholder]="selectedObject?.placeholder" />
           </div>
           <div class="form-group" *ngSwitchCase="'dateRange'">
             <input
@@ -40,9 +40,9 @@
           </div>
 
           <div class="form-group" *ngSwitchCase="'dropdown'">
-            <select class="form-control" #search >
-              <option value="" selected>{{selectedObject.placeholder}}</option>
-              <option *ngFor="let obj of selectedObject.filterBy">{{obj.value}}</option>
+            <select class="form-control" #search (change)="searchOnChange(search)">
+              <option value="" selected>{{selectedObject?.placeholder}}</option>
+              <option *ngFor="let obj of selectedObject?.filterBy" [value]="obj.key">{{obj.value}}</option>
             </select>
           </div>
 
@@ -54,3 +54,4 @@
         </div>
       </div>
 </section>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

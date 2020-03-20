@@ -1,5 +1,6 @@
-import { SharedService } from 'src/app/services/shared.service';
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, ChangeDetectorRef, ViewEncapsulation, Input } from '@angular/core';
+import { loadingConfig } from './../../constant/globalfunction';
+import { UserService } from './../../components/user/user.service';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, ChangeDetectorRef, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { NgbDateStruct, NgbInputDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, fromEvent } from 'rxjs';
 import { map, filter, debounceTime, tap, switchAll, distinctUntilChanged } from 'rxjs/operators';
@@ -20,8 +21,13 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
   styleUrls: ['./searching.component.scss']
 })
 export class SearchingComponent implements OnInit {
+
+  public showSpinner: boolean;
+  public spinnerConfig: any;
+
   @Input() searchingCriteria: any;
-  private statusDropDownSubscriber:any;
+  @Output() filteredData = new EventEmitter();
+
   public statuses:any[]=[];
   public selectedObject:any={};
 
@@ -45,15 +51,16 @@ export class SearchingComponent implements OnInit {
   isTo = date => equals(date, this.toDate);
   constructor(  private renderer: Renderer2, 
     private _parserFormatter: NgbDateParserFormatter,
-    private _sharedService: SharedService,
+    private _userService: UserService,
     private changeDetectorRef: ChangeDetectorRef,) { }
 
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
   }
 
-  
   selectedOption(option){
     this.selectedObject = this.searchingCriteria.searchBy.find(obj=> obj.key == option);
+    console.log(this.filteredData)
   }
   // selectSearch(){
   //   if(this.searchingOption){
@@ -120,19 +127,41 @@ export class SearchingComponent implements OnInit {
   //       }
   //     }
   // }
-  // filterByStatus(elem){
-  //   if(this.searchingOption){
-  //     if(elem.value){
-  //       this.modifySearchObj = Object.assign({}, this.searchObj);
-  //       this.modifySearchObj.Status = elem.value
-  //       this.getPaymentList(this.modifySearchObj);
-  //      }
-  //      else{
-  //       this.getPaymentList(this.searchObj);
-  //       this.modifySearchObj = Object.assign({}, this.searchObj);
-  //     }
-  //     }
-  // }
+    searchOnChange(elem){
+          if(elem.value){
+          let obj:any = {
+            [this.selectedObject.key] : elem.value,
+          };
+            if(this.searchingCriteria.TotalRecords){
+              obj.TotalRecords = this.searchingCriteria.TotalRecords;
+            }
+            if(this.searchingCriteria.PageNumber){
+              obj.PageNumber = this.searchingCriteria.PageNumber;
+            }
+          this.filter(obj);
+        }
+    }
+
+    filter(obj){
+    this.showSpinner=true;
+      this._userService.postCalls(this.searchingCriteria.apiEndPoint, obj)
+      .then((data:any)=>{
+        if(data && data.length){
+          let object = {
+            data: data,
+            [this.selectedObject.key]: obj[this.selectedObject.key],
+            searchMode : this.searchingCriteria.searchMode
+          }
+         this.filteredData.emit(object);
+        }
+       this.showSpinner=false;
+      })
+      .catch(err=>{
+       this.showSpinner=false;
+        console.log(err)
+        })
+    }
+
   onDateSelection(date: NgbDateStruct) {
     let parsed = '';
     if (!this.fromDate && !this.toDate) {
