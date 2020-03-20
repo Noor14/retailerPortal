@@ -20,21 +20,14 @@ export class DashboardComponent implements OnInit {
       {name:'Payment ID', placeholder: 'Payment ID', type: 'typing', key: 'InvoiceNumber'},
       {name:'Company', placeholder: 'Company', type: 'typing', key: 'CompanyName'},
       {name:'Status', placeholder: 'Status', type: 'dropdown', key: 'Status'},
-      {name:'Created Date',placeholder: 'Created Date', type: 'dateRange', key: ['DateFrom', 'DateTo']},
-      {name:'Amount' ,placeholder: 'Amount', type: 'range', key: ['PaymentAmountMin', 'PaymentAmountMax']}
+      {name:'Created Date', placeholder: 'Created Date', type: 'dateRange', key: ['DateFrom', 'DateTo']},
+      {name:'Amount', placeholder: 'Amount', type: 'range', key: ['PaymentAmountMin', 'PaymentAmountMax']}
      ],
     searchMode:'payment'
   };
   public searchObjOrder: any = {
     TotalRecords: 10,
     PageNumber : 0,
-    CompanyName:null,
-    DateFrom:null,
-    DateTo:null,
-    Status:null,
-    PaymentAmountMin:null,
-    PaymentAmountMax:null,
-    OrderNumber:null,
     searchBy:[
       {name:'Order ID', placeholder: 'Order ID', type: 'typing', key: 'OrderNumber'},
       {name:'Company', placeholder: 'Company', type: 'typing', key: 'CompanyName'},
