@@ -52,10 +52,13 @@ export class PaymentDetailsComponent implements OnInit {
   getPaymentDetails(resourceName, requestId){
       this.showSpinner=true;
     this._paymentDetailService.getDetail(resourceName, requestId).then((data: any) => {
-      this.showSpinner=false;
+      if(!this.requestType && this.requestId){
+        data = data.Invoice;
+      }
       data.CreatedDate =  moment(data.CreatedDate).format('DD-MM-YYYY');
       data.TransactionDate =  moment(data.TransactionDate).format('DD-MM-YYYY');
       this.paymentDetailForm.patchValue(data);
+      this.showSpinner=false;
     })
     .catch(err => {
       this.showSpinner=false;

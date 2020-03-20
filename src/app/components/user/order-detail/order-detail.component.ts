@@ -53,7 +53,7 @@ export class OrderDetailComponent implements OnInit {
   }
   getOrderDetails(requestId){
     this.showSpinner=true;
-  this._orderDetailService.getDetail(requestId).then((data: any) => {
+    this._orderDetailService.getDetail(requestId).then((data: any) => {
     this.showSpinner=false;
     this.orderDetaiList = data.OrderDetails;
     data.OrderPaymentDetails.OrderCreatedDate =  moment(data.OrderPaymentDetails.OrderCreatedDate).format('DD-MM-YYYY');

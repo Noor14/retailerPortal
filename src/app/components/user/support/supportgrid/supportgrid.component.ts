@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 import { SharedService } from '../../../../services/shared.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DialogComponent } from 'src/app/shared/dialog-modal/dialog/dialog.component';
-import { fromEvent } from 'rxjs';
-import { map, filter, debounceTime, tap, switchAll, distinctUntilChanged } from 'rxjs/operators';
+
 @Component({
   selector: 'app-supportgrid',
   templateUrl: './supportgrid.component.html',
@@ -37,8 +36,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
     private _supportService: TicketSupportService,
     private _sharedService: SharedService,
     private _router: Router,
-    private _modalService: NgbModal,
-    private changeDetectorRef: ChangeDetectorRef) { }
+    private _modalService: NgbModal) { }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
