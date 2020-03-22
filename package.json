@@ -25,6 +25,7 @@
     "@angular/router": "~8.2.14",
     "@hardpool/ngx-spinner": "^2.2.1",
     "@ng-bootstrap/ng-bootstrap": "^5.1.5",
+    "@syncfusion/ej2-angular-treegrid": "^17.4.51",
     "angular2-text-mask": "^9.0.0",
     "bootstrap": "^4.4.1",
     "float-label-css": "^1.0.2",
