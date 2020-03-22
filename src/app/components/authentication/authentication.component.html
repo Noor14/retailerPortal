@@ -2,25 +2,28 @@
     <div class="container-fluid">
      <div class="row">
         <section class="content col-10 offset-1">
-            <div class="row">
-                <div class="col-lg-5 col-md-12 mb-3">
-                    <h1 class="logo text-hide">Logo</h1>
-                    <h4 class="mt-4 mb-3 title">Welcome to Retailer Portal</h4>
-                    <p class="text-justify description">
-                        Haball Self-Service Retailer Portal is a one window solution to manage business
-                        to business transactions and enable process optimization from ordering digitally
-                        to making payments easily.
-                    </p>
-                    <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-start">
-                      <button class="btn btn-primary mr-3" *ngIf="supportBtnToggle" routerLink="/support">Support</button>
-                      <button class="btn btn-primary" *ngIf="signupBtnToggle" routerLink="/registration">Signup</button>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-5 col-md-12 mb-3">
+                        <h1 class="logo text-hide">Logo</h1>
+                        <h4 class="mt-4 mb-3 title">Welcome to Retailer Portal</h4>
+                        <p class="text-justify description">
+                            Haball Self-Service Retailer Portal is a one window solution to manage business
+                            to business transactions and enable process optimization from ordering digitally
+                            to making payments easily.
+                        </p>
+                        <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-start">
+                          <button class="btn btn-primary mr-3" *ngIf="supportBtnToggle" routerLink="/support">Support</button>
+                          <button class="btn btn-primary" *ngIf="signupBtnToggle" routerLink="/registration">Signup</button>
+                        </div>
+    
                     </div>
-
-                </div>
-                <div class="col-lg-6 col-md-12 offset-lg-1">
-                    <router-outlet></router-outlet>
+                    <div class="col-lg-6 col-md-12 offset-lg-1">
+                        <router-outlet></router-outlet>
+                    </div>
                 </div>
             </div>
+         
         </section>
      </div>
     </div>
