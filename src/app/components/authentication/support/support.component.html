@@ -1,80 +1,80 @@
-<section class="support" id="nav-scrollbar">
-    <h4 class="mb-4 title">Welcome to Haball support center</h4>
-    <form [formGroup]="supportForm">
-        <div class="form-group has-float-label">
-            <input type="text" id="name" class="form-control" formControlName="ContactName" placeholder="Company"
-            [ngClass]="{'validationError': supportForm.controls['ContactName'].errors && (supportForm.controls.ContactName.dirty || supportForm.controls.ContactName.touched)}">
-            <label for="name">Company</label>
-        </div>
-
+<section class="support">
+    <h4 class="mb-4 title ml-3">Welcome to Haball support center</h4>
+    <section class="spForm container" id="nav-scrollbar">
+        <form [formGroup]="supportForm">
             <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group has-float-label">
-                        <input type="email" id="email" noWhiteSpace class="form-control" formControlName="Email" placeholder="Email"
-                        [ngClass]="{'validationError': supportForm.controls['Email'].errors && (supportForm.controls.Email.dirty || supportForm.controls.Email.touched)}">
-                        <label for="email">Email</label>
+                    <div class="col-12">
+                        <div class="form-group has-float-label">
+                            <input type="text" id="name" class="form-control" formControlName="ContactName" placeholder="Company"
+                            [ngClass]="{'validationError': supportForm.controls['ContactName'].errors && (supportForm.controls.ContactName.dirty || supportForm.controls.ContactName.touched)}">
+                            <label for="name">Company</label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group has-float-label">
-                        <input type="text" id="mobile" class="form-control" [textMask]="{mask: mobileMask}" formControlName="MobileNumber" placeholder="Mobile No"
-                        [ngClass]="{'validationError': supportForm.controls['MobileNumber'].errors && (supportForm.controls.MobileNumber.dirty || supportForm.controls.MobileNumber.touched)}">
-                        <label for="mobile">Mobile No</label>
+    
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group has-float-label">
+                            <input type="email" id="email" noWhiteSpace class="form-control" formControlName="Email" placeholder="Email"
+                            [ngClass]="{'validationError': supportForm.controls['Email'].errors && (supportForm.controls.Email.dirty || supportForm.controls.Email.touched)}">
+                            <label for="email">Email</label>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group has-float-label">
-                        <select name="PreferredContactMethod" placeholder="Contact Method" id="contact" class="form-control" formControlName="PreferredContactMethod"
-                        [ngClass]="{'validationError': supportForm.controls['PreferredContactMethod'].errors && (supportForm.controls.PreferredContactMethod.dirty || supportForm.controls.PreferredContactMethod.touched)}">
-                        <option value="null" disabled selected>Contact Method</option> 
-                        <option *ngFor="let contact of contacting" [value]="contact.key"> {{contact.value}} </option>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group has-float-label">
+                            <input type="text" id="mobile" class="form-control" [textMask]="{mask: mobileMask}" formControlName="MobileNumber" placeholder="Mobile No"
+                            [ngClass]="{'validationError': supportForm.controls['MobileNumber'].errors && (supportForm.controls.MobileNumber.dirty || supportForm.controls.MobileNumber.touched)}">
+                            <label for="mobile">Mobile No</label>
+                        </div>
+                    </div>
+    
+    
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group has-float-label">
+                            <select name="PreferredContactMethod" placeholder="Contact Method" id="contact" class="form-control" formControlName="PreferredContactMethod"
+                            [ngClass]="{'validationError': supportForm.controls['PreferredContactMethod'].errors && (supportForm.controls.PreferredContactMethod.dirty || supportForm.controls.PreferredContactMethod.touched)}">
+                            <option value="null" disabled selected>Contact Method</option> 
+                            <option *ngFor="let contact of contacting" [value]="contact.key"> {{contact.value}} </option>
+                            </select>
+                        <label for="contact">Contact Method</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group has-float-label">
+                            <select name="IssueType" id="Issue" class="form-control" formControlName="IssueType" placeholder="Issue Type"
+                            [ngClass]="{'validationError': supportForm.controls['IssueType'].errors && (supportForm.controls.IssueType.dirty || supportForm.controls.IssueType.touched)}">
+                                 <option value="null" disabled selected>Issue Type</option>
+                                <option *ngFor="let issue of issueType" [value]="issue.key"> {{issue.value}} </option>
+                            </select>
+                            <label for="Issue">Issue Type</label>
+                        </div>
+                    </div>
+              
+                    <div class="col-12">
+                        <div class="form-group has-float-label">
+                            <select name="Criticality" id="criticality" class="form-control" formControlName="Criticality" placeholder="Criticality"
+                            [ngClass]="{'validationError': supportForm.controls['Criticality'].errors && (supportForm.controls.Criticality.dirty || supportForm.controls.Criticality.touched)}">
+                            <option value="null" disabled selected>Criticality Type</option>
+                            <option *ngFor="let critical of criticality" [value]="critical.key"> {{critical.value}} </option>
                         </select>
-                    <label for="contact">Contact Method</label>
+                        <label for="criticality">Criticality</label>
+                        </div>
+                    </div>
+           
+                    <div class="col-12">
+                        <div class="form-group has-float-label">
+                            <textarea rows="1" id="address" cols="58" class="form-control" placeholder="Address" formControlName="Description"
+                            [ngClass]="{'validationError': supportForm.controls['Description'].errors && (supportForm.controls.Description.dirty || supportForm.controls.Description.touched)}"></textarea>
+                            <label for="address">Comments</label>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group has-float-label">
-                        <select name="IssueType" id="Issue" class="form-control" formControlName="IssueType" placeholder="Issue Type"
-                        [ngClass]="{'validationError': supportForm.controls['IssueType'].errors && (supportForm.controls.IssueType.dirty || supportForm.controls.IssueType.touched)}">
-                             <option value="null" disabled selected>Issue Type</option>
-                            <option *ngFor="let issue of issueType" [value]="issue.key"> {{issue.value}} </option>
-                        </select>
-                        <label for="Issue">Issue Type</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group has-float-label">
-                        <select name="Criticality" id="criticality" class="form-control" formControlName="Criticality" placeholder="Criticality"
-                        [ngClass]="{'validationError': supportForm.controls['Criticality'].errors && (supportForm.controls.Criticality.dirty || supportForm.controls.Criticality.touched)}">
-                        <option value="null" disabled selected>Criticality Type</option>
-                        <option *ngFor="let critical of criticality" [value]="critical.key"> {{critical.value}} </option>
-                    </select>
-                    <label for="criticality">Criticality</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group has-float-label">
-                        <textarea rows="1" id="address" cols="58" class="form-control" placeholder="Address" formControlName="Description"
-                        [ngClass]="{'validationError': supportForm.controls['Description'].errors && (supportForm.controls.Description.dirty || supportForm.controls.Description.touched)}"></textarea>
-                        <label for="address">Comments</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-center">
-                <button class="btn btn-primary mr-3" type="button" routerLink="/login">Back</button>
-                <button class="btn btn-primary ml-3" type="button" (click)="save()" [disabled]="supportForm.invalid">Submit</button>
-            </div>        
-                    
-    </form>
+    
+                <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-center">
+                    <button class="btn btn-primary mr-3" type="button" routerLink="/login">Back</button>
+                    <button class="btn btn-primary ml-3" type="button" (click)="save()" [disabled]="supportForm.invalid">Submit</button>
+                </div>        
+                        
+        </form>
+    </section>
+    
 </section>
 <ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

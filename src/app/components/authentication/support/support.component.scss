@@ -1,6 +1,8 @@
 .support
 {
-    max-height: 440px;
-    overflow-x: auto;
+    .spForm{
+        max-height: 440px;
+        overflow-y: auto;
+    }
 
 }
