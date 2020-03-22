@@ -60,7 +60,10 @@ export class SearchingComponent implements OnInit {
 
   selectedOption(option){
     this.selectedObject = this.searchingCriteria.searchBy.find(obj=> obj.key == option);
-    if(this.selectedKey){
+    if(this.selectedObject && this.selectedObject.type == "typing" && !this.selectedKey){
+      this.searchOntyping()
+    }
+    else if(this.selectedKey){
       if(this.searchingCriteria.TotalRecords){
         this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
       }
@@ -70,73 +73,42 @@ export class SearchingComponent implements OnInit {
       delete this.searchingobj[this.selectedKey];
       this.filter(this.searchingobj);
       this.selectedKey = undefined;
+      if (this.search && this.search.nativeElement && this.search.nativeElement.value){
+        this.search.nativeElement.value = '';
+      }
     }
   }
-  // selectSearch(){
-  //   if(this.searchingOption){
-  //     // if(this.search.nativeElement && this.search.nativeElement.value){
-  //     //   this.getPaymentList(this.searchObj);
-  //     //   this.modifySearchObj = Object.assign({}, this.searchObj);
-  //     //   this.search.nativeElement.value= '';
-  //     // }
-  //     this.changeDetectorRef.detectChanges();
-  //     fromEvent(this.search && this.search.nativeElement, 'keyup').pipe(
-  //       // get value
-  //       map((event: any) => {
-  //         return event.target.value;
-  //       })
-  //       // if character length greater then 2
-  //       // ,filter(res => res.length > 2)
-  //       // Time in milliseconds between key events
-  //       ,debounceTime(1000)        
-  //       // If previous query is diffent from current   
-  //       ,distinctUntilChanged()
-  //       // subscription for response
-  //       ).subscribe((text: string) => {
-  //            if(text){
-  //             this.modifySearchObj = Object.assign({}, this.searchObj);
-  //             switch(this.searchingOption) {
-  //               case 'Company':
-  //                 this.modifySearchObj.CompanyName = text
-  //                 this.getPaymentList(this.modifySearchObj);
-  //                 break;
-  //               case 'Payment ID':
-  //                 this.modifySearchObj.InvoiceNumber = text
-  //                 this.getPaymentList(this.modifySearchObj);
-  //                 break;
-                
-  //               case 'Amount':
-  //                 this.modifySearchObj.Amount = text
-  //                 this.getPaymentList(this.modifySearchObj);
-  //                 break;
 
-  //               case 'Status':
-  //                 this.modifySearchObj.Status = text
-  //                 this.getPaymentList(this.modifySearchObj);
-  //                 break;
-
-  //               case 'Created Date':
-  //                 this.modifySearchObj.Amount = text
-  //                 this.getPaymentList(this.modifySearchObj);
-  //                 break;
-
-               
-  //             }
-             
-  //            }
-  //            else{
-  //             this.getPaymentList(this.searchObj);
-  //             this.modifySearchObj = Object.assign({}, this.searchObj);
-  //           }
+  searchOntyping(){
+      this.changeDetectorRef.detectChanges();
+      fromEvent(this.search && this.search.nativeElement, 'keyup').pipe(
+        // get value
+        map((event: any) => {
+          return event.target.value;
+        })
+        // if character length greater then 2
+        // ,filter(res => res.length > 2)
+        // Time in milliseconds between key events
+        ,debounceTime(1000)        
+        // If previous query is diffent from current   
+        ,distinctUntilChanged()
+        // subscription for response
+        ).subscribe((text: string) => {
+              this.selectedKey = [this.selectedObject.key]
+              this.searchingobj = {
+                [this.selectedObject.key] : text,
+              };
+                if(this.searchingCriteria.TotalRecords){
+                  this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
+                }
+                if(this.searchingCriteria.PageNumber == 0){
+                  this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
+                }
+              this.filter(this.searchingobj);
           
-  //       });
-  //     }else{
-  //       if(this.search.nativeElement && this.search.nativeElement.value){
-  //         this.getPaymentList(this.searchObj);
-  //         this.modifySearchObj = Object.assign({}, this.searchObj);
-  //       }
-  //     }
-  // }
+        });
+      }
+
     searchOnChange(elem){
           if(elem.value && [this.selectedObject.key]){
           this.selectedKey = [this.selectedObject.key]
@@ -164,10 +136,10 @@ export class SearchingComponent implements OnInit {
     }
 
     filter(obj){
-      this.showSpinner=true;
+      this.showSpinner = true;
         this._userService.postCalls(this.searchingCriteria.apiEndPoint, obj)
         .then((data:any)=>{
-          if(data && data.length){
+          if(data && Object.keys(data).length){
             let object = {
               data: data,
               [this.selectedObject.key]: obj[this.selectedKey],
