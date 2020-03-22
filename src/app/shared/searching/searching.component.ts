@@ -24,7 +24,7 @@ export class SearchingComponent implements OnInit {
 
   public showSpinner: boolean;
   public spinnerConfig: any;
-
+  private selectedKey: any = undefined;
   @Input() searchingCriteria: any;
   @Output() filteredData = new EventEmitter();
 
@@ -60,16 +60,16 @@ export class SearchingComponent implements OnInit {
 
   selectedOption(option){
     this.selectedObject = this.searchingCriteria.searchBy.find(obj=> obj.key == option);
-    if(Object.keys(this.searchingobj).length){
+    if(this.selectedKey){
       if(this.searchingCriteria.TotalRecords){
         this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
       }
-      if(this.searchingCriteria.PageNumber.hasOwnProperty(this.searchingCriteria.PageNumber)){
+      if(this.searchingCriteria.PageNumber == 0){
         this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
-      }else{
-        this.searchingobj = {}
       }
+      delete this.searchingobj[this.selectedKey];
       this.filter(this.searchingobj);
+      this.selectedKey = undefined;
     }
   }
   // selectSearch(){
@@ -138,38 +138,49 @@ export class SearchingComponent implements OnInit {
   //     }
   // }
     searchOnChange(elem){
-          if(elem.value){
+          if(elem.value && [this.selectedObject.key]){
+          this.selectedKey = [this.selectedObject.key]
           this.searchingobj = {
             [this.selectedObject.key] : elem.value,
           };
             if(this.searchingCriteria.TotalRecords){
               this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
             }
-            if(this.searchingCriteria.PageNumber){
+            if(this.searchingCriteria.PageNumber == 0){
               this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
             }
+          this.filter(this.searchingobj);
+        }
+        else if(!elem.value && this.selectedKey){
+          if(this.searchingCriteria.TotalRecords){
+            this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
+          }
+          if(this.searchingCriteria.PageNumber == 0){
+            this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
+          }
+          delete this.searchingobj[this.selectedKey];
           this.filter(this.searchingobj);
         }
     }
 
     filter(obj){
-    this.showSpinner=true;
-      this._userService.postCalls(this.searchingCriteria.apiEndPoint, obj)
-      .then((data:any)=>{
-        if(data && data.length){
-          let object = {
-            data: data,
-            [this.selectedObject.key]: obj[this.selectedObject.key],
-            searchMode : this.searchingCriteria.searchMode
+      this.showSpinner=true;
+        this._userService.postCalls(this.searchingCriteria.apiEndPoint, obj)
+        .then((data:any)=>{
+          if(data && data.length){
+            let object = {
+              data: data,
+              [this.selectedObject.key]: obj[this.selectedKey],
+              searchMode : this.searchingCriteria.searchMode
+            }
+          this.filteredData.emit(object);
           }
-         this.filteredData.emit(object);
-        }
-       this.showSpinner=false;
-      })
-      .catch(err=>{
-       this.showSpinner=false;
-        console.log(err)
+        this.showSpinner = false;
         })
+        .catch(err=>{
+        this.showSpinner=false;
+          console.log(err)
+          })
     }
 
   onDateSelection(date: NgbDateStruct) {
