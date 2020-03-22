@@ -1,57 +1,58 @@
 <section class="search">
     <div class="row">
-        <div class="col-md-3">
-          <div class="form-group">
-            <select class="form-control" [(ngModel)]="searchingOption" (change)="selectedOption(searchingOption)">
-              <option value="undefined" selected>Select Criteria</option>
-              <option *ngFor="let option of searchingCriteria?.searchBy" [value]="option.key">{{option.name}}</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="col-md-4" [ngSwitch]="selectedObject?.type">
-          <div class="form-group" *ngSwitchCase="'typing'">
-            <input class="form-control" #search [placeholder]="selectedObject?.placeholder" />
-          </div>
-          <div class="form-group" *ngSwitchCase="'dateRange'">
-            <input
-            #myRangeInput
-           class="form-control" 
-           placeholder="mm-dd-yyyy - mm-dd-yyyy"
-            name="dp" [displayMonths]="2" [navigation]="'select'" [outsideDays]="'visible'"
-            [showWeekNumbers]="false" ngbDatepicker #d="ngbDatepicker" [dayTemplate]="t" (click)="d.toggle()" [autoClose]="'outside'"
-           [(ngModel)]="model" 
-           ngbDatepicker 
-           [maxDate]="maxDate"
-           [minDate]="minDate"
-           autocomplete="off">
-   
-           <ng-template #t let-date="date" let-focused="focused">
-               <span class="custom-day"
-                   [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
-                   [class.faded]="isHovered(date) || isInside(date)"
-                   (click)="onDateSelection(date)"
-                   (mouseenter)="hoveredDate = date"
-                   (mouseleave)="hoveredDate = null"
-                   >
-               {{ date.day }}
-               </span>
-           </ng-template>
-          </div>
-
-          <div class="form-group" *ngSwitchCase="'dropdown'">
-            <select class="form-control" #search (change)="searchOnChange(search)">
-              <option value="" selected>{{selectedObject?.placeholder}}</option>
-              <option *ngFor="let obj of selectedObject?.filterBy" [value]="obj.key">{{obj.value}}</option>
-            </select>
-          </div>
-
-          <div class="form-group d-flex" *ngSwitchCase="'range'">
-            <input class="form-control" placeholder="Min Amount" /> 
-            <span class="mr-2 ml-2 separator"></span> 
-            <input class="form-control" placeholder="Max Amount" />
-          </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <select class="form-control" [(ngModel)]="searchingOption" (change)="selectedOption(searchingOption)">
+            <option value="undefined" selected>Select Criteria</option>
+            <option *ngFor="let option of searchingCriteria?.searchBy" [value]="option.key">{{option.name}}</option>
+          </select>
         </div>
       </div>
+
+      <div class="col-md-4" [ngSwitch]="selectedObject?.type">
+        <div class="form-group" *ngSwitchCase="'typing'">
+          <input class="form-control" #search [placeholder]="selectedObject?.placeholder" />
+        </div>
+        <div class="form-group" *ngSwitchCase="'dateRange'">
+          <input
+          #myRangeInput
+         class="form-control" 
+         placeholder="mm-dd-yyyy - mm-dd-yyyy"
+          name="dp" [displayMonths]="2" [navigation]="'select'" [outsideDays]="'visible'"
+          [showWeekNumbers]="false" ngbDatepicker #d="ngbDatepicker" [dayTemplate]="t" (click)="d.toggle()" [autoClose]="'outside'"
+         [(ngModel)]="model" 
+         ngbDatepicker 
+         [maxDate]="maxDate"
+         [minDate]="minDate"
+         autocomplete="off">
+ 
+         <ng-template #t let-date="date" let-focused="focused">
+             <span class="custom-day"
+                 [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+                 [class.faded]="isHovered(date) || isInside(date)"
+                 (click)="onDateSelection(date)"
+                 (mouseenter)="hoveredDate = date"
+                 (mouseleave)="hoveredDate = null"
+                 >
+             {{ date.day }}
+             </span>
+         </ng-template>
+        </div>
+
+        <div class="form-group" *ngSwitchCase="'dropdown'">
+          <select class="form-control" #search (change)="searchOnChange(search)">
+            <option value="" selected>{{selectedObject?.placeholder}}</option>
+            <option *ngFor="let obj of selectedObject?.filterBy" [value]="obj.key">{{obj.value}}</option>
+          </select>
+        </div>
+
+        <div class="form-group d-flex" *ngSwitchCase="'range'">
+          <input class="form-control" placeholder="Min Amount" /> 
+          <span class="mr-2 ml-2 separator"></span> 
+          <input class="form-control" placeholder="Max Amount" />
+        </div>
+      </div>
+  </div>
+
 </section>
 <ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>
