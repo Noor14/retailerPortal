@@ -4,7 +4,9 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2, ChangeDetectorRef,
 import { NgbDateStruct, NgbInputDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, fromEvent } from 'rxjs';
 import { map, filter, debounceTime, tap, switchAll, distinctUntilChanged } from 'rxjs/operators';
-const now = new Date();
+import * as moment from 'moment';
+
+const now = moment();
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
   one && two && two.year === one.year && two.month === one.month && two.day === one.day;
 
@@ -35,7 +37,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
   private onTypeSubscriber:any;
 
   startDate: NgbDateStruct;
-  maxDate: NgbDateStruct = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
+  maxDate: NgbDateStruct = { year: now.year(), month: now.month() + 1, day: now.date()};
   minDate: NgbDateStruct;
   hoveredDate: NgbDateStruct;
   fromDate: any;
