@@ -31,7 +31,7 @@
             padding-right: 1rem;
             background-color: unset;
             .ngb-dp-day{
-              &:nth-last-child(1){
+              &:last-child{
                 color: red;
               }
             }
