@@ -1,4 +1,4 @@
-<section class="search">
+<section class="searching">
     <div class="row">
       <div class="col-md-3">
         <div class="form-group">
@@ -18,7 +18,7 @@
           #myRangeInput
          class="form-control" 
          placeholder="mm-dd-yyyy - mm-dd-yyyy"
-          name="dp" [displayMonths]="2" [navigation]="'select'" [outsideDays]="'visible'"
+          name="dp" [displayMonths]="2" [navigation]="'arrows'" [outsideDays]="'visible'"
           [showWeekNumbers]="false" ngbDatepicker #d="ngbDatepicker" [dayTemplate]="t" (click)="d.toggle()" [autoClose]="'outside'"
          [(ngModel)]="model" 
          ngbDatepicker 

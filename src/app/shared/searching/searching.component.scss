@@ -1,19 +1,80 @@
+@import "../../../assets/_scss/_variables";
+
 .searching{
-    .custom-day {
-        text-align: center;
-        padding: 0.185rem 0.25rem;
-        display: inline-block;
-        height: 2rem;
-        width: 2rem;
-        &.focused {
-            background-color: #e6e6e6;
+  ngb-datepicker{
+    .ngb-dp-header{
+      background-color: unset;
+      ngb-datepicker-navigation{
+        .ngb-dp-arrow{
+          .ngb-dp-arrow-btn{
+            color: $baseColor;
+            &:focus{
+              outline: unset;
+            }
           }
-          &.range, &:hover {
-            background-color: #97bb3d;
-            color: white;
-          }
-          &.faded {
-            background-color: rgba(15, 248, 85, 0.5);
-          }
+        }
+        .ngb-dp-month-name{
+          color: $baseColor;
+          background-color: unset;
+          font-size: large;
+        }
       }
+    }
+    .ngb-dp-months{
+      .ngb-dp-month{
+        &:first-child{
+          border-right: 1px solid #eee;
+        }
+        &:first-child, &:last-child{
+          .ngb-dp-week{
+            padding-left: 1rem;
+            padding-right: 1rem;
+            background-color: unset;
+            .ngb-dp-day{
+              &:nth-last-child(1){
+                color: red;
+              }
+            }
+            
+          }
+        }
+        .ngb-dp-week{
+          .ngb-dp-weekday{
+            font-style: normal;
+            color: #777777;
+          }
+          .ngb-dp-day{
+            &:focus{
+              outline: unset;
+            }
+            .custom-day {
+              text-align: center;
+              padding: 0.185rem 0.25rem;
+              display: inline-block;
+              height: 2rem;
+              width: 2rem;
+              &:focus{
+                outline: unset;
+              }
+              &.focused {
+                  background-color: #e6e6e6;
+                }
+                &.range, &:hover {
+                  background-color: $baseColor;
+                  color: white;
+                }
+                &.faded {
+                  background-color: #97bb3d8c;
+                }
+            }
+          }
+        }
+      }
+ 
+    }
+   
+    
+  }
+ 
+
 }
