@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit {
   public paymentsList: any[]= [];
   public orderList: any[]= [];
   private statusDropDownSubscriber: any;
+  private searchingByKey:any;
 
   constructor(
     private _dashboardService: DashboardService,
@@ -131,23 +132,31 @@ export class DashboardComponent implements OnInit {
 
   loadMore(mode){
     if(mode =='payment'){
-      this.searchObjPayment.PageNumber++
-      this.getPaymentList(this.searchObjPayment);
+      this.searchObjPayment.PageNumber++;
+      let obj = {...this.searchObjPayment , ...this.searchingByKey};
+      this.getPaymentList(obj);
     }else{
       this.searchObjOrder.PageNumber++
-      this.getOrderList(this.searchObjOrder);
+      let obj = {...this.searchObjOrder , ...this.searchingByKey};
+      this.getOrderList(obj);
     }
   }
  
   onSearchResult(event){
     if(event.searchMode == "payment"){
+      this.searchObjPayment.PageNumber = 0;
       this.paymentsList = event.data.PrePaidRequestData;
+      let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
+      this.searchingByKey = {[key]: event[key]}
       this.loadAvailable = (this.paymentsList.length == event.data.RecordCount)? false : true;
     }else{
+      this.searchObjOrder.PageNumber = 0;
+      let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
+      this.searchingByKey = {[key]: event[key]}
       this.orderList = event.data[0];
       this.loadAvailableOrder = (this.orderList.length == event.data[1].RecordCount)? false : true;
     }
-    console.log(event)
+    console.log(event, this.searchingByKey)
   }
   openDialog(id :Number){
     const modalRef = this._modalService.open(DialogComponent,{ 

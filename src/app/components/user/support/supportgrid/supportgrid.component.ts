@@ -37,6 +37,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
      apiEndPoint:'support/Search',
      searchMode:'support'
    }
+   private searchingByKey:any;
   constructor(
     private _supportService: TicketSupportService,
     private _sharedService: SharedService,
@@ -54,6 +55,9 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   }
   onSearchResult(event){
     this.supportList = event.data[0];
+    this.searchObj.PageNumber = 0;
+    let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
+    this.searchingByKey = {[key]: event[key]}
     this.loadAvailable = (this.supportList.length == event.data[1].RecordCount)? false : true;
     console.log(event)
   }
@@ -97,7 +101,8 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   }
   loadMore(){
     this.searchObj.PageNumber++
-    this.getSupportList(this.searchObj);
+    let obj = {...this.searchObj , ...this.searchingByKey};
+    this.getSupportList(obj);
   }
   openDialog(id :Number){
     const modalRef = this._modalService.open(DialogComponent,{ 

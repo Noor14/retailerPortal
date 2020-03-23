@@ -86,8 +86,11 @@ export class SearchingComponent implements OnInit, OnDestroy {
       if (this.search && this.search.nativeElement && this.search.nativeElement.value){
         this.search.nativeElement.value = '';
       }
-
+      if(this.selectedObject && this.selectedObject.type == "typing" && !this.selectedKey){
+        this.searchOntyping();
+      }
     }
+  
   }
 
   searchOntyping(){
