@@ -17,7 +17,7 @@
           <input
           #myRangeInput
          class="form-control" 
-         placeholder="mm-dd-yyyy - mm-dd-yyyy"
+         placeholder="From Date - To Date"
           name="dp" [displayMonths]="2" [navigation]="'arrows'" [outsideDays]="'visible'"
           [showWeekNumbers]="false" ngbDatepicker #d="ngbDatepicker" [dayTemplate]="t" (click)="d.toggle()" [autoClose]="'outside'"
          [(ngModel)]="model" 
