@@ -1,6 +1,6 @@
 import { loadingConfig } from './../../constant/globalfunction';
 import { UserService } from './../../components/user/user.service';
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, ChangeDetectorRef, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, ChangeDetectorRef, ViewEncapsulation, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NgbDateStruct, NgbInputDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, fromEvent } from 'rxjs';
 import { map, filter, debounceTime, tap, switchAll, distinctUntilChanged } from 'rxjs/operators';
@@ -20,7 +20,7 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./searching.component.scss']
 })
-export class SearchingComponent implements OnInit {
+export class SearchingComponent implements OnInit, OnDestroy {
 
   public showSpinner: boolean;
   public spinnerConfig: any;
@@ -31,7 +31,7 @@ export class SearchingComponent implements OnInit {
   public statuses:any[]=[];
   public selectedObject:any={};
   private searchingobj:any= {}
-
+  private onTypeSubscriber:any;
 
   startDate: NgbDateStruct;
   maxDate: NgbDateStruct;
@@ -57,11 +57,15 @@ export class SearchingComponent implements OnInit {
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
   }
-
+  ngOnDestroy(){
+    if(this.onTypeSubscriber){
+      this.onTypeSubscriber.unsubscribe();
+    }
+  }
   selectedOption(option){
     this.selectedObject = this.searchingCriteria.searchBy.find(obj=> obj.key == option);
     if(this.selectedObject && this.selectedObject.type == "typing" && !this.selectedKey){
-      this.searchOntyping()
+      this.searchOntyping();
     }
     else if(this.selectedKey){
       if(this.searchingCriteria.TotalRecords){
@@ -76,12 +80,16 @@ export class SearchingComponent implements OnInit {
       if (this.search && this.search.nativeElement && this.search.nativeElement.value){
         this.search.nativeElement.value = '';
       }
+      if(this.onTypeSubscriber && this.selectedObject && this.selectedObject.type == "typing"){
+        this.onTypeSubscriber.unsubscribe();
+        this.searchOntyping();
+      }
     }
   }
 
   searchOntyping(){
       this.changeDetectorRef.detectChanges();
-      fromEvent(this.search && this.search.nativeElement, 'keyup').pipe(
+      this.onTypeSubscriber = fromEvent(this.search && this.search.nativeElement, 'keyup').pipe(
         // get value
         map((event: any) => {
           return event.target.value;
@@ -94,7 +102,7 @@ export class SearchingComponent implements OnInit {
         ,distinctUntilChanged()
         // subscription for response
         ).subscribe((text: string) => {
-              this.selectedKey = [this.selectedObject.key]
+              this.selectedKey = this.selectedObject.key;
               this.searchingobj = {
                 [this.selectedObject.key] : text,
               };
@@ -111,7 +119,7 @@ export class SearchingComponent implements OnInit {
 
     searchOnChange(elem){
           if(elem.value && [this.selectedObject.key]){
-          this.selectedKey = [this.selectedObject.key]
+          this.selectedKey = this.selectedObject.key
           this.searchingobj = {
             [this.selectedObject.key] : elem.value,
           };
