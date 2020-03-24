@@ -149,16 +149,12 @@ export class DashboardComponent implements OnInit {
       this.searchObjPayment.PageNumber = 0;
       this.paymentsList = event.data.PrePaidRequestData;
       let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
-      if(key){
-        this.searchingByKey = {[key]: event[key]}
-      }
+      this.searchingByKey = (key)? {[key]: event[key]} : undefined;
       this.loadAvailable = (this.paymentsList.length == event.data.RecordCount)? false : true;
     }else{
       this.searchObjOrder.PageNumber = 0;
       let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
-      if(key){
-        this.searchingByKey = {[key]: event[key]}
-      }
+      this.searchingByKey = (key)? {[key]: event[key]} : undefined;
       this.orderList = event.data[0];
       this.loadAvailableOrder = (this.orderList.length == event.data[1].RecordCount)? false : true;
     }
