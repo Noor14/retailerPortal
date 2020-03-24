@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   public passToggle:boolean;
   public newToggle:boolean;
   public confirmToggle:boolean;
+  oldPasswordError: boolean;
 
   constructor(
     private _profileService: ProfileService,
@@ -89,6 +90,9 @@ export class ProfileComponent implements OnInit {
     .catch(err=>{
       this.showSpinner = false;
       if(err.error.status==405){
+        if(err.error.message==='Incorrect Old Password'){
+          this.oldPasswordError = true;
+        }
         this._toast.error(err.error.message,"Error")
       }
     })

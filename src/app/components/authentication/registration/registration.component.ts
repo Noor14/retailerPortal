@@ -56,7 +56,7 @@ export class RegistrationComponent implements OnInit {
       CNIC: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.cnic_Pattern)]),
       CompanyName: new FormControl(null, [Validators.required]),
       Address: new FormControl(null, [Validators.required]),
-      recaptcha: new FormControl(null, [Validators.required])
+      recaptcha: new FormControl(null, [])
     });
   }
   handleSuccess(data) {

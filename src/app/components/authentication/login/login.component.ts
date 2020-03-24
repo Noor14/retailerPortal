@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public loginForm : FormGroup
   public loginFailure: boolean = false;
   private loginFormSubscriber: any
+  public passToggle:boolean;
   constructor(
     private _loginService: LoginService,
     private _sharedService: SharedService,

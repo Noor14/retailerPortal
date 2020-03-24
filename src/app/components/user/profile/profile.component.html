@@ -114,12 +114,14 @@
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group has-float-label password">
                                         <input noWhiteSpace [type]="passToggle ? 'text':'password'" id="oldpassword" class="form-control" formControlName="Password" placeholder="Old Password"
-                                        [ngClass]="{'validationError': passwordForm.controls['Password'].errors && (passwordForm.controls.Password.dirty || passwordForm.controls.Password.touched)}">
+                                        [ngClass]="{'validationError':  oldPasswordError ||(passwordForm.controls['Password'].errors && (passwordForm.controls.Password.dirty || passwordForm.controls.Password.touched))}">
                                         <label for="oldpassword">Old Password</label>
                                         <span (click)="passToggle=!passToggle">
                                             <img src="../../../../assets/_images/eye.svg"  width="17" />
                                         </span>
-
+                                        <p *ngIf="passwordForm.controls['Password'].errors || oldPasswordError" class="errorMessage">
+                                            <small *ngIf="oldPasswordError && !passwordForm.controls['Password'].errors">Wrong Password</small>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
