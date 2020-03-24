@@ -1,3 +1,4 @@
+import { SharedService } from './../../../services/shared.service';
 import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +18,8 @@ export class UpdatepasswordComponent implements OnInit {
   constructor(
     private _loginService: LoginService,
     private _route:Router,
-    private _toast: ToastrService
+    private _toast: ToastrService,
+    private _sharedService: SharedService
     ) {
 
    }
@@ -40,7 +42,7 @@ export class UpdatepasswordComponent implements OnInit {
       this.showSpinner=false;
         if (data) {
           this._toast.success("Your password has been updated. You would be logged out of your account");
-          this._route.navigate(['/login'])
+          this.logout();
         }
         else{
           this._toast.success("Password not updated please try after some few minutes");
@@ -55,6 +57,19 @@ export class UpdatepasswordComponent implements OnInit {
       validateAllFormFields(this.updatePasswordForm);
     }
   }
+  logout(){
+    this._sharedService.logoutUser()
+    .then((res:boolean)=>{
+      if(res){
+        localStorage.clear();
+        this._route.navigate(['/login'])
+      }    
+      this.showSpinner=false;
+    })
+    .catch(err=>{
+    this.showSpinner=false;
 
+      })
+  }
 
 }
