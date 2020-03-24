@@ -149,6 +149,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
           }
           delete this.searchingobj[this.selectedKey];
           this.filter(this.searchingobj);
+          this.selectedKey = undefined;
         }
     }
 
