@@ -1,4 +1,3 @@
-import { SharedService } from './../../../services/shared.service';
 import { Router } from '@angular/router';
 import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
@@ -6,6 +5,7 @@ import { ProfileService } from './profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from '../../../shared/app.mask';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../user.service';
 import * as moment from 'moment';
 @Component({
   selector: 'app-profile',
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(
     private _profileService: ProfileService,
     private _toast:ToastrService,
-    private _sharedService: SharedService,
+    private _userService: UserService,
     private _route :Router
     ) { }
 
@@ -116,7 +116,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
   }
   logout(){
-    this._sharedService.logoutUser()
+    this._userService.logoutUser()
     .then((res:boolean)=>{
       if(res){
         localStorage.clear();

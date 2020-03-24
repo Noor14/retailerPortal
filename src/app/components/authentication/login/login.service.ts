@@ -24,6 +24,21 @@ export class LoginService {
     });
     return promise;
   }
+  
+  logoutUser() {
+    let promise = new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/users/logout`;
+      this._http.delete(apiURL)
+        .toPromise()
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        })
+    })
+    return promise;
+  }
 
   PostCalls(UserData, recourseName, rightId) {
     let promise = new Promise((resolve, reject) => {

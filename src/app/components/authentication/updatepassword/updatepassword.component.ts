@@ -1,4 +1,3 @@
-import { SharedService } from './../../../services/shared.service';
 import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
@@ -18,8 +17,7 @@ export class UpdatepasswordComponent implements OnInit {
   constructor(
     private _loginService: LoginService,
     private _route:Router,
-    private _toast: ToastrService,
-    private _sharedService: SharedService
+    private _toast: ToastrService
     ) {
 
    }
@@ -58,7 +56,7 @@ export class UpdatepasswordComponent implements OnInit {
     }
   }
   logout(){
-    this._sharedService.logoutUser()
+    this._loginService.logoutUser()
     .then((res:boolean)=>{
       if(res){
         localStorage.clear();
