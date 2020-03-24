@@ -3,8 +3,7 @@ import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.co
 import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from './dashboard.service';
-import {  NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dashboard',

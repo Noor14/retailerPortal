@@ -38,6 +38,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
      searchMode:'support'
    }
    private searchingByKey:any;
+   
   constructor(
     private _supportService: TicketSupportService,
     private _sharedService: SharedService,
