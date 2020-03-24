@@ -25,12 +25,12 @@ export class UserComponent implements OnInit {
       this._userService.getCalls("lookup/null")
       .then((data:any)=>{
         if(data && data.length){
+          // create grouping
           let obj = data.reduce((r, a) => {
             r[a.type] = [...r[a.type] || [], a];
             return r;
            }, {});
           this._sharedService.dropDownValues.next(obj);
-          console.log(obj)
         }
       })
       .catch(err=>{

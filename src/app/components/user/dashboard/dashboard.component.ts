@@ -3,8 +3,7 @@ import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.co
 import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from './dashboard.service';
-import {  NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,7 +39,6 @@ export class DashboardComponent implements OnInit {
       {name:'Payment ID', placeholder: 'Payment ID', type: 'typing', key: 'InvoiceNumber'},
       {name:'Company', placeholder: 'Company', type: 'typing', key: 'CompanyName'},
       {name:'Status', placeholder: 'Status', type: 'dropdown', key: 'Status', filterBy : undefined},
-      {name:'Created Date', placeholder: 'Created Date', type: 'dateRange', key: ['DateFrom', 'DateTo']},
       {name:'Amount', placeholder: 'Amount', type: 'range', key: ['PaymentAmountMin', 'PaymentAmountMax']}
      ],
      TotalRecords: 10,
@@ -78,9 +76,12 @@ export class DashboardComponent implements OnInit {
     this.statusDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
       if(res && res.PREPAID_STATUS){
           let arr = res.PREPAID_STATUS.concat(res.INVOICE_STATUS);
+          // filter unique value
            let statusesPayment = [...new Map(arr.map(item =>
             [item['value'], item])).values()];
 
+          // set key name with the name of value
+            statusesPayment.map((obj:any) => {obj.key = obj.value});
             let objPayment = this.filterObjPayment.searchBy.find(obj => obj.key == 'Status');
             let ind = this.filterObjPayment.searchBy.findIndex(obj => obj.key == 'Status');
             objPayment.filterBy = statusesPayment;
@@ -147,16 +148,15 @@ export class DashboardComponent implements OnInit {
       this.searchObjPayment.PageNumber = 0;
       this.paymentsList = event.data.PrePaidRequestData;
       let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
-      this.searchingByKey = {[key]: event[key]}
+      this.searchingByKey = (key)? {[key]: event[key]} : undefined;
       this.loadAvailable = (this.paymentsList.length == event.data.RecordCount)? false : true;
     }else{
       this.searchObjOrder.PageNumber = 0;
       let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
-      this.searchingByKey = {[key]: event[key]}
+      this.searchingByKey = (key)? {[key]: event[key]} : undefined;
       this.orderList = event.data[0];
       this.loadAvailableOrder = (this.orderList.length == event.data[1].RecordCount)? false : true;
     }
-    console.log(event, this.searchingByKey)
   }
   openDialog(id :Number){
     const modalRef = this._modalService.open(DialogComponent,{ 

@@ -31,9 +31,6 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/float-label-css/dist/float-label.min.css",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/@syncfusion/ej2-base/styles/material.css",
-              "node_modules/@syncfusion/ej2-grids/styles/material.css",
-              "node_modules/@syncfusion/ej2-treegrid/styles/material.css",
               "src/styles.scss"
             ],
             "scripts": []
