@@ -162,7 +162,6 @@ export class DashboardComponent implements OnInit {
       this.orderList = event.data[0];
       this.loadAvailableOrder = (this.orderList.length == event.data[1].RecordCount)? false : true;
     }
-    console.log(event, this.searchingByKey)
   }
   openDialog(id :Number){
     const modalRef = this._modalService.open(DialogComponent,{ 
