@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from '../../../shared/app.mask';
@@ -13,7 +13,7 @@ import * as moment from 'moment';
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   public profileForm: FormGroup;
   public passwordForm: FormGroup;
   private userObject: any;
@@ -24,8 +24,9 @@ export class ProfileComponent implements OnInit {
   public passToggle:boolean;
   public newToggle:boolean;
   public confirmToggle:boolean;
-  oldPasswordError: boolean;
-
+  public oldPasswordError: boolean;
+  public updateBtnDisabled:boolean = true;
+  private profileFormSubscriber:any;
   constructor(
     private _profileService: ProfileService,
     private _toast:ToastrService,
@@ -57,6 +58,11 @@ export class ProfileComponent implements OnInit {
       })
     this.getProfile();
   }
+  ngOnDestroy(){
+    if(this.profileFormSubscriber){
+      this.profileFormSubscriber.unsubscribe();
+    }
+  }
 
   getProfile() {
     this.showSpinner = true;
@@ -64,12 +70,20 @@ export class ProfileComponent implements OnInit {
       .then((data: any) => {
       this.showSpinner = false;
       data.CreatedDate =  moment(data.CreatedDate).format('DD-MM-YYYY');
-        this.profileForm.patchValue(data)
+        this.profileForm.patchValue(data);
+        this.onChanges();
       })
       .catch(err => {
       this.showSpinner = false;
         console.log(err);
       })
+  }
+  onChanges():void{
+    this.profileFormSubscriber = this.profileForm.valueChanges.subscribe(val => {
+      if(val && Object.keys(val).length){
+          this.updateBtnDisabled = false;
+      }
+    });
   }
   elemFocus(elem){
     elem.readOnly= false;
@@ -90,7 +104,7 @@ export class ProfileComponent implements OnInit {
     .catch(err=>{
       this.showSpinner = false;
       if(err.error.status==405){
-        if(err.error.message==='Incorrect Old Password'){
+        if(err.error.message === 'Incorrect Old Password'){
           this.oldPasswordError = true;
         }
         this._toast.error(err.error.message,"Error")
@@ -122,8 +136,11 @@ export class ProfileComponent implements OnInit {
     this._profileService.postCalls(this.profileForm.value, 8 ,"retailer/Save")
     .then((data:any)=>{
       this.showSpinner = false;
+      if(this.profileFormSubscriber){
+      this.profileFormSubscriber.unsubscribe();
+      this.updateBtnDisabled = true;
+    }
       this._toast.success("Profile has been updated")
-
     })
     .catch(err=>{
       this.showSpinner = false;

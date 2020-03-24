@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button class="btn btn-primary" type="button" (click)="updateProfile()" [disabled]="profileForm.invalid">Update</button>
+                                <button class="btn btn-primary" type="button" (click)="updateProfile()" [disabled]="profileForm.invalid || updateBtnDisabled">Update</button>
                             </div>
 
                         </form>
@@ -114,7 +114,7 @@
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group has-float-label password">
                                         <input noWhiteSpace [type]="passToggle ? 'text':'password'" id="oldpassword" class="form-control" formControlName="Password" placeholder="Old Password"
-                                        [ngClass]="{'validationError':  oldPasswordError ||(passwordForm.controls['Password'].errors && (passwordForm.controls.Password.dirty || passwordForm.controls.Password.touched))}">
+                                        [ngClass]="{'validationError':  oldPasswordError || (passwordForm.controls['Password'].errors && (passwordForm.controls.Password.dirty || passwordForm.controls.Password.touched))}">
                                         <label for="oldpassword">Old Password</label>
                                         <span (click)="passToggle=!passToggle">
                                             <img src="../../../../assets/_images/eye.svg"  width="17" />
