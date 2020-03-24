@@ -77,9 +77,12 @@ export class DashboardComponent implements OnInit {
     this.statusDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
       if(res && res.PREPAID_STATUS){
           let arr = res.PREPAID_STATUS.concat(res.INVOICE_STATUS);
+          // filter unique value
            let statusesPayment = [...new Map(arr.map(item =>
             [item['value'], item])).values()];
 
+          // set key name with the name of value
+            statusesPayment.forEach((obj:any) => obj.key = obj.value );
             let objPayment = this.filterObjPayment.searchBy.find(obj => obj.key == 'Status');
             let ind = this.filterObjPayment.searchBy.findIndex(obj => obj.key == 'Status');
             objPayment.filterBy = statusesPayment;
