@@ -82,7 +82,7 @@ export class DashboardComponent implements OnInit {
             [item['value'], item])).values()];
 
           // set key name with the name of value
-            statusesPayment.forEach((obj:any) => obj.key = obj.value );
+            statusesPayment.map((obj:any) => {obj.key = obj.value});
             let objPayment = this.filterObjPayment.searchBy.find(obj => obj.key == 'Status');
             let ind = this.filterObjPayment.searchBy.findIndex(obj => obj.key == 'Status');
             objPayment.filterBy = statusesPayment;
