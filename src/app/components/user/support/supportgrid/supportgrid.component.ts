@@ -57,7 +57,9 @@ export class SupportgridComponent implements OnInit, OnDestroy {
     this.supportList = event.data[0];
     this.searchObj.PageNumber = 0;
     let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
-    this.searchingByKey = {[key]: event[key]}
+    if(key){
+      this.searchingByKey = {[key]: event[key]}
+    }
     this.loadAvailable = (this.supportList.length == event.data[1].RecordCount)? false : true;
     console.log(event)
   }

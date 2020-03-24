@@ -159,10 +159,15 @@ export class SearchingComponent implements OnInit, OnDestroy {
           if(data && Object.keys(data).length){
             let object = {
               data: data,
-              [this.selectedObject.key]: obj[this.selectedKey],
               searchMode : this.searchingCriteria.searchMode
             }
-          this.filteredData.emit(object);
+              if(this.selectedObject && this.selectedObject.key && this.selectedKey){
+                var objkeyObj ={
+                  [this.selectedObject.key]: obj[this.selectedKey],
+                }
+              }
+           let resObj = {...object, ...objkeyObj}; 
+          this.filteredData.emit(resObj);
           }
         this.showSpinner = false;
         })
