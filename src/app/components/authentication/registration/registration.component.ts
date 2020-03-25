@@ -24,7 +24,8 @@ export class RegistrationComponent implements OnInit {
   public spinnerConfig:any;
   public showSpinner: boolean;
   public passToggle:boolean;
-
+  public confirmPassToggle:boolean;
+  
   @ViewChild('captchaElem', { static: false }) captchaElem: ReCaptcha2Component;
   // @ViewChild('langInput', { static: false }) langInput: ElementRef;
 
@@ -55,7 +56,7 @@ export class RegistrationComponent implements OnInit {
       Username: new FormControl(null, [Validators.required]),
       CNIC: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.cnic_Pattern)]),
       CompanyName: new FormControl(null, [Validators.required]),
-      Address: new FormControl(null, [Validators.required]),
+      Address: new FormControl(null, []),
       recaptcha: new FormControl(null, [Validators.required])
     });
   }

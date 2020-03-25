@@ -23,15 +23,18 @@
                                   <img src="../../../../assets/_images/eye.svg" width="17"/>
                               </span>
                               <img src="../../../../assets/_images/info.svg" width="14px" class="infoIcon"
-                              triggers="click" placement="bottom-right" [autoClose]="'outside'" ngbTooltip="Password must be minimum 6 characters long including 1 numeric value and 1 special character" />
+                              triggers="click" placement="bottom-right" [autoClose]="'outside'" ngbTooltip="Password must be minimum 6 characters long including 1 numeric value, 1 alphabet and 1 special character" />
                              
                           </div>
                       </div>
                       <div class="col-sm-12 col-md-6">
-                          <div class="form-group has-float-label">
-                              <input type="password" noWhiteSpace id="confirmPassword" class="form-control" formControlName="ConfirmPassword" autocomplete="new-password" placeholder="Confirm Password"
+                          <div class="form-group has-float-label password">
+                              <input [type]="confirmPassToggle ? 'text':'password'" noWhiteSpace id="confirmPassword" class="form-control" formControlName="ConfirmPassword" autocomplete="new-password" placeholder="Confirm Password"
                               [ngClass]="{'validationError': registerForm.controls['ConfirmPassword'].errors && (registerForm.controls.ConfirmPassword.dirty || registerForm.controls.ConfirmPassword.touched)}">
                               <label for="confirmPassword">Confirm Password</label>
+                              <span (click)="confirmPassToggle = !confirmPassToggle" >
+                                <img src="../../../../assets/_images/eye.svg" width="17"/>
+                            </span>
                           </div>
                       </div>
               
