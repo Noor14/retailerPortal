@@ -24,8 +24,8 @@ export class OrderComponent implements OnInit, AfterViewInit {
     {
       "data": {
         "name": "Applications",
-        "size": "200mb",
-        "type": "Folder"
+        "size": "",
+        "type": ""
       },
       "children": [
         {
@@ -33,30 +33,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
             "name": "Angular",
             "size": "25mb",
             "type": "Folder"
-          },
-          "children": [
-            {
-              "data": {
-                "name": "angular.app",
-                "size": "10mb",
-                "type": "Application"
-              }
-            },
-            {
-              "data": {
-                "name": "cli.app",
-                "size": "10mb",
-                "type": "Application"
-              }
-            },
-            {
-              "data": {
-                "name": "mobile.app",
-                "size": "5mb",
-                "type": "Application"
-              }
-            }
-          ]
+          }
         },
         {
           "data": {

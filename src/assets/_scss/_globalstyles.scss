@@ -293,14 +293,16 @@ html{
   
           }
           tbody{
-            tr:focus{
-              outline: unset;
-            }
-            tr:nth-child(odd) {
-              background-color: #fff;
-            }
-            tr:nth-child(even) {
-              background-color: #e9ecef;
+            tr{
+              &:focus{
+                outline: unset;
+              }
+              &:nth-child(odd) {
+                background-color: #fff;
+              }
+              &:nth-child(even) {
+                background-color: #e9ecef;
+              }
             }
           }
   
