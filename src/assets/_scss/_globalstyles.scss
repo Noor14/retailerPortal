@@ -284,12 +284,18 @@ html{
         .table{
           text-align: center;
           margin: 0;
+          &.ui-treetable-table {
+            text-align: unset;
+          }
           th{
             border-top: unset;
             background-color: #e9ecef;
   
           }
           tbody{
+            tr:focus{
+              outline: unset;
+            }
             tr:nth-child(odd) {
               background-color: #fff;
             }
@@ -325,6 +331,9 @@ html{
         &.table-responsive{
           max-height: 380px;
           .table{
+            &.ui-treetable-table {
+              text-align: unset;
+            }
             text-align: center;
             margin: 0;
             th{
@@ -333,6 +342,9 @@ html{
     
             }
             tbody{
+              tr:focus{
+                outline: unset;
+              }
               tr:nth-child(odd) {
                 background-color: #fff;
               }
