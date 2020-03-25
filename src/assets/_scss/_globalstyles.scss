@@ -327,36 +327,7 @@ html{
         font-size: 17px;
         margin-bottom: 18px;
       }
-      .gridArea{
-        &.table-responsive{
-          max-height: 380px;
-          .table{
-            &.ui-treetable-table {
-              text-align: unset;
-            }
-            text-align: center;
-            margin: 0;
-            th{
-              border-top: unset;
-              background-color: transparent;
-    
-            }
-            tbody{
-              tr:focus{
-                outline: unset;
-              }
-              tr:nth-child(odd) {
-                background-color: #fff;
-              }
-              tr:nth-child(even) {
-                background-color: #e9ecef;
-              }
-            }
-    
-          }
-        }
-     
-      }
+
  
   }
   

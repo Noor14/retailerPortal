@@ -1,0 +1,12 @@
+.order{
+    .content{
+        border: 1px solid #BCBEC0;
+        border-radius: 3px;
+        .table{
+            tr, th{
+                    background-color: transparent !important;
+            }
+          
+        }
+    }
+}

@@ -19,7 +19,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public kycList: any[]= [];
   public selectedCompany: string= undefined;
   public companyDetailForm: FormGroup;
-
+  public toggleCompanyProductList:boolean= false;
   files :TreeNode[]=	[
     {
       "data": {
@@ -349,10 +349,15 @@ export class OrderComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(){
     let elemWrapper = document.getElementsByClassName('ui-treetable-wrapper')[0];
-    elemWrapper.classList.add('table-responsive')
-    elemWrapper.classList.add('gridArea')
     let elem = document.getElementsByClassName('ui-treetable-table')[0];
-    elem.classList.add('table')
+    if(elemWrapper){
+      elemWrapper.classList.add('table-responsive');
+      elemWrapper.classList.add('gridArea');
+      elemWrapper.id="nav-scrollbar";
+    }
+    if(elem){
+      elem.classList.add('table')
+    }
   }
 
   getKYCList(requestId){
@@ -372,12 +377,14 @@ export class OrderComponent implements OnInit, AfterViewInit {
 
   companyProducts(dealerCode){
     this.showSpinner=true;
+    this.toggleCompanyProductList = true;
     this._orderDetailService.getKYCListDetail('products/GetProductByDealerCode', dealerCode).then((data: any) => {
       console.log(data)
       this.showSpinner=false;
     })
     .catch(err => {
       this.showSpinner=false;
+
     })
   }
 
