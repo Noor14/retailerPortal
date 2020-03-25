@@ -62,7 +62,7 @@
             <ngb-tab>
               <ng-template ngbTabTitle>Order Detail</ng-template>
               <ng-template ngbTabContent>
-                <div class="contentArea bg-white">
+                <div class="content bg-white">
                     <div class="gridArea table-responsive" id="nav-scrollbar">
                       <table class="table" *ngIf="orderDetaiList && orderDetaiList.length">
                             <thead>
@@ -97,20 +97,18 @@
                     </div>
                 
                   </div>
-                        <div>
-                            <table class="table mz-summary">
-                                <tr>
-                                    <td colspan="6">Gross Amount: <strong>Rs. 4,154.00 </strong> </td>
-                                    <!-- <td colspan="6">GST 17%: <strong>Rs. 4,154.00 </strong></td> -->
-                                    <td rowspan="2" class="text-right"><button class="btn btn-primary">Back</button></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="1">Total Discount: <strong>Rs. 4,154.00 </strong></td>
-                                    <td colspan="1">Net Amount <strong>Rs. 4,154.00 </strong></td>
-                                </tr>
-                            </table>
-                            <hr>
-                        </div>
+                  <table class="table summary">
+                    <tr>
+                        <td colspan="6">Gross Amount: <strong>Rs. 4,154.00 </strong> </td>
+                        <!-- <td colspan="6">GST 17%: <strong>Rs. 4,154.00 </strong></td> -->
+                        <td rowspan="2" class="text-right"><button class="btn btn-primary">Back</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1">Total Discount: <strong>Rs. 4,154.00 </strong></td>
+                        <td colspan="1">Net Amount <strong>Rs. 4,154.00 </strong></td>
+                    </tr>
+                </table>
+                <hr>
               </ng-template>
             </ngb-tab>
             <ngb-tab>

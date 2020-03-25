@@ -55,7 +55,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
   constructor(  private renderer: Renderer2, 
     private _parserFormatter: NgbDateParserFormatter,
     private _userService: UserService,
-    private changeDetectorRef: ChangeDetectorRef,) { }
+    private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
@@ -124,7 +124,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
               this.filter(this.searchingobj);
           
         });
-      }
+  }
 
     searchOnChange(elem){
           if(elem.value && [this.selectedObject.key]){

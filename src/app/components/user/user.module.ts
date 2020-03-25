@@ -1,3 +1,4 @@
+import { TreeTableModule } from 'primeng/treetable';
 import { SharedModule } from './../../shared/shared.module';
 import { UserService } from './user.service';
 import { NgModule } from '@angular/core';
@@ -50,6 +51,7 @@ import { OrderComponent } from './order/order.component';
     ReactiveFormsModule,
     NgxSpinnerModule,
     FormsModule,
+    TreeTableModule,
     SharedModule
   ],
   providers:[
