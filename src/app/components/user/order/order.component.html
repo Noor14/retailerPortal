@@ -81,7 +81,7 @@
                         <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
                             <tr [ttRow]="rowNode">
                                 <td [ngClass]="{'node': rowNode.node.children && rowNode.node.children.length}">
-                                    <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                                    <p-treeTableToggler class="pointer" [rowNode]="rowNode"></p-treeTableToggler>
                                     {{rowData.Title}}
                                 </td>
                                 <td>{{rowData.ProductCode}}</td>
