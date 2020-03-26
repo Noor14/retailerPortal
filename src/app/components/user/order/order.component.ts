@@ -40,14 +40,14 @@ export class OrderComponent implements OnInit, AfterViewInit {
 
   }
   ngAfterViewInit(){
-    this.setTableClassTree()
+    this.setTableTreeClass()
   }
   onTabChange(event){
     if(event.activeId == "OrderSummary"){
-      this.setTableClassTree()
+      this.setTableTreeClass()
     }
   }
-  setTableClassTree(){
+  setTableTreeClass(){
       setTimeout(()=>{
         let elemWrapper = document.getElementsByClassName('ui-treetable-wrapper')[0];
         let elem = document.getElementsByClassName('ui-treetable-table')[0];
@@ -93,7 +93,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
     })
   }
   generateProductCompany(data){
-    this.setTableClassTree();
+    this.setTableTreeClass();
     let list = [];
     let dataList = [];
     for (let index = 0; index < data.SubCategory.length; index++) {
