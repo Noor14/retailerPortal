@@ -7,7 +7,7 @@
             <a class="breadcrumb-item">Order</a>
         </li>
     </ol>
-    <ngb-tabset #tab="ngbTabset" (tabChange)="onTabChange($event)">
+    <ngb-tabset #tab="ngbTabset" (tabChange)="onTabChange($event)" [activeId]="activeTab">
         <ngb-tab id="placeOrder">
             <ng-template ngbTabTitle>Place Order</ng-template>
             <ng-template ngbTabContent>
@@ -90,7 +90,7 @@
                                 <td>{{rowData.UnitOFMeasure}}</td>
                                 <td>{{rowData.PackSize}}</td>
                                 <td class="d-flex justify-content-center">
-                                    <input *ngIf="!rowNode.node.children || (rowNode.node.children && !rowNode.node.children.length)"
+                                    <input maxlength="9" numbersOnly  *ngIf="!rowNode.node.children || (rowNode.node.children && !rowNode.node.children.length)"
                                     class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="rowData.OrderQty"
                                       (change)="selectProduct(rowData)" />
                                 </td>
@@ -100,13 +100,13 @@
                 </div>
                 <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end pt-3">
                     <button class="btn btn-primary ml-3" type="button" (click)="toggleCompanyProductList = !toggleCompanyProductList">Back</button>
-                    <button class="btn btn-primary ml-3" type="button" (click)="tab.select('OrderSummary')">Checkout</button>
+                    <button class="btn btn-primary ml-3" type="button" (click)="tab.select('orderSummary')">Checkout</button>
                 </div>
             </div>
 
             </ng-template>
         </ngb-tab>
-        <ngb-tab id="OrderSummary" [disabled]="!orderSummary.length">
+        <ngb-tab id="orderSummary" [disabled]="!orderSummary.length">
             <ng-template ngbTabTitle>Order Summary</ng-template>
             <ng-template ngbTabContent>
                 <div class="content bg-white">
@@ -133,7 +133,7 @@
                                 <td>{{order.UnitOFMeasure}}</td>
                                 <td>{{order.PackSize}}</td>
                                 <td class="d-flex justify-content-center">
-                                    <input  class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
+                                    <input  maxlength="9" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
                                       (change)="selectProduct(order)" />
                                 </td>
                                 <td>{{order.OrderQty * order.ProductUnitPrice}}</td>
@@ -145,6 +145,10 @@
                     </div>
                 
                   </div>
+                  <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end pt-3" *ngIf="orderSummary.length">
+                    <button class="btn btn-primary ml-3" type="button" >Draft</button>
+                    <button class="btn btn-primary ml-3" type="button" >Confirm Order</button>
+                </div>
             </ng-template>
         </ngb-tab>
     </ngb-tabset>

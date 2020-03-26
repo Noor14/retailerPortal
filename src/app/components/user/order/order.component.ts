@@ -1,9 +1,10 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppMasks, AppPattern } from 'src/app/shared/app.mask';
 import { loadingConfig } from 'src/app/constant/globalfunction';
-import { Component, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { OrderDetailService } from '../order-detail/order-detail.service';
 import { TreeNode } from 'primeng/api/treenode';
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-order',
@@ -23,6 +24,8 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public categoryList :TreeNode[]= [];
   private selectedDealerCode:string;
   public orderSummary: any[]=[];
+  public activeTab:string = 'placeOrder';
+  @ViewChild('tabs', {static:false}) public tabs:NgbTabset;
   constructor(private _orderDetailService : OrderDetailService) { }
 
   ngOnInit() {
@@ -40,11 +43,12 @@ export class OrderComponent implements OnInit, AfterViewInit {
   
 
   }
+
   ngAfterViewInit(){
     this.setTableTreeClass()
   }
   onTabChange(event){
-    if(event.activeId == "OrderSummary"){
+    if(event.activeId == "orderSummary"){
       this.setTableTreeClass()
     }
   }
@@ -91,6 +95,9 @@ export class OrderComponent implements OnInit, AfterViewInit {
       else{
         this.orderSummary.push(product)
       }
+    }
+    if (!this.orderSummary.length){
+      this.tabs.select('placeOrder');
     }
   }
   companyProducts(dealerCode){
