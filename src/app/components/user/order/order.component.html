@@ -80,11 +80,9 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
                             <tr [ttRow]="rowNode">
-                                <td>
+                                <td [ngClass]="{'node': rowNode.node.children && rowNode.node.children.length}">
                                     <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
-                                    <span [ngClass]="{'node': rowNode.node.children && rowNode.node.children.length}">{{rowData.Title}}</span>
-                                    <!-- <span>{{rowData | json}}</span>
-                                    <strong>{{rowNode | json}}</strong> -->
+                                    {{rowData.Title}}
                                 </td>
                                 <td>{{rowData.ProductCode}}</td>
                                 <td>{{rowData.ProductUnitPrice}}</td>

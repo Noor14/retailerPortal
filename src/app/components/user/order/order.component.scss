@@ -8,14 +8,15 @@
                 tr{
                     background-color: transparent !important;
                     &:hover{
-                        background-color: #e9ecef;
+                        background-color: #e9ecef !important;
                     }
                     th{
                         @extend tr;
                     }
                     td{
-                        .node{
+                        &.node{
                             font-weight: bold;
+                            cursor: pointer;
                         }
                     }
                 }
