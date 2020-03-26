@@ -28,7 +28,12 @@ export class EULAComponent implements OnInit {
       this._loginService.PostCalls(userObj,"users/termsandcondition", 9)
       .then( data=>{
         if(data){
-          this._route.navigate(['/updatePassword'])
+          if(this.userIdentity.UserAccount.SelfSignup){
+            this._route.navigate((['/user/dashboard']))
+          }
+          else{
+            this._route.navigate(['/updatePassword'])
+          }
 
         }
         else{

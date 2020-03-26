@@ -30,7 +30,7 @@
                           <td>{{payment.InvoiceNumber}}</td>
                           <td>{{payment.CompanyName}}</td>
                           <td class="statusWidth">{{payment.Status}}</td>
-                          <td>{{payment.TotalPrice}}</td>
+                          <td>{{payment.TotalPrice | currency:'PKR '}}</td>
                           <td>
                             <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
@@ -77,7 +77,7 @@
                           <td>{{order.OrderNumber}}</td>
                           <td>{{order.CompanyName}}</td>
                           <td class="createDateWidth">{{order.CreatedDate |  date: 'dd-MM-yyyy'}}</td>
-                          <td>{{order.TotalPrice}}</td>
+                          <td>{{order.TotalPrice | currency:'PKR '}}</td>
                           <td class="statusWidth">{{order.Status}}</td>
                           <td>
                             <div ngbDropdown class="d-inline" placement="bottom-right">
