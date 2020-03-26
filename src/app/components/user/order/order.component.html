@@ -7,7 +7,7 @@
             <a class="breadcrumb-item">Order</a>
         </li>
     </ol>
-    <ngb-tabset #tab="ngbTabset">
+    <ngb-tabset #tab="ngbTabset" (tabChange)="onTabChange($event)">
         <ngb-tab id="placeOrder">
             <ng-template ngbTabTitle>Place Order</ng-template>
             <ng-template ngbTabContent>
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                  </div>
-                 <div class="productInfo" [hidden]="!toggleCompanyProductList">
+                 <div class="productInfo" *ngIf="toggleCompanyProductList">
                   <div class="content bg-white" >
                     <p-treeTable [value]="categoryList">
                         <ng-template pTemplate="header">
@@ -105,10 +105,7 @@
         <ngb-tab id="OrderSummary">
             <ng-template ngbTabTitle>Order Summary</ng-template>
             <ng-template ngbTabContent>
-                <div class="content">
                      Order Summary
-                </div>
-
             </ng-template>
         </ngb-tab>
     </ngb-tabset>
