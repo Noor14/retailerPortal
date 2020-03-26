@@ -11,7 +11,7 @@
         <ngb-tab id="placeOrder">
             <ng-template ngbTabTitle>Place Order</ng-template>
             <ng-template ngbTabContent>
-                <div class="contentArea bg-white p-4 position-absolute w-100" *ngIf="!toggleCompanyProductList" [@fadeAnimation]>
+                <div class="contentArea bg-white p-4 " *ngIf="!toggleCompanyProductList" >
                     <h6 class="contentSubTitle">What do you want to order from?</h6>
                     <div class="row">
                         <div class="col-md-5 col-sm-12">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                  </div>
-                 <div class="productInfo w-100 position-absolute" *ngIf="toggleCompanyProductList" [@fadeAnimation]>
+                 <div class="productInfo" *ngIf="toggleCompanyProductList">
                   <div class="content bg-white" >
                     <p-treeTable [value]="categoryList">
                         <ng-template pTemplate="header">

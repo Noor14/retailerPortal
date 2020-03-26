@@ -1,4 +1,3 @@
-import { fadeAnimation } from './../../../constant/animations';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppMasks, AppPattern } from 'src/app/shared/app.mask';
 import { loadingConfig } from 'src/app/constant/globalfunction';
@@ -10,11 +9,7 @@ import { TreeNode } from 'primeng/api/treenode';
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss'],
-  animations: [
-    fadeAnimation
-    // animation triggers go here
-  ],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class OrderComponent implements OnInit, AfterViewInit {
   public cnicMask = AppMasks.cnic_Mask;
@@ -26,7 +21,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public companyDetailForm: FormGroup;
   public toggleCompanyProductList:boolean= false;
   public categoryList :TreeNode[]= [];
- 
+  private selectedDealerCode:string;
   constructor(private _orderDetailService : OrderDetailService) { }
 
   ngOnInit() {
@@ -83,55 +78,63 @@ export class OrderComponent implements OnInit, AfterViewInit {
   }
 
   companyProducts(dealerCode){
-    this.showSpinner=true;
-    this._orderDetailService.getKYCListDetail('products/GetProductByDealerCode', dealerCode).then((data: any) => {
-      console.log(data)
-      this.showSpinner=false;
-      this.toggleCompanyProductList = true;
+    if(this.selectedDealerCode != dealerCode){
+      this.selectedDealerCode = dealerCode
+      this.showSpinner=true;
+      this._orderDetailService.getKYCListDetail('products/GetProductByDealerCode', dealerCode).then((data: any) => {
+        console.log(data)
+        this.showSpinner=false;
+        this.toggleCompanyProductList = true;
+        this.setTableTreeClass();
+        if(data && data.SubCategory && data.Products && data.SubCategory.length && data.Products.length){
+          this.generateProductCompany(data);
+        }else{
+          this.categoryList = [];
+        }
+      })
+      .catch(err => {
+        this.showSpinner=false;
+  
+      })
+    }else{
       this.setTableTreeClass();
-      if(data.SubCategory && data.Products && data.SubCategory.length && data.Products.length){
-        this.generateProductCompany(data);
-      }else{
-        this.categoryList = [];
-      }
-    })
-    .catch(err => {
-      this.showSpinner=false;
+      this.toggleCompanyProductList = true;
+    }
 
-    })
   }
   generateProductCompany(data){
-    let list = [];
-    let dataList = [];
-    for (let index = 0; index < data.SubCategory.length; index++) {
-      for (let ind = 0; ind < data.Products.length; ind++) {
-          if(data.Products[ind].ProductCategoryId == data.SubCategory[index].CategoryId){
-            var obj = data.SubCategory[index];
-            if(!obj['children']){
-              obj['children'] = [];
+      let list = [];
+      let dataList = [];
+      for (let index = 0; index < data.SubCategory.length; index++) {
+        for (let ind = 0; ind < data.Products.length; ind++) {
+            if(data.Products[ind].ProductCategoryId == data.SubCategory[index].CategoryId){
+              var obj = data.SubCategory[index];
+              if(!obj['children']){
+                obj['children'] = [];
+              }
+              let dataObj ={
+                data:{...data.Products[ind]}
+              }
+              let title = dataObj.data.Title;
+              dataObj.data.Title = dataObj.data.ProductCode;
+              dataObj.data.ProductCode = title
+              obj['children'].push(dataObj)
+  
             }
-            let dataObj ={
-              data:{...data.Products[ind]}
-            }
-            let title = dataObj.data.Title;
-            dataObj.data.Title = dataObj.data.ProductCode;
-            dataObj.data.ProductCode = title
-            obj['children'].push(dataObj)
-
-          }
+        }
+        list.push(obj);
       }
-      list.push(obj);
+      list.forEach((obj, i)=>{
+        let child = obj.children;
+        delete obj.children;
+        let object = {
+          data:{...obj},
+          children: child
+        }
+        dataList.push(object)
+      })
+      this.categoryList = dataList;
     }
-    list.forEach((obj, i)=>{
-      let child = obj.children;
-      delete obj.children;
-      let object = {
-        data:{...obj},
-        children: child
-      }
-      dataList.push(object)
-    })
-    this.categoryList = dataList;
-  }
+    
 
 }

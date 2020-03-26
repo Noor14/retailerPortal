@@ -1,52 +1,49 @@
 .order{
-    .tab-pane {
-        position: relative;
-        .content{
-            border: 1px solid #BCBEC0;
-            border-radius: 3px;
-            .gridArea{
-                height: unset;
-                .table{
-                    tr{
-                        background-color: transparent !important;
-                        &:hover{
-                            background-color: #e9ecef !important;
-                        }
-                        th{
-                            @extend tr;
-                        }
-                        td{
-                            vertical-align: middle;
-                            &.node{
-                                    font-weight: bold;
-                                    p-treetabletoggler{
-                                        .ui-treetable-toggler {
-                                            position: relative;
-                                            .pi-chevron-right::after{
-                                                content: "+";
-                                                font-style: normal;
-                                                left: -35px;
-                                                position: absolute;
-                                                font-size: 22px;
-                                                color: #96bb3d;
-                                                bottom: -9px;
-                                                font-weight: normal;
-                                            }
-                                            .pi-chevron-down::after{
-                                                @extend .pi-chevron-right,::after;
-                                                content: "–";
-                                                
-                                            }
+    .content{
+        border: 1px solid #BCBEC0;
+        border-radius: 3px;
+        .gridArea{
+            height: unset;
+            .table{
+                tr{
+                    background-color: transparent !important;
+                    &:hover{
+                        background-color: #e9ecef !important;
+                    }
+                    th{
+                        @extend tr;
+                    }
+                    td{
+                        vertical-align: middle;
+                        &.node{
+                                font-weight: bold;
+                                p-treetabletoggler{
+                                    .ui-treetable-toggler {
+                                        position: relative;
+                                        .pi-chevron-right::after{
+                                            content: "+";
+                                            font-style: normal;
+                                            left: -35px;
+                                            position: absolute;
+                                            font-size: 22px;
+                                            color: #96bb3d;
+                                            bottom: -9px;
+                                            font-weight: normal;
+                                        }
+                                        .pi-chevron-down::after{
+                                            @extend .pi-chevron-right,::after;
+                                            content: "–";
+                                            
                                         }
                                     }
-                            }
+                                }
                         }
                     }
-                  
                 }
+              
             }
-         
         }
+     
     }
    
 }
