@@ -36,9 +36,7 @@ export class EULAComponent implements OnInit {
           }
 
         }
-        else{
-
-        }
+       
       })
       .catch(err =>{
 
