@@ -89,7 +89,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
       if(index >=0 && !product.OrderQty){
         this.orderSummary.splice(index, 1)
       }
-      else if (index >=0 && !product.OrderQty){
+      else if (index >=0 && product.OrderQty){
         this.orderSummary.splice(index, 1, product)
       }
       else{
@@ -99,6 +99,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
     if (!this.orderSummary.length){
       this.tabs.select('placeOrder');
     }
+    console.log(this.orderSummary)
   }
   companyProducts(dealerCode){
     if(this.selectedDealerCode != dealerCode){
