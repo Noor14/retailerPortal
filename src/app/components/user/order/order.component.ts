@@ -25,7 +25,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   private selectedDealerCode:string;
   public orderSummary: any[]=[];
   public activeTab:string = 'placeOrder';
-  @ViewChild('tabs', {static:false}) public tabs:NgbTabset;
+  @ViewChild('tab', {static:false}) public tabs:NgbTabset;
   constructor(private _orderDetailService : OrderDetailService) { }
 
   ngOnInit() {
