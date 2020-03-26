@@ -284,9 +284,6 @@ html{
         .table{
           text-align: center;
           margin: 0;
-          &.ui-treetable-table {
-            text-align: unset;
-          }
           th{
             border-top: unset;
             background-color: #e9ecef;
