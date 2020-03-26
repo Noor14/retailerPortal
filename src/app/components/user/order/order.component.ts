@@ -83,8 +83,11 @@ export class OrderComponent implements OnInit, AfterViewInit {
       console.log(data)
       this.showSpinner=false;
       this.toggleCompanyProductList = true;
-      if(data.SubCategory.length && data.Products.length){
+      this.setTableTreeClass();
+      if(data.SubCategory && data.Products && data.SubCategory.length && data.Products.length){
         this.generateProductCompany(data);
+      }else{
+        this.categoryList = [];
       }
     })
     .catch(err => {
@@ -93,7 +96,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
     })
   }
   generateProductCompany(data){
-    this.setTableTreeClass();
     let list = [];
     let dataList = [];
     for (let index = 0; index < data.SubCategory.length; index++) {
