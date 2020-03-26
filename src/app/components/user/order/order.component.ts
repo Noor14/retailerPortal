@@ -1,3 +1,4 @@
+import { fadeAnimation } from './../../../constant/animations';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppMasks, AppPattern } from 'src/app/shared/app.mask';
 import { loadingConfig } from 'src/app/constant/globalfunction';
@@ -9,6 +10,10 @@ import { TreeNode } from 'primeng/api/treenode';
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss'],
+  animations: [
+    fadeAnimation
+    // animation triggers go here
+  ],
   encapsulation: ViewEncapsulation.None,
 })
 export class OrderComponent implements OnInit, AfterViewInit {

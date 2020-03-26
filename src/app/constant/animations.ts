@@ -1,7 +1,6 @@
 import { trigger, animate, transition, style, query, group, state } from '@angular/animations';
 
-export const routeAnimation =
-
+export const fadeAnimation =
     trigger('fadeAnimation', [
       transition('* => *', [
         query(':enter', [
