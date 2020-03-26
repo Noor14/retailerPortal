@@ -22,6 +22,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public toggleCompanyProductList:boolean= false;
   public categoryList :TreeNode[]= [];
   private selectedDealerCode:string;
+  public orderSummary: any[]=[];
   constructor(private _orderDetailService : OrderDetailService) { }
 
   ngOnInit() {
@@ -76,8 +77,21 @@ export class OrderComponent implements OnInit, AfterViewInit {
     let obj = this.kycList.find(obj=> obj.DealerCode == dealerCode);
     this.companyDetailForm.patchValue(obj);
   }
-  selectProduct(product, qty){
-    console.log(product, qty)
+  selectProduct(product){
+    if (!this.orderSummary.length && product.OrderQty){
+        this.orderSummary.push(product)
+    }else{
+      let index = this.orderSummary.findIndex(obj => obj.ProductId == product.ProductId);
+      if(index >=0 && !product.OrderQty){
+        this.orderSummary.splice(index, 1)
+      }
+      else if (index >=0 && !product.OrderQty){
+        this.orderSummary.splice(index, 1, product)
+      }
+      else{
+        this.orderSummary.push(product)
+      }
+    }
   }
   companyProducts(dealerCode){
     if(this.selectedDealerCode != dealerCode){
