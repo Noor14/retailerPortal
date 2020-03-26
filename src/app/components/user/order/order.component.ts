@@ -357,45 +357,49 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this.showSpinner=true;
     this._orderDetailService.getKYCListDetail('products/GetProductByDealerCode', dealerCode).then((data: any) => {
       console.log(data)
-      let list = [];
-      let dataList = [];
-      for (let index = 0; index < data.SubCategory.length; index++) {
-        for (let ind = 0; ind < data.Products.length; ind++) {
-            if(data.Products[ind].ProductCategoryId == data.SubCategory[index].CategoryId){
-              var obj = data.SubCategory[index];
-              if(!obj['children']){
-                obj['children'] = [];
-              }
-              let dataObj ={
-                data:{...data.Products[ind]}
-              }
-              let title = dataObj.data.Title;
-              dataObj.data.Title = dataObj.data.ProductCode;
-              dataObj.data.ProductCode = title
-              obj['children'].push(dataObj)
-
-            }
-        }
-        list.push(obj)
-      }
-      list.forEach((obj, i)=>{
-        let child = obj.children;
-        delete obj.children;
-        let object = {
-          data:{...obj},
-          children: child
-        }
-        dataList.push(object)
-      })
-      console.log(dataList)
-      this.categoryList = dataList;
       this.showSpinner=false;
       this.toggleCompanyProductList = true;
+      if(data.SubCategory.length && data.Products.length){
+        this.generateProductCompany(data);
+      }
     })
     .catch(err => {
       this.showSpinner=false;
 
     })
+  }
+  generateProductCompany(data){
+    let list = [];
+    let dataList = [];
+    for (let index = 0; index < data.SubCategory.length; index++) {
+      for (let ind = 0; ind < data.Products.length; ind++) {
+          if(data.Products[ind].ProductCategoryId == data.SubCategory[index].CategoryId){
+            var obj = data.SubCategory[index];
+            if(!obj['children']){
+              obj['children'] = [];
+            }
+            let dataObj ={
+              data:{...data.Products[ind]}
+            }
+            let title = dataObj.data.Title;
+            dataObj.data.Title = dataObj.data.ProductCode;
+            dataObj.data.ProductCode = title
+            obj['children'].push(dataObj)
+
+          }
+      }
+      list.push(obj);
+    }
+    list.forEach((obj, i)=>{
+      let child = obj.children;
+      delete obj.children;
+      let object = {
+        data:{...obj},
+        children: child
+      }
+      dataList.push(object)
+    })
+    this.categoryList = dataList;
   }
 
 }

@@ -6,15 +6,18 @@
             height: unset;
             .table{
                 tr{
-                        background-color: transparent !important;
-                        th{
-                            @extend tr;
+                    background-color: transparent !important;
+                    &:hover{
+                        background-color: #e9ecef;
+                    }
+                    th{
+                        @extend tr;
+                    }
+                    td{
+                        .node{
+                            font-weight: bold;
                         }
-                        td{
-                            .node{
-                                font-weight: bold;
-                            }
-                        }
+                    }
                 }
               
             }
