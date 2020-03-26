@@ -2,11 +2,23 @@
     .content{
         border: 1px solid #BCBEC0;
         border-radius: 3px;
-        .table{
-            tr, th{
-                    background-color: transparent !important;
+        .gridArea{
+            height: unset;
+            .table{
+                tr{
+                        background-color: transparent !important;
+                        th{
+                            @extend tr;
+                        }
+                        td{
+                            .node{
+                                font-weight: bold;
+                            }
+                        }
+                }
+              
             }
-          
         }
+     
     }
 }

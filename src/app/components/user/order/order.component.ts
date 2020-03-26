@@ -20,7 +20,8 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public selectedCompany: string= undefined;
   public companyDetailForm: FormGroup;
   public toggleCompanyProductList:boolean= false;
-  files :TreeNode[]=	[
+  public categoryList :TreeNode[]= [];
+  public files :TreeNode[]=	[
     {
       "data": {
         "name": "Applications",
@@ -354,10 +355,36 @@ export class OrderComponent implements OnInit, AfterViewInit {
 
   companyProducts(dealerCode){
     this.showSpinner=true;
-    this.toggleCompanyProductList = true;
     this._orderDetailService.getKYCListDetail('products/GetProductByDealerCode', dealerCode).then((data: any) => {
       console.log(data)
+      let list = [];
+      let dataList = [];
+      for (let index = 0; index < data.SubCategory.length; index++) {
+        for (let ind = 0; ind < data.Products.length; ind++) {
+            if(data.Products[ind].ProductCategoryId == data.SubCategory[index].CategoryId){
+              var obj = data.SubCategory[index];
+              if(!obj['children']){
+                obj['children'] = [];
+              }
+              obj['children'].push({data:{...data.Products[ind]}})
+
+            }
+        }
+        list.push(obj)
+      }
+      list.forEach((obj, i)=>{
+        let child = obj.children;
+        delete obj.children;
+        let object = {
+          data:{...obj},
+          children: child
+        }
+        dataList.push(object)
+      })
+      console.log(dataList)
+      this.categoryList = dataList;
       this.showSpinner=false;
+      this.toggleCompanyProductList = true;
     })
     .catch(err => {
       this.showSpinner=false;

@@ -66,7 +66,7 @@
                  </div>
                  <div class="productInfo" [hidden]="!toggleCompanyProductList">
                   <div class="content bg-white" >
-                    <p-treeTable [value]="files">
+                    <p-treeTable [value]="categoryList">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>Product Code</th>
@@ -82,14 +82,16 @@
                             <tr [ttRow]="rowNode">
                                 <td>
                                     <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
-                                    {{rowData.name}}
+                                    <span [ngClass]="{'node': rowNode.node.children && rowNode.node.children.length}">{{rowData.Title}}</span>
+                                    <!-- <span>{{rowData | json}}</span>
+                                    <strong>{{rowNode | json}}</strong> -->
                                 </td>
-                                <td>{{rowData.size}}</td>
-                                <td>{{rowData.type}}</td>
-                                <td>{{rowData.size}}</td>
-                                <td>{{rowData.type}}</td>
-                                <td>{{rowData.size}}</td>
-                                <td>{{rowData.type}}</td>
+                                <td>{{rowData.ProductCode}}</td>
+                                <td>{{rowData.ProductUnitPrice}}</td>
+                                <td>{{rowData.DiscountAmount}}</td>
+                                <td>{{rowData.UnitOFMeasure}}</td>
+                                <td>{{rowData.PackSize}}</td>
+                                <td><input *ngIf="!rowNode.node.children || (rowNode.node.children && !rowNode.node.children.length)"class="form-control" placeholder="Quantity" /></td>
                             </tr>
                         </ng-template>
                     </p-treeTable>
