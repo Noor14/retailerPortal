@@ -366,7 +366,13 @@ export class OrderComponent implements OnInit, AfterViewInit {
               if(!obj['children']){
                 obj['children'] = [];
               }
-              obj['children'].push({data:{...data.Products[ind]}})
+              let dataObj ={
+                data:{...data.Products[ind]}
+              }
+              let title = dataObj.data.Title;
+              dataObj.data.Title = dataObj.data.ProductCode;
+              dataObj.data.ProductCode = title
+              obj['children'].push(dataObj)
 
             }
         }
