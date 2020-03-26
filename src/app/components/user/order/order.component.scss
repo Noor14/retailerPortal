@@ -14,8 +14,31 @@
                         @extend tr;
                     }
                     td{
+                        vertical-align: middle;
                         &.node{
                                 font-weight: bold;
+                                p-treetabletoggler{
+                                    .ui-treetable-toggler {
+                                        position: relative;
+                                        .pi-chevron-right::before{
+                                            content: "+";
+                                            font-style: normal;
+                                            position: absolute;
+                                            font-size: 22px;
+                                            color: #96bb3d;
+                                            bottom: -9px;
+                                            font-weight: normal;
+                                        }
+                                        .pi-chevron-down::before{
+                                            @extend .pi-chevron-right,::before;
+                                            content: "–";
+                                            
+                                        }
+                                    }
+                                }
+                                span{
+                                  margin-left: 35px;
+                                }
                         }
                     }
                 }
@@ -24,4 +47,5 @@
         }
      
     }
+   
 }
