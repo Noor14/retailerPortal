@@ -76,7 +76,9 @@ export class OrderComponent implements OnInit, AfterViewInit {
     let obj = this.kycList.find(obj=> obj.DealerCode == dealerCode);
     this.companyDetailForm.patchValue(obj);
   }
-
+  selectProduct(product, qty){
+    console.log(product, qty)
+  }
   companyProducts(dealerCode){
     if(this.selectedDealerCode != dealerCode){
       this.selectedDealerCode = dealerCode
