@@ -17,6 +17,26 @@
                         vertical-align: middle;
                         &.node{
                                 font-weight: bold;
+                                p-treetabletoggler{
+                                    .ui-treetable-toggler {
+                                        position: relative;
+                                        .pi-chevron-right::after{
+                                            content: "+";
+                                            font-style: normal;
+                                            left: -35px;
+                                            position: absolute;
+                                            font-size: 22px;
+                                            color: #96bb3d;
+                                            bottom: -9px;
+                                            font-weight: normal;
+                                        }
+                                        .pi-chevron-down::after{
+                                            @extend .pi-chevron-right,::after;
+                                            content: "–";
+                                            
+                                        }
+                                    }
+                                }
                         }
                     }
                 }
