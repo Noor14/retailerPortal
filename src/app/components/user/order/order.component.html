@@ -92,7 +92,7 @@
                                 <td class="d-flex justify-content-center">
                                     <input maxlength="9" numbersOnly  *ngIf="!rowNode.node.children || (rowNode.node.children && !rowNode.node.children.length)"
                                     class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="rowData.OrderQty"
-                                      (change)="selectProduct(rowData)" />
+                                      (blur)="selectProduct(rowData)" />
                                 </td>
                             </tr>
                         </ng-template>
@@ -134,7 +134,7 @@
                                 <td>{{order.PackSize}}</td>
                                 <td class="d-flex justify-content-center">
                                     <input  maxlength="9" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
-                                      (change)="selectProduct(order)" />
+                                      (blur)="selectProduct(order)" />
                                 </td>
                                 <td>{{order.OrderQty * order.ProductUnitPrice}}</td>
                            
