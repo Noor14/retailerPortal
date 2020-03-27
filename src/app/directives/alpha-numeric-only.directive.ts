@@ -5,25 +5,25 @@ import { AppPattern } from '../shared/app.mask';
   selector: '[alphaNumericOnly]'
 })
 export class AlphaNumericOnlyDirective {
+  
+ // Allow key codes for special events. Reflect :
+ // Backspace, tab, end, home
+ private specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home'];
 
-  constructor(private _el: ElementRef) { }
-  @HostListener('input', ['$event']) onInputChange(event) {
-
-    let regex = AppPattern.alphaNumericOnly;
-    if(this._el.nativeElement.value.length == 1 && event.data != null && event.data.trim() == ""){
-      this._el.nativeElement.value = '';
-    }
-    else{
-      if(event.data && event.data != " " && !this._el.nativeElement.value.match(regex)){
-        let arr = this._el.nativeElement.value.split('')
-        let ind = arr.indexOf(event.data);
-        if(ind>=0){
-          arr.splice(ind, 1);
-          this._el.nativeElement.value = arr.join().replace(/,/g, '').trim()
-
-        }
-       }
-    }
-
+ constructor(private el: ElementRef) {
   }
+  @HostListener('keydown', [ '$event' ])
+  onKeyDown(event: KeyboardEvent) {
+     let regex=AppPattern.alphaNumericOnly;
+       // Allow Backspace, tab, end, and home keys
+       if (this.specialKeys.indexOf(event.key) !== -1) {
+       return;
+       }
+       let current: string = this.el.nativeElement.value;
+       let next: string = current.concat(event.key);
+       if (next && !String(next).match(regex)) {
+       event.preventDefault();
+       }
+  }
+
 }
