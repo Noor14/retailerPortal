@@ -66,7 +66,7 @@
                  </div>
                  <div class="productInfo" *ngIf="toggleCompanyProductList">
                   <div class="content bg-white" >
-                    <p-treeTable [value]="categoryList">
+                    <p-treeTable [value]="categoryList" >
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>Product Code</th>
@@ -85,8 +85,8 @@
                                     <span>{{rowData.Title}}</span>
                                 </td>
                                 <td>{{rowData.ProductCode}}</td>
-                                <td>{{rowData.ProductUnitPrice}}</td>
-                                <td>{{rowData.DiscountAmount}}</td>
+                                <td>{{rowData.ProductUnitPrice  | currency:'PKR '}}</td>
+                                <td>{{rowData.DiscountAmount  | currency:'PKR '}}</td>
                                 <td>{{rowData.UnitOFMeasure}}</td>
                                 <td>{{rowData.PackSize}}</td>
                                 <td class="d-flex justify-content-center">
@@ -100,15 +100,18 @@
                 </div>
                 <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end pt-3">
                     <button class="btn btn-primary ml-3" type="button" (click)="toggleCompanyProductList = !toggleCompanyProductList">Back</button>
-                    <button class="btn btn-primary ml-3" type="button" (click)="tab.select('orderSummary')">Checkout</button>
+                    <button class="btn btn-primary ml-3" type="button" [ngClass]="{'mutedBtn': !orderSummary.length}" (click)="tab.select('orderSummary')">Checkout</button>
                 </div>
             </div>
 
             </ng-template>
         </ngb-tab>
-        <ngb-tab id="orderSummary" [disabled]="!orderSummary.length">
+        <ngb-tab id="orderSummary">
             <ng-template ngbTabTitle>Order Summary</ng-template>
             <ng-template ngbTabContent>
+                <div class="text-right templateBtn">
+                    <button class="btn btn-primary" type="button">Save Template</button>
+                </div>
                 <div class="content bg-white">
                     <div class="gridArea table-responsive" id="nav-scrollbar">
                       <table class="table" *ngIf="orderSummary && orderSummary.length">
@@ -128,15 +131,15 @@
                             <tr *ngFor="let order of orderSummary; let i = index">
                                 <td>{{order.Title}}</td>
                                 <td>{{order.ProductCode}}</td>
-                                <td>{{order.ProductUnitPrice}}</td>
-                                <td>{{order.DiscountAmount}}</td>
+                                <td>{{order.ProductUnitPrice  | currency:'PKR '}}</td>
+                                <td>{{order.DiscountAmount  | currency:'PKR '}}</td>
                                 <td>{{order.UnitOFMeasure}}</td>
                                 <td>{{order.PackSize}}</td>
                                 <td class="d-flex justify-content-center">
                                     <input  maxlength="9" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
                                       (blur)="selectProduct(order)" />
                                 </td>
-                                <td>{{order.OrderQty * order.ProductUnitPrice}}</td>
+                                <td>{{order.OrderQty * order.ProductUnitPrice  | currency:'PKR '}}</td>
                            
                             </tr>
                             </tbody>
@@ -147,7 +150,7 @@
                   </div>
                   <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end pt-3" *ngIf="orderSummary.length">
                     <button class="btn btn-primary ml-3" type="button" >Draft</button>
-                    <button class="btn btn-primary ml-3" type="button" >Confirm Order</button>
+                    <button class="btn btn-primary ml-3" type="button" (click)="confirmOrder()">Confirm Order</button>
                 </div>
             </ng-template>
         </ngb-tab>

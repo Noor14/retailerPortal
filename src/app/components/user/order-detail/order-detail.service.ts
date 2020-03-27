@@ -37,6 +37,20 @@ export class OrderDetailService {
     })
     return promise;
   }
+  orderSave(obj){
+    let promise = new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/Orders/saveOrder`;
+      this._http.post(apiURL, obj)
+        .toPromise()
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        })
+    })
+    return promise;
+  }
 }
 
 

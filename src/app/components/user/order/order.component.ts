@@ -5,6 +5,8 @@ import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, Element
 import { OrderDetailService } from '../order-detail/order-detail.service';
 import { TreeNode } from 'primeng/api/treenode';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -26,7 +28,11 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public orderSummary: any[]=[];
   public activeTab:string = 'placeOrder';
   @ViewChild('tab', {static:false}) public tabs:NgbTabset;
-  constructor(private _orderDetailService : OrderDetailService) { }
+  constructor(
+    private _orderDetailService : OrderDetailService,
+    private _toast: ToastrService,
+    private _route: Router
+    ) { }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
@@ -48,7 +54,12 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this.setTableTreeClass()
   }
   onTabChange(event){
-    if(event.activeId == "orderSummary"){
+    if(event.activeId == "placeOrder" && event.nextId == "orderSummary"){
+      if(!this.orderSummary.length){
+        event.preventDefault()
+      }
+    }
+    else if(event.activeId == "orderSummary"  && event.nextId == "placeOrder"){
       this.setTableTreeClass()
     }
   }
@@ -80,6 +91,31 @@ export class OrderComponent implements OnInit, AfterViewInit {
   companyDetail(dealerCode){
     let obj = this.kycList.find(obj=> obj.DealerCode == dealerCode);
     this.companyDetailForm.patchValue(obj);
+  }
+  confirmOrder(){
+    if(this.orderSummary.length){
+      this.showSpinner=true;
+      let obj = {
+      ID:0,
+      DealerCode:this.selectedDealerCode,
+      OrderDetails:this.orderSummary
+      }
+      this._orderDetailService.orderSave(obj).then((data: any) => {
+        if(data.OrderNumber && data.ID){
+          this._toast.success("Order Saved");
+            this._route.navigate(['/user/dashboard'])
+        }
+        this.showSpinner=false;
+      })
+      .catch(err => {
+        this.showSpinner=false;
+        if(err.error){
+          this._toast.error(err.error.message, "Error")
+        }
+  
+      })
+    }
+   
   }
   selectProduct(product){
     if (!this.orderSummary.length && product.OrderQty){
@@ -123,7 +159,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
       this.setTableTreeClass();
       this.toggleCompanyProductList = true;
     }
-
   }
   generateProductCompany(data){
       let list = [];
