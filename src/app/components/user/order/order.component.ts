@@ -1,10 +1,11 @@
+import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppMasks, AppPattern } from 'src/app/shared/app.mask';
 import { loadingConfig } from 'src/app/constant/globalfunction';
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { OrderDetailService } from '../order-detail/order-detail.service';
 import { TreeNode } from 'primeng/api/treenode';
-import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTabset, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -25,19 +26,22 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public toggleCompanyProductList:boolean= false;
   public categoryList :TreeNode[]= [];
   private selectedDealerCode:string;
+  private userObject: any;
   public orderSummary: any[]=[];
   public activeTab:string = 'placeOrder';
   @ViewChild('tab', {static:false}) public tabs:NgbTabset;
   constructor(
     private _orderDetailService : OrderDetailService,
     private _toast: ToastrService,
-    private _route: Router
+    private _route: Router,
+    private _modalService: NgbModal,
+
     ) { }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
-    let userObject = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
-    this.getKYCList(userObject.RetailerID);
+    this.userObject = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
+    this.getKYCList(this.userObject.RetailerID);
     this.companyDetailForm = new FormGroup({
       Email: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
       Mobile: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
@@ -51,7 +55,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(){
-    this.setTableTreeClass()
+    this.setTableTreeClass();
   }
   onTabChange(event){
     if(event.nextId == "orderSummary"){
@@ -78,6 +82,23 @@ export class OrderComponent implements OnInit, AfterViewInit {
       },0)
 
   }
+  openDialog(){
+    if(this.orderSummary.length){
+      const modalRef = this._modalService.open(DialogComponent,{ 
+        centered: true,
+        keyboard: false,
+        backdrop:'static'
+      });
+      let obj = {
+        ID:0, 
+        DealerCode:this.selectedDealerCode,
+        RetailerCode:this.userObject.RetailerCode,
+        Status:1,
+        OrderTemplateDetails: this.orderSummary 
+        }
+      modalRef.componentInstance.obj = {object : obj, btnText: 'Save', title: 'Save Template', mode: 'orderTemplate', inputBox: true};
+   }
+  }
   getKYCList(requestId){
     this.showSpinner=true;
     this._orderDetailService.getKYCListDetail('kyc/ConnectedKycList',requestId).then((data: any) => {
@@ -100,7 +121,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
       DealerCode:this.selectedDealerCode,
       OrderDetails:this.orderSummary
       }
-      this._orderDetailService.orderSave(obj).then((data: any) => {
+      this._orderDetailService.save('Orders/saveOrder', obj).then((data: any) => {
         if(data.OrderNumber && data.ID){
           this._toast.success("Order Saved");
             this._route.navigate(['/user/dashboard'])

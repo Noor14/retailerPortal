@@ -1,14 +1,18 @@
 <section class="dialogBox">
   <div class="modal-header">
-      <h4 class="modal-title text-warning title" id="modal-title">{{dialogBoxObject.title}}</h4>
+      <h4 class="modal-title title" id="modal-title" [ngClass]="dialogBoxObject?.titleTextColor">{{dialogBoxObject?.title}}</h4>
       <button type="button" class="close" aria-describedby="modal-title" (click)="activeModal.dismiss()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <p class="text-center">{{dialogBoxObject.detail}}</p>
+      <p class="text-center" *ngIf="dialogBoxObject?.detail">{{dialogBoxObject?.detail}}</p>
+      <div class="form-group" *ngIf="dialogBoxObject?.inputBox">
+        <input type="text" class="form-control" alphabetsOnly [(ngModel)]="name" placeholder="Enter Template Name">
+      </div>
       <div class="d-flex justify-content-center">
-        <button type="button" class="btn btn-primary" (click)="delete()">Yes, I want</button>
+        <button type="button" class="btn btn-primary" [disabled]="dialogBoxObject?.inputBox && !name" (click)="performAction()">{{dialogBoxObject?.btnText}}</button>
       </div>
     </div>
-</section>
+  </section>
+  <ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

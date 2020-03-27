@@ -110,7 +110,7 @@
             <ng-template ngbTabTitle>Order Summary</ng-template>
             <ng-template ngbTabContent>
                 <div class="text-right templateBtn">
-                    <button class="btn btn-primary" type="button">Save Template</button>
+                    <button class="btn btn-primary" type="button" [disabled]="!orderSummary.length" (click)="openDialog()">Save Template</button>
                 </div>
                 <div class="content bg-white">
                     <div class="gridArea table-responsive" id="nav-scrollbar">

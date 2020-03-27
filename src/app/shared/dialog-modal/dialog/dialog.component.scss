@@ -17,11 +17,16 @@
                 width: 2px;
                 height: 30px;
                 content: '';
-                background: #ffc107;
+                background: $baseColor;
                 position: absolute;
                 left: 0;
-        
-        }
+                }
+                &.warning{
+                    color: #ffc107;
+                    &::before{
+                    background: #ffc107;
+                    }
+                }
     }
  }
 

@@ -1,3 +1,4 @@
+import { AlphabetsOnlyDirective } from './../directives/alphabets-only.directive';
 import { NumberDirective } from 'src/app/directives/numbers-only.directive';
 import { NoWhiteSpaceDirective } from './../directives/no-white-space.directive';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     NoWhiteSpaceDirective, 
     NumberDirective,
+    AlphabetsOnlyDirective,
     HeaderComponent,
     SidebarComponent, 
     DialogComponent,
@@ -39,7 +41,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SidebarComponent,
     SearchingComponent,
     NoWhiteSpaceDirective,
-    NumberDirective],
+    NumberDirective,
+    AlphabetsOnlyDirective],
 
   providers:[]
 })

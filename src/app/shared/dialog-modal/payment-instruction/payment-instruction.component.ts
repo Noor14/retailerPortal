@@ -26,7 +26,7 @@ export class PaymentInstructionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    loadingConfig.placement = SPINNER_PLACEMENT.block_ui,
+    loadingConfig.placement = SPINNER_PLACEMENT.block_ui;
     this.spinnerConfig = loadingConfig;
     if(this.obj && Object.keys(this.obj).length){
       this.paymentInstructions = this.obj;

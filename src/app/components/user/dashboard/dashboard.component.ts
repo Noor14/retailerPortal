@@ -164,7 +164,7 @@ export class DashboardComponent implements OnInit {
       keyboard: false,
       backdrop:'static'
      });
-    modalRef.componentInstance.obj = {id : id, title: 'Delete Payment', deleteType: 'payment', detail:'Are you sure, you want to delete this payment? '};
+    modalRef.componentInstance.obj = {id : id, title: 'Delete Payment', titleTextColor: 'warning', mode: 'payment', btnText: 'Yes, I want', detail:'Are you sure, you want to delete this payment? '};
     modalRef.result.then((result) => {
       if(result){
         let index = this.paymentsList.findIndex(obj => obj.RetailerInvoiceId == result)

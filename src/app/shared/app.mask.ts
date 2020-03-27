@@ -28,6 +28,7 @@ export class AppPattern {
     public static cnic_Pattern:RegExp = /^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$/;
     public static str_Pattern:RegExp = /[0-9]+/;
     public static number:RegExp = /^[1-9][0-9]*$/;
+    public static alphabetsOnly:RegExp = /^[a-zA-Z]+$/;
     public static password:RegExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/
     // /^[0-9+]{7}-[0-9+]{1}$/
 

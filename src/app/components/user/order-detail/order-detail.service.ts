@@ -37,9 +37,9 @@ export class OrderDetailService {
     })
     return promise;
   }
-  orderSave(obj){
+  save(apiEndPath, obj){
     let promise = new Promise((resolve, reject) => {
-      const apiURL = `${baseApi}/api/Orders/saveOrder`;
+      const apiURL = `${baseApi}/api/${apiEndPath}`;
       this._http.post(apiURL, obj)
         .toPromise()
         .then(res => {
@@ -51,6 +51,7 @@ export class OrderDetailService {
     })
     return promise;
   }
+ 
 }
 
 

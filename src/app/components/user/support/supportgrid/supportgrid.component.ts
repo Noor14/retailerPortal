@@ -110,7 +110,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
       keyboard: false,
       backdrop:'static'
      });
-    modalRef.componentInstance.obj = {id : id, title: 'Delete Ticket', deleteType: 'support', detail:'Are you sure, you want to delete this ticket? '};
+    modalRef.componentInstance.obj = {id : id, title: 'Delete Ticket', titleTextColor: 'warning', mode: 'support', btnText: 'Yes, I want', detail:'Are you sure, you want to delete this ticket? '};
     modalRef.result.then((result) => {
       if(result){
         let index = this.supportList.findIndex(obj => obj.ID == result)

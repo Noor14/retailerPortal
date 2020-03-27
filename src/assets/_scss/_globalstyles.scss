@@ -40,10 +40,14 @@ html{
         position: absolute;
         margin: 0;
       }
-      .small-modal {
+
+      .modal-content{
+        background-color: #F8F8F8;
+        border-radius: unset;
+      }
+      .md-modal {
         .modal-dialog {
-          max-width: 400px!important;
-          margin: auto
+          max-width: 600px!important;
         }
       }
       .form-group{
