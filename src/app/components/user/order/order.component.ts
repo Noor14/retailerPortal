@@ -97,7 +97,15 @@ export class OrderComponent implements OnInit, AfterViewInit {
         OrderTemplateDetails: this.orderSummary 
         }
       modalRef.componentInstance.obj = {object : obj, btnText: 'Save', title: 'Save Template', mode: 'orderTemplate', inputBox: true};
-   }
+      modalRef.result.then((result) => {
+        if(result){
+          this.orderSummary = [];
+          this.tabs.select('placeOrder');
+        }
+      }, (reason) => {
+        // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
   }
   getKYCList(requestId){
     this.showSpinner=true;
@@ -150,7 +158,9 @@ export class OrderComponent implements OnInit, AfterViewInit {
         this.orderSummary.splice(index, 1, product)
       }
       else{
-        this.orderSummary.push(product)
+        if(product.OrderQty){
+          this.orderSummary.push(product)
+        }  
       }
     }
     if (!this.orderSummary.length){

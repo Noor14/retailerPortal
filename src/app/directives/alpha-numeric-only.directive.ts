@@ -1,20 +1,20 @@
-import { AppPattern } from 'src/app/shared/app.mask';
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, HostListener, ElementRef } from '@angular/core';
+import { AppPattern } from '../shared/app.mask';
 
 @Directive({
-  selector: '[numbersOnly]'
+  selector: '[alphaNumericOnly]'
 })
-export class NumberDirective {
+export class AlphaNumericOnlyDirective {
 
   constructor(private _el: ElementRef) { }
   @HostListener('input', ['$event']) onInputChange(event) {
 
-    let regex = AppPattern.number;
-    if(this._el.nativeElement.value.length == 1 && event.data == "0"){
+    let regex = AppPattern.alphaNumericOnly;
+    if(this._el.nativeElement.value.length == 1 && event.data != null && event.data.trim() == ""){
       this._el.nativeElement.value = '';
     }
     else{
-      if(event.data && event.data != "0" && !event.data.match(regex)){
+      if(event.data && event.data != " " && !this._el.nativeElement.value.match(regex)){
         let arr = this._el.nativeElement.value.split('')
         let ind = arr.indexOf(event.data);
         if(ind>=0){

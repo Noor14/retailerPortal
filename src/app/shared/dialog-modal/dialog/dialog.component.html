@@ -8,7 +8,7 @@
     <div class="modal-body">
       <p class="text-center" *ngIf="dialogBoxObject?.detail">{{dialogBoxObject?.detail}}</p>
       <div class="form-group" *ngIf="dialogBoxObject?.inputBox">
-        <input type="text" class="form-control" alphabetsOnly [(ngModel)]="name" placeholder="Enter Template Name">
+        <input type="text" class="form-control" alphaNumericOnly [(ngModel)]="name" placeholder="Enter Template Name">
       </div>
       <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-primary" [disabled]="dialogBoxObject?.inputBox && !name" (click)="performAction()">{{dialogBoxObject?.btnText}}</button>

@@ -68,13 +68,17 @@ export class DialogComponent implements OnInit {
       })
     }
     else if(this.dialogBoxObject.mode == 'orderTemplate'){
-      if(this.name){
+      if(this.name.trim()){
         this.showSpinner = true;
-        this.dialogBoxObject.object.Name = this.name;
+        this.dialogBoxObject.object.Name = this.name.trim();
         this._orderDetailService.save('ordertemplate/save', this.dialogBoxObject.object)
         .then((res: any) => {
           this.showSpinner = false;
-          this._toast.success('Template Saved');
+          if(res.ID){
+            this._toast.success('Template Saved');
+            this.activeModal.close(res.ID);
+          }
+         
         })
         .catch((err:HttpErrorResponse) => {
           this.showSpinner = false;
