@@ -4,7 +4,6 @@ import { Component, OnInit, Input, SecurityContext } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
-import { SPINNER_PLACEMENT } from '@hardpool/ngx-spinner';
 
 @Component({
   selector: 'app-payment-instruction',
@@ -26,7 +25,6 @@ export class PaymentInstructionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    loadingConfig.placement = SPINNER_PLACEMENT.block_ui;
     this.spinnerConfig = loadingConfig;
     if(this.obj && Object.keys(this.obj).length){
       this.paymentInstructions = this.obj;
