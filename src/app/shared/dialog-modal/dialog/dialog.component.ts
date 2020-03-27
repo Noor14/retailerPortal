@@ -70,7 +70,7 @@ export class DialogComponent implements OnInit {
     else if(this.dialogBoxObject.mode == 'orderTemplate'){
       if(this.name){
         this.showSpinner = true;
-        this.dialogBoxObject.object.name = this.name;
+        this.dialogBoxObject.object.Name = this.name;
         this._orderDetailService.save('ordertemplate/save', this.dialogBoxObject.object)
         .then((res: any) => {
           this.showSpinner = false;
