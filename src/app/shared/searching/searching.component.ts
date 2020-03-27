@@ -31,6 +31,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
   @Input() searchingCriteria: any;
   @Output() filteredData = new EventEmitter();
 
+  public searchingOption:any =undefined;
   public statuses:any[]=[];
   public selectedObject:any={};
   private searchingobj:any= {}
