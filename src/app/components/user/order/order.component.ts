@@ -54,12 +54,12 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this.setTableTreeClass()
   }
   onTabChange(event){
-    if(event.activeId == "placeOrder" && event.nextId == "orderSummary"){
+    if(event.nextId == "orderSummary"){
       if(!this.orderSummary.length){
         event.preventDefault();
       }
     }
-    else if(event.activeId == "orderSummary"  && event.nextId == "placeOrder"){
+    else if(event.nextId == "placeOrder"){
       this.setTableTreeClass()
     }
   }
