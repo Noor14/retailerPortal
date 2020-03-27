@@ -56,7 +56,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   onTabChange(event){
     if(event.activeId == "placeOrder" && event.nextId == "orderSummary"){
       if(!this.orderSummary.length){
-        event.preventDefault()
+        event.preventDefault();
       }
     }
     else if(event.activeId == "orderSummary"  && event.nextId == "placeOrder"){
