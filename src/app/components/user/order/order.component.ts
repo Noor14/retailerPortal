@@ -100,6 +100,11 @@ export class OrderComponent implements OnInit, AfterViewInit {
       modalRef.result.then((result) => {
         if(result){
           this.orderSummary = [];
+          this.categoryList.forEach(obj => {
+            if(obj.children.length){
+              obj.children.map(item=>{item.data['OrderQty'] = undefined})
+            }
+          })
           this.tabs.select('placeOrder');
         }
       }, (reason) => {
