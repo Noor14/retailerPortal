@@ -8,8 +8,8 @@
       </li>
   </ol>
 
-    <ngb-tabset>
-        <ngb-tab>
+    <ngb-tabset (tabChange)="onTabChange($event)">
+        <ngb-tab id="payment">
           <ng-template ngbTabTitle>Payment</ng-template>
           <ng-template ngbTabContent>
             <div class="content">
@@ -55,7 +55,7 @@
            
           </ng-template>
         </ngb-tab>
-        <ngb-tab>
+        <ngb-tab id="order">
           <ng-template ngbTabTitle>Order</ng-template>
           <ng-template ngbTabContent>
             <div class="content">

@@ -54,7 +54,8 @@ export class DashboardComponent implements OnInit {
   public paymentsList: any[]= [];
   public orderList: any[]= [];
   private statusDropDownSubscriber: any;
-  private searchingByKey:any;
+  private searchingByKeyOrder:any;
+  private searchingByKeyPayment:any;
 
   constructor(
     private _dashboardService: DashboardService,
@@ -130,15 +131,26 @@ export class DashboardComponent implements OnInit {
       console.log(err);
     })
   }
+  onTabChange(event){
+      if(event.nextId == "order" && this.searchingByKeyOrder){
+        this.getOrderList(this.searchObjOrder);
+        this.searchingByKeyOrder =undefined;
 
+      }
+      else if(event.nextId == "payment" && this.searchingByKeyPayment){
+        this.getPaymentList(this.searchObjPayment);
+        this.searchingByKeyPayment =undefined;
+      }
+ 
+  }
   loadMore(mode){
     if(mode =='payment'){
       this.searchObjPayment.PageNumber++;
-      let obj = {...this.searchObjPayment , ...this.searchingByKey};
+      let obj = {...this.searchObjPayment , ...this.searchingByKeyPayment};
       this.getPaymentList(obj);
     }else{
       this.searchObjOrder.PageNumber++
-      let obj = {...this.searchObjOrder , ...this.searchingByKey};
+      let obj = {...this.searchObjOrder , ...this.searchingByKeyOrder};
       this.getOrderList(obj);
     }
   }
@@ -148,12 +160,12 @@ export class DashboardComponent implements OnInit {
       this.searchObjPayment.PageNumber = 0;
       this.paymentsList = event.data.PrePaidRequestData;
       let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
-      this.searchingByKey = (key)? {[key]: event[key]} : undefined;
+      this.searchingByKeyPayment = (key)? {[key]: event[key]} : undefined;
       this.loadAvailable = (this.paymentsList.length == event.data.RecordCount)? false : true;
     }else{
       this.searchObjOrder.PageNumber = 0;
       let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
-      this.searchingByKey = (key)? {[key]: event[key]} : undefined;
+      this.searchingByKeyOrder = (key)? {[key]: event[key]} : undefined;
       this.orderList = event.data[0];
       this.loadAvailableOrder = (this.orderList.length == event.data[1].RecordCount)? false : true;
     }
