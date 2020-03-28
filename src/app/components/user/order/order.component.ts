@@ -202,7 +202,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
         let object
         for (let ind = 0; ind < data.Products.length; ind++) {
             if(data.Products[ind].ProductCategoryId == data.SubCategory[index].CategoryId){
-             var obj = data.SubCategory[index];
+             let obj = data.SubCategory[index];
               if(!obj['children']){
                 obj['children'] = [];
               }
