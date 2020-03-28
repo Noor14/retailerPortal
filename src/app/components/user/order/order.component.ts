@@ -126,6 +126,31 @@ export class OrderComponent implements OnInit, AfterViewInit {
     let obj = this.kycList.find(obj=> obj.DealerCode == dealerCode);
     this.companyDetailForm.patchValue(obj);
   }
+  saveDraft(){
+    if(this.orderSummary.length){
+      this.showSpinner=true;
+      let obj = {
+      ID:0,
+      DealerCode:this.selectedDealerCode,
+      OrderDetails:this.orderSummary
+      }
+      this._orderDetailService.save('Orders/draft', obj).then((data: any) => {
+        if(data.OrderNumber && data.ID){
+          this._toast.success("Draft Saved");
+            this._route.navigate(['/user/dashboard'])
+        }
+        this.showSpinner=false;
+      })
+      .catch(err => {
+        this.showSpinner=false;
+        if(err.error){
+          this._toast.error(err.error.message, "Error")
+        }
+  
+      })
+    }
+  }
+
   confirmOrder(){
     if(this.orderSummary.length){
       this.showSpinner=true;
