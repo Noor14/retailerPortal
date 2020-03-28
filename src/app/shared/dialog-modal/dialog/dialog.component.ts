@@ -67,6 +67,45 @@ export class DialogComponent implements OnInit {
         }
       })
     }
+    else if(this.dialogBoxObject.mode == 'order' && this.dialogBoxObject.type == 'delete'){
+      this.showSpinner = true;
+      this._dashboardService.deleteOrder(this.dialogBoxObject.id)
+      .then((res: any) => {
+        if(res && res.ID){
+          this._toast.success('Order successfully deleted');
+          this.showSpinner = false;
+          this.activeModal.close(this.dialogBoxObject.id);
+        }
+      })
+      .catch((err:HttpErrorResponse) => {
+        this.showSpinner = false;
+        if(err.error){
+          this._toast.error(err.error.message, "Error")
+        }
+      })
+    }
+    else if(this.dialogBoxObject.mode == 'order' && this.dialogBoxObject.type == 'cancel'){
+      this.showSpinner = true;
+      let obj ={
+        ID: this.dialogBoxObject.id,
+        Status: 4
+      }
+      this._dashboardService.cancelOrder(obj)
+      .then((res: any) => {
+        if(res && res.ID){
+          this._toast.success('Order successfully cancelled');
+          this.showSpinner = false;
+          this.activeModal.close(res.ID);
+        }
+        
+      })
+      .catch((err:HttpErrorResponse) => {
+        this.showSpinner = false;
+        if(err.error){
+          this._toast.error(err.error.message, "Error")
+        }
+      })
+    }
     else if(this.dialogBoxObject.mode == 'orderTemplate'){
       if(this.name.trim()){
         this.showSpinner = true;

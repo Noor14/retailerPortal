@@ -39,4 +39,32 @@ export class DashboardService {
     })
     return promise;
   }
+  deleteOrder(id) {
+    let promise = new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/orders/deletedraft/${id}`;
+      this._http.delete(apiURL)
+        .toPromise()
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        })
+    })
+    return promise;
+  }
+  cancelOrder(obj) {
+    let promise = new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/orders/cancelorder`;
+      this._http.post(apiURL, obj)
+        .toPromise()
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        })
+    })
+    return promise;
+  }
 }
