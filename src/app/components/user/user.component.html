@@ -1,17 +1,20 @@
 <div class="overlay d-lg-none" *ngIf="navigationToggle" (click)="navigationToggle=false"></div>
 <app-header [navigationState]="navigationToggle" (navToggling)='navigationToggle = $event'></app-header>
-<section class="container-fluid">
-    <div class="row main">
+<main>
+  <section class="container-fluid h-100">
+    <div class="row h-100">
       <div class="col-lg-2 d-none d-lg-block navigation">
         <app-sidebar ></app-sidebar>
       </div>
       <div class="navigation d-lg-none" *ngIf="navigationToggle" [@slideInOut]>
         <app-sidebar (navToggling)='navigationToggle = $event'></app-sidebar>
       </div>
-    <div class="col-lg-10 contentPages">
+      <div class="col-lg-10 contentPages">
         <router-outlet></router-outlet>
-    </div>
+      </div>
     </div>
 </section>
+</main>
+
 
 

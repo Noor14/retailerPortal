@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { SearchingComponent } from './searching/searching.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   
@@ -24,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DialogComponent,
     PaymentInstructionComponent,
     SearchingComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   exports:[
     HeaderComponent,
+    FooterComponent,
     SidebarComponent,
     SearchingComponent,
     NoWhiteSpaceDirective,
