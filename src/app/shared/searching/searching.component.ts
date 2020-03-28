@@ -123,7 +123,9 @@ export class SearchingComponent implements OnInit, OnDestroy {
                   this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
                 }
               this.filter(this.searchingobj);
-          
+                if(!text){
+                 this.selectedKey = undefined;
+                }
         });
   }
 
