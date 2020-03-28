@@ -149,8 +149,8 @@
                 
                   </div>
                   <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end pt-3" *ngIf="orderSummary.length">
-                    <button class="btn btn-primary ml-3" type="button" >Draft</button>
-                    <button class="btn btn-primary ml-3" type="button" (click)="confirmOrder()">Confirm Order</button>
+                    <button class="btn btn-primary ml-3" type="button" [disabled]="!orderSummary.length" (click)="saveDraft()">Draft</button>
+                    <button class="btn btn-primary ml-3" type="button" [disabled]="!orderSummary.length" (click)="confirmOrder()">Confirm Order</button>
                 </div>
             </ng-template>
         </ngb-tab>
