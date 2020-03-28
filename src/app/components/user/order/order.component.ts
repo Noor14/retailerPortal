@@ -177,7 +177,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
       this.selectedDealerCode = dealerCode
       this.showSpinner=true;
       this._orderDetailService.getKYCListDetail('products/GetProductByDealerCode', dealerCode).then((data: any) => {
-        console.log(data)
         this.showSpinner=false;
         this.toggleCompanyProductList = true;
         this.setTableTreeClass();
@@ -200,9 +199,10 @@ export class OrderComponent implements OnInit, AfterViewInit {
       let list = [];
       let dataList = [];
       for (let index = 0; index < data.SubCategory.length; index++) {
+        let object
         for (let ind = 0; ind < data.Products.length; ind++) {
             if(data.Products[ind].ProductCategoryId == data.SubCategory[index].CategoryId){
-              var obj = data.SubCategory[index];
+             var obj = data.SubCategory[index];
               if(!obj['children']){
                 obj['children'] = [];
               }
@@ -212,22 +212,27 @@ export class OrderComponent implements OnInit, AfterViewInit {
               let title = dataObj.data.Title;
               dataObj.data.Title = dataObj.data.ProductCode;
               dataObj.data.ProductCode = title
-              obj['children'].push(dataObj)
-  
+              obj['children'].push(dataObj);
+              object = obj
             }
         }
-        list.push(obj);
-      }
-      list.forEach((obj, i)=>{
-        let child = obj.children;
-        delete obj.children;
-        let object = {
-          data:{...obj},
-          children: child
+        if(object && Object.keys(object).length ){
+          list.push(object);
         }
-        dataList.push(object)
-      })
-      this.categoryList = dataList;
+      }
+      if(list && list.length){
+        list.forEach((obj)=>{
+          let child = obj.children;
+          delete obj.children;
+          let object = {
+            data:{...obj},
+            children: child
+          }
+          dataList.push(object)
+        })
+        this.categoryList = dataList;
+      }
+ 
     }
     
 
