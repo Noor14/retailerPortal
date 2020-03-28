@@ -170,17 +170,32 @@ export class DashboardComponent implements OnInit {
       this.loadAvailableOrder = (this.orderList.length == event.data[1].RecordCount)? false : true;
     }
   }
-  openDialog(id :Number){
+  openDialog(id :Number, type, mode){
     const modalRef = this._modalService.open(DialogComponent,{ 
       centered: true,
       keyboard: false,
       backdrop:'static'
      });
-    modalRef.componentInstance.obj = {id : id, title: 'Delete Payment', titleTextColor: 'warning', mode: 'payment', btnText: 'Yes, I want', detail:'Are you sure, you want to delete this payment? '};
+    let title = type.charAt(0).toUpperCase() + type.slice(1) + " " + mode.charAt(0).toUpperCase() + mode.slice(1);
+    modalRef.componentInstance.obj = {id : id, title: title, titleTextColor: 'warning', mode: mode, type: type, btnText: 'Yes, I want', detail: `Are you sure, you want to ${type} this ${mode}? `};
     modalRef.result.then((result) => {
       if(result){
-        let index = this.paymentsList.findIndex(obj => obj.RetailerInvoiceId == result)
-        this.paymentsList.splice(index, 1)
+        if(mode == 'payment' && type == 'delete'){
+          let index = this.paymentsList.findIndex(obj => obj.RetailerInvoiceId == result)
+          this.paymentsList.splice(index, 1)
+        }
+       else if(mode == 'order'){
+         if(type == 'delete'){
+          let index = this.orderList.findIndex(obj => obj.ID == result)
+          this.orderList.splice(index, 1)
+         }else if(type == 'cancel'){
+          let index = this.orderList.findIndex(obj => obj.ID == result)
+          let obj = this.orderList.find(obj => obj.ID == result);
+          obj.Status = "Cancelled"
+          this.orderList.splice(index, 1, obj)
+         }
+        
+       }
       }
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
