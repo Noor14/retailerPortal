@@ -1,12 +1,6 @@
 @import "../../../assets/_scss/_variables";
 
 .authentication{
-    background: url('../../../assets/_images/bg.jpg') no-repeat center center fixed;
-    min-height: 100vh;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     .content{
         padding:5rem 0;
         .logo{
