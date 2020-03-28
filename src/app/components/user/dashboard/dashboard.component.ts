@@ -49,8 +49,8 @@ export class DashboardComponent implements OnInit {
   public showSpinner: boolean;
   public spinnerConfig: any;
  
-  public loadAvailable:boolean = true; 
-  public loadAvailableOrder:boolean = true; 
+  public loadAvailableCount:number; 
+  public loadAvailableOrderCount:number; 
   public paymentsList: any[]= [];
   public orderList: any[]= [];
   private statusDropDownSubscriber: any;
@@ -106,7 +106,7 @@ export class DashboardComponent implements OnInit {
     }else{
       this.paymentsList = this.paymentsList.concat(data.PrePaidRequestData);
     }
-    this.loadAvailable = (this.paymentsList.length == data.RecordCount)? false : true;
+    this.loadAvailableCount = data.RecordCount;
     })
     .catch(err => {
     this.showSpinner=false;
@@ -124,7 +124,7 @@ export class DashboardComponent implements OnInit {
     }else{
       this.orderList = this.orderList.concat(data[0]);
     }
-    this.loadAvailableOrder = (this.orderList.length == data[1].RecordCount)? false : true;
+    this.loadAvailableOrderCount = data[1].RecordCount;
     })
     .catch(err => {
     this.showSpinner=false;
@@ -161,13 +161,13 @@ export class DashboardComponent implements OnInit {
       this.paymentsList = event.data.PrePaidRequestData;
       let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
       this.searchingByKeyPayment = (key)? {[key]: event[key]} : undefined;
-      this.loadAvailable = (this.paymentsList.length == event.data.RecordCount)? false : true;
+      this.loadAvailableCount =  event.data.RecordCount;
     }else{
       this.searchObjOrder.PageNumber = 0;
       let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
       this.searchingByKeyOrder = (key)? {[key]: event[key]} : undefined;
       this.orderList = event.data[0];
-      this.loadAvailableOrder = (this.orderList.length == event.data[1].RecordCount)? false : true;
+      this.loadAvailableOrderCount = event.data[1].RecordCount;
     }
   }
   openDialog(id :Number, type, mode){
@@ -182,12 +182,14 @@ export class DashboardComponent implements OnInit {
       if(result){
         if(mode == 'payment' && type == 'delete'){
           let index = this.paymentsList.findIndex(obj => obj.RetailerInvoiceId == result)
-          this.paymentsList.splice(index, 1)
+          this.paymentsList.splice(index, 1);
+          this.loadAvailableCount--
         }
        else if(mode == 'order'){
          if(type == 'delete'){
           let index = this.orderList.findIndex(obj => obj.ID == result)
-          this.orderList.splice(index, 1)
+          this.orderList.splice(index, 1);
+          this.loadAvailableOrderCount--
          }else if(type == 'cancel'){
           let index = this.orderList.findIndex(obj => obj.ID == result)
           let obj = this.orderList.find(obj => obj.ID == result);

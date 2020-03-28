@@ -18,7 +18,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   public spinnerConfig: any;
   private supportDropDownSubscriber:any;
   public supportList:any[] = [];
-  public loadAvailable: boolean;
+  public loadAvailableCount: number;
 
   private searchObj: any = {
     TotalRecords: 10,
@@ -59,7 +59,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
     this.searchObj.PageNumber = 0;
     let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
     this.searchingByKey = (key)? {[key]: event[key]} : undefined;
-    this.loadAvailable = (this.supportList.length == event.data[1].RecordCount)? false : true;
+    this.loadAvailableCount = event.data[1].RecordCount;
   }
  
   getSupportList(searchObj) {
@@ -72,7 +72,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
           }else{
             this.supportList = this.supportList.concat(data[0]);
           }
-          this.loadAvailable = (this.supportList.length == data[1].RecordCount)? false : true;
+          this.loadAvailableCount = data[1].RecordCount;
         })
         .catch(err => {
           this.showSpinner=false;
@@ -114,7 +114,8 @@ export class SupportgridComponent implements OnInit, OnDestroy {
     modalRef.result.then((result) => {
       if(result){
         let index = this.supportList.findIndex(obj => obj.ID == result)
-        this.supportList.splice(index, 1)
+        this.supportList.splice(index, 1);
+        this.loadAvailableCount--
       }
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

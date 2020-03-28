@@ -71,7 +71,7 @@ export class DialogComponent implements OnInit {
       this.showSpinner = true;
       this._dashboardService.deleteOrder(this.dialogBoxObject.id)
       .then((res: any) => {
-        if(res && res.ID){
+        if(res && res.OrderId){
           this._toast.success('Order successfully deleted');
           this.showSpinner = false;
           this.activeModal.close(this.dialogBoxObject.id);
@@ -95,7 +95,7 @@ export class DialogComponent implements OnInit {
         if(res && res.ID){
           this._toast.success('Order successfully cancelled');
           this.showSpinner = false;
-          this.activeModal.close(res.ID);
+          this.activeModal.close(this.dialogBoxObject.id);
         }
         
       })

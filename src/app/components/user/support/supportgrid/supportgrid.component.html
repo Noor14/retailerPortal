@@ -41,7 +41,7 @@
                            
                         </td>
                     </tr>
-                    <tr  class="text-center" *ngIf="loadAvailable">
+                    <tr  class="text-center" *ngIf="loadAvailableCount > supportList.length">
                         <td colspan="5"> <button class="btn" (click)="loadMore()" >Load More</button></td>
                     </tr>
                     </tbody>
