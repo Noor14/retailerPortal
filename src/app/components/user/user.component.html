@@ -9,8 +9,8 @@
       <div class="navigation d-lg-none" *ngIf="navigationToggle" [@slideInOut]>
         <app-sidebar (navToggling)='navigationToggle = $event'></app-sidebar>
       </div>
-      <div class="col-lg-10 contentPages">
-        <router-outlet></router-outlet>
+      <div class="col-lg-10 contentPages" [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
+            <router-outlet class="maincontent" #o="outlet"></router-outlet>
       </div>
     </div>
 </section>

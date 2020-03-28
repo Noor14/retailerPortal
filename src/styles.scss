@@ -103,6 +103,11 @@
     background-color: #96BB3C;
   }
 
-
-
-
+  router-outlet.maincontent ~ * {
+    position: absolute;
+    width: calc(100% - 100px);
+  }
+  router-outlet.authcontent ~ * {
+    position: absolute;
+    width: calc(100% - 30px);
+  }
