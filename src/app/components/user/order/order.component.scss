@@ -7,6 +7,22 @@
         .mutedBtn{
             opacity: .65;
         }
+        .templateSelection{
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 25%;
+        }
+        @media screen and (max-width: 767.9px){
+            app-searching{
+                .searching{
+                    margin-top: 70px;
+                }
+            }
+            .templateSelection{
+                width: 100%;
+            }
+        }
         .content{
             border: 1px solid #BCBEC0;
             border-radius: 3px;

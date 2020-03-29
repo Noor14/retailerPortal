@@ -65,6 +65,11 @@
                     </div>
                  </div>
                  <div class="productInfo position-absolute w-100" *ngIf="toggleCompanyProductList" [@fadeAnimation]>
+                    <app-searching></app-searching>
+                    <select class="form-control templateSelection">
+                        <option value="">Select Template</option>
+                        <option [value]="item.ID" *ngFor="let item of templateList">{{item.Name}}</option>
+                    </select>
                   <div class="content bg-white" >
                     <p-treeTable [value]="categoryList" >
                         <ng-template pTemplate="header">

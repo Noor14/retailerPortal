@@ -23,7 +23,7 @@ export class OrderDetailService {
     })
     return promise;
   }
-  getKYCListDetail(apiEndPath,requestId){
+  getKYCAndTemplateListDetail(apiEndPath,requestId){
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${apiEndPath}/${requestId}`;
       this._http.get(apiURL)
@@ -37,6 +37,7 @@ export class OrderDetailService {
     })
     return promise;
   }
+
   save(apiEndPath, obj){
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${apiEndPath}`;

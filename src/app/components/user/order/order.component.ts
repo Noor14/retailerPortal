@@ -33,6 +33,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   private selectedDealerCode:string;
   private userObject: any;
   public orderSummary: any[]=[];
+  public templateList: any[] = [];
   public activeTab:string = 'placeOrder';
   @ViewChild('tab', {static:false}) public tabs:NgbTabset;
   constructor(
@@ -119,12 +120,27 @@ export class OrderComponent implements OnInit, AfterViewInit {
   }
   getKYCList(requestId){
     this.showSpinner=true;
-    this._orderDetailService.getKYCListDetail('kyc/ConnectedKycList',requestId).then((data: any) => {
+    this._orderDetailService.getKYCAndTemplateListDetail('kyc/ConnectedKycList', requestId).then((data: any) => {
       this.kycList = data;
       this.showSpinner=false;
     })
     .catch(err => {
       this.showSpinner=false;
+    })
+  }
+
+  getTemplateList(dealerCode){
+    this.showSpinner=true;
+    this._orderDetailService.getKYCAndTemplateListDetail('ordertemplate/GetAllByDealerCode', dealerCode).then((data: any) => {
+      if(data && data.length){
+        this.templateList = data;
+      }
+      console.log(this.templateList)
+      this.showSpinner=false;
+    })
+    .catch(err => {
+      this.showSpinner=false;
+      this.templateList=[]
     })
   }
   companyDetail(dealerCode){
@@ -204,9 +220,10 @@ export class OrderComponent implements OnInit, AfterViewInit {
   }
   companyProducts(dealerCode){
     if(this.selectedDealerCode != dealerCode){
-      this.selectedDealerCode = dealerCode
+      this.selectedDealerCode = dealerCode;
+      this.getTemplateList(dealerCode);
       this.showSpinner=true;
-      this._orderDetailService.getKYCListDetail('products/GetProductByDealerCode', dealerCode).then((data: any) => {
+      this._orderDetailService.getKYCAndTemplateListDetail('products/GetProductByDealerCode', dealerCode).then((data: any) => {
         this.showSpinner=false;
         this.toggleCompanyProductList = true;
         this.setTableTreeClass();
