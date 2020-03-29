@@ -8,12 +8,17 @@ import { TreeNode } from 'primeng/api/treenode';
 import { NgbTabset, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { fadeAnimation } from './../../../constant/animations';
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+    fadeAnimation
+    // animation triggers go here
+  ]
 })
 export class OrderComponent implements OnInit, AfterViewInit {
   public cnicMask = AppMasks.cnic_Mask;

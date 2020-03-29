@@ -1,57 +1,61 @@
 .order{
-    .templateBtn{
-        margin-bottom: 15px;
-    }
-    .mutedBtn{
-        opacity: .65;
-    }
-    .content{
-        border: 1px solid #BCBEC0;
-        border-radius: 3px;
-        .gridArea{
-            height: unset;
-            .table{
-                tr{
-                    background-color: transparent !important;
-                    &:hover{
-                        background-color: #e9ecef !important;
-                    }
-                    th{
-                        @extend tr;
-                    }
-                    td{
-                        vertical-align: middle;
-                        &.node{
-                                font-weight: bold;
-                                p-treetabletoggler{
-                                    .ui-treetable-toggler {
-                                        position: relative;
-                                        .pi-chevron-right::before{
-                                            content: "+";
-                                            font-style: normal;
-                                            position: absolute;
-                                            font-size: 22px;
-                                            color: #96bb3d;
-                                            bottom: -9px;
-                                            font-weight: normal;
-                                        }
-                                        .pi-chevron-down::before{
-                                            @extend .pi-chevron-right,::before;
-                                            content: "–";
-                                            
+    .tab-content{
+        position: relative;
+        .templateBtn{
+            margin-bottom: 15px;
+        }
+        .mutedBtn{
+            opacity: .65;
+        }
+        .content{
+            border: 1px solid #BCBEC0;
+            border-radius: 3px;
+            .gridArea{
+                height: unset;
+                .table{
+                    tr{
+                        background-color: transparent !important;
+                        &:hover{
+                            background-color: #e9ecef !important;
+                        }
+                        th{
+                            @extend tr;
+                        }
+                        td{
+                            vertical-align: middle;
+                            &.node{
+                                    font-weight: bold;
+                                    p-treetabletoggler{
+                                        .ui-treetable-toggler {
+                                            position: relative;
+                                            .pi-chevron-right::before{
+                                                content: "+";
+                                                font-style: normal;
+                                                position: absolute;
+                                                font-size: 22px;
+                                                color: #96bb3d;
+                                                bottom: -9px;
+                                                font-weight: normal;
+                                            }
+                                            .pi-chevron-down::before{
+                                                @extend .pi-chevron-right,::before;
+                                                content: "–";
+                                                
+                                            }
                                         }
                                     }
-                                }
-                                span{
-                                  margin-left: 35px;
-                                }
+                                    span{
+                                      margin-left: 35px;
+                                    }
+                            }
                         }
                     }
+                  
                 }
-              
             }
+         
         }
-     
     }
+ 
    
 }

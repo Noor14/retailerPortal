@@ -9,7 +9,7 @@ export const fadeAnimation =
         ),
         group([
             query(':leave', [
-                    animate(300, style({ opacity: 0 }))
+                    animate(20, style({ opacity: 0 }))
                 ],
                 { optional: true }
             ),
