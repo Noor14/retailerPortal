@@ -150,11 +150,13 @@ export class OrderComponent implements OnInit, AfterViewInit {
       modalRef.componentInstance.obj = {object : obj, btnText: 'Save', title: 'Save Template', mode: 'orderTemplate', inputBox: true};
       modalRef.result.then((result) => {
         if(result && Object.keys(result).length){
-         let obj = this.templateList.find(obj=> obj.ID == this.selectedTemplateID);
-         obj.Name = result.templateName;
-         let index = this.templateList.findIndex(obj=> obj.ID == this.selectedTemplateID);
-         this.templateList.splice(index, 1, obj);
-         this.selectedTemplateID = undefined;
+          if(this.selectedTemplateID && this.selectedTemplateID != 'undefined'){
+            let obj = this.templateList.find(obj=> obj.ID == this.selectedTemplateID);
+            obj.Name = result.templateName;
+            let index = this.templateList.findIndex(obj=> obj.ID == this.selectedTemplateID);
+            this.templateList.splice(index, 1, obj);
+            this.selectedTemplateID = undefined;
+          }
           this.orderSummary = [];
           this.categoryList.forEach(obj => {
             if(obj.children.length){
