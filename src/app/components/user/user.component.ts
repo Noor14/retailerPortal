@@ -1,6 +1,6 @@
 import { UserService } from './user.service';
 import { SharedService } from './../../services/shared.service';
-import { slideInOut, fadeAnimation } from './../../constant/animations';
+import { slideInOut } from './../../constant/animations';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
   animations: [
-    fadeAnimation,
     slideInOut
     // animation triggers go here
   ]

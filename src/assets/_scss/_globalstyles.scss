@@ -25,6 +25,7 @@ html{
         display: flex;
         flex-direction: column;
         height: 100vh;
+        min-height: 100vh;
         main, .authentication {
           flex: auto;
           flex-shrink: 0;
@@ -40,7 +41,6 @@ html{
       app-authentication{
         background: url('./assets/_images/bg.jpg') no-repeat center center fixed;
         background-size: cover;
-        min-height: 100vh;
         height: unset;
       }
       small{

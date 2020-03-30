@@ -132,7 +132,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   getTemplateList(dealerCode){
     this.showSpinner=true;
     this._orderDetailService.getKYCAndTemplateListDetail('ordertemplate/GetAllByDealerCode', dealerCode).then((data: any) => {
-      if(data && data.length){
+      if(data){
         this.templateList = data;
       }
       console.log(this.templateList)
