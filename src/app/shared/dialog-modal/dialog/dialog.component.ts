@@ -117,8 +117,12 @@ export class DialogComponent implements OnInit {
         .then((res: any) => {
           this.showSpinner = false;
           if(res.ID){
-            this._toast.success('Template Saved');
-            this.activeModal.close(res.ID);
+            this._toast.success('Template saved successfully');
+            let obj={
+              id: res.ID,
+              templateName: this.name.trim()
+            }
+            this.activeModal.close(obj);
           }
          
         })
