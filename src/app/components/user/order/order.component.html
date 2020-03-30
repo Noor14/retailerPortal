@@ -23,7 +23,7 @@
                                 <label for="selectCompany">Select Company</label>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12" *ngIf="selectedCompany">
+                        <div class="col-md-6 col-sm-12" *ngIf="selectedCompany && templateList.length">
                             <div class="form-group has-float-label">
                                 <select id="selectTemplate" class="form-control" [(ngModel)]="selectedTemplateID" (change)="onSelectedTemplate(selectedTemplateID)">
                                     <option value="undefined">Select Template</option>
