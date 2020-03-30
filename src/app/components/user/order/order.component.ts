@@ -37,6 +37,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public orderSummary: any[]=[];
   public templateList: any[] = [];
   public activeTab:string = 'placeOrder';
+  private selectedDraftID = undefined;
   @ViewChild('tab', {static:false}) public tabs:NgbTabset;
   constructor(
     private _orderDetailService : OrderDetailService,
@@ -208,14 +209,15 @@ export class OrderComponent implements OnInit, AfterViewInit {
     if(this.orderSummary.length){
       this.showSpinner=true;
       let obj = {
-      ID:0,
+      ID:(!this.selectedDraftID)? 0 : this.selectedDraftID,
       DealerCode:this.selectedDealerCode,
       OrderDetails:this.orderSummary
       }
-      this._orderDetailService.save('Orders/draft', obj).then((data: any) => {
+     let endPoint = (!this.selectedDraftID)? 'Orders/draft' : 'Orders/editDraft';
+      this._orderDetailService.save(endPoint, obj).then((data: any) => {
         if(data.OrderNumber && data.ID){
           this._toast.success("Draft created successfully");
-            this._route.navigate(['/user/dashboard'])
+          this.selectedDraftID = data.ID
         }
         this.showSpinner=false;
       })
