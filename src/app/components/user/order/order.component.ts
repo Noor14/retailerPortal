@@ -204,6 +204,10 @@ export class OrderComponent implements OnInit, AfterViewInit {
   companyDetail(dealerCode){
     let obj = this.kycList.find(obj=> obj.DealerCode == dealerCode);
     this.companyDetailForm.patchValue(obj);
+    if(this.selectedDealerCode != dealerCode){
+      this.selectedDealerCode = dealerCode;
+      this.getTemplateList(dealerCode);
+    }
   }
   saveDraft(){
     if(this.orderSummary.length){
@@ -280,7 +284,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
   companyProducts(dealerCode){
     if(this.selectedDealerCode != dealerCode){
       this.selectedDealerCode = dealerCode;
-      this.getTemplateList(dealerCode);
       this.showSpinner=true;
       this._orderDetailService.getKYCAndTemplateListDetail('products/GetProductByDealerCode', dealerCode).then((data: any) => {
         this.showSpinner=false;

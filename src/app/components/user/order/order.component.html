@@ -14,12 +14,22 @@
                 <div class="contentArea bg-white p-4 position-absolute w-100"  *ngIf="!toggleCompanyProductList">
                     <h6 class="contentSubTitle">What do you want to order from?</h6>
                     <div class="row">
-                        <div class="col-md-5 col-sm-12">
-                            <div class="form-group">
-                                <select class="form-control" [(ngModel)]="selectedCompany" (ngModelChange)="companyDetail(selectedCompany)">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group has-float-label">
+                                <select id="selectCompany" class="form-control" [(ngModel)]="selectedCompany" (change)="companyDetail(selectedCompany)">
                                     <option disabled value='undefined'>Select Company</option>
                                     <option *ngFor="let obj of kycList" [value]="obj.DealerCode">{{obj.CompanyName}}</option>
                                 </select>
+                                <label for="selectCompany">Select Company</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12" *ngIf="selectedCompany">
+                            <div class="form-group has-float-label">
+                                <select id="selectTemplate" class="form-control" [(ngModel)]="selectedTemplateID" (change)="onSelectedTemplate(selectedTemplateID)">
+                                    <option value="undefined">Select Template</option>
+                                    <option [value]="item.ID" *ngFor="let item of templateList">{{item.Name}}</option>
+                                </select>
+                                <label for="selectTemplate">Select Template</label>
                             </div>
                         </div>
                         <div class="col-12" *ngIf="selectedCompany">
@@ -66,10 +76,6 @@
                  </div>
                  <div class="productInfo position-absolute w-100" *ngIf="toggleCompanyProductList" [@fadeAnimation]>
                     <app-searching></app-searching>
-                    <select class="form-control templateSelection" [(ngModel)]="selectedTemplateID" (change)="onSelectedTemplate(selectedTemplateID)">
-                        <option value="undefined">Select Template</option>
-                        <option [value]="item.ID" *ngFor="let item of templateList">{{item.Name}}</option>
-                    </select>
                   <div class="content bg-white" >
                     <p-treeTable [value]="categoryList" >
                         <ng-template pTemplate="header">
