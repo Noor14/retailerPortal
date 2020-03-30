@@ -31,24 +31,24 @@ export class OrderDetailComponent implements OnInit {
       this.getOrderDetails(this.requestId);
     }
     this.orderDetailForm = new FormGroup({
-      CompanyName: new FormControl(null, [Validators.required]),
-      OrderNumber: new FormControl(null, [Validators.required]),
-      OrderCreatedDate: new FormControl(null, [Validators.required]),
-      OrderStatus: new FormControl(null, [Validators.required]),
-      Comment: new FormControl(null, [Validators.required]),
+      CompanyName: new FormControl({value:null, disabled:true}, [Validators.required]),
+      OrderNumber: new FormControl({value:null, disabled:true}, [Validators.required]),
+      OrderCreatedDate: new FormControl({value:null, disabled:true}, [Validators.required]),
+      OrderStatus: new FormControl({value:null, disabled:true}, [Validators.required]),
+      Comment: new FormControl({value:null, disabled:true}, [Validators.required]),
     });
     this.orderPaymentDetailForm = new FormGroup({
-      CompanyName: new FormControl(null, [Validators.required]),
-      InvoiceNumber: new FormControl(null, [Validators.required]),
-      InvoiceCreatedDate: new FormControl(null, [Validators.required]),
-      TransactionDate: new FormControl(null, [Validators.required]),
-      BankName: new FormControl(null, [Validators.required]),
-      AuthID: new FormControl(null, [Validators.required]),
-      SettlementID: new FormControl(null, [Validators.required]),
-      InvoiceStatus: new FormControl(null, [Validators.required]),
-      PaidAmount: new FormControl(null, [Validators.required]),
-      TransactionCharges: new FormControl(null, [Validators.required]),
-      InvoiceTotalAmount: new FormControl(null, [Validators.required]),
+      CompanyName: new FormControl({value:null, disabled:true}, [Validators.required]),
+      InvoiceNumber: new FormControl({value:null, disabled:true}, [Validators.required]),
+      InvoiceCreatedDate: new FormControl({value:null, disabled:true}, [Validators.required]),
+      TransactionDate: new FormControl({value:null, disabled:true}, [Validators.required]),
+      BankName: new FormControl({value:null, disabled:true}, [Validators.required]),
+      AuthID: new FormControl({value:null, disabled:true}, [Validators.required]),
+      SettlementID: new FormControl({value:null, disabled:true}, [Validators.required]),
+      InvoiceStatus: new FormControl({value:null, disabled:true}, [Validators.required]),
+      PaidAmount: new FormControl({value:null, disabled:true}, [Validators.required]),
+      TransactionCharges: new FormControl({value:null, disabled:true}, [Validators.required]),
+      InvoiceTotalAmount: new FormControl({value:null, disabled:true}, [Validators.required]),
     });
   }
   getOrderDetails(requestId){

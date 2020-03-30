@@ -36,17 +36,17 @@ export class PaymentDetailsComponent implements OnInit {
       }
     this.paymentDetailForm = new FormGroup({
       ID: new FormControl(0),
-      PrePaidNumber:  new FormControl(null, [Validators.required]),
-      PaidAmount: new FormControl(null, [Validators.required]),
-      CompanyName: new FormControl(null, [Validators.required]),
-      CreatedDate: new FormControl(null, [Validators.required]),
-      AuthID: new FormControl(null, [Validators.required]),
-      BankName: new FormControl(null, [Validators.required]),
-      TransactionDate: new FormControl(null, [Validators.required]),
-      TransactionCharges: new FormControl(null, [Validators.required]),
-      Status: new FormControl(null, [Validators.required]),
-      SettlementID: new FormControl(null,[Validators.required]),
-      TotalAmount: new FormControl(null,[Validators.required])
+      PrePaidNumber:  new FormControl({value:null, disabled:true}, [Validators.required]),
+      PaidAmount: new FormControl({value:null, disabled:true}, [Validators.required]),
+      CompanyName: new FormControl({value:null, disabled:true}, [Validators.required]),
+      CreatedDate: new FormControl({value:null, disabled:true}, [Validators.required]),
+      AuthID: new FormControl({value:null, disabled:true}, [Validators.required]),
+      BankName: new FormControl({value:null, disabled:true}, [Validators.required]),
+      TransactionDate: new FormControl({value:null, disabled:true}, [Validators.required]),
+      TransactionCharges: new FormControl({value:null, disabled:true}, [Validators.required]),
+      Status: new FormControl({value:null, disabled:true}, [Validators.required]),
+      SettlementID: new FormControl({value:null, disabled:true},[Validators.required]),
+      TotalAmount: new FormControl({value:null, disabled:true},[Validators.required])
     });
   }
   getPaymentDetails(resourceName, requestId){
