@@ -204,10 +204,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   companyDetail(dealerCode){
     let obj = this.kycList.find(obj=> obj.DealerCode == dealerCode);
     this.companyDetailForm.patchValue(obj);
-    if(this.selectedDealerCode != dealerCode){
-      this.selectedDealerCode = dealerCode;
-      this.getTemplateList(dealerCode);
-    }
+    this.getTemplateList(dealerCode);
   }
   saveDraft(){
     if(this.orderSummary.length){
