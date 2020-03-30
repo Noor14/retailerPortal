@@ -52,12 +52,12 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this.userObject = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
     this.getKYCList(this.userObject.RetailerID);
     this.companyDetailForm = new FormGroup({
-      Email: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
-      Mobile: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
-      CNIC: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.cnic_Pattern)]),
-      CompanyName: new FormControl(null, [Validators.required]),
-      CompanyNTN: new FormControl(null, [Validators.required]),
-      Address: new FormControl(null, [Validators.required]),
+      Email: new FormControl({value:null, disabled:true}, [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
+      Mobile: new FormControl({value:null, disabled:true}, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
+      CNIC: new FormControl({value:null, disabled:true}, [Validators.required, Validators.pattern(AppPattern.cnic_Pattern)]),
+      CompanyName: new FormControl({value:null, disabled:true}, [Validators.required]),
+      CompanyNTN: new FormControl({value:null, disabled:true}, [Validators.required]),
+      Address: new FormControl({value:null, disabled:true}, [Validators.required]),
     });
   
 
