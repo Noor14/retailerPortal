@@ -37,6 +37,20 @@ export class OrderDetailService {
     })
     return promise;
   }
+  getTemplateDetail(apiEndPath, requestId, dealerCode){
+    let promise = new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/${apiEndPath}/${requestId}/${dealerCode}`;
+      this._http.get(apiURL)
+        .toPromise()
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        })
+    })
+    return promise;
+  }
 
   save(apiEndPath, obj){
     let promise = new Promise((resolve, reject) => {

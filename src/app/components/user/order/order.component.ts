@@ -31,6 +31,8 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public toggleCompanyProductList:boolean= false;
   public categoryList :TreeNode[]= [];
   private selectedDealerCode:string;
+  public selectedTemplateID: undefined;
+  public selectedTemplate: any;
   private userObject: any;
   public orderSummary: any[]=[];
   public templateList: any[] = [];
@@ -73,6 +75,48 @@ export class OrderComponent implements OnInit, AfterViewInit {
       this.setTableTreeClass()
     }
   }
+  onSelectedTemplate(templateId){
+    if(templateId != 'undefined'){
+      this.showSpinner = true;
+      this._orderDetailService.getTemplateDetail('ordertemplate/GetByTemplateID', templateId, this.selectedDealerCode).then((data: any) => {
+        if(data && data.OrderTemplateDetails && data.OrderTemplateDetails.length){
+          this.orderSummary = data.OrderTemplateDetails.map(obj => {
+            obj.ProductUnitPrice = obj.UnitPrice;
+            obj.UnitOFMeasure = obj.UOMTitle;
+            obj.ProductCode = obj.Title;;
+            obj.Title = obj.Code
+            return obj;
+          });
+          this.selectedTemplate = data.OrderTemplate[0];
+          this.tabs.select('orderSummary');
+          this.fillProductsInfo(this.orderSummary);
+  
+        }
+        this.showSpinner=false;
+      })
+      .catch(err => {
+        this.showSpinner=false;
+        this.templateList=[]
+      })
+    }
+
+  }
+  fillProductsInfo(orderSummary){
+    for (let index = 0; index < this.categoryList.length; index++) {
+        for (let ind = 0; ind < orderSummary.length; ind++) {
+          if(this.categoryList[index].data.CategoryId == orderSummary[ind].CategoryId){
+            for (let child = 0; child < this.categoryList[index].children.length; child++) {
+                if(this.categoryList[index].children[child].data.ProductId == orderSummary[ind].ProductId){
+                  this.categoryList[index].children[child].data.OrderQty = orderSummary[ind].OrderQty
+                }
+            }
+          }
+          
+        }
+      
+    }
+  }
+
   setTableTreeClass(){
       setTimeout(()=>{
         let elemWrapper = document.getElementsByClassName('ui-treetable-wrapper')[0];
@@ -96,10 +140,11 @@ export class OrderComponent implements OnInit, AfterViewInit {
         backdrop:'static'
       });
       let obj = {
-        ID:0, 
+        ID: (this.selectedTemplate)? this.selectedTemplate.ID : 0, 
         DealerCode:this.selectedDealerCode,
         RetailerCode:this.userObject.RetailerCode,
         Status:1,
+        Name: (this.selectedTemplate)? this.selectedTemplate.Name : undefined,
         OrderTemplateDetails: this.orderSummary 
         }
       modalRef.componentInstance.obj = {object : obj, btnText: 'Save', title: 'Save Template', mode: 'orderTemplate', inputBox: true};
@@ -135,7 +180,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
       if(data){
         this.templateList = data;
       }
-      console.log(this.templateList)
       this.showSpinner=false;
     })
     .catch(err => {
@@ -157,7 +201,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
       }
       this._orderDetailService.save('Orders/draft', obj).then((data: any) => {
         if(data.OrderNumber && data.ID){
-          this._toast.success("Draft Saved");
+          this._toast.success("Draft created successfully");
             this._route.navigate(['/user/dashboard'])
         }
         this.showSpinner=false;
@@ -182,7 +226,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
       }
       this._orderDetailService.save('Orders/saveOrder', obj).then((data: any) => {
         if(data.OrderNumber && data.ID){
-          this._toast.success("Order saved successfully");
+          this._toast.success("Order created successfully");
             this._route.navigate(['/user/dashboard'])
         }
         this.showSpinner=false;

@@ -66,8 +66,8 @@
                  </div>
                  <div class="productInfo position-absolute w-100" *ngIf="toggleCompanyProductList" [@fadeAnimation]>
                     <app-searching></app-searching>
-                    <select class="form-control templateSelection">
-                        <option value="">Select Template</option>
+                    <select class="form-control templateSelection" [(ngModel)]="selectedTemplateID" (change)="onSelectedTemplate(selectedTemplateID)">
+                        <option value="undefined">Select Template</option>
                         <option [value]="item.ID" *ngFor="let item of templateList">{{item.Name}}</option>
                     </select>
                   <div class="content bg-white" >
@@ -115,7 +115,10 @@
             <ng-template ngbTabTitle>Order Summary</ng-template>
             <ng-template ngbTabContent>
                 <div class="text-right templateBtn">
-                    <button class="btn btn-primary" type="button" [disabled]="!orderSummary.length" (click)="openDialog()">Save Template</button>
+                    <button class="btn btn-primary" type="button" [disabled]="!orderSummary.length" (click)="openDialog()">
+                       <span *ngIf="(!selectedTemplateID || selectedTemplateID == 'undefined'); else otherTemp">Save Template</span>
+                       <ng-template #otherTemp>Update Template</ng-template>
+                    </button>
                 </div>
                 <div class="content bg-white">
                     <div class="gridArea table-responsive" id="nav-scrollbar">

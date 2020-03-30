@@ -31,6 +31,9 @@ export class DialogComponent implements OnInit {
     this.spinnerConfig = loadingConfig;
     if(this.obj && Object.keys(this.obj).length){
       this.dialogBoxObject = this.obj;
+      if(this.dialogBoxObject.object && this.dialogBoxObject.object.Name){
+        this.name = this.dialogBoxObject.object.Name;
+      }
     }
   }
 
