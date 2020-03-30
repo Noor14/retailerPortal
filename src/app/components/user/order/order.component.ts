@@ -96,7 +96,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
       })
       .catch(err => {
         this.showSpinner=false;
-        this.templateList=[]
       })
     }
 
@@ -156,6 +155,13 @@ export class OrderComponent implements OnInit, AfterViewInit {
             let index = this.templateList.findIndex(obj=> obj.ID == this.selectedTemplateID);
             this.templateList.splice(index, 1, obj);
             this.selectedTemplateID = undefined;
+          }else{
+            let obj = {
+              ID: result.id,
+              Name: result.templateName,
+              DealerCode: this.selectedDealerCode
+            }
+            this.templateList.push(obj);
           }
           this.orderSummary = [];
           this.categoryList.forEach(obj => {
@@ -186,12 +192,12 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this._orderDetailService.getKYCAndTemplateListDetail('ordertemplate/GetAllByDealerCode', dealerCode).then((data: any) => {
       if(data){
         this.templateList = data;
+        console.log(this.templateList)
       }
       this.showSpinner=false;
     })
     .catch(err => {
       this.showSpinner=false;
-      this.templateList=[]
     })
   }
   companyDetail(dealerCode){
