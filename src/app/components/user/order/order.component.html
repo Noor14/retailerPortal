@@ -146,7 +146,7 @@
                                 <td>{{order.PackSize}}</td>
                                 <td class="d-flex justify-content-center">
                                     <input type="number" min="1" maxlength="9" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
-                                     (blur)="checkOrderStage()"  />
+                                     (blur)="checkOrderStage(order, i)"  />
                                 </td>
                                 <td>{{order.OrderQty * order.ProductUnitPrice  | currency:'PKR '}}</td>
                            

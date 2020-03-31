@@ -282,10 +282,14 @@ export class OrderComponent implements OnInit, AfterViewInit {
       this.tabs.select('placeOrder');
     }
   }
-  checkOrderStage(){
+  checkOrderStage(order?, index?){
     if(this.orderSummary.length){
      this.orderplacementStage = this.orderSummary.some(obj => obj.OrderQty);
+     if(order && !order.OrderQty){
+      this.deleteSummaryRow(index)
     }
+    }
+  
   }
   deleteSummaryRow(index){
     if(this.orderSummary.length){
