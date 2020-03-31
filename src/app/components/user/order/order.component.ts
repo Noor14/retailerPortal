@@ -137,6 +137,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   }
   openDialog(){
     if(this.orderSummary.length && this.orderplacementStage){
+      this.orderSummary = this.orderSummary.filter(obj=> obj.OrderQty);
       const modalRef = this._modalService.open(DialogComponent,{ 
         centered: true,
         keyboard: false,
@@ -210,6 +211,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   }
   saveDraft(){
     if(this.orderSummary.length && this.orderplacementStage){
+      this.orderSummary = this.orderSummary.filter(obj=> obj.OrderQty);
       this.showSpinner=true;
       let obj = {
       ID:(!this.selectedDraftID)? 0 : this.selectedDraftID,
@@ -236,6 +238,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
 
   confirmOrder(){
     if(this.orderSummary.length && this.orderplacementStage){
+      this.orderSummary = this.orderSummary.filter(obj=> obj.OrderQty);
       this.showSpinner=true;
       let obj = {
       ID:0,
