@@ -134,11 +134,12 @@
                                 <th>Pack Size</th>
                                 <th>Quantity</th>
                                 <th>Amount</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr *ngFor="let order of orderSummary; let i = index">
-                                <td><img src="../../../../assets/_images/trash.svg" alt="delIcon" class="delIcon" (click)="deleteSummaryRow(i)"> {{order.Title}}</td>
+                                <td>{{order.Title}}</td>
                                 <td>{{order.ProductCode}}</td>
                                 <td>{{order.ProductUnitPrice  | currency:'PKR '}}</td>
                                 <td>{{order.DiscountAmount  | currency:'PKR '}}</td>
@@ -149,7 +150,7 @@
                                      (blur)="checkOrderStage(order, i)"  />
                                 </td>
                                 <td>{{order.OrderQty * order.ProductUnitPrice  | currency:'PKR '}}</td>
-                           
+                                <td><img src="../../../../assets/_images/trash.svg" alt="delIcon" class="delIcon" (click)="deleteSummaryRow(i)"></td>
                             </tr>
                             </tbody>
                  
