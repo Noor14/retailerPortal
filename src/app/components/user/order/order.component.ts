@@ -218,7 +218,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
      let endPoint = (!this.selectedDraftID)? 'Orders/draft' : 'Orders/editDraft';
       this._orderDetailService.save(endPoint, obj).then((data: any) => {
         if(data.OrderNumber && data.ID){
-          this._toast.success("Order saved successfully");
+          this._toast.success("Order saved");
           this.selectedDraftID = data.ID
         }
         this.showSpinner=false;
@@ -244,7 +244,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
       }
       this._orderDetailService.save('Orders/saveOrder', obj).then((data: any) => {
         if(data.OrderNumber && data.ID){
-          this._toast.success("Order created successfully");
+          this._toast.success("Order created");
             this._route.navigate(['/user/dashboard'])
         }
         this.showSpinner=false;
