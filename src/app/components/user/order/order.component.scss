@@ -44,6 +44,10 @@
                                 cursor:pointer;
                                 vertical-align: top;
                             }
+                            input{
+                                height: unset;
+                                margin: auto;
+                            }
                             &.node{
                                     font-weight: bold;
                                     p-treetabletoggler{

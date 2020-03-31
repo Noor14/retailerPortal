@@ -80,6 +80,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
     }
   }
   onSelectedTemplate(templateId){
+    this.orderSummary = [];
     this.categoryList.forEach(obj => {
       if(obj.children.length){
         obj.children.map(item=>{item.data['OrderQty'] = undefined})
