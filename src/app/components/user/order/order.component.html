@@ -117,7 +117,7 @@
             <ng-template ngbTabTitle>Order Summary</ng-template>
             <ng-template ngbTabContent>
                 <div class="text-right templateBtn" *ngIf="orderSummary.length">
-                    <button class="btn btn-primary" type="button" [disabled]="!orderSummary.length || !orderplacementStage" (click)="openDialog()">
+                    <button class="btn btn-primary" type="button" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="openDialog()">
                        Save Template
                     </button>
                 </div>
@@ -158,8 +158,8 @@
                 
                   </div>
                 <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end pt-3" *ngIf="orderSummary.length">
-                    <button class="btn btn-primary ml-3" type="button" [disabled]="!orderSummary.length || !orderplacementStage" (click)="saveDraft()">Draft</button>
-                    <button class="btn btn-primary ml-3" type="button" [disabled]="!orderSummary.length || !orderplacementStage" (click)="confirmOrder()">Confirm Order</button>
+                    <button class="btn btn-primary ml-3" type="button" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="saveDraft()">Draft</button>
+                    <button class="btn btn-primary ml-3" type="button" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="confirmOrder()">Confirm Order</button>
                 </div>
             </ng-template>
         </ngb-tab>
