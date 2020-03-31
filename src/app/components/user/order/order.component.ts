@@ -144,11 +144,11 @@ export class OrderComponent implements OnInit, AfterViewInit {
         backdrop:'static'
       });
       let obj = {
-        ID: (this.selectedTemplate)? this.selectedTemplate.ID : 0, 
+        ID: (this.selectedTemplate && this.selectedTemplateID && this.selectedTemplateID != 'undefined')? this.selectedTemplate.ID : 0, 
         DealerCode:this.selectedDealerCode,
         RetailerCode:this.userObject.RetailerCode,
         Status:1,
-        Name: (this.selectedTemplate)? this.selectedTemplate.Name : undefined,
+        Name: (this.selectedTemplate && this.selectedTemplateID && this.selectedTemplateID != 'undefined')? this.selectedTemplate.Name : undefined,
         OrderTemplateDetails: this.orderSummary 
         }
       modalRef.componentInstance.obj = {object : obj, btnText: 'Save', title: 'Save Template', mode: 'orderTemplate', inputBox: true};
@@ -197,7 +197,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this._orderDetailService.getKYCAndTemplateListDetail('ordertemplate/GetAllByDealerCode', dealerCode).then((data: any) => {
       if(data){
         this.templateList = data;
-        console.log(this.templateList)
       }
       this.showSpinner=false;
     })
@@ -286,7 +285,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
   checkOrderStage(){
     if(this.orderSummary.length){
      this.orderplacementStage = this.orderSummary.some(obj => obj.OrderQty);
-     console.log(this.orderplacementStage)
     }
   }
   deleteSummaryRow(index){
