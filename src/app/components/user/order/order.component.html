@@ -23,15 +23,7 @@
                                 <label for="selectCompany">Select Company</label>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12" *ngIf="selectedCompany && templateList.length">
-                            <div class="form-group has-float-label">
-                                <select id="selectTemplate" class="form-control" [(ngModel)]="selectedTemplateID" (change)="onSelectedTemplate(selectedTemplateID)">
-                                    <option value="undefined">Select Template</option>
-                                    <option [value]="item.ID" *ngFor="let item of templateList">{{item.Name}}</option>
-                                </select>
-                                <label for="selectTemplate">Select Template</label>
-                            </div>
-                        </div>
+
                         <div class="col-12" *ngIf="selectedCompany">
                             <form [formGroup]="companyDetailForm">
                               <h5 class="text-muted mb-4"> {{companyDetailForm.controls['CompanyName'].value}}</h5>
@@ -76,6 +68,10 @@
                  </div>
                  <div class="productInfo position-absolute w-100" *ngIf="toggleCompanyProductList" [@fadeAnimation]>
                     <app-searching></app-searching>
+                    <select class="form-control templateSelection" [(ngModel)]="selectedTemplateID" (change)="onSelectedTemplate(selectedTemplateID)">
+                        <option value="undefined">Select Template</option>
+                        <option [value]="item.ID" *ngFor="let item of templateList">{{item.Name}}</option>
+                    </select>
                   <div class="content bg-white" >
                     <p-treeTable [value]="categoryList" >
                         <ng-template pTemplate="header">
