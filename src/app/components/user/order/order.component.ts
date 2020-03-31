@@ -300,6 +300,17 @@ export class OrderComponent implements OnInit, AfterViewInit {
       modalRef.componentInstance.obj = {btnText: 'Yes, I want', titleTextColor: 'warning', title: 'Delete Product', detail: 'Are you sure, you want to delete this product', mode: 'confirmDialog'};
       modalRef.result.then((result) => {
         if(result){
+          this.categoryList.forEach(obj => {
+            if(obj.children.length){
+              obj.children.map(item=>{
+                if(item.data.ProductId == this.orderSummary[index].ProductId){
+                  item.data['OrderQty'] = undefined
+                }
+               return item;
+              }
+              )
+            }
+          })
           this.orderSummary[index].OrderQty = undefined;
           this.orderSummary.splice(index, 1);
           if(!this.orderSummary.length){
