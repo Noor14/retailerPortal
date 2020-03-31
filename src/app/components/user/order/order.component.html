@@ -116,14 +116,14 @@
         <ngb-tab id="orderSummary">
             <ng-template ngbTabTitle>Order Summary</ng-template>
             <ng-template ngbTabContent>
-                <div class="text-right templateBtn">
+                <div class="text-right templateBtn" *ngIf="orderSummary.length">
                     <button class="btn btn-primary" type="button" [disabled]="!orderSummary.length" (click)="openDialog()">
                        Save Template
                     </button>
                 </div>
-                <div class="content bg-white">
+                <div class="content bg-white" *ngIf="orderSummary && orderSummary.length">
                     <div class="gridArea table-responsive" id="nav-scrollbar">
-                      <table class="table" *ngIf="orderSummary && orderSummary.length">
+                      <table class="table" >
                             <thead>
                             <tr>
                                 <th>Product Code</th>
@@ -138,7 +138,7 @@
                             </thead>
                             <tbody>
                             <tr *ngFor="let order of orderSummary; let i = index">
-                                <td>{{order.Title}}</td>
+                                <td><img src="../../../../assets/_images/trash.svg" alt="delIcon" class="delIcon" (click)="deleteSummaryRow(i)"> {{order.Title}}</td>
                                 <td>{{order.ProductCode}}</td>
                                 <td>{{order.ProductUnitPrice  | currency:'PKR '}}</td>
                                 <td>{{order.DiscountAmount  | currency:'PKR '}}</td>
@@ -146,7 +146,7 @@
                                 <td>{{order.PackSize}}</td>
                                 <td class="d-flex justify-content-center">
                                     <input type="number" min="1" maxlength="9" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
-                                      (blur)="selectProduct(order)" />
+                                       />
                                 </td>
                                 <td>{{order.OrderQty * order.ProductUnitPrice  | currency:'PKR '}}</td>
                            
@@ -157,7 +157,7 @@
                     </div>
                 
                   </div>
-                  <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end pt-3" *ngIf="orderSummary.length">
+                <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end pt-3" *ngIf="orderSummary.length">
                     <button class="btn btn-primary ml-3" type="button" [disabled]="!orderSummary.length" (click)="saveDraft()">Draft</button>
                     <button class="btn btn-primary ml-3" type="button" [disabled]="!orderSummary.length" (click)="confirmOrder()">Confirm Order</button>
                 </div>

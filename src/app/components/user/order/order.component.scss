@@ -39,6 +39,12 @@
                         }
                         td{
                             vertical-align: middle;
+                            .delIcon{
+                                width: 15px;
+                                margin-right: 10px;
+                                vertical-align: text-top;
+                                cursor:pointer
+                            }
                             &.node{
                                     font-weight: bold;
                                     p-treetabletoggler{

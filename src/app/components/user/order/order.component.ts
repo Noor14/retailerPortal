@@ -277,6 +277,27 @@ export class OrderComponent implements OnInit, AfterViewInit {
       this.tabs.select('placeOrder');
     }
   }
+  deleteSummaryRow(index){
+    if(this.orderSummary.length){
+      const modalRef = this._modalService.open(DialogComponent,{ 
+        centered: true,
+        keyboard: false,
+        backdrop:'static'
+      });
+      modalRef.componentInstance.obj = {btnText: 'Yes, I want', titleTextColor: 'warning', title: 'Delete Product', detail: 'Are you sure, you want to delete this product', mode: 'confirmDialog'};
+      modalRef.result.then((result) => {
+        if(result){
+          this.orderSummary[index].OrderQty = undefined;
+          this.orderSummary.splice(index, 1);
+          if(!this.orderSummary.length){
+            this.tabs.select('placeOrder');
+          }
+        }
+      }, (reason) => {
+        // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+  }
   companyProducts(dealerCode){
     if(this.selectedDealerCode != dealerCode){
       this.selectedDealerCode = dealerCode;

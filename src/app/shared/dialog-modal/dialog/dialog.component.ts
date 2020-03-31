@@ -70,6 +70,12 @@ export class DialogComponent implements OnInit {
         }
       })
     }
+    else if(this.dialogBoxObject.mode == 'confirmDialog'){
+      this.showSpinner = true;
+      this._toast.success('Product successfully deleted');
+      this.activeModal.close(true);
+      this.showSpinner = false;
+    }
     else if(this.dialogBoxObject.mode == 'order' && this.dialogBoxObject.type == 'delete'){
       this.showSpinner = true;
       this._dashboardService.deleteOrder(this.dialogBoxObject.id)
