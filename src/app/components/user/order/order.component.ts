@@ -168,13 +168,13 @@ export class OrderComponent implements OnInit, AfterViewInit {
             }
             this.templateList.push(obj);
           }
-          this.orderSummary = [];
-          this.categoryList.forEach(obj => {
-            if(obj.children.length){
-              obj.children.map(item=>{item.data['OrderQty'] = undefined})
-            }
-          })
-          this.tabs.select('placeOrder');
+          // this.orderSummary = [];
+          // this.categoryList.forEach(obj => {
+          //   if(obj.children.length){
+          //     obj.children.map(item=>{item.data['OrderQty'] = undefined})
+          //   }
+          // })
+          // this.tabs.select('placeOrder');
         }
       }, (reason) => {
         // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
