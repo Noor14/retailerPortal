@@ -38,6 +38,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public templateList: any[] = [];
   public activeTab:string = 'placeOrder';
   private selectedDraftID = undefined;
+  public orderplacementStage: boolean = false;
   @ViewChild('tab', {static:false}) public tabs:NgbTabset;
   constructor(
     private _orderDetailService : OrderDetailService,
@@ -70,6 +71,8 @@ export class OrderComponent implements OnInit, AfterViewInit {
     if(event.nextId == "orderSummary"){
       if(!this.orderSummary.length){
         event.preventDefault();
+      }else{
+        this.checkOrderStage();
       }
     }
     else if(event.nextId == "placeOrder"){
@@ -133,7 +136,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
 
   }
   openDialog(){
-    if(this.orderSummary.length){
+    if(this.orderSummary.length && this.orderplacementStage){
       const modalRef = this._modalService.open(DialogComponent,{ 
         centered: true,
         keyboard: false,
@@ -206,7 +209,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this.companyDetailForm.patchValue(obj);
   }
   saveDraft(){
-    if(this.orderSummary.length){
+    if(this.orderSummary.length && this.orderplacementStage){
       this.showSpinner=true;
       let obj = {
       ID:(!this.selectedDraftID)? 0 : this.selectedDraftID,
@@ -232,7 +235,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
   }
 
   confirmOrder(){
-    if(this.orderSummary.length){
+    if(this.orderSummary.length && this.orderplacementStage){
       this.showSpinner=true;
       let obj = {
       ID:0,
@@ -275,6 +278,12 @@ export class OrderComponent implements OnInit, AfterViewInit {
     }
     if (!this.orderSummary.length){
       this.tabs.select('placeOrder');
+    }
+  }
+  checkOrderStage(){
+    if(this.orderSummary.length){
+     this.orderplacementStage = this.orderSummary.some(obj => obj.OrderQty);
+     console.log(this.orderplacementStage)
     }
   }
   deleteSummaryRow(index){
