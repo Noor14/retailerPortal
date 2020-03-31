@@ -1,4 +1,4 @@
-// import { OrderComponent } from './../../order/order.component';
+//import { DeactivateGuard } from './../../deactivate.guard';
 import { NgModule } from '@angular/core';
 import { PaymentComponent } from './payment/payment.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
