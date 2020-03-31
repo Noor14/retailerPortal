@@ -137,7 +137,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
   }
   openDialog(){
     if(this.orderSummary.length && this.orderplacementStage){
-      this.orderSummary = this.orderSummary.filter(obj=> obj.OrderQty);
       const modalRef = this._modalService.open(DialogComponent,{ 
         centered: true,
         keyboard: false,
@@ -149,7 +148,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
         RetailerCode:this.userObject.RetailerCode,
         Status:1,
         Name: (this.selectedTemplate && this.selectedTemplateID && this.selectedTemplateID != 'undefined')? this.selectedTemplate.Name : undefined,
-        OrderTemplateDetails: this.orderSummary 
+        OrderTemplateDetails: this.orderSummary.filter(obj=> obj.OrderQty)
         }
       modalRef.componentInstance.obj = {object : obj, btnText: 'Save', title: 'Save Template', mode: 'orderTemplate', inputBox: true};
       modalRef.result.then((result) => {
@@ -210,12 +209,11 @@ export class OrderComponent implements OnInit, AfterViewInit {
   }
   saveDraft(){
     if(this.orderSummary.length && this.orderplacementStage){
-      this.orderSummary = this.orderSummary.filter(obj=> obj.OrderQty);
       this.showSpinner=true;
       let obj = {
       ID:(!this.selectedDraftID)? 0 : this.selectedDraftID,
       DealerCode:this.selectedDealerCode,
-      OrderDetails:this.orderSummary
+      OrderDetails: this.orderSummary.filter(obj=> obj.OrderQty)
       }
      let endPoint = (!this.selectedDraftID)? 'Orders/draft' : 'Orders/editDraft';
       this._orderDetailService.save(endPoint, obj).then((data: any) => {
