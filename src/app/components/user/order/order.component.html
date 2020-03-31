@@ -66,7 +66,7 @@
                         </div>
                     </div>
                  </div>
-                 <div class="productInfo" *ngIf="toggleCompanyProductList">
+                 <div class="productInfo position-relative" *ngIf="toggleCompanyProductList">
                     <app-searching></app-searching>
                     <select class="form-control templateSelection" [(ngModel)]="selectedTemplateID" (change)="onSelectedTemplate(selectedTemplateID)">
                         <option value="undefined">Select Template</option>
