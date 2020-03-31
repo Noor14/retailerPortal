@@ -91,10 +91,14 @@ export class OrderComponent implements OnInit, AfterViewInit {
             obj.Title = obj.Code
             return obj;
           });
+          this.categoryList.forEach(obj => {
+            if(obj.children.length){
+              obj.children.map(item=>{item.data['OrderQty'] = undefined})
+            }
+          })
           this.selectedTemplate = data.OrderTemplate[0];
           this.tabs.select('orderSummary');
           this.fillProductsInfo(this.orderSummary);
-  
         }
         this.showSpinner=false;
       })
