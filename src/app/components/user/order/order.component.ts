@@ -80,6 +80,11 @@ export class OrderComponent implements OnInit, AfterViewInit {
     }
   }
   onSelectedTemplate(templateId){
+    this.categoryList.forEach(obj => {
+      if(obj.children.length){
+        obj.children.map(item=>{item.data['OrderQty'] = undefined})
+      }
+    })
     if(templateId != 'undefined'){
       this.showSpinner = true;
       this._orderDetailService.getTemplateDetail('ordertemplate/GetByTemplateID', templateId, this.selectedDealerCode).then((data: any) => {
@@ -91,11 +96,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
             obj.Title = obj.Code
             return obj;
           });
-          this.categoryList.forEach(obj => {
-            if(obj.children.length){
-              obj.children.map(item=>{item.data['OrderQty'] = undefined})
-            }
-          })
           this.selectedTemplate = data.OrderTemplate[0];
           this.tabs.select('orderSummary');
           this.fillProductsInfo(this.orderSummary);
