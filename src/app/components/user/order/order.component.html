@@ -93,7 +93,10 @@
                                 </td>
                                 <td>{{rowData.ProductCode}}</td>
                                 <td>{{rowData.ProductUnitPrice  | currency:'PKR '}}</td>
-                                <td>{{rowData.DiscountAmount  | currency:'PKR '}}</td>
+                                <td>
+                                    <span *ngIf="rowData.DiscountAmount; else otherTemp">{{rowData.ProductUnitPrice - rowData.DiscountAmount  | currency:'PKR '}}</span>
+                                    <ng-template #otherTemp> {{rowData.ProductUnitPrice | currency:'PKR '}}</ng-template>
+                                </td>
                                 <td>{{rowData.UnitOFMeasure}}</td>
                                 <td>{{rowData.PackSize}}</td>
                                 <td class="d-flex justify-content-center">
@@ -142,14 +145,17 @@
                                 <td>{{order.Title}}</td>
                                 <td>{{order.ProductCode}}</td>
                                 <td>{{order.ProductUnitPrice  | currency:'PKR '}}</td>
-                                <td>{{order.DiscountAmount  | currency:'PKR '}}</td>
+                                <td> 
+                                   <span *ngIf="order.DiscountAmount; else other">{{order.ProductUnitPrice - order.DiscountAmount  | currency:'PKR '}}</span>
+                                   <ng-template #other> {{order.ProductUnitPrice | currency:'PKR '}}</ng-template>
+                                </td>
                                 <td>{{order.UnitOFMeasure}}</td>
                                 <td>{{order.PackSize}}</td>
                                 <td class="d-flex justify-content-center">
                                     <input type="number" min="1" maxlength="9" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
                                      (blur)="checkOrderStage(order, i)"  />
                                 </td>
-                                <td>{{order.OrderQty * order.ProductUnitPrice  | currency:'PKR '}}</td>
+                                <td>{{order.OrderQty * (order.ProductUnitPrice - order.DiscountAmount) * order.PackSize | currency:'PKR '}}</td>
                                 <td><img src="../../../../assets/_images/trash.svg" alt="delIcon" class="delIcon" (click)="deleteSummaryRow(i)"></td>
                             </tr>
                             </tbody>
