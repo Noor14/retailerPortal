@@ -304,7 +304,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
             if(obj.children.length){
               obj.children.map(item=>{
                 if(item.data.ProductId == this.orderSummary[index].ProductId){
-                  item.data['OrderQty'] = undefined
+                  item.data['OrderQty'] = undefined;
                 }
                return item;
               }
