@@ -212,6 +212,15 @@ html{
         background-color: unset;
         padding: .75rem 0rem;
         color: $baseFontColor;
+        .breadcrumb-item{
+          a[href]{
+            color: $baseColor;
+            &:hover{
+              color: $baseColor;
+              text-decoration: unset;
+            }
+          }
+        }
       }
 
     }

@@ -118,8 +118,7 @@
             <ng-template ngbTabContent>
                 <div class="text-right templateBtn">
                     <button class="btn btn-primary" type="button" [disabled]="!orderSummary.length" (click)="openDialog()">
-                       <span *ngIf="(!selectedTemplateID || selectedTemplateID == 'undefined'); else otherTemp">Save Template</span>
-                       <ng-template #otherTemp>Update Template</ng-template>
+                       Save Template
                     </button>
                 </div>
                 <div class="content bg-white">
