@@ -311,7 +311,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
               )
             }
           })
-          this.orderSummary[index].OrderQty = undefined;
           this.orderSummary.splice(index, 1);
           if(!this.orderSummary.length){
             this.tabs.select('placeOrder');
