@@ -119,7 +119,7 @@
         <ngb-tab id="orderSummary">
             <ng-template ngbTabTitle>Order Summary</ng-template>
             <ng-template ngbTabContent>
-                <div class="text-right templateBtn" *ngIf="orderSummary.length">
+                <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end mb-3 templateBtn" *ngIf="orderSummary.length">
                     <button class="btn btn-primary" type="button" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="openDialog()">
                        Save Template
                     </button>
