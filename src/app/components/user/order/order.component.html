@@ -163,15 +163,31 @@
                         </table>
                     </div>
                 </div>
-                <div>
-                    Net Amount: {{netAmount | currency : "PKR "}}
-                    Gross Amount: {{grossAmount | currency : "PKR "}}
+                <!-- <div>
+                    Net Amount: 
+                    Gross Amount: 
                     Total Discount:  {{totalDiscount | currency : "PKR "}}
-                </div>
-                <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end pt-3" *ngIf="orderSummary.length">
-                    <button class="btn btn-primary ml-3" type="button" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="saveDraft()">Draft</button>
-                    <button class="btn btn-primary ml-3" type="button" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="confirmOrder()">Confirm Order</button>
-                </div>
+                </div> -->
+
+                <div class="row summary m-3 pb-2">
+                    <div class="col-md-7">
+                             Gross Amount: <span>{{grossAmount | currency : "PKR "}}</span> 
+                             <div class="row">
+                             <div class="col-md-6">Total Discount: <span>{{totalDiscount | currency:'PKR '}}</span></div>
+                             <div class="col-md-6">Net Amount: <span>{{netAmount | currency : "PKR "}}</span></div>
+                             </div>
+                         </div>
+                         <div class="col-md-5">
+                                
+                    <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end" *ngIf="orderSummary.length">
+                        <button class="btn btn-primary ml-3" type="button" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="saveDraft()">Draft</button>
+                        <button class="btn btn-primary ml-3" type="button" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="confirmOrder()">Confirm Order</button>
+                    </div>
+                  </div>
+                   </div>
+
+
+
             </ng-template>
         </ngb-tab>
     </ngb-tabset>

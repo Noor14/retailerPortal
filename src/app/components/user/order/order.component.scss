@@ -1,6 +1,6 @@
 .order{
     .tab-content{
-        position: relative;
+        // position: relative;
         .mutedBtn{
             opacity: .65;
         }
@@ -18,6 +18,13 @@
             }
             .templateSelection{
                 width: 100%;
+            }
+        }
+        .summary{
+            border-bottom: 1px solid #BCBEC0;
+            span
+            {
+                font-weight: bold;
             }
         }
         .content{

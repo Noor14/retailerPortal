@@ -99,20 +99,7 @@
                     </div>
                   </div>
                   <div class="row summary m-3 pb-2">
-                    <!-- <table class="table">
-                        <tr>
-                            <td colspan="6">Gross Amount: <strong>{{this.grossAmount | currency:'PKR '}}</strong> </td>
-                            <!-- <td colspan="6">GST 17%: <strong>Rs. 4,154.00 </strong></td> --
-                            <td rowspan="2" class="text-right">
-                                <button class="btn btn-primary" (click)="tab.select('order')">Back</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="1">Total Discount: <strong>{{totalDiscount | currency:'PKR '}}</strong></td>
-                            <td colspan="1">Net Amount: <strong>{{netAmount | currency:'PKR '}}</strong></td>
-                        </tr>
-                    </table> -->
-                        <div class="col-md-9">
+                   <div class="col-md-9">
                             Gross Amount: <span>{{this.grossAmount | currency:'PKR '}}</span> 
                             <div class="row">
                             <div class="col-md-6">Total Discount: <span>{{totalDiscount | currency:'PKR '}}</span></div>
@@ -122,8 +109,6 @@
                         <div class="col-md-3 text-right">
                             <button class="btn btn-primary" (click)="tab.select('order')">Back</button>
                         </div>
-                    
-
                   </div>
               </ng-template>
             </ngb-tab>
