@@ -106,8 +106,10 @@
                             <div class="col-md-6">Net Amount: <span>{{netAmount | currency:'PKR '}}</span></div>
                             </div>
                         </div>
-                        <div class="col-md-3 text-right">
-                            <button class="btn btn-primary" (click)="tab.select('order')">Back</button>
+                        <div class="col-md-3">
+                            <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
+                                <button class="btn btn-primary" (click)="tab.select('order')">Back</button>
+                            </div>
                         </div>
                   </div>
               </ng-template>
