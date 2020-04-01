@@ -35,7 +35,8 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public netAmount: number = 0;
   public totalDiscount: number = 0;
   public grossAmount: number = 0;
-  private compareValueToCalculateSummary:number = 0
+  private compareValueToCalculateSummary:number;
+  private compareValueAfterToBeforeValue: number;
   private selectedDraftID = undefined;
   public orderplacementStage: boolean = false;
   @ViewChild('tab', {static:false}) public tabs:NgbTabset;
@@ -79,8 +80,9 @@ export class OrderComponent implements OnInit, AfterViewInit {
     }
     else if(event.nextId == "placeOrder"){
       this.setTableTreeClass();
-      if(this.selectedTemplateID && this.selectedTemplateID != "undefined"){
+      if(this.selectedTemplateID && this.selectedTemplateID != "undefined" && this.compareValueToCalculateSummary != this.compareValueAfterToBeforeValue){
         this.fillProductsInfo(this.orderSummary);
+        this.compareValueToCalculateSummary = this.compareValueAfterToBeforeValue;
       }
     }
   }
@@ -299,10 +301,12 @@ export class OrderComponent implements OnInit, AfterViewInit {
   checkOrderStage(order?, index?){
     if(this.orderSummary.length){
      this.orderplacementStage = this.orderSummary.some(obj => obj.OrderQty);
-     if(order && order.OrderQty != this.compareValueToCalculateSummary){
+     if(order && order.OrderQty && order.OrderQty != this.compareValueToCalculateSummary){
+     this.compareValueAfterToBeforeValue = order.OrderQty;
       this.calculateSummary();
      }
-     if(order && !order.OrderQty){
+     else if(order && !order.OrderQty){
+     this.compareValueAfterToBeforeValue = order.OrderQty;
       this.deleteSummaryRow(index)
     }
     }
