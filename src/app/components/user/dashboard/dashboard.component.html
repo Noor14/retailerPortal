@@ -86,7 +86,7 @@
                                 <button ngbDropdownItem *ngIf="order.Status != 'Draft'" [routerLink] = "['/user/orderDetail', order.ID]">View</button>
                                 <button ngbDropdownItem *ngIf="order.Status == 'Draft' || order.Status == 'Pending'">Edit</button>
                                 <button ngbDropdownItem *ngIf="order.Status == 'Draft'" (click)="openDialog(order.ID, 'delete', 'order')">Delete</button>
-                                <button ngbDropdownItem *ngIf="order.Status == 'Approved' || order.Status == 'Pending'" (click)="openDialog(order.ID, 'cancel', 'order')">Cancel</button>
+                                <button ngbDropdownItem *ngIf="(order.Status == 'Approved' && order.InvoiceStatus == 'Un-Paid') || order.Status == 'Pending'" (click)="openDialog(order.ID, 'cancel', 'order')">Cancel</button>
                               </div>
                             </div>
                            
