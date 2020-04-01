@@ -18,8 +18,8 @@ export class OrderDetailComponent implements OnInit {
   private requestId: Number;
   public orderDetaiList: any[] =[];
   public netAmount: number = 0;
-  public totalDiscount: number;
-  public grossAmount: number;
+  public totalDiscount: number = 0;
+  public grossAmount: number =0;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -66,8 +66,8 @@ export class OrderDetailComponent implements OnInit {
     this.orderPaymentDetailForm.patchValue(data.OrderPaymentDetails);
     this.orderDetaiList.forEach(obj => {
       this.netAmount += obj.TotalPrice;
-      this.grossAmount = obj.UnitPrice * obj.OrderQty * obj.PackSize;
-      this.totalDiscount = ( obj.UnitPrice - obj.Discount)  * obj.OrderQty * obj.PackSize;
+      this.grossAmount += obj.UnitPrice * obj.OrderQty * obj.PackSize;
+      this.totalDiscount += ( obj.UnitPrice - obj.Discount)  * obj.OrderQty * obj.PackSize;
     });
   })
   .catch(err => {
