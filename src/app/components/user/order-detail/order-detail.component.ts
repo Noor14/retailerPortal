@@ -17,6 +17,9 @@ export class OrderDetailComponent implements OnInit {
   public orderPaymentDetailForm: FormGroup;
   private requestId: Number;
   public orderDetaiList: any[] =[];
+  public netAmount: number = 0;
+  public totalDiscount: number;
+  public grossAmount: number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -61,6 +64,11 @@ export class OrderDetailComponent implements OnInit {
     data.OrderPaymentDetails.TransactionDate =  moment(data.OrderPaymentDetails.TransactionDate).format('DD-MM-YYYY');
     this.orderDetailForm.patchValue(data.OrderPaymentDetails);
     this.orderPaymentDetailForm.patchValue(data.OrderPaymentDetails);
+    this.orderDetaiList.forEach(obj => {
+      this.netAmount += obj.TotalPrice;
+      this.grossAmount = obj.UnitPrice * obj.OrderQty * obj.PackSize;
+      this.totalDiscount = ( obj.UnitPrice - obj.Discount)  * obj.OrderQty * obj.PackSize;
+    });
   })
   .catch(err => {
     this.showSpinner=false;
