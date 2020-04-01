@@ -14,11 +14,11 @@
         }
     }
     .summary{
-        td
+        border-bottom: 1px solid #BCBEC0;
+        span
         {
-            border-top: unset;
+            font-weight: bold;
         }
-       
     }
     
 }
