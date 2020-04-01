@@ -1,6 +1,5 @@
 .order{
     .tab-content{
-        // position: relative;
         .mutedBtn{
             opacity: .65;
         }
@@ -13,11 +12,12 @@
         @media screen and (max-width: 767.9px){
             app-searching{
                 .searching{
-                    margin-top: 70px;
+                    margin-top: 60px;
                 }
             }
             .templateSelection{
                 width: 100%;
+                top: -60px;
             }
         }
         .summary{
