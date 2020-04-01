@@ -67,7 +67,7 @@ export class OrderDetailComponent implements OnInit {
     this.orderDetaiList.forEach(obj => {
       this.netAmount += obj.TotalPrice;
       this.grossAmount += obj.UnitPrice * obj.OrderQty * obj.PackSize;
-      this.totalDiscount += ( obj.UnitPrice - (obj.Discount || obj.UnitPrice))  * obj.OrderQty * obj.PackSize;
+      this.totalDiscount += obj.Discount * obj.OrderQty * obj.PackSize;
     });
   })
   .catch(err => {
