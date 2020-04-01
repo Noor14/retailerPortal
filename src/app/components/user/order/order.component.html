@@ -73,7 +73,7 @@
                         <option [value]="item.ID" *ngFor="let item of templateList">{{item.Name}}</option>
                     </select>
                   <div class="content bg-white" >
-                    <p-treeTable [value]="categoryList" >
+                    <p-treeTable [value]="categoryList" (onNodeExpand)="nodeToggling($event)">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>Product Code</th>

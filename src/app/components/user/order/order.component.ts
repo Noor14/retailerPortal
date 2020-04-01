@@ -214,6 +214,11 @@ export class OrderComponent implements OnInit, AfterViewInit {
     let obj = this.kycList.find(obj=> obj.DealerCode == dealerCode);
     this.companyDetailForm.patchValue(obj);
   }
+
+  nodeToggling(event){
+    this.categoryList.filter(obj => obj.data.CategoryId != event.node.data.CategoryId && obj.expanded).map((elem)=> {elem.expanded = false;})
+  }
+
   saveDraft(){
     if(this.orderSummary.length && this.orderplacementStage){
       this.showSpinner=true;
