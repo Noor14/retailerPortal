@@ -152,7 +152,7 @@
                                 <td>{{order.UnitOFMeasure}}</td>
                                 <td>{{order.PackSize}}</td>
                                 <td>
-                                    <input type="number" min="1" maxlength="9" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
+                                    <input type="number" (focus)="checkValue(order.OrderQty)" min="1" maxlength="9" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
                                      (blur)="checkOrderStage(order, i)"  />
                                 </td>
                                 <td>{{order.OrderQty * (order.ProductUnitPrice - order.DiscountAmount) * order.PackSize | currency:'PKR '}}</td>
@@ -162,8 +162,12 @@
                  
                         </table>
                     </div>
-                
-                  </div>
+                </div>
+                <div>
+                    Net Amount: {{netAmount | currency : "PKR "}}
+                    Gross Amount: {{grossAmount | currency : "PKR "}}
+                    Total Discount:  {{totalDiscount | currency : "PKR "}}
+                </div>
                 <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end pt-3" *ngIf="orderSummary.length">
                     <button class="btn btn-primary ml-3" type="button" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="saveDraft()">Draft</button>
                     <button class="btn btn-primary ml-3" type="button" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="confirmOrder()">Confirm Order</button>

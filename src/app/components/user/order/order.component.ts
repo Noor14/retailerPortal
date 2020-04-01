@@ -32,6 +32,10 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public orderSummary: any[]=[];
   public templateList: any[] = [];
   public activeTab:string = 'placeOrder';
+  public netAmount: number = 0;
+  public totalDiscount: number = 0;
+  public grossAmount: number = 0;
+  private compareValueToCalculateSummary:number = 0
   private selectedDraftID = undefined;
   public orderplacementStage: boolean = false;
   @ViewChild('tab', {static:false}) public tabs:NgbTabset;
@@ -68,6 +72,9 @@ export class OrderComponent implements OnInit, AfterViewInit {
         event.preventDefault();
       }else{
         this.checkOrderStage();
+        if(this.orderplacementStage){
+          this.calculateSummary();
+        }
       }
     }
     else if(event.nextId == "placeOrder"){
@@ -284,11 +291,27 @@ export class OrderComponent implements OnInit, AfterViewInit {
   checkOrderStage(order?, index?){
     if(this.orderSummary.length){
      this.orderplacementStage = this.orderSummary.some(obj => obj.OrderQty);
+     if(this.orderplacementStage && order && order.OrderQty != this.compareValueToCalculateSummary){
+      this.calculateSummary();
+     }
      if(order && !order.OrderQty){
       this.deleteSummaryRow(index)
     }
     }
   
+  }
+  checkValue(currentValue){
+    this.compareValueToCalculateSummary = currentValue;
+  }
+  calculateSummary(){
+    this.netAmount = 0;
+    this.grossAmount = 0;
+    this.totalDiscount = 0;
+    this.orderSummary.filter(obj => obj.OrderQty).forEach(obj => {
+      this.netAmount += obj.OrderQty * (obj.ProductUnitPrice - obj.DiscountAmount) * obj.PackSize;
+      this.grossAmount += obj.ProductUnitPrice * obj.OrderQty * obj.PackSize;
+      this.totalDiscount += obj.DiscountAmount  * obj.OrderQty * obj.PackSize;
+    });
   }
   deleteSummaryRow(index){
     if(this.orderSummary.length){
