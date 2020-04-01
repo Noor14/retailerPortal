@@ -78,7 +78,10 @@ export class OrderComponent implements OnInit, AfterViewInit {
       }
     }
     else if(event.nextId == "placeOrder"){
-      this.setTableTreeClass()
+      this.setTableTreeClass();
+      if(this.selectedTemplateID && this.selectedTemplateID != "undefined"){
+        this.fillProductsInfo(this.orderSummary);
+      }
     }
   }
   onSelectedTemplate(templateId){
@@ -96,7 +99,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
             obj.ProductUnitPrice = obj.UnitPrice;
             obj.UnitOFMeasure = obj.UOMTitle;
             obj.ProductCode = obj.Title;;
-            obj.Title = obj.Code
+            obj.Title = obj.Code;
             return obj;
           });
           this.selectedTemplate = data.OrderTemplate[0];
