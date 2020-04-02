@@ -24,6 +24,7 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@auth0/angular-jwt": "^4.0.0",
     "@hardpool/ngx-spinner": "^2.2.1",
     "@ng-bootstrap/ng-bootstrap": "^5.1.5",
     "angular2-text-mask": "^9.0.0",

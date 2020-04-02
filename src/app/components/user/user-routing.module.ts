@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../services/auth.guard';
 //import { DeactivateGuard } from './../../deactivate.guard';
 import { NgModule } from '@angular/core';
 import { PaymentComponent } from './payment/payment.component';
