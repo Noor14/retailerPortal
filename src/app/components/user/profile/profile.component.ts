@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       Email: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
       Mobile: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
       CNIC: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.cnic_Pattern)]),
-      Address: new FormControl(null, [Validators.required]),
+      Address: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
       CreatedDate: new FormControl({value:null, disabled:true}, [Validators.required]),
       CompanyName: new FormControl(null, [Validators.required]),
       
@@ -139,7 +139,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if(this.profileFormSubscriber){
       this.profileFormSubscriber.unsubscribe();
       this.updateBtnDisabled = true;
-    }
+      this.onChanges();
+      }
       this._toast.success("Profile has been updated")
     })
     .catch(err=>{

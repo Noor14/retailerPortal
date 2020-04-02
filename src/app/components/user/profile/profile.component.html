@@ -80,6 +80,11 @@
                                         [ngClass]="{'validationError': profileForm.controls['Address'].errors && (profileForm.controls.Address.dirty || profileForm.controls.Address.touched)}"></textarea>
                                         <label for="address">Address</label>
                                         <img *ngIf="address.readOnly" (click)="elemFocus(address)" src="../../../../assets/_images/edit.svg" width="15px" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" /> 
+                                        <p *ngIf="profileForm.controls['Address'].errors" class="errorMessage">
+                                            <small *ngIf="profileForm.controls['Address'].hasError('maxlength') && (profileForm.controls.Address.dirty || profileForm.controls.Address.touched)">
+                                                Address should be maximum 250 characters
+                                            </small>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

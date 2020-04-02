@@ -92,7 +92,12 @@
                                     <textarea rows="1" cols="58" id="address" class="form-control" placeholder="Address" formControlName="Address"
                                     [ngClass]="{'validationError': registerForm.controls['Address'].errors && (registerForm.controls.Address.dirty || registerForm.controls.Address.touched)}"></textarea>
                                     <label for="address">Address</label>
-                                  </div>
+                                    <p *ngIf="registerForm.controls['Address'].errors" class="errorMessage">
+                                        <small *ngIf="registerForm.controls['Address'].hasError('maxlength') && (registerForm.controls.Address.dirty || registerForm.controls.Address.touched)">
+                                            Address should be maximum 250 characters
+                                        </small>
+                                    </p>
+                                </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
