@@ -300,14 +300,14 @@ export class OrderComponent implements OnInit, AfterViewInit {
   checkOrderStage(order?, index?){
     if(this.orderSummary.length){
      this.orderplacementStage = this.orderSummary.some(obj => obj.OrderQty);
-     if(order && order.OrderQty && order.OrderQty != this.compareValueToCalculateSummary){
+     if(order && order.OrderQty != this.compareValueToCalculateSummary){
      this.compareValueAfterToBeforeValue = order.OrderQty;
+      if(!this.compareValueAfterToBeforeValue){
+        this.deleteSummaryRow(index)
+      }
       this.calculateSummary();
      }
-     else if(order && !order.OrderQty){
-     this.compareValueAfterToBeforeValue = order.OrderQty;
-      this.deleteSummaryRow(index)
-    }
+  
     }
   
   }
