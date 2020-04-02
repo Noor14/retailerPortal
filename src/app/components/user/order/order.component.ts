@@ -232,8 +232,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
       DealerCode:this.selectedDealerCode,
       OrderDetails: this.orderSummary.filter(obj=> obj.OrderQty)
       }
-     let endPoint = (!this.selectedDraftID)? 'Orders/draft' : 'Orders/editDraft';
-      this._orderDetailService.save(endPoint, obj).then((data: any) => {
+      this._orderDetailService.save('Orders/draft', obj).then((data: any) => {
         if(data.OrderNumber && data.ID){
           this._toast.success("Order saved");
           this.selectedDraftID = data.ID
