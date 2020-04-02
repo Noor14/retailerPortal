@@ -61,7 +61,9 @@ export class OrderDetailComponent implements OnInit {
     this.orderDetaiList = data.OrderDetails;
     data.OrderPaymentDetails.OrderCreatedDate =  moment(data.OrderPaymentDetails.OrderCreatedDate).format('DD-MM-YYYY');
     data.OrderPaymentDetails.InvoiceCreatedDate =  moment(data.OrderPaymentDetails.InvoiceCreatedDate).format('DD-MM-YYYY');
-    data.OrderPaymentDetails.TransactionDate =  moment(data.OrderPaymentDetails.TransactionDate).format('DD-MM-YYYY');
+    if(data.OrderPaymentDetails.TransactionDate){
+      data.OrderPaymentDetails.TransactionDate =  moment(data.OrderPaymentDetails.TransactionDate).format('DD-MM-YYYY');
+    }
     this.orderDetailForm.patchValue(data.OrderPaymentDetails);
     this.orderPaymentDetailForm.patchValue(data.OrderPaymentDetails);
     this.orderDetaiList.forEach(obj => {
