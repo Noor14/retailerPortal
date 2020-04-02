@@ -17,19 +17,20 @@
             <div class="contentArea bg-white p-4" id="nav-scrollbar">
                 <form [formGroup]="paymentDetailForm">
                     <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                    <div class="form-group has-float-label">
+                                        <input type="text" class="form-control" id="companyName"  placeholder="Company Name" formControlName="CompanyName">
+                                        <label for="companyName"> Company Name </label>
+        
+                                    </div>
+                                </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group has-float-label">
                                 <input type="text" id="psID" class="form-control"  placeholder="PS-ID" formControlName="PrePaidNumber">
                                 <label for="psID"> PS-ID </label>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group has-float-label">
-                                <input type="text" class="form-control" id="companyName"  placeholder="Company Name" formControlName="CompanyName">
-                                <label for="companyName"> Company Name </label>
-
-                            </div>
-                        </div>
+                      
                 
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group has-float-label">
