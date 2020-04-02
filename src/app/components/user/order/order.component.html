@@ -16,11 +16,11 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group has-float-label">
-                                <select id="selectCompany" class="form-control" [(ngModel)]="selectedCompany" (change)="companyDetail(selectedCompany)">
+                                <select id="company" class="form-control" [(ngModel)]="selectedCompany" (change)="companyDetail(selectedCompany)">
                                     <option disabled value='undefined'>Select Company</option>
                                     <option *ngFor="let obj of kycList" [value]="obj.DealerCode">{{obj.CompanyName}}</option>
                                 </select>
-                                <label for="selectCompany">Select Company</label>
+                                <label for="company">Company</label>
                             </div>
                         </div>
 
