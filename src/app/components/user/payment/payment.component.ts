@@ -119,8 +119,13 @@ export class PaymentComponent implements OnInit, OnDestroy{
         if(!this.updateBtn){
           this.onChanges();
         }else{
-          this.updateBtn = false;
+          if(this.paymentFormSubscriber){
+            this.paymentFormSubscriber.unsubscribe();
+            this.updateBtn = false;
+            this.onChanges();
+          }
         }
+       
       }
     })
     .catch(err=>{
