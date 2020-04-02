@@ -100,7 +100,7 @@
                                 <td>{{rowData.UnitOFMeasure}}</td>
                                 <td>{{rowData.PackSize}}</td>
                                 <td>
-                                    <input type="number" min="1" maxlength="9" numbersOnly  *ngIf="!rowNode.node.children || (rowNode.node.children && !rowNode.node.children.length)"
+                                    <input type="number" min="1" numbersOnly *ngIf="!rowNode.node.children || (rowNode.node.children && !rowNode.node.children.length)"
                                     class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="rowData.OrderQty"
                                       (blur)="selectProduct(rowData)" />
                                 </td>
@@ -152,7 +152,7 @@
                                 <td>{{order.UnitOFMeasure}}</td>
                                 <td>{{order.PackSize}}</td>
                                 <td>
-                                    <input type="number" (focus)="checkValue(order.OrderQty)" min="1" maxlength="9" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
+                                    <input type="number" (focus)="checkValue(order.OrderQty)" min="1" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
                                      (blur)="checkOrderStage(order, i)"  />
                                 </td>
                                 <td>{{order.OrderQty * (order.ProductUnitPrice - order.DiscountAmount) * order.PackSize | currency:'PKR '}}</td>

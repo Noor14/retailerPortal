@@ -23,7 +23,9 @@ constructor(private el: ElementRef) {
       let next: string = current.concat(event.key);
       if (next && !String(next).match(regex)) {
       event.preventDefault();
-      }
+      }else if(next && next.length > 9){
+        event.preventDefault();
+       }
  }
 
 }
