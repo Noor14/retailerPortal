@@ -23,7 +23,7 @@ export class PaymentComponent implements OnInit, OnDestroy{
   public paymentPrepaidNumber:number = undefined;
   private paymentFormSubscriber:any;
   public updateBtn:boolean = false;
-  public requestId:Number;
+  private requestId:Number;
   public requestType: Number;
   constructor(
     private _paymentService: PaymentService,
