@@ -13,6 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export class DashboardComponent implements OnInit {
 
+  public payBygroupList: boolean = false;
   private searchObjPayment: any = {
     TotalRecords: 10,
     PageNumber : 0

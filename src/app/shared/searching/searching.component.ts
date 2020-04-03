@@ -129,57 +129,57 @@ export class SearchingComponent implements OnInit, OnDestroy {
         });
   }
 
-    searchOnChange(elem){
-          if(elem.value && [this.selectedObject.key]){
-          this.selectedKey = this.selectedObject.key
-          this.searchingobj = {
-            [this.selectedObject.key] : elem.value,
-          };
-            if(this.searchingCriteria.TotalRecords){
-              this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
-            }
-            if(this.searchingCriteria.PageNumber == 0){
-              this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
-            }
-          this.filter(this.searchingobj);
-        }
-        else if(!elem.value && this.selectedKey){
-          if(this.searchingCriteria.TotalRecords){
-            this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
-          }
-          if(this.searchingCriteria.PageNumber == 0){
-            this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
-          }
-          delete this.searchingobj[this.selectedKey];
-          this.filter(this.searchingobj);
-          this.selectedKey = undefined;
-        }
+  searchOnChange(elem){
+    if(elem.value && [this.selectedObject.key]){
+    this.selectedKey = this.selectedObject.key
+    this.searchingobj = {
+      [this.selectedObject.key] : elem.value,
+    };
+      if(this.searchingCriteria.TotalRecords){
+        this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
+      }
+      if(this.searchingCriteria.PageNumber == 0){
+        this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
+      }
+    this.filter(this.searchingobj);
+  }
+  else if(!elem.value && this.selectedKey){
+    if(this.searchingCriteria.TotalRecords){
+      this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
     }
+    if(this.searchingCriteria.PageNumber == 0){
+      this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
+    }
+    delete this.searchingobj[this.selectedKey];
+    this.filter(this.searchingobj);
+    this.selectedKey = undefined;
+  }
+}
 
-    filter(obj){
-      this.showSpinner = true;
-        this._userService.postCalls(this.searchingCriteria.apiEndPoint, obj)
-        .then((data:any)=>{
-          if(data && Object.keys(data).length){
-            let object = {
-              data: data,
-              searchMode : this.searchingCriteria.searchMode
-            }
-              if(this.selectedObject && this.selectedObject.key && this.selectedKey){
-                var objkeyObj ={
-                  [this.selectedObject.key]: obj[this.selectedKey],
-                }
-              }
-           let resObj = {...object, ...objkeyObj}; 
-          this.filteredData.emit(resObj);
+  filter(obj){
+    this.showSpinner = true;
+      this._userService.postCalls(this.searchingCriteria.apiEndPoint, obj)
+      .then((data:any)=>{
+        if(data && Object.keys(data).length){
+          let object = {
+            data: data,
+            searchMode : this.searchingCriteria.searchMode
           }
-        this.showSpinner = false;
+            if(this.selectedObject && this.selectedObject.key && this.selectedKey){
+              var objkeyObj ={
+                [this.selectedObject.key]: obj[this.selectedKey],
+              }
+            }
+        let resObj = {...object, ...objkeyObj}; 
+        this.filteredData.emit(resObj);
+        }
+      this.showSpinner = false;
+      })
+      .catch(err=>{
+      this.showSpinner=false;
+        console.log(err)
         })
-        .catch(err=>{
-        this.showSpinner=false;
-          console.log(err)
-          })
-    }
+  }
 
   onDateSelection(date: NgbDateStruct) {
     let parsed = '';
