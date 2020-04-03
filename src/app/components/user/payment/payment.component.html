@@ -11,7 +11,7 @@
             <div class="contentHeader">
                 <h5>Payment</h5>
             </div>
-            <div class="text-right makePaymentBtn" *ngIf="paymentPrepaidNumber">
+            <div class="text-right makePaymentBtn" *ngIf="paymentPrepaidNumber && requestType">
                 <button class="btn btn-primary" type="button" (click)="resetForm()">Make New Payment</button>
             </div>
             <div class="contentArea bg-white p-4">

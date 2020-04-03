@@ -36,7 +36,10 @@
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
                                 <button ngbDropdownItem *ngIf="(payment.IsEditable && payment.Status == 'Paid') || (!payment.IsEditable && (payment.Status == 'Blocked' || payment.Status == 'Payment Processing' || payment.Status == 'Paid' || payment.Status == 'Un-paid'))" [routerLink] = "['/user/paymentDetail', payment.RetailerInvoiceId, payment.IsEditable]">View</button>
-                                <button ngbDropdownItem *ngIf="payment.Status == 'Un-Paid'" [routerLink] = "['/user/payment', payment.RetailerInvoiceId, payment.IsEditable]">Edit</button>
+                                <button ngbDropdownItem *ngIf="payment.Status == 'Un-Paid'" [routerLink] = "['/user/payment', payment.RetailerInvoiceId, payment.IsEditable]">
+                                  <span *ngIf="payment.IsEditable; else temp">Edit</span>
+                                  <ng-template #temp>View</ng-template>
+                                </button>
                                 <button ngbDropdownItem *ngIf="payment.IsEditable && payment.Status == 'Un-Paid'" (click)="openDialog(payment.RetailerInvoiceId, 'delete', 'payment')">Delete</button>
                                 <button ngbDropdownItem class="payBy" *ngIf="payment.IsEditable && payment.Status == 'Un-Paid'" (mouseenter)="payBygroupList = true" (mouseleave)="payBygroupList = false">Pay By
                                   <ul class="list-group paymentPayBY" *ngIf="payBygroupList">
