@@ -21,7 +21,7 @@ export class PaymentComponent implements OnInit, OnDestroy{
   public paymentForm: FormGroup; 
   public distributorList:any[];
   public paymentPrepaidNumber:number = undefined;
-  public paymentFormSubscriber:any;
+  private paymentFormSubscriber:any;
   public updateBtn:boolean = false;
   public requestId:Number;
   public requestType: Number;
