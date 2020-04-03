@@ -130,7 +130,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
   }
 
   searchOnChange(elem){
-    if(elem.value && [this.selectedObject.key]){
+    if(elem.value && this.selectedObject.key){
     this.selectedKey = this.selectedObject.key
     this.searchingobj = {
       [this.selectedObject.key] : elem.value,
