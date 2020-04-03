@@ -315,18 +315,22 @@ html{
     &-toggle::after{
       display:none;
     }
-    &-item:active{
-      background-color: #afafaf;
-    }
-    &-item:focus{
-      outline: unset;
+    &-item{
+      padding: .35rem 1.5rem !important;
+      &:active{
+        background-color: #afafaf;
+      }
+      &:focus{
+        outline: unset;
+      }
+
     }
     &-menu{
       left: auto !important;
       right: 0px !important;
       top: auto !important;
       transform: unset !important;
-
+      padding: 0;
     }
   }
   .content{

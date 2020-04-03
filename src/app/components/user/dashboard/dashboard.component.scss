@@ -7,9 +7,7 @@
           min-width: 80px;
       }
       .dropdown-menu{
-          padding: 0;
           .dropdown-item{
-            padding: .35rem 1.5rem !important;
             &.payBy{
                 position: relative;
                 &::after{
