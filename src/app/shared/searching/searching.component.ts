@@ -39,10 +39,10 @@ export class SearchingComponent implements OnInit, OnDestroy {
 
   startDate: NgbDateStruct;
   maxDate: NgbDateStruct = { year: now.year(), month: now.month() + 1, day: now.date()};
-  minDate: NgbDateStruct;
   hoveredDate: NgbDateStruct;
-  fromDate: any;
-  toDate: any;
+
+  fromDate: NgbDateStruct;
+  toDate: NgbDateStruct;
   model: any;
   @ViewChild("d", {static: false}) input: NgbInputDatepicker;
   @ViewChild('myRangeInput' , {static: false}) myRangeInput: ElementRef;
