@@ -23,4 +23,5 @@ export class PaymentDetailService {
     })
     return promise;
   }
+
 }
