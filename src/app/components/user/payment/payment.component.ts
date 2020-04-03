@@ -21,10 +21,10 @@ export class PaymentComponent implements OnInit, OnDestroy{
   public paymentForm: FormGroup; 
   public distributorList:any[];
   public paymentPrepaidNumber:number = undefined;
-  private paymentFormSubscriber:any;
+  public paymentFormSubscriber:any;
   public updateBtn:boolean = false;
-  private requestId:Number;
-  private requestType: Number;
+  public requestId:Number;
+  public requestType: Number;
   constructor(
     private _paymentService: PaymentService,
     private _toast: ToastrService,
