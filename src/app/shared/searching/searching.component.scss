@@ -61,7 +61,8 @@
                 outline: unset;
               }
               &.focused {
-                  background-color: #e6e6e6;
+                  background-color: $baseColor;
+                  color: white;
                 }
                 &.range, &:hover {
                   background-color: $baseColor;
