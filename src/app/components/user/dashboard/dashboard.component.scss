@@ -10,6 +10,16 @@
           padding: 0;
           .dropdown-item{
             padding: .35rem 1.5rem !important;
+            &.payBy{
+                position: relative;
+                &::after{
+                    content: "\203A";
+                    position: absolute;
+                    right: 20px;
+                    font-size: 25px;
+                    top: -2px;
+                }
+            }
             .paymentPayBY{
                 position: absolute;
                 left: -158px;

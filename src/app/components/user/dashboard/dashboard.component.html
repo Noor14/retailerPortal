@@ -38,7 +38,7 @@
                                 <button ngbDropdownItem *ngIf="(payment.IsEditable && payment.Status == 'Paid') || (!payment.IsEditable && (payment.Status == 'Blocked' || payment.Status == 'Payment Processing' || payment.Status == 'Paid' || payment.Status == 'Un-paid'))" [routerLink] = "['/user/paymentDetail', payment.RetailerInvoiceId, payment.IsEditable]">View</button>
                                 <button ngbDropdownItem *ngIf="payment.Status == 'Un-Paid'" [routerLink] = "['/user/payment', payment.RetailerInvoiceId, payment.IsEditable]">Edit</button>
                                 <button ngbDropdownItem *ngIf="payment.IsEditable && payment.Status == 'Un-Paid'" (click)="openDialog(payment.RetailerInvoiceId, 'delete', 'payment')">Delete</button>
-                                <button ngbDropdownItem class="position-relative" *ngIf="payment.IsEditable && payment.Status == 'Un-Paid'" (mouseenter)="payBygroupList = true" (mouseleave)="payBygroupList = false">Pay By
+                                <button ngbDropdownItem class="payBy" *ngIf="payment.IsEditable && payment.Status == 'Un-Paid'" (mouseenter)="payBygroupList = true" (mouseleave)="payBygroupList = false">Pay By
                                   <ul class="list-group paymentPayBY" *ngIf="payBygroupList">
                                     <li class="list-group-item">PS ID</li>
                                   </ul>
