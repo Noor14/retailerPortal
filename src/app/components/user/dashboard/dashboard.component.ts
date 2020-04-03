@@ -194,7 +194,7 @@ export class DashboardComponent implements OnInit {
          }else if(type == 'cancel'){
           let index = this.orderList.findIndex(obj => obj.ID == result)
           let obj = this.orderList.find(obj => obj.ID == result);
-          obj.Status = "Cancelled"
+          obj.Status = "Canceled"
           this.orderList.splice(index, 1, obj)
          }
         

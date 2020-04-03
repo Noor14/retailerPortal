@@ -102,7 +102,7 @@ export class DialogComponent implements OnInit {
       this._dashboardService.cancelOrder(obj)
       .then((res: any) => {
         if(res && res.ID){
-          this._toast.success('Order successfully cancelled');
+          this._toast.success('Order successfully canceled');
           this.showSpinner = false;
           this.activeModal.close(this.dialogBoxObject.id);
         }
