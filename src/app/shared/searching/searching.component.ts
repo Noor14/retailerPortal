@@ -155,8 +155,10 @@ export class SearchingComponent implements OnInit, OnDestroy {
             this.searchingobj = {};
               if(text.trim()){
                 this.searchingobj[this.selectedObject.key[0]] = text.trim();
+                this.searchingobj[this.selectedObject.key[1]] = text.trim();
               }else{
                 delete this.searchingobj[this.selectedObject.key[0]];
+                delete this.searchingobj[this.selectedObject.key[1]];
                 this.selectedKey = undefined;
               }
               if(this.searchingCriteria.TotalRecords){
@@ -264,7 +266,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
         this.searchingobj[this.selectedObject.key[1]] = new Date(`${this.toDate.year}-${this.toDate.month}-${this.toDate.day}`).toISOString();
       }
       else {
-        delete this.searchingobj[this.selectedObject.key[1]];
+        this.searchingobj[this.selectedObject.key[1]] = new Date(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`).toISOString();
       }
       if(this.searchingCriteria.TotalRecords){
         this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
