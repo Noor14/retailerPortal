@@ -148,7 +148,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
       // if character length greater then 2
       // ,filter(res => res.length > 2)
       // Time in milliseconds between key events
-      ,debounceTime(1000)        
+      ,debounceTime(1500)        
       // If previous query is diffent from current   
       ,distinctUntilChanged()
       // subscription for response
@@ -157,8 +157,8 @@ export class SearchingComponent implements OnInit, OnDestroy {
             this.searchingobj = {};
             let dateCheck = new Date(text.trim());
               if(text.trim() &&  !isNaN(dateCheck.getTime())){
-                this.searchingobj[this.selectedObject.key[0]] = text.trim();
-                this.searchingobj[this.selectedObject.key[1]] = text.trim();
+                this.searchingobj[this.selectedObject.key[0]] = new Date(text.trim()).toISOString;
+                this.searchingobj[this.selectedObject.key[1]] = new Date(text.trim()).toISOString;
               }else{
                 delete this.searchingobj[this.selectedObject.key[0]];
                 delete this.searchingobj[this.selectedObject.key[1]];
@@ -174,7 +174,6 @@ export class SearchingComponent implements OnInit, OnDestroy {
                     return;
                 }
                 this.model = null;
-               
               }
               if(this.searchingCriteria.TotalRecords){
                 this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
