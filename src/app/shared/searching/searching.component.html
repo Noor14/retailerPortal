@@ -22,6 +22,7 @@
          [showWeekNumbers]="false"  ngbDatepicker #d="ngbDatepicker" [dayTemplate]="t" (click)="d.toggle()" [autoClose]="'outside'"
          [(ngModel)]="model" 
          (focus)="getCurrentDate(model)"
+         (keydown)="onlyBackSpaceAllow($event)"
          ngbDatepicker 
          [maxDate]="maxDate"
          autocomplete="off"

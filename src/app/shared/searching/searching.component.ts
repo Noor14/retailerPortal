@@ -5,6 +5,7 @@ import { NgbDateStruct, NgbInputDatepicker, NgbDateParserFormatter } from '@ng-b
 import { Observable, fromEvent } from 'rxjs';
 import { map, filter, debounceTime, tap, switchAll, distinctUntilChanged } from 'rxjs/operators';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 
 const now = moment();
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
@@ -57,6 +58,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
   constructor(  private renderer: Renderer2, 
     private _parserFormatter: NgbDateParserFormatter,
     private _userService: UserService,
+    private _toast:ToastrService,
     private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -153,13 +155,22 @@ export class SearchingComponent implements OnInit, OnDestroy {
       ).subscribe((text: string) => {
             this.selectedKey = this.selectedObject.key;
             this.searchingobj = {};
-              if(text.trim()){
+            let dateCheck = new Date(text.trim());
+              if(text.trim() &&  !isNaN(dateCheck.getTime())){
                 this.searchingobj[this.selectedObject.key[0]] = text.trim();
                 this.searchingobj[this.selectedObject.key[1]] = text.trim();
               }else{
                 delete this.searchingobj[this.selectedObject.key[0]];
                 delete this.searchingobj[this.selectedObject.key[1]];
                 this.selectedKey = undefined;
+                if(text.trim()){
+                  this.showSpinner = true;
+                    setTimeout(()=> { 
+                    this.showSpinner =false;
+                    this._toast.error('Date Format is incorrect');
+                    }, 2000);
+                    return;
+                }
               }
               if(this.searchingCriteria.TotalRecords){
                 this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
@@ -233,6 +244,14 @@ export class SearchingComponent implements OnInit, OnDestroy {
   }
   getCurrentDate(date){
     this.inputCurrentDate = date;
+  }
+  onlyBackSpaceAllow(event){
+    if (event.key == 'Backspace') {
+      return;
+      }else{
+        event.preventDefault();
+
+      }
   }
   onDateSelection(date: NgbDateStruct) {
     let parsed = '';
