@@ -57,8 +57,17 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   onSearchResult(event){
     this.supportList = event.data[0];
     this.searchObj.PageNumber = 0;
-    let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
-    this.searchingByKey = (key)? {[key]: event[key]} : undefined;
+    let arr = Object.keys(event).filter(item => item != 'data' && item != 'searchMode');
+    if(Array.isArray(arr) && arr.length){
+      this.searchingByKey = {};
+      for (const key in arr) {
+        if (arr.hasOwnProperty(key)) {
+          this.searchingByKey[arr[key]]= event[arr[key]];
+        }
+      }
+    }else{
+      this.searchingByKey =  null;
+    }
     this.loadAvailableCount = event.data[1].RecordCount;
   }
  
@@ -96,9 +105,6 @@ export class SupportgridComponent implements OnInit, OnDestroy {
     });
   }
 
-  gotoView(id:Number){
-    this._router.navigate(['/user/support/', id])
-  }
   loadMore(){
     this.searchObj.PageNumber++
     let obj = {...this.searchObj , ...this.searchingByKey};

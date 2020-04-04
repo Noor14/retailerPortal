@@ -165,10 +165,19 @@ export class SearchingComponent implements OnInit, OnDestroy {
             data: data,
             searchMode : this.searchingCriteria.searchMode
           }
-            if(this.selectedObject && this.selectedObject.key && this.selectedKey){
+            if(this.selectedObject && this.selectedObject.key && !Array.isArray(this.selectedObject.key) && this.selectedKey){
               var objkeyObj ={
                 [this.selectedObject.key]: obj[this.selectedKey],
               }
+            }else if(this.selectedObject && this.selectedObject.key && Array.isArray(this.selectedObject.key) && this.selectedKey){
+             var objkey = {}
+              if(obj[this.selectedKey[0]]){
+                objkey[this.selectedObject.key[0]] = obj[this.selectedKey[0]]
+              }
+              if(obj[this.selectedKey[1]]){
+                objkey[this.selectedObject.key[1]] = obj[this.selectedKey[1]]
+              }
+              objkeyObj = Object.assign({},objkey);
             }
         let resObj = {...object, ...objkeyObj}; 
         this.filteredData.emit(resObj);
@@ -199,7 +208,28 @@ export class SearchingComponent implements OnInit, OnDestroy {
     if(this.toDate) {
       parsed += ' - ' + this._parserFormatter.format(this.toDate);
     }
-   
     this.renderer.setProperty(this.myRangeInput.nativeElement, 'value', parsed);
+  
+  }
+  calenderSearch(){
+    if(this.selectedObject.key){
+      this.selectedKey = this.selectedObject.key;
+      if(this.fromDate){
+        this.searchingobj[this.selectedObject.key[0]] = new Date(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`).toISOString();
+      }
+      if(this.toDate){
+        this.searchingobj[this.selectedObject.key[1]] = new Date(`${this.toDate.year}-${this.toDate.month}-${this.toDate.day}`).toISOString();
+      }
+      else {
+        delete this.searchingobj[this.selectedObject.key[1]];
+      }
+      if(this.searchingCriteria.TotalRecords){
+        this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
+      }
+      if(this.searchingCriteria.PageNumber == 0){
+        this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
+      }
+      this.filter(this.searchingobj);
+    }
   }
 }

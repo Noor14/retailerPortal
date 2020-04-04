@@ -161,13 +161,27 @@ export class DashboardComponent implements OnInit {
     if(event.searchMode == "payment"){
       this.searchObjPayment.PageNumber = 0;
       this.paymentsList = event.data.PrePaidRequestData;
-      let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
-      this.searchingByKeyPayment = (key)? {[key]: event[key]} : undefined;
+      let arr = Object.keys(event).filter(item => item != 'data' && item != 'searchMode');
+      if(arr && arr.length == 1){
+        let key = arr.pop();
+        this.searchingByKeyPayment = {[key]: event[key]} ;
+      }else{
+        this.searchingByKeyPayment =  null;
+      }
       this.loadAvailableCount =  event.data.RecordCount;
     }else{
       this.searchObjOrder.PageNumber = 0;
-      let key= Object.keys(event).filter(item => item != 'data' && item != 'searchMode').pop();
-      this.searchingByKeyOrder = (key)? {[key]: event[key]} : undefined;
+      let arr= Object.keys(event).filter(item => item != 'data' && item != 'searchMode');
+      if(Array.isArray(arr) && arr.length){
+        this.searchingByKeyOrder = {};
+        for (const key in arr) {
+          if (arr.hasOwnProperty(key)) {
+            this.searchingByKeyOrder[arr[key]]= event[arr[key]];
+          }
+        }
+      }else{
+        this.searchingByKeyOrder =  null;
+      }
       this.orderList = event.data[0];
       this.loadAvailableOrderCount = event.data[1].RecordCount;
     }

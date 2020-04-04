@@ -19,11 +19,12 @@
          class="form-control" 
          placeholder="From Date - To Date"
           name="dp" [displayMonths]="2" [navigation]="'arrows'" [outsideDays]="'visible'"
-          [showWeekNumbers]="false" ngbDatepicker #d="ngbDatepicker" [dayTemplate]="t" (click)="d.toggle()" [autoClose]="'outside'"
+          [showWeekNumbers]="false"  ngbDatepicker #d="ngbDatepicker" [dayTemplate]="t" (click)="d.toggle()" [autoClose]="'outside'"
          [(ngModel)]="model" 
          ngbDatepicker 
          [maxDate]="maxDate"
-         autocomplete="off">
+         autocomplete="off"
+         (closed)="calenderSearch()">
  
          <ng-template #t let-date="date" let-focused="focused" let-disabled="disabled">
           <span class="custom-day"
