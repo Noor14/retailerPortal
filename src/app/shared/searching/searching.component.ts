@@ -43,7 +43,8 @@ export class SearchingComponent implements OnInit, OnDestroy {
 
   fromDate: NgbDateStruct;
   toDate: NgbDateStruct;
-  model: any;
+  public model: any;
+  private inputCurrentDate;
   @ViewChild("d", {static: false}) input: NgbInputDatepicker;
   @ViewChild('myRangeInput' , {static: false}) myRangeInput: ElementRef;
   @ViewChild('search', {static: false}) search: ElementRef;
@@ -189,7 +190,9 @@ export class SearchingComponent implements OnInit, OnDestroy {
         console.log(err)
         })
   }
-
+  getCurrentDate(date){
+    this.inputCurrentDate = date;
+  }
   onDateSelection(date: NgbDateStruct) {
     let parsed = '';
     if (!this.fromDate && !this.toDate) {
@@ -212,7 +215,8 @@ export class SearchingComponent implements OnInit, OnDestroy {
   
   }
   calenderSearch(){
-    if(this.selectedObject.key){
+    var date = this.model;
+    if(this.selectedObject.key && this.inputCurrentDate != date){
       this.selectedKey = this.selectedObject.key;
       if(this.fromDate){
         this.searchingobj[this.selectedObject.key[0]] = new Date(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`).toISOString();
