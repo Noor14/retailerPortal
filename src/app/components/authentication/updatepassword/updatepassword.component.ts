@@ -14,6 +14,8 @@ export class UpdatepasswordComponent implements OnInit {
   public updatePasswordForm: FormGroup;
   public showSpinner: boolean;
   public spinnerConfig: any;
+  public passToggle:boolean;
+  public confirmPassToggle:boolean;
   constructor(
     private _loginService: LoginService,
     private _route:Router,
@@ -24,9 +26,9 @@ export class UpdatepasswordComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
-    let userObj = JSON.parse(localStorage.getItem('userIdentity'));
+    let userObj = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
     this.updatePasswordForm = new FormGroup({
-      Username: new FormControl(userObj.UserAccount.Username, Validators.required),
+      Username: new FormControl(userObj.Username, Validators.required),
       NewPassword: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.password)]),
       ConfirmPassword: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.password)]),
     })
@@ -61,7 +63,7 @@ export class UpdatepasswordComponent implements OnInit {
       if(res){
         localStorage.clear();
         this._route.navigate(['/login'])
-      }    
+      }
       this.showSpinner=false;
     })
     .catch(err=>{
