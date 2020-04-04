@@ -68,6 +68,9 @@ export class SearchingComponent implements OnInit, OnDestroy {
     }
   }
   selectedOption(option){
+    this.model = null;
+    this.fromDate = null;
+    this.toDate = null;
     this.selectedObject = this.searchingCriteria.searchBy.find(obj=> obj.key == option);
     if(this.selectedObject && this.selectedObject.type == "typing" && !this.selectedKey){
       this.searchOntyping();
