@@ -120,21 +120,19 @@ export class SearchingComponent implements OnInit, OnDestroy {
         // subscription for response
         ).subscribe((text: string) => {
               this.selectedKey = this.selectedObject.key;
+              this.searchingobj = {};
               if(text.trim()){
                 this.searchingobj[this.selectedObject.key] = text.trim();
               }else{
                 delete this.searchingobj[this.selectedObject.key];
                 this.selectedKey = undefined;
               }
-              this.searchingobj = {
-                [this.selectedObject.key] : text.trim(),
-              };
-                if(this.searchingCriteria.TotalRecords){
-                  this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
-                }
-                if(this.searchingCriteria.PageNumber == 0){
-                  this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
-                }
+              if(this.searchingCriteria.TotalRecords){
+                this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
+              }
+              if(this.searchingCriteria.PageNumber == 0){
+                this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
+              }
               this.filter(this.searchingobj);
         });
   }
@@ -154,7 +152,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
       // subscription for response
       ).subscribe((text: string) => {
             this.selectedKey = this.selectedObject.key;
-            this.searchingobj = {}
+            this.searchingobj = {};
               if(text.trim()){
                 this.searchingobj[this.selectedObject.key[0]] = text.trim();
               }else{
