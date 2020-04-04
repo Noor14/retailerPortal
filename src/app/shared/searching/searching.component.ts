@@ -148,15 +148,16 @@ export class SearchingComponent implements OnInit, OnDestroy {
       // if character length greater then 2
       // ,filter(res => res.length > 2)
       // Time in milliseconds between key events
-      ,debounceTime(1500)        
+      ,debounceTime(1000)        
       // If previous query is diffent from current   
       ,distinctUntilChanged()
       // subscription for response
       ).subscribe((text: string) => {
+        if(text != this.inputCurrentDate){
             this.selectedKey = this.selectedObject.key;
             this.searchingobj = {};
-            let dateCheck = new Date(text.trim());
-              if(text.trim() &&  !isNaN(dateCheck.getTime())){
+            let dateCheck = new Date(text && text.trim());
+              if(text && text.trim() &&  !isNaN(dateCheck.getTime())){
                 this.searchingobj[this.selectedObject.key[0]] = new Date(text.trim()).toISOString();
                 this.searchingobj[this.selectedObject.key[1]] = new Date(text.trim()).toISOString();
               }else{
@@ -165,7 +166,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
                 this.selectedKey = undefined;
                 this.fromDate = null;
                 this.toDate = null;
-                if(text.trim()){
+                if(text && text.trim()){
                   this.showSpinner = true;
                     setTimeout(()=> { 
                     this.showSpinner =false;
@@ -182,6 +183,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
                 this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
               }
               this.filter(this.searchingobj);
+            }
       });
 }
 
@@ -246,7 +248,13 @@ export class SearchingComponent implements OnInit, OnDestroy {
         })
   }
   getCurrentDate(date){
-    this.inputCurrentDate = date;
+    this.inputCurrentDate = '';
+    if(this.fromDate) {
+      this.inputCurrentDate += this._parserFormatter.format(this.fromDate);
+    }
+    if(this.toDate) {
+      this.inputCurrentDate += ' - ' + this._parserFormatter.format(this.toDate);
+    }
   }
   onlyBackSpaceAllow(event){
     if (event.key == 'Backspace') {
@@ -278,8 +286,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
   
   }
   calenderSearch(){
-    var date = this.model;
-    if(this.selectedObject.key && this.inputCurrentDate != date){
+    if(this.selectedObject.key && this.inputCurrentDate != this.myRangeInput.nativeElement.value){
       this.selectedKey = this.selectedObject.key;
       if(this.fromDate){
         this.searchingobj[this.selectedObject.key[0]] = new Date(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`).toISOString();
