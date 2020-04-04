@@ -26,9 +26,10 @@ export class UpdatepasswordComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
-    let userObj = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
+    let userObj = (localStorage.getItem('userIdentity'))? JSON.parse(localStorage.getItem('userIdentity')).UserAccount : undefined;
+    let userName = (userObj && userObj.Username)? userObj.Username : null;
     this.updatePasswordForm = new FormGroup({
-      Username: new FormControl(userObj.Username, Validators.required),
+      Username: new FormControl(userName, Validators.required),
       NewPassword: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.password)]),
       ConfirmPassword: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.password)]),
     })
