@@ -81,7 +81,7 @@ export class DialogComponent implements OnInit {
       this._dashboardService.deleteOrder(this.dialogBoxObject.id)
       .then((res: any) => {
         if(res && res.OrderId){
-          this._toast.success('Order successfully deleted');
+          this._toast.success('Order deleted');
           this.showSpinner = false;
           this.activeModal.close(this.dialogBoxObject.id);
         }
@@ -102,7 +102,7 @@ export class DialogComponent implements OnInit {
       this._dashboardService.cancelOrder(obj)
       .then((res: any) => {
         if(res && res.ID){
-          this._toast.success('Order successfully canceled');
+          this._toast.success('Order canceled');
           this.showSpinner = false;
           this.activeModal.close(this.dialogBoxObject.id);
         }
@@ -123,7 +123,7 @@ export class DialogComponent implements OnInit {
         .then((res: any) => {
           this.showSpinner = false;
           if(res.ID){
-            this._toast.success('Template saved successfully');
+            this._toast.success('Template saved');
             let obj={
               id: res.ID,
               templateName: this.name.trim()
