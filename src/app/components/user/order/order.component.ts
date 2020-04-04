@@ -260,7 +260,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
       }
       this._orderDetailService.save('Orders/saveOrder', obj).then((data: any) => {
         if(data.OrderNumber && data.ID){
-          this._toast.success("Order saved");
+          this._toast.success("Order created");
             this._route.navigate(['/user/dashboard'])
         }
         this.showSpinner=false;
