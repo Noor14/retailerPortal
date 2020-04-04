@@ -71,6 +71,9 @@ export class SearchingComponent implements OnInit, OnDestroy {
     this.model = null;
     this.fromDate = null;
     this.toDate = null;
+    if(this.onTypeSubscriber){
+      this.onTypeSubscriber.unsubscribe();
+    }
     this.selectedObject = this.searchingCriteria.searchBy.find(obj=> obj.key == option);
     if(this.selectedObject && this.selectedObject.type == "typing" && !this.selectedKey){
       this.searchOntyping();
@@ -117,6 +120,12 @@ export class SearchingComponent implements OnInit, OnDestroy {
         // subscription for response
         ).subscribe((text: string) => {
               this.selectedKey = this.selectedObject.key;
+              if(text.trim()){
+                this.searchingobj[this.selectedObject.key] = text.trim();
+              }else{
+                delete this.searchingobj[this.selectedObject.key];
+                this.selectedKey = undefined;
+              }
               this.searchingobj = {
                 [this.selectedObject.key] : text.trim(),
               };
@@ -127,11 +136,40 @@ export class SearchingComponent implements OnInit, OnDestroy {
                   this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
                 }
               this.filter(this.searchingobj);
-                if(!text){
-                 this.selectedKey = undefined;
-                }
         });
   }
+  searchOnDateRemoving(){
+    this.changeDetectorRef.detectChanges();
+    this.onTypeSubscriber = fromEvent(this.myRangeInput && this.myRangeInput.nativeElement, 'keyup').pipe(
+      // get value
+      map((event: any) => {
+        return event.target.value;
+      })
+      // if character length greater then 2
+      // ,filter(res => res.length > 2)
+      // Time in milliseconds between key events
+      ,debounceTime(1000)        
+      // If previous query is diffent from current   
+      ,distinctUntilChanged()
+      // subscription for response
+      ).subscribe((text: string) => {
+            this.selectedKey = this.selectedObject.key;
+            this.searchingobj = {}
+              if(text.trim()){
+                this.searchingobj[this.selectedObject.key[0]] = text.trim();
+              }else{
+                delete this.searchingobj[this.selectedObject.key[0]];
+                this.selectedKey = undefined;
+              }
+              if(this.searchingCriteria.TotalRecords){
+                this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
+              }
+              if(this.searchingCriteria.PageNumber == 0){
+                this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
+              }
+              this.filter(this.searchingobj);
+      });
+}
 
   searchOnChange(elem){
     if(elem.value && this.selectedObject.key){
@@ -173,7 +211,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
               var objkeyObj ={
                 [this.selectedObject.key]: obj[this.selectedKey],
               }
-            }else if(this.selectedObject && this.selectedObject.key && Array.isArray(this.selectedObject.key) && this.selectedKey){
+            }else if(this.selectedObject && this.selectedObject.key && Array.isArray(this.selectedObject.key) && Array.isArray(this.selectedKey)){
              var objkey = {}
               if(obj[this.selectedKey[0]]){
                 objkey[this.selectedObject.key[0]] = obj[this.selectedKey[0]]
@@ -237,6 +275,9 @@ export class SearchingComponent implements OnInit, OnDestroy {
         this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
       }
       this.filter(this.searchingobj);
+      if(this.myRangeInput.nativeElement.value){
+        this.searchOnDateRemoving()
+      }
     }
   }
 }
