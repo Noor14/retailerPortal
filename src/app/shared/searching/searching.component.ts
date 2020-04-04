@@ -157,8 +157,8 @@ export class SearchingComponent implements OnInit, OnDestroy {
             this.searchingobj = {};
             let dateCheck = new Date(text.trim());
               if(text.trim() &&  !isNaN(dateCheck.getTime())){
-                this.searchingobj[this.selectedObject.key[0]] = new Date(text.trim()).toISOString;
-                this.searchingobj[this.selectedObject.key[1]] = new Date(text.trim()).toISOString;
+                this.searchingobj[this.selectedObject.key[0]] = new Date(text.trim()).toISOString();
+                this.searchingobj[this.selectedObject.key[1]] = new Date(text.trim()).toISOString();
               }else{
                 delete this.searchingobj[this.selectedObject.key[0]];
                 delete this.searchingobj[this.selectedObject.key[1]];
