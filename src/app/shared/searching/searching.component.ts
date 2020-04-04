@@ -247,7 +247,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
         console.log(err)
         })
   }
-  getCurrentDate(date){
+  getCurrentDate(){
     this.inputCurrentDate = '';
     if(this.fromDate) {
       this.inputCurrentDate += this._parserFormatter.format(this.fromDate);

@@ -21,7 +21,7 @@
           name="dp" [displayMonths]="2" [navigation]="'arrows'" [outsideDays]="'visible'"
          [showWeekNumbers]="false"  ngbDatepicker #d="ngbDatepicker" [dayTemplate]="t" (click)="d.toggle()" [autoClose]="'outside'"
          [(ngModel)]="model" 
-         (focus)="getCurrentDate(model)"
+         (focus)="getCurrentDate()"
          (keydown)="onlyBackSpaceAllow($event)"
          ngbDatepicker 
          [maxDate]="maxDate"
