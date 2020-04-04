@@ -163,6 +163,8 @@ export class SearchingComponent implements OnInit, OnDestroy {
                 delete this.searchingobj[this.selectedObject.key[0]];
                 delete this.searchingobj[this.selectedObject.key[1]];
                 this.selectedKey = undefined;
+                this.fromDate = null;
+                this.toDate = null;
                 if(text.trim()){
                   this.showSpinner = true;
                     setTimeout(()=> { 
@@ -171,6 +173,8 @@ export class SearchingComponent implements OnInit, OnDestroy {
                     }, 2000);
                     return;
                 }
+                this.model = null;
+               
               }
               if(this.searchingCriteria.TotalRecords){
                 this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
