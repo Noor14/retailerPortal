@@ -39,6 +39,21 @@
                             background-color: #e9ecef !important;
                         }
                         th{
+                            &.productCode{
+                                min-width:105px
+                            }
+                              &.productTitle{
+                                min-width:100px
+                            }
+                              &.dicountedPrice{
+                                min-width:130px
+                            }
+                              &.packSize{
+                                min-width:80px
+                            }  
+                            &.qty{
+                                min-width:200px
+                            }
                             @extend tr;
                         }
                         td{
