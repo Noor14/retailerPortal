@@ -76,13 +76,13 @@
                     <p-treeTable [value]="categoryList" (onNodeExpand)="nodeToggling($event)">
                         <ng-template pTemplate="header">
                             <tr>
-                                <th>Product Code</th>
-                                <th>Product Title</th>
+                                <th [style.min-width.px]="105">Product Code</th>
+                                <th [style.min-width.px]="100">Product Title</th>
                                 <th>Price</th>
-                                <th>Discounted Price</th>
+                                <th [style.min-width.px]="130">Discounted Price</th>
                                 <th>UOM</th>
-                                <th>Pack Size</th>
-                                <th>Quantity</th>
+                                <th [style.min-width.px]="80">Pack Size</th>
+                                <th [style.min-width.px]="200">Quantity</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
@@ -129,13 +129,13 @@
                       <table class="table" >
                             <thead>
                             <tr>
-                                <th>Product Code</th>
-                                <th>Product Tilte</th>
+                                <th [style.min-width.px]="105">Product Code</th>
+                                <th [style.min-width.px]="100">Product Title</th>
                                 <th>Price</th>
-                                <th>Discounted Price</th>
+                                <th [style.min-width.px]="130">Discounted Price</th>
                                 <th>UOM</th>
-                                <th>Pack Size</th>
-                                <th>Quantity</th>
+                                <th [style.min-width.px]="80">Pack Size</th>
+                                <th [style.min-width.px]="200">Quantity</th>
                                 <th>Amount</th>
                                 <th></th>
                             </tr>
