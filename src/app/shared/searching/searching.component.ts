@@ -316,10 +316,8 @@ export class SearchingComponent implements OnInit, OnDestroy {
       if(this.myRangeInput.nativeElement.value){
         if(this.onTypeSubscriber){
           this.onTypeSubscriber.unsubscribe();
-          this.searchOnDateRemoving();
-        }else{
-          this.searchOnDateRemoving();
         }
+          this.searchOnDateRemoving();
       }
     }
   }
