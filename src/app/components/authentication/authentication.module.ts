@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationComponent } from './authentication.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { LoginService } from './login/login.service';
 import { RegistrationComponent } from './registration/registration.component';
 import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
@@ -31,7 +30,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     AuthenticationRoutingModule,
     ReactiveFormsModule,
     TextMaskModule,
@@ -43,11 +41,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   providers:[
     LoginService, 
-    SupportService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorService,
-      multi: true
-    }]
+    SupportService]
 })
 export class AuthenticationModule { }

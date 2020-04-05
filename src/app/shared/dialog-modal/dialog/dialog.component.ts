@@ -6,7 +6,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketSupportService } from './../../../components/user/support/ticket-support.service';
 import { DashboardService } from '../../../components/user/dashboard/dashboard.service';
-import { SPINNER_PLACEMENT } from '@hardpool/ngx-spinner';
 
 @Component({
   selector: 'app-dialog',
@@ -72,7 +71,9 @@ export class DialogComponent implements OnInit {
     }
     else if(this.dialogBoxObject.mode == 'confirmDialog'){
       this.showSpinner = true;
-      this._toast.success('Product successfully deleted');
+      if(this.dialogBoxObject.type != 'creationProcess'){
+        this._toast.success('Product successfully deleted');
+      }
       this.activeModal.close(true);
       this.showSpinner = false;
     }

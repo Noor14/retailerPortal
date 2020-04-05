@@ -8,7 +8,6 @@ import { UserRoutingModule } from './user-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user.component';
 import { ProfileComponent } from './profile/profile.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ProfileService } from './profile/profile.service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -23,7 +22,6 @@ import { NetworkComponent } from './network/network.component';
 import { NetworkService } from './network/network.service';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { PaymentDetailService } from './payment-details/payment-detail.service';
-import { InterceptorService } from 'src/app/services/interceptor.service';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { OrderDetailService } from './order-detail/order-detail.service';
 import { OrderComponent } from './order/order.component';
@@ -46,7 +44,6 @@ import { OrderComponent } from './order/order.component';
     CommonModule,
     UserRoutingModule,
     NgbModule,
-    HttpClientModule,
     TextMaskModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
@@ -62,12 +59,7 @@ import { OrderComponent } from './order/order.component';
     UserService,
     NetworkService,
     PaymentDetailService,
-    OrderDetailService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorService,
-      multi: true
-    }
+    OrderDetailService
   ]
 
 })

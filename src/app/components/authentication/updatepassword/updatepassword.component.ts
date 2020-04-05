@@ -1,3 +1,4 @@
+import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
 import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,7 @@ import { LoginService } from '../login/login.service';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { AppPattern } from '../../../shared/app.mask'
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-updatepassword',
   templateUrl: './updatepassword.component.html',
@@ -19,7 +21,8 @@ export class UpdatepasswordComponent implements OnInit {
   constructor(
     private _loginService: LoginService,
     private _route:Router,
-    private _toast: ToastrService
+    private _toast: ToastrService,
+    private _modalService : NgbModal
     ) {
 
    }
@@ -58,6 +61,25 @@ export class UpdatepasswordComponent implements OnInit {
       validateAllFormFields(this.updatePasswordForm);
     }
   }
+
+
+  openDialog(){
+      const modalRef = this._modalService.open(DialogComponent, { 
+        centered: true,
+        keyboard: false,
+        backdrop:'static'
+      });
+      modalRef.componentInstance.obj = {btnText: 'Yes, I want', titleTextColor: 'warning', title: 'Skip Process', type: 'creationProcess', detail: 'Are you sure, you want to skip?', mode: 'confirmDialog'};
+      modalRef.result.then((result) => {
+        if(result){
+          this._route.navigate(['/user/dashboard']);
+        }
+      },(reason) => {
+        // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+  }
+
+
   logout(){
     this._loginService.logoutUser()
     .then((res:boolean)=>{

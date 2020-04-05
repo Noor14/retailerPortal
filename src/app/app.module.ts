@@ -1,4 +1,4 @@
-
+import { InterceptorService } from './services/interceptor.service';
 import { SharedService } from './services/shared.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component'
 import { ToastrModule } from 'ngx-toastr';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 export function jwtOptionsFactory() {
   return {
     tokenGetter: () => {
@@ -28,6 +29,7 @@ export function jwtOptionsFactory() {
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
@@ -41,7 +43,12 @@ export function jwtOptionsFactory() {
     })
   ],
   providers: [
-    SharedService
+    SharedService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
     ],
   bootstrap: [AppComponent]
 })

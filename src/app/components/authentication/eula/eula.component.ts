@@ -12,9 +12,7 @@ export class EULAComponent implements OnInit {
   private userIdentity:any;
 
   constructor(private _loginService : LoginService,private _route:Router) {
-    this.userIdentity= JSON.parse(localStorage.getItem('userIdentity') );
-    console.log(this.userIdentity);
-
+    this.userIdentity = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
    }
   // users/termsandcondition
   ngOnInit() {
@@ -28,7 +26,7 @@ export class EULAComponent implements OnInit {
       this._loginService.PostCalls(userObj,"users/termsandcondition", 9)
       .then( data=>{
         if(data){
-          if(this.userIdentity.UserAccount.SelfSignup){
+          if(this.userIdentity.SelfSignup){
             this._route.navigate((['/user/dashboard']))
           }
           else{

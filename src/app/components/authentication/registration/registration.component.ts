@@ -1,5 +1,5 @@
 import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
-import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { AppMasks, AppPattern } from '../../../shared/app.mask'
@@ -12,7 +12,7 @@ import { ReCaptcha2Component } from 'ngx-captcha';
   styleUrls: ['./registration.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit, OnDestroy {
   public registerForm: FormGroup;
   public cnicMask = AppMasks.cnic_Mask;
   public mobileMask = AppMasks.mobile_Mask;
@@ -25,7 +25,11 @@ export class RegistrationComponent implements OnInit {
   public showSpinner: boolean;
   public passToggle:boolean;
   public confirmPassToggle:boolean;
-  
+  private registerFormMobileSubscriber:any;
+  private registerFormCNICSubscriber:any;
+  private registerFormUserNameSubscriber:any;
+  private registerFormEmailSubscriber:any;
+  private registerFormCompanyNameSubscriber:any;
   @ViewChild('captchaElem', { static: false }) captchaElem: ReCaptcha2Component;
   // @ViewChild('langInput', { static: false }) langInput: ElementRef;
 
@@ -60,12 +64,97 @@ export class RegistrationComponent implements OnInit {
       recaptcha: new FormControl(null, [Validators.required])
     });
   }
-  handleSuccess(data) {
-    console.log(data);
+  ngOnDestroy(){
+    if(this.registerFormMobileSubscriber){
+      this.registerFormMobileSubscriber.unsubscribe();
+    }
+    if(this.registerFormCNICSubscriber){
+      this.registerFormCNICSubscriber.unsubscribe();
+    }
+    if(this.registerFormUserNameSubscriber){
+      this.registerFormUserNameSubscriber.unsubscribe();
+    }
+    if(this.registerFormEmailSubscriber){
+      this.registerFormEmailSubscriber.unsubscribe();
+    }
+    if(this.registerFormCompanyNameSubscriber){
+      this.registerFormCompanyNameSubscriber.unsubscribe();
+    }
+  
   }
- handleReset(): void {
-    this.captchaElem.resetCaptcha();
+  onChanges(){
+    if(this.registerFormMobileSubscriber){
+      this.registerFormMobileSubscriber.unsubscribe();
+    }
+    if(this.registerFormCNICSubscriber){
+      this.registerFormCNICSubscriber.unsubscribe();
+    }
+    if(this.registerFormUserNameSubscriber){
+      this.registerFormUserNameSubscriber.unsubscribe();
+    }
+    if(this.registerFormEmailSubscriber){
+      this.registerFormEmailSubscriber.unsubscribe();
+    }
+    if(this.registerFormCompanyNameSubscriber){
+      this.registerFormCompanyNameSubscriber.unsubscribe();
+    }
+    if(this.emailExist){
+      this.onEmailChanges();
+    }
+    if(this.userExist){
+      this.onUserNameChanges();
+    }
+    if(this.cnicExist){
+      this.onCnicChanges();
+    }
+    if(this.mobileExist){
+      this.onMobileChanges();
+
+    }
+    if(this.companyExist){
+      this.onCompanyChanges();
+
+    }
   }
+  onMobileChanges(){
+    this.registerFormMobileSubscriber = this.registerForm.get('Mobile').valueChanges.subscribe(val => {
+         if(this.mobileExist){
+            this.mobileExist = false; 
+          }
+    });
+  } 
+  onCnicChanges(){
+    this.registerFormCNICSubscriber = this.registerForm.get('CNIC').valueChanges.subscribe(val => {
+         if(this.cnicExist){
+            this.cnicExist = false; 
+          }
+    });
+  } 
+  onUserNameChanges(){
+    this.registerFormUserNameSubscriber = this.registerForm.get('Username').valueChanges.subscribe(val => {
+         if(this.userExist){
+            this.userExist = false; 
+          }
+    });
+  } 
+  onEmailChanges(){
+    this.registerFormEmailSubscriber = this.registerForm.get('Email').valueChanges.subscribe(val => {
+         if(this.emailExist){
+            this.emailExist = false; 
+          }
+    });
+  }
+
+  onCompanyChanges(){
+    this.registerFormCompanyNameSubscriber = this.registerForm.get('CompanyName').valueChanges.subscribe(val => {
+         if(this.companyExist){
+            this.companyExist = false; 
+          }
+    });
+  }
+
+
+
   register() {
     if (this.registerForm.valid) {
       if (this.registerForm.value.Password === this.registerForm.value.ConfirmPassword) {
@@ -79,6 +168,7 @@ export class RegistrationComponent implements OnInit {
               this.cnicExist = data.CNIC;
               this.mobileExist = data.Mobile;
               this.companyExist = data.Company;
+              this.onChanges();
             }
             else {
               this._toast.success("Registered successfully");
