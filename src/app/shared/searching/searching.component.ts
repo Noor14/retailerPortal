@@ -46,8 +46,8 @@ export class SearchingComponent implements OnInit, OnDestroy {
   maxDate: NgbDateStruct = { year: now.year(), month: now.month() + 1, day: now.date()};
   hoveredDate: NgbDateStruct;
 
-  fromDate: NgbDateStruct;
-  toDate: NgbDateStruct;
+  private fromDate: NgbDateStruct;
+  private toDate: any;
   public model: any;
   private inputCurrentDate;
   private inputRemovingCurrentDate;
@@ -257,11 +257,16 @@ export class SearchingComponent implements OnInit, OnDestroy {
   }
   getCurrentDate(){
     this.inputCurrentDate = '';
-    if(this.fromDate) {
-      this.inputCurrentDate += this._parserFormatter.format(this.fromDate);
-    }
-    if(this.toDate) {
-      this.inputCurrentDate += ' - ' + this._parserFormatter.format(this.toDate);
+    if(!this.toDate) {
+      this.inputCurrentDate = this.myRangeInput.nativeElement.value;
+    }else {
+      if(this.fromDate) {
+        this.inputCurrentDate += this._parserFormatter.format(this.fromDate);
+      }
+      if(this.toDate){
+        this.inputCurrentDate += ' - ' + this._parserFormatter.format(this.toDate);
+        // delete this.toDate['updated']
+      }
     }
   }
   onlyBackSpaceAllow(event){
@@ -291,11 +296,14 @@ export class SearchingComponent implements OnInit, OnDestroy {
       parsed += ' - ' + this._parserFormatter.format(this.toDate);
     }
     this.renderer.setProperty(this.myRangeInput.nativeElement, 'value', parsed);
-  
+   
   }
   calenderSearch(){
-    
-    if(this.selectedObject.key && this.inputCurrentDate != this.myRangeInput.nativeElement.value && this.inputRemovingCurrentDate != this.myRangeInput.nativeElement.value){
+    if(this.toDate && !this.toDate.hasOwnProperty('updated')){
+      this.myRangeInput.nativeElement.value += ' - ' + this._parserFormatter.format(this.toDate);
+      this.toDate.updated = true;
+    }
+    if(this.selectedObject.key && this.myRangeInput.nativeElement.value && this.inputCurrentDate != this.myRangeInput.nativeElement.value && this.inputRemovingCurrentDate != this.myRangeInput.nativeElement.value){
       this.selectedKey = this.selectedObject.key;
       if(this.fromDate){
         this.searchingobj[this.selectedObject.key[0]] = moment(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`, 'YYYY-M-D').toISOString();
