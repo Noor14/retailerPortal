@@ -71,9 +71,6 @@ export class DialogComponent implements OnInit {
     }
     else if(this.dialogBoxObject.mode == 'confirmDialog'){
       this.showSpinner = true;
-      if(this.dialogBoxObject.type != 'creationProcess'){
-        this._toast.success('Product successfully deleted');
-      }
       this.activeModal.close(true);
       this.showSpinner = false;
     }

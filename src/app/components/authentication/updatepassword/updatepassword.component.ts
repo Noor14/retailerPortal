@@ -69,7 +69,7 @@ export class UpdatepasswordComponent implements OnInit {
         keyboard: false,
         backdrop:'static'
       });
-      modalRef.componentInstance.obj = {btnText: 'Yes, I want', titleTextColor: 'warning', title: 'Skip Process', type: 'creationProcess', detail: 'Are you sure, you want to skip?', mode: 'confirmDialog'};
+      modalRef.componentInstance.obj = {btnText: 'Yes, I want', titleTextColor: 'warning', title: 'Skip Process', detail: 'Are you sure, you want to skip?', mode: 'confirmDialog'};
       modalRef.result.then((result) => {
         if(result){
           this._route.navigate(['/user/dashboard']);
