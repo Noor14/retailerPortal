@@ -77,9 +77,6 @@ export class SearchingComponent implements OnInit, OnDestroy {
     this.model = null;
     this.fromDate = null;
     this.toDate = null;
-    if(this.onTypeSubscriber){
-      this.onTypeSubscriber.unsubscribe();
-    }
     this.selectedObject = this.searchingCriteria.searchBy.find(obj=> obj.key == option);
     if(this.selectedObject && this.selectedObject.type == "typing" && !this.selectedKey){
       this.searchOntyping();
@@ -97,7 +94,12 @@ export class SearchingComponent implements OnInit, OnDestroy {
       if(this.searchingCriteria.PageNumber == 0){
         this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
       }
-      delete this.searchingobj[this.selectedKey];
+      if(Array.isArray(this.selectedKey)){
+        delete this.searchingobj[this.selectedKey[0]];
+        delete this.searchingobj[this.selectedKey[1]];
+      }else{
+        delete this.searchingobj[this.selectedKey];
+      }
       this.filter(this.searchingobj);
       this.selectedKey = undefined;
       if (this.search && this.search.nativeElement && this.search.nativeElement.value){
