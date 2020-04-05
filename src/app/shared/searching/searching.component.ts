@@ -298,13 +298,13 @@ export class SearchingComponent implements OnInit, OnDestroy {
     if(this.selectedObject.key && this.inputCurrentDate != this.myRangeInput.nativeElement.value && this.inputRemovingCurrentDate != this.myRangeInput.nativeElement.value){
       this.selectedKey = this.selectedObject.key;
       if(this.fromDate){
-        this.searchingobj[this.selectedObject.key[0]] = new Date(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`).toISOString();
+        this.searchingobj[this.selectedObject.key[0]] = moment(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`, 'YYYY-M-D').toISOString();
       }
       if(this.toDate){
-        this.searchingobj[this.selectedObject.key[1]] = new Date(`${this.toDate.year}-${this.toDate.month}-${this.toDate.day}`).toISOString();
+        this.searchingobj[this.selectedObject.key[1]] = moment(`${this.toDate.year}-${this.toDate.month}-${this.toDate.day}`, 'YYYY-M-D').toISOString();
       }
       else {
-        this.searchingobj[this.selectedObject.key[1]] = new Date(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`).toISOString();
+        this.searchingobj[this.selectedObject.key[1]] = moment(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`, 'YYYY-M-D').toISOString();
       }
       if(this.searchingCriteria.TotalRecords){
         this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
