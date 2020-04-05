@@ -1,3 +1,4 @@
+import { DateFormater } from './../../constant/date-formater';
 import { loadingConfig } from './../../constant/globalfunction';
 import { UserService } from './../../components/user/user.service';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, ChangeDetectorRef, ViewEncapsulation, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
@@ -22,7 +23,10 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
   selector: 'app-searching',
   templateUrl: './searching.component.html',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./searching.component.scss']
+  styleUrls: ['./searching.component.scss'],
+  providers: [
+    {provide: NgbDateParserFormatter, useClass: DateFormater}
+   ]
 })
 export class SearchingComponent implements OnInit, OnDestroy {
 
