@@ -50,6 +50,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
   toDate: NgbDateStruct;
   public model: any;
   private inputCurrentDate;
+  private inputRemovingCurrentDate;
   @ViewChild("d", {static: false}) input: NgbInputDatepicker;
   @ViewChild('myRangeInput' , {static: false}) myRangeInput: ElementRef;
   @ViewChild('search', {static: false}) search: ElementRef;
@@ -162,25 +163,26 @@ export class SearchingComponent implements OnInit, OnDestroy {
         if(text != this.inputCurrentDate){
             this.selectedKey = this.selectedObject.key;
             this.searchingobj = {};
-            let dateCheck = new Date(text && text.trim());
-              if(text && text.trim() &&  !isNaN(dateCheck.getTime())){
-                this.searchingobj[this.selectedObject.key[0]] = new Date(text.trim()).toISOString();
-                this.searchingobj[this.selectedObject.key[1]] = new Date(text.trim()).toISOString();
+              if(text && text.trim() &&  moment(text.trim()).isValid()){
+                this.searchingobj[this.selectedObject.key[0]] = moment(text.trim()).toISOString();
+                this.searchingobj[this.selectedObject.key[1]] = moment(text.trim()).toISOString();
               }else{
                 delete this.searchingobj[this.selectedObject.key[0]];
                 delete this.searchingobj[this.selectedObject.key[1]];
                 this.selectedKey = undefined;
-                this.fromDate = null;
-                this.toDate = null;
                 if(text && text.trim()){
                   this.showSpinner = true;
                     setTimeout(()=> { 
-                    this.showSpinner =false;
+                    this.showSpinner = false;
                     this._toast.error('Date Format is incorrect');
                     }, 2000);
+
+                    this.inputRemovingCurrentDate = text.trim();
                     return;
                 }
                 this.model = null;
+                this.fromDate = null;
+                this.toDate = null;
               }
               if(this.searchingCriteria.TotalRecords){
                 this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
@@ -292,7 +294,8 @@ export class SearchingComponent implements OnInit, OnDestroy {
   
   }
   calenderSearch(){
-    if(this.selectedObject.key && this.inputCurrentDate != this.myRangeInput.nativeElement.value){
+    
+    if(this.selectedObject.key && this.inputCurrentDate != this.myRangeInput.nativeElement.value && this.inputRemovingCurrentDate != this.myRangeInput.nativeElement.value){
       this.selectedKey = this.selectedObject.key;
       if(this.fromDate){
         this.searchingobj[this.selectedObject.key[0]] = new Date(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`).toISOString();
@@ -311,7 +314,12 @@ export class SearchingComponent implements OnInit, OnDestroy {
       }
       this.filter(this.searchingobj);
       if(this.myRangeInput.nativeElement.value){
-        this.searchOnDateRemoving()
+        if(this.onTypeSubscriber){
+          this.onTypeSubscriber.unsubscribe();
+          this.searchOnDateRemoving();
+        }else{
+          this.searchOnDateRemoving();
+        }
       }
     }
   }
