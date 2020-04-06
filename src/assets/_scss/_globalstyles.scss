@@ -87,7 +87,7 @@ html{
       }
       &.password{
         position: relative;
-        input{
+        .form-control{
           padding-right: 55px;
         }
         span{
@@ -99,7 +99,7 @@ html{
             cursor: pointer;
 
         }
-        input[type="text"] + label + span{
+        .form-control[type="text"] + label + span{
             &::after{
                 content: '';
                 width: 2px;
