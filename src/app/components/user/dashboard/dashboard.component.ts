@@ -16,8 +16,6 @@ import { PaymentInstructionComponent } from '../../../shared/dialog-modal/paymen
 export class DashboardComponent implements OnInit {
 
   public payBygroupList: boolean = false;
-  public paymentPrepaidNumber:number = undefined;
-  private requestId:Number;
   private searchObjPayment: any = {
     TotalRecords: 10,
     PageNumber : 0
@@ -228,14 +226,14 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  openDialogPSID(){
+  openDialogPSID(paymentPrepaidNumber, requestId){
     const modalRef = this._modalService.open(PaymentInstructionComponent,{ 
       centered: true,
       keyboard: false,
       backdrop:'static',
       size:'lg'
      });
-    modalRef.componentInstance.obj = {PSID : this.paymentPrepaidNumber, VoucherNo: this.requestId};
+    modalRef.componentInstance.obj = {PSID : paymentPrepaidNumber, VoucherNo: requestId};
     modalRef.result.then((result) => {
       if(result){
       }
