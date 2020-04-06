@@ -4,6 +4,8 @@ import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PaymentInstructionComponent } from '../../../shared/dialog-modal/payment-instruction/payment-instruction.component';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +16,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class DashboardComponent implements OnInit {
 
   public payBygroupList: boolean = false;
+  public paymentPrepaidNumber:number = undefined;
+  private requestId:Number;
   private searchObjPayment: any = {
     TotalRecords: 10,
     PageNumber : 0
@@ -218,6 +222,22 @@ export class DashboardComponent implements OnInit {
          }
         
        }
+      }
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  openDialogPSID(){
+    const modalRef = this._modalService.open(PaymentInstructionComponent,{ 
+      centered: true,
+      keyboard: false,
+      backdrop:'static',
+      size:'lg'
+     });
+    modalRef.componentInstance.obj = {PSID : this.paymentPrepaidNumber, VoucherNo: this.requestId};
+    modalRef.result.then((result) => {
+      if(result){
       }
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
