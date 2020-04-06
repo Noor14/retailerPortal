@@ -136,12 +136,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this._profileService.postCalls(this.profileForm.value, 8 ,"retailer/Save")
     .then((data:any)=>{
       this.showSpinner = false;
-      this.updateBtnDisabled = true;
-      this._toast.success("Profile has been updated")
+      if(data.ID){
+        this.updateBtnDisabled = true;
+        this._toast.success(`Retailer Code ${this.profileForm.controls['RetailerCode'].value} has been updated successfully`)
+      }
     })
     .catch(err=>{
       this.showSpinner = false;
-      if(err.error.status==405){
+      if(err.error && err.error.status==405){
         this._toast.error(err.error.message,"Error")
       }
     })
