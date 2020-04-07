@@ -21,7 +21,7 @@ export class EULAComponent implements OnInit {
   agreeTermsAndConditions(){
       let userObj =
       { 
-        RetailerID:this.userIdentity.UserAccount.RetailerID
+        RetailerID:this.userIdentity.RetailerID
       };
       this._loginService.PostCalls(userObj,"users/termsandcondition", 9)
       .then( data=>{

@@ -7,22 +7,49 @@ import { SharedService } from './shared.service';
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
 
-  constructor(private _sharedService: SharedService,
-    private _route: Router){
+  constructor(protected _sharedService: SharedService,
+    protected _route: Router){
   }
   canActivate(next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
     let url: string = state.url;
+      if (!this._sharedService.isAuthenticated()) {
+        return true;
+      }
+      if(this._route && this._route.url && this._route.url != '/'){
+        this._route.navigate([this._route.url]);
+      }else{
+        this._route.navigate(['/user/dashboard']);
+      }
 
-    if (!this._sharedService.isAuthenticated()) {
-      this._route.navigate(['login']);
-      return false;
-    }
-    return true;
+        return false;
   }
   canActivateChild(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean{
    return this.canActivate(route, state);
+  }
+ 
+}
+@Injectable({
+  providedIn: 'root'
+})
+export class UserGuard extends AuthGuard {
+  constructor(_sharedService: SharedService,
+    _route: Router){
+    super(_sharedService, _route)
+  }
+  canActivate(next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): boolean {
+      if (this._sharedService.isAuthenticated()) {
+        return true;
+      }
+      if(this._route && this._route.url && this._route.url != '/'){
+        this._route.navigate([this._route.url]);
+      }else{
+        this._route.navigate(['login']);
+      }
+        return false;
+   
   }
  
 }

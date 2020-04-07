@@ -1,11 +1,11 @@
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard, UserGuard } from './services/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: 'user', loadChildren: () => import('./components/user/user.module').then(m => m.UserModule), canActivate: [AuthGuard], canActivateChild: [AuthGuard] },
-  { path: '', loadChildren: () => import('./components/authentication/authentication.module').then(m => m.AuthenticationModule)}
+  { path: 'user', loadChildren: () => import('./components/user/user.module').then(m => m.UserModule), canActivate: [UserGuard], canActivateChild: [UserGuard] },
+  { path: '', loadChildren: () => import('./components/authentication/authentication.module').then(m => m.AuthenticationModule), canActivate: [AuthGuard], canActivateChild: [AuthGuard] }
 
 ];
 
