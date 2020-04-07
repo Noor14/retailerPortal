@@ -63,6 +63,7 @@ export class PaymentComponent implements OnInit, OnDestroy{
     this.showSpinner=false;
     if(!this.requestType && this.requestId){
       data = data.Invoice;
+      data.PaidAmount = data.TotalAmount;
     }
     this.paymentForm.patchValue(data);
     this.paymentPrepaidNumber = data.PrePaidNumber;
