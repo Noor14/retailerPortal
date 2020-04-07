@@ -12,16 +12,16 @@ export class EULAComponent implements OnInit {
   private userIdentity:any;
 
   constructor(private _loginService : LoginService,private _route:Router) {
-    this.userIdentity = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
-   }
+  }
   // users/termsandcondition
   ngOnInit() {
+    this.userIdentity = (localStorage.getItem('userIdentity'))? JSON.parse(localStorage.getItem('userIdentity')).UserAccount : undefined;
   }
 
   agreeTermsAndConditions(){
       let userObj =
       { 
-        RetailerID:this.userIdentity.RetailerID
+        RetailerID: this.userIdentity.RetailerID
       };
       this._loginService.PostCalls(userObj,"users/termsandcondition", 9)
       .then( data=>{

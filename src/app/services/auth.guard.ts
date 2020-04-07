@@ -16,12 +16,11 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       if (!this._sharedService.isAuthenticated()) {
         return true;
       }
-      if(this._route && this._route.url && this._route.url != '/'){
+      else if(this._route && this._route.url && this._route.url != '/'){
         this._route.navigate([this._route.url]);
       }else{
         this._route.navigate(['/user/dashboard']);
       }
-
         return false;
   }
   canActivateChild(route: ActivatedRouteSnapshot,
@@ -43,7 +42,7 @@ export class UserGuard extends AuthGuard {
       if (this._sharedService.isAuthenticated()) {
         return true;
       }
-      if(this._route && this._route.url && this._route.url != '/'){
+      else if(this._route && this._route.url && this._route.url != '/'){
         this._route.navigate([this._route.url]);
       }else{
         this._route.navigate(['login']);
