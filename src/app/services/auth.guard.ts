@@ -12,7 +12,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
   canActivate(next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    let url: string = state.url;
       if (!this._sharedService.isAuthenticated()) {
         return true;
       }
