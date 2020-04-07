@@ -18,6 +18,8 @@ export class UpdatepasswordComponent implements OnInit {
   public spinnerConfig: any;
   public passToggle:boolean;
   public confirmPassToggle:boolean;
+  private userIdentity:any;
+
   constructor(
     private _loginService: LoginService,
     private _route:Router,
@@ -29,8 +31,8 @@ export class UpdatepasswordComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
-    let userObj = (localStorage.getItem('userIdentity'))? JSON.parse(localStorage.getItem('userIdentity')).UserAccount : undefined;
-    let userName = (userObj && userObj.Username)? userObj.Username : null;
+    this.userIdentity = (localStorage.getItem('userIdentity'))? JSON.parse(localStorage.getItem('userIdentity')) : undefined;
+    let userName = (this.userIdentity && this.userIdentity.UserAccount)? this.userIdentity.UserAccount.Username : null;
     this.updatePasswordForm = new FormGroup({
       Username: new FormControl(userName, Validators.required),
       NewPassword: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.password)]),
@@ -50,6 +52,8 @@ export class UpdatepasswordComponent implements OnInit {
         }
         else{
           this._toast.success("Password not updated please try after some few minutes");
+          this.userIdentity.UserAccount.IsTermAndConditionAccepted = 1;
+          localStorage.setItem('userIdentity', JSON.stringify(this.userIdentity));
           this._route.navigate(['/user/dashboard']);
         }
       })
@@ -72,6 +76,8 @@ export class UpdatepasswordComponent implements OnInit {
       modalRef.componentInstance.obj = {btnText: 'Yes, I want', titleTextColor: 'warning', title: 'Skip Process', detail: 'Are you sure, you want to skip?', mode: 'confirmDialog'};
       modalRef.result.then((result) => {
         if(result){
+          this.userIdentity.UserAccount.IsTermAndConditionAccepted = 1;
+          localStorage.setItem('userIdentity', JSON.stringify(this.userIdentity));
           this._route.navigate(['/user/dashboard']);
         }
       },(reason) => {
