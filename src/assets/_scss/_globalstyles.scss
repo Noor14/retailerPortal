@@ -283,9 +283,6 @@ html{
     border: 1px solid #ced4da;
     border-radius: .25rem;
   }
-  textarea{
-    @extend input;
-  }
   select{
     background: inherit;
     background-color: #fff;
