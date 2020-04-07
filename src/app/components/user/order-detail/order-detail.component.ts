@@ -49,9 +49,9 @@ export class OrderDetailComponent implements OnInit {
       AuthID: new FormControl({value:null, disabled:true}, [Validators.required]),
       SettlementID: new FormControl({value:null, disabled:true}, [Validators.required]),
       InvoiceStatus: new FormControl({value:null, disabled:true}, [Validators.required]),
-      PaidAmount: new FormControl({value:null, disabled:true}, [Validators.required]),
-      TransactionCharges: new FormControl({value:null, disabled:true}, [Validators.required]),
       InvoiceTotalAmount: new FormControl({value:null, disabled:true}, [Validators.required]),
+      TransactionCharges: new FormControl({value:null, disabled:true}, [Validators.required]),
+      TotalAmount: new FormControl({value:null, disabled:true}, [Validators.required]),
     });
   }
   getOrderDetails(requestId){
