@@ -21,7 +21,7 @@ export class SharedService {
   }
   public isAuthenticated(): boolean {
     const obj = JSON.parse(localStorage.getItem('userIdentity'));
-      if(obj && obj.access_token && obj.IsTermAndConditionAccepted){
+      if(obj && obj.access_token && obj.UserAccount && obj.UserAccount.IsTermAndConditionAccepted){
         // Check whether the token is expired and return
         // true or false
         return !this._jwtHelper.isTokenExpired(obj.access_token);
