@@ -287,7 +287,6 @@ html{
     @extend input;
   }
   select{
-    @extend input;
     background: inherit;
     background-color: #fff;
     padding-right: .75rem;
@@ -298,11 +297,6 @@ html{
   input:-webkit-autofill {
      +label {
        border: unset;
-       top: -15px;
-       &::after{
-        top: 64%;
-       }
-      @extend input;
     }
   }
   .form-control:placeholder-shown:not(:focus) + *{
