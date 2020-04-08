@@ -1,3 +1,4 @@
+import { DeactivateGuard } from './../../services/deactivate.guard';
 //import { DeactivateGuard } from './../../deactivate.guard';
 import { NgModule } from '@angular/core';
 import { PaymentComponent } from './payment/payment.component';
@@ -19,9 +20,9 @@ const routes: Routes = [
     // pathMatch: 'full',
     children: [
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'profile', component: ProfileComponent },
+    { path: 'profile', component: ProfileComponent, canDeactivate: [DeactivateGuard] },
     { path: 'support', component: SupportgridComponent },
-    { path: 'support/:id', component: SupportscreenComponent },
+    { path: 'support/:id', component: SupportscreenComponent, canDeactivate: [DeactivateGuard] },
     { path: 'payment', component: PaymentComponent },
     { path: 'payment/:id/:viewType', component: PaymentComponent },
     { path: 'paymentDetail/:id/:viewType', component: PaymentDetailsComponent },

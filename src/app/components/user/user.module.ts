@@ -1,3 +1,4 @@
+import { DeactivateGuard } from './../../services/deactivate.guard';
 import { TreeTableModule } from 'primeng/treetable';
 import { SharedModule } from './../../shared/shared.module';
 import { UserService } from './user.service';
@@ -59,7 +60,8 @@ import { OrderComponent } from './order/order.component';
     UserService,
     NetworkService,
     PaymentDetailService,
-    OrderDetailService
+    OrderDetailService,
+    DeactivateGuard
   ]
 
 })

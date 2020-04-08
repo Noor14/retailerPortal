@@ -7,13 +7,15 @@ import { AppPattern, AppMasks } from '../../../shared/app.mask';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../user.service';
 import * as moment from 'moment';
+import { CanComponentDeactivate } from '../../../services/deactivate.guard';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   public profileForm: FormGroup;
   public passwordForm: FormGroup;
   private userObject: any;
@@ -33,6 +35,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private _userService: UserService,
     private _route :Router
     ) { }
+
+  canDeactivate(){
+    if(this.profileForm.dirty || !this.updateBtnDisabled){
+      return false
+    }else{
+      return true
+    }
+  }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
@@ -58,6 +68,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       })
     this.getProfile();
   }
+
   ngOnDestroy(){
     if(this.profileFormSubscriber){
       this.profileFormSubscriber.unsubscribe();
