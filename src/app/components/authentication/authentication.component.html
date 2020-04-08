@@ -13,8 +13,8 @@
                             to making payments easily.
                         </p>
                         <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-start">
-                          <button class="btn btn-primary mr-3" *ngIf="supportBtnToggle" routerLink="/support">Need Support</button>
-                          <button class="btn btn-primary" *ngIf="signupBtnToggle" routerLink="/registration">Signup</button>
+                          <button class="btn btn-primary mr-3" *ngIf="supportBtnToggle" (click)="navigate('support')">Need Support</button>
+                          <button class="btn btn-primary" *ngIf="signupBtnToggle" (click)="navigate('registration')">Signup</button>
                         </div>
     
                     </div>

@@ -1,6 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
 import { SupportService } from './support/support.service';
+import { Router } from '@angular/router';
+import { LoginService } from './login/login.service';
 
 @Component({
   selector: 'app-authentication',
@@ -15,6 +18,8 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   private btnTogglingSubscription: any;
   constructor(
     private _sharedService: SharedService,
+    private _route:Router,
+    private _loginService: LoginService,
     private _supportService: SupportService) { }
 
   ngOnInit() {
@@ -34,5 +39,19 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.btnTogglingSubscription.unsubscribe();
   }
-
+  navigate(route){
+    if(localStorage.getItem('userIdentity')){
+      this.logout();
+    } 
+    this._route.navigate([route]);
+  }
+  logout(){
+    this._loginService.logoutUser()
+    .then((res:boolean)=>{
+        localStorage.clear();
+    })
+    .catch((err:HttpErrorResponse)=>{
+      localStorage.clear();
+      })
+  }
 }
