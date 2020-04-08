@@ -31,9 +31,15 @@ export class SupportComponent implements OnInit, OnDestroy, CanComponentDeactiva
     ) { }
   canDeactivate(){
       if(this.supportForm.dirty){
-        return false
+        let object = this.supportForm.value;
+        if(Object.values(object).filter(item => item).length){
+          return false;
+        }else{
+          return true;
+        }
+     
       }else{
-        return true
+        return true;
       }
     }
   ngOnInit() {
