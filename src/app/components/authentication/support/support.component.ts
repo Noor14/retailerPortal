@@ -30,7 +30,7 @@ export class SupportComponent implements OnInit, OnDestroy, CanComponentDeactiva
     private _toast: ToastrService
     ) { }
   canDeactivate(){
-      if(this.supportForm.valid){
+      if(this.supportForm.dirty){
         return false
       }else{
         return true
