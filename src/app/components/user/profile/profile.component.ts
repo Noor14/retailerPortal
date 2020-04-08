@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     ) { }
 
   canDeactivate(){
-    if(this.profileForm.dirty || !this.updateBtnDisabled){
+    if(!this.updateBtnDisabled){
       return false
     }else{
       return true
