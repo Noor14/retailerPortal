@@ -78,16 +78,16 @@ export class SearchingComponent implements OnInit, OnDestroy {
     this.model = null;
     this.fromDate = null;
     this.toDate = null;
+    if(this.onTypeSubscriber){
+      this.onTypeSubscriber.unsubscribe();
+    }
     this.selectedObject = this.searchingCriteria.searchBy.find(obj=> obj.key == option);
     if(this.selectedObject && this.selectedObject.type == "typing" && !this.selectedKey){
       this.searchOntyping();
     }
     else if(this.selectedKey){
-      if(this.onTypeSubscriber){
-        this.onTypeSubscriber.unsubscribe();
-        if(this.selectedObject && this.selectedObject.type == "typing"){
+      if(this.selectedObject && this.selectedObject.type == "typing"){
           this.searchOntyping();
-        }
       }
       if(this.searchingCriteria.TotalRecords){
         this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
@@ -106,9 +106,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
       if (this.search && this.search.nativeElement && this.search.nativeElement.value){
         this.search.nativeElement.value = '';
       }
-      if(this.selectedObject && this.selectedObject.type == "typing" && !this.selectedKey){
-        this.searchOntyping();
-      }
+
     }
   
   }
