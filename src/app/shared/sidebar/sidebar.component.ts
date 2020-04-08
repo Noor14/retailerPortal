@@ -40,7 +40,7 @@ export class SidebarComponent implements OnInit {
 
   navToggle() {
     if(this.navigationState){
-      this.navToggling.emit(false);
+      this.navToggling.emit(!this.navigationState);
     }
   }
 }

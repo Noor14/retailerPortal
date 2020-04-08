@@ -29,8 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy, OnChanges {
       this.navToggler = this.navigationState;
     }
     navToggle() {
-        this.navToggler = !this.navToggler
-        this.navToggling.emit(this.navToggler);
+        this.navToggling.emit(!this.navToggler);
     }
     ngOnDestroy(){
       if(this.userInfoSubscriber)
