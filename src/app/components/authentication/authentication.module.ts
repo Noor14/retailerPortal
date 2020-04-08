@@ -1,3 +1,4 @@
+import { DeactivateGuard } from './../../services/deactivate.guard';
 import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -37,10 +38,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgxCaptchaModule,
     NgbModule,
     SharedModule
-
   ],
   providers:[
     LoginService, 
-    SupportService]
+    SupportService,
+    DeactivateGuard]
 })
 export class AuthenticationModule { }

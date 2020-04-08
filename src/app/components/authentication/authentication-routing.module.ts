@@ -1,3 +1,4 @@
+import { DeactivateGuard } from './../../services/deactivate.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -19,7 +20,7 @@ const routes: Routes = [
     { path: 'forgetPassword', component: ForgetpasswordComponent },
     { path: 'updatePassword', component: UpdatepasswordComponent },
     { path: 'eula', component: EULAComponent },
-    { path: 'support', component: SupportComponent },
+    { path: 'support', component: SupportComponent, canDeactivate: [DeactivateGuard] },
     { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]
   }

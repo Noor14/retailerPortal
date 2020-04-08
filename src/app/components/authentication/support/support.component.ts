@@ -1,3 +1,4 @@
+import { CanComponentDeactivate } from '../../../services/deactivate.guard';
 import { ToastrService } from 'ngx-toastr';
 import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -12,7 +13,7 @@ import { SharedService } from '../../../services/shared.service';
   templateUrl: './support.component.html',
   styleUrls: ['./support.component.scss']
 })
-export class SupportComponent implements OnInit, OnDestroy {
+export class SupportComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   private supportDropDownSubscriber:any;
   public supportForm: FormGroup;
   public issueType: any[] = [];
@@ -28,7 +29,13 @@ export class SupportComponent implements OnInit, OnDestroy {
     private _sharedService : SharedService,
     private _toast: ToastrService
     ) { }
-
+  canDeactivate(){
+      if(this.supportForm.valid){
+        return false
+      }else{
+        return true
+      }
+    }
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     this.getdropDownList();

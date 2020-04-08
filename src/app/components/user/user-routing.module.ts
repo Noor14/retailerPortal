@@ -22,7 +22,7 @@ const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'profile', component: ProfileComponent, canDeactivate: [DeactivateGuard] },
     { path: 'support', component: SupportgridComponent },
-    { path: 'support/:id', component: SupportscreenComponent, canDeactivate: [DeactivateGuard] },
+    { path: 'support/:id', component: SupportscreenComponent },
     { path: 'payment', component: PaymentComponent },
     { path: 'payment/:id/:viewType', component: PaymentComponent },
     { path: 'paymentDetail/:id/:viewType', component: PaymentDetailsComponent },
