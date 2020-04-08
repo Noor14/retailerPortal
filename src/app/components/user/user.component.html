@@ -7,7 +7,7 @@
         <app-sidebar ></app-sidebar>
       </div>
       <div class="navigation d-lg-none" *ngIf="navigationToggle" [@slideInOut]>
-        <app-sidebar (navToggling)='navigationToggle = $event'></app-sidebar>
+        <app-sidebar [navigationState]="navigationToggle" (navToggling)='navigationToggle = $event'></app-sidebar>
       </div>
       <div class="col-lg-10 contentPages">
             <router-outlet></router-outlet>

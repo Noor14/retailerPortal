@@ -1,6 +1,6 @@
 import { loadingConfig } from './../../constant/globalfunction';
 import { UserService } from './../../components/user/user.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,12 +14,13 @@ export class SidebarComponent implements OnInit {
   public showSpinner:boolean
   public spinnerConfig:any;
   @Output() navToggling = new EventEmitter();
+  @Input() navigationState: boolean;
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
 
   }
-
+ 
   logout(){
     this.showSpinner=true;
     this._userService.logoutUser()
@@ -38,6 +39,8 @@ export class SidebarComponent implements OnInit {
   }
 
   navToggle() {
-    this.navToggling.emit(false);
+    if(this.navigationState){
+      this.navToggling.emit(false);
+    }
   }
 }
