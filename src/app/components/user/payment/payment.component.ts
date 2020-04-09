@@ -151,7 +151,8 @@ export class PaymentComponent implements OnInit, OnDestroy{
 
   viewVoucher(){
     this.showSpinner=true;
-    this._paymentService.getVoucher(this.requestId)
+    let endPoint = (!this.requestType && this.requestId)? 'invoices/PrintInvoice' :'prepaidrequests/printRecipt';
+    this._paymentService.getVoucher(endPoint, this.requestId)
     .then((res:any)=>{
       this.showSpinner=false;
       if(res.data && res.data.length){

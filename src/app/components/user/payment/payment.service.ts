@@ -23,9 +23,9 @@ export class PaymentService {
     })
     return promise;
   }
-  getVoucher(id){
+  getVoucher(endPoint, id){
     let promise = new Promise((resolve, reject) => {
-      const apiURL = `${baseApi}/api/prepaidrequests/printRecipt/${id}`;
+      const apiURL = `${baseApi}/api/${endPoint}/${id}`;
       this._http.get(apiURL)
         .toPromise()
         .then(res => {
