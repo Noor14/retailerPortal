@@ -37,7 +37,19 @@ export class PaymentComponent implements OnInit, OnDestroy{
       this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path);
       this.requestType = (this.activatedRoute.snapshot.url[2])? Number(this.activatedRoute.snapshot.url[2].path) : 1;
      }
-
+   canDeactivate(){
+      if(this.paymentForm.dirty){
+        let object = this.paymentForm.value;
+        if(Object.values(object).filter(item => item).length){
+          return false;
+        }else{
+          return true;
+        }
+     
+      }else{
+        return true;
+      }
+    }
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     if(this.requestId){
