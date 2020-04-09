@@ -46,7 +46,10 @@ import { FooterComponent } from './footer/footer.component';
     SearchingComponent,
     NoWhiteSpaceDirective,
     NumberDirective,
-    AlphaNumericOnlyDirective],
+    AlphaNumericOnlyDirective,
+    NgbModule,
+    NgxSpinnerModule.config(loadingConfig)
+  ],
 
   providers:[]
 })
