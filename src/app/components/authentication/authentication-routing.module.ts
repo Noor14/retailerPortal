@@ -16,7 +16,7 @@ const routes: Routes = [
     // pathMatch: 'full',
     children: [
     { path: 'login', component: LoginComponent },
-    { path: 'registration', component: RegistrationComponent },
+    { path: 'registration', component: RegistrationComponent, canDeactivate: [DeactivateGuard] },
     { path: 'forgetPassword', component: ForgetpasswordComponent },
     { path: 'updatePassword', component: UpdatepasswordComponent },
     { path: 'eula', component: EULAComponent },

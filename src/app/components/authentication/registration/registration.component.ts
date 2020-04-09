@@ -1,3 +1,4 @@
+import { CanComponentDeactivate } from './../../../services/deactivate.guard';
 import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
 import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
@@ -12,7 +13,7 @@ import { ReCaptcha2Component } from 'ngx-captcha';
   styleUrls: ['./registration.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class RegistrationComponent implements OnInit, OnDestroy {
+export class RegistrationComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   public registerForm: FormGroup;
   public cnicMask = AppMasks.cnic_Mask;
   public mobileMask = AppMasks.mobile_Mask;
@@ -48,6 +49,19 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     private _loginService: LoginService,
     private _router: Router) { }
 
+  canDeactivate(){
+      if(this.registerForm.dirty){
+        let object = this.registerForm.value;
+        if(Object.values(object).filter(item => item).length){
+          return false;
+        }else{
+          return true;
+        }
+     
+      }else{
+        return true;
+      }
+    }
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     this.registerForm = new FormGroup({
