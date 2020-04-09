@@ -32,7 +32,7 @@ export class PaymentInstructionComponent implements OnInit {
   }
   viewVoucher(){
     this.showSpinner=true;
-    this._paymentService.getVoucher(this.paymentInstructions.VoucherNo)
+    this._paymentService.getVoucher(this.paymentInstructions.endPoint, this.paymentInstructions.VoucherNo)
     .then((res:any)=>{
       this.showSpinner=false;
       if(res.data && res.data.length){
