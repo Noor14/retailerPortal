@@ -234,7 +234,8 @@ export class DashboardComponent implements OnInit {
       backdrop:'static',
       size:'lg'
      });
-    modalRef.componentInstance.obj = {PSID : paymentPrepaidNumber, VoucherNo: requestId};
+    let endPoint = "prepaidrequests/printRecipt";
+    modalRef.componentInstance.obj = {PSID : paymentPrepaidNumber, VoucherNo: requestId, endPoint: endPoint};
     modalRef.result.then((result) => {
       if(result){
       }
