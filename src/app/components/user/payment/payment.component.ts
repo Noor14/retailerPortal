@@ -1,3 +1,4 @@
+import { CanComponentDeactivate } from './../../../services/deactivate.guard';
 import { AppPattern } from '../../../shared/app.mask';
 import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
@@ -15,7 +16,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss']
 })
-export class PaymentComponent implements OnInit, OnDestroy{
+export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   public spinnerConfig:any;
   public showSpinner:boolean;
   public paymentForm: FormGroup; 
