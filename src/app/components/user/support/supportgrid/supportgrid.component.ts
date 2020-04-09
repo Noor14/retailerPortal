@@ -87,7 +87,6 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   getdropDownList() {
     this.supportDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
       if(res){
-
         let objstatus = this.filterObj.searchBy.find(obj => obj.key == 'Status');
         let ind = this.filterObj.searchBy.findIndex(obj => obj.key == 'Status');
         objstatus.filterBy = res.SUPPORT_STATUS;
