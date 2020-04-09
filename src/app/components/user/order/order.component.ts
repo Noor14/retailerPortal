@@ -1,7 +1,6 @@
 import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AppMasks, AppPattern } from 'src/app/shared/app.mask';
-import { loadingConfig } from 'src/app/constant/globalfunction';
+import { AppMasks, AppPattern } from '../../../shared/app.mask';
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { OrderDetailService } from '../order-detail/order-detail.service';
 import { TreeNode } from 'primeng/api/treenode';
@@ -19,7 +18,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public cnicMask = AppMasks.cnic_Mask;
   public mobileMask = AppMasks.mobile_Mask;
   public showSpinner: boolean;
-  public spinnerConfig: any;
   public kycList: any[]= [];
   public selectedCompany: string= undefined;
   public companyDetailForm: FormGroup;
@@ -49,7 +47,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
     ) { }
 
   ngOnInit() {
-    this.spinnerConfig = loadingConfig;
     this.userObject = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
     this.getKYCList(this.userObject.RetailerID);
     this.companyDetailForm = new FormGroup({

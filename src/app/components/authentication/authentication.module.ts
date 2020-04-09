@@ -1,3 +1,4 @@
+import { loadingConfig } from './../../constant/globalfunction';
 import { DeactivateGuard } from './../../services/deactivate.guard';
 import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -15,7 +16,6 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { SupportComponent } from './support/support.component';
 import { SupportService } from './support/support.service';
 import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
-import { InterceptorService } from 'src/app/services/interceptor.service';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -34,7 +34,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AuthenticationRoutingModule,
     ReactiveFormsModule,
     TextMaskModule,
-    NgxSpinnerModule,
+    NgxSpinnerModule.config(loadingConfig),
     NgxCaptchaModule,
     NgbModule,
     SharedModule

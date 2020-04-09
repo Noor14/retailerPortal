@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { loadingConfig } from './../../../constant/globalfunction';
 import { OrderDetailService } from './order-detail.service';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
@@ -12,7 +11,6 @@ import * as moment from 'moment';
 })
 export class OrderDetailComponent implements OnInit {
   public showSpinner: boolean;
-  public spinnerConfig: any;
   public orderDetailForm: FormGroup;
   public orderPaymentDetailForm: FormGroup;
   private requestId: Number;
@@ -28,8 +26,6 @@ export class OrderDetailComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.spinnerConfig = loadingConfig;
-
     if(this.requestId){
       this.getOrderDetails(this.requestId);
     }

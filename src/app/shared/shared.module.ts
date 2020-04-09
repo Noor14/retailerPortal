@@ -1,3 +1,4 @@
+import { loadingConfig } from './../constant/globalfunction';
 import { AlphaNumericOnlyDirective } from '../directives/alpha-numeric-only.directive';
 import { NumberDirective } from 'src/app/directives/numbers-only.directive';
 import { NoWhiteSpaceDirective } from './../directives/no-white-space.directive';
@@ -29,7 +30,7 @@ import { FooterComponent } from './footer/footer.component';
   ],
   imports: [
     CommonModule,
-    NgxSpinnerModule,
+    NgxSpinnerModule.config(loadingConfig),
     RouterModule,
     FormsModule,
     NgbModule,

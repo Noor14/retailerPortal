@@ -1,4 +1,4 @@
-import { SPINNER_ANIMATIONS, SPINNER_PLACEMENT, ISpinnerConfig } from '@hardpool/ngx-spinner';
+import { SPINNER_ANIMATIONS, SPINNER_PLACEMENT } from '@hardpool/ngx-spinner';
 import { FormGroup, FormControl } from '@angular/forms';
 
 export const loadingConfig = {

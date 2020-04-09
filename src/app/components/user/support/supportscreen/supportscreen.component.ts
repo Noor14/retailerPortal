@@ -1,5 +1,5 @@
 import { CanComponentDeactivate } from './../../../../services/deactivate.guard';
-import { loadingConfig, validateAllFormFields } from './../../../../constant/globalfunction';
+import { validateAllFormFields } from './../../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -14,7 +14,6 @@ import { TicketSupportService } from '../ticket-support.service';
 })
 export class SupportscreenComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   public showSpinner: boolean;
-  public spinnerConfig: any;
   private supportDropDownSubscriber:any;
   private routeSubscriber: any;
   public supportDetail: any = {};
@@ -55,7 +54,6 @@ export class SupportscreenComponent implements OnInit, OnDestroy, CanComponentDe
     }
   }
   ngOnInit() {
-    this.spinnerConfig = loadingConfig;
     this.getdropDownList();
     let userObj = JSON.parse(localStorage.getItem('userIdentity')).UserAccount
     if (this.supportID) {

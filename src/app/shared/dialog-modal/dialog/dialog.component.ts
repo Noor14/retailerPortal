@@ -1,5 +1,4 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { loadingConfig } from './../../../constant/globalfunction';
 import { OrderDetailService } from './../../../components/user/order-detail/order-detail.service';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, Input } from '@angular/core';
@@ -15,7 +14,6 @@ import { DashboardService } from '../../../components/user/dashboard/dashboard.s
 export class DialogComponent implements OnInit {
 
   @Input() obj:any;
-  public spinnerConfig:any;
   public showSpinner:boolean;
   public dialogBoxObject: any={};
   public name: string = undefined;
@@ -27,7 +25,6 @@ export class DialogComponent implements OnInit {
     private _toast: ToastrService) { }
 
   ngOnInit() {
-    this.spinnerConfig = loadingConfig;
     if(this.obj && Object.keys(this.obj).length){
       this.dialogBoxObject = this.obj;
       if(this.dialogBoxObject.object && this.dialogBoxObject.object.Name){

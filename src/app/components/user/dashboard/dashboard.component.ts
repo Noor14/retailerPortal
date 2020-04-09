@@ -1,6 +1,5 @@
 import { SharedService } from 'src/app/services/shared.service';
 import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
-import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -51,8 +50,6 @@ export class DashboardComponent implements OnInit {
      searchMode:'payment'
    }
   public showSpinner: boolean;
-  public spinnerConfig: any;
- 
   public loadAvailableCount:number; 
   public loadAvailableOrderCount:number; 
   public paymentsList: any[]= [];
@@ -68,7 +65,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getdropDownList();
-    this.spinnerConfig = loadingConfig;
     this.getPaymentList(this.searchObjPayment);
     this.getOrderList(this.searchObjOrder);
   }

@@ -1,4 +1,3 @@
-import { loadingConfig } from './../../constant/globalfunction';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -10,13 +9,11 @@ import { Router } from '@angular/router';
 export class SidebarComponent implements OnInit {
 
   constructor(private _route: Router) { }
-  public showSpinner:boolean
-  public spinnerConfig:any;
+
   @Output() navToggling = new EventEmitter();
   @Input() navigationState: boolean;
 
   ngOnInit() {
-    this.spinnerConfig = loadingConfig;
   }
  
   logout(){

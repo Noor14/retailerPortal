@@ -1,5 +1,5 @@
 import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
-import { loadingConfig, validateAllFormFields } from './../../../constant/globalfunction';
+import { validateAllFormFields } from './../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
@@ -15,7 +15,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class UpdatepasswordComponent implements OnInit {
   public updatePasswordForm: FormGroup;
   public showSpinner: boolean;
-  public spinnerConfig: any;
   public passToggle:boolean;
   public confirmPassToggle:boolean;
   private userIdentity:any;
@@ -30,7 +29,6 @@ export class UpdatepasswordComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.spinnerConfig = loadingConfig;
     this.userIdentity = (localStorage.getItem('userIdentity'))? JSON.parse(localStorage.getItem('userIdentity')) : undefined;
     let userName = (this.userIdentity && this.userIdentity.UserAccount)? this.userIdentity.UserAccount.Username : null;
     this.updatePasswordForm = new FormGroup({

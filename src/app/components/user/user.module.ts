@@ -1,3 +1,4 @@
+import { loadingConfig } from './../../constant/globalfunction';
 import { DeactivateGuard } from './../../services/deactivate.guard';
 import { TreeTableModule } from 'primeng/treetable';
 import { SharedModule } from './../../shared/shared.module';
@@ -47,7 +48,7 @@ import { OrderComponent } from './order/order.component';
     NgbModule,
     TextMaskModule,
     ReactiveFormsModule,
-    NgxSpinnerModule,
+    NgxSpinnerModule.config(loadingConfig),
     FormsModule,
     TreeTableModule,
     SharedModule
