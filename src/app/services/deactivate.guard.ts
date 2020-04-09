@@ -16,9 +16,7 @@ export class DeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
     state: RouterStateSnapshot,
     nextState?: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
       if(!component.canDeactivate()){
-      return this.openDialogBox().then(val => {
-        return val;
-        });
+      return this.openDialogBox().then(val => val);
       }else{
         return true;
       }

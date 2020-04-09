@@ -1,5 +1,4 @@
 import { loadingConfig } from './../../constant/globalfunction';
-import { UserService } from './../../components/user/user.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private _userService : UserService, private _route: Router) { }
+  constructor(private _route: Router) { }
   public showSpinner:boolean
   public spinnerConfig:any;
   @Output() navToggling = new EventEmitter();
@@ -21,20 +20,7 @@ export class SidebarComponent implements OnInit {
   }
  
   logout(){
-    this.showSpinner=true;
-    this._userService.logoutUser()
-    .then((res:boolean)=>{
-      if(res){
-        this.navToggle();
-        localStorage.clear();
-        this._route.navigate(['/login'])
-      }    
-      this.showSpinner=false;
-    })
-    .catch(err=>{
-    this.showSpinner=false;
-
-      })
+    this._route.navigate(['login'],{ queryParams: { logout: true }})
   }
 
   navToggle() {

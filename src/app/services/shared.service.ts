@@ -10,7 +10,7 @@ export class SharedService {
   
   private userInfo = new BehaviorSubject<any>(undefined);
   public getUserInfo = this.userInfo.asObservable();
-
+  public callLogout:boolean = false;
   constructor(public _jwtHelper: JwtHelperService) { }
 
   setUser(data) {
