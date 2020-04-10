@@ -75,6 +75,12 @@ export class SearchingComponent implements OnInit, OnDestroy {
     if(this.onTypeSubscriber){
       this.onTypeSubscriber.unsubscribe();
     }
+    if(this.onRangeSubscriberOne){
+      this.onRangeSubscriberOne.unsubscribe();
+    }
+    if(this.onRangeSubscriberTwo){
+      this.onRangeSubscriberTwo.unsubscribe();
+    }
   }
   selectedOption(option){
     this.model = null;
