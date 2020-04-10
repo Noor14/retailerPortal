@@ -22,8 +22,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
    this.loadingSubscriber = this._sharedService.loadingLogOut.subscribe( res => {
       if(res != undefined){
         if(!res){
-          this._sharedService.loadingLogOut.next(undefined)
           this.navToggle();
+          this._sharedService.loadingLogOut.next(undefined);
         }
         this.showSpinner = res;
       }
