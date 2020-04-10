@@ -38,7 +38,7 @@ export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactiva
       this.requestType = (this.activatedRoute.snapshot.url[2])? Number(this.activatedRoute.snapshot.url[2].path) : 1;
      }
    canDeactivate(){
-      if(this.paymentForm.dirty){
+      if(this.paymentForm.dirty && !this.paymentPrepaidNumber){
         let object = this.paymentForm.value;
         if(Object.values(object).filter(item => item).length){
           return false;
@@ -46,7 +46,11 @@ export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactiva
           return true;
         }
      
-      }else{
+      }
+      else if(this.paymentForm.dirty && this.paymentPrepaidNumber && this.updateBtn){
+        return false;
+      }
+      else{
         return true;
       }
     }
