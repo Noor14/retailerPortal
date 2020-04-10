@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppMasks, AppPattern } from '../../../shared/app.mask';
@@ -6,7 +7,7 @@ import { OrderDetailService } from '../order-detail/order-detail.service';
 import { TreeNode } from 'primeng/api/treenode';
 import { NgbTabset, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -37,14 +38,18 @@ export class OrderComponent implements OnInit, AfterViewInit {
   private compareValueAfterToBeforeValue: number;
   private selectedDraftID = undefined;
   public orderplacementStage: boolean = false;
+  private requestId:Number;
   @ViewChild('tab', {static:false}) public tabs:NgbTabset;
   constructor(
     private _orderDetailService : OrderDetailService,
     private _toast: ToastrService,
     private _route: Router,
+    private activatedRoute: ActivatedRoute,
     private _modalService: NgbModal,
 
-    ) { }
+    ) { 
+      this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path);
+    }
 
   ngOnInit() {
     this.userObject = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
@@ -58,7 +63,35 @@ export class OrderComponent implements OnInit, AfterViewInit {
       Address: new FormControl({value:null, disabled:true}, [Validators.required]),
     });
   
+    if(this.requestId){
+      this.activeTab = 'orderSummary';
+      this.getOrderDetailByID(this.requestId);
+    }
+  }
 
+  getOrderDetailByID(requestId){
+    this.showSpinner=true;
+    this._orderDetailService.getDetail(requestId).then((data: any) => {
+    this.showSpinner=false;
+    this.orderplacementStage = true;
+    console.log(data);
+    this.orderSummary = data.OrderDetails.map(obj => {
+      obj.ProductUnitPrice = obj.UnitPrice;
+      obj.UnitOFMeasure = obj.UOMTitle;
+      obj.ProductCode = obj.Title;;
+      obj.Title = obj.Code;
+      obj.DiscountAmount = (obj.Discount)? obj.UnitPrice - obj.Discount : 0;
+      return obj;
+    });
+    this.calculateSummary();
+    this.fillProductsInfo(this.orderSummary);
+    this.companyProducts(data.OrderPaymentDetails.DealerCode);
+    this.selectedCompany = this.kycList.find(obj => obj.DealerCode == data.OrderPaymentDetails.DealerCode).DealerCode;
+    this.companyDetail(this.selectedCompany);
+  })
+  .catch((err:HttpErrorResponse) => {
+    this.showSpinner=false;
+  })
   }
 
   ngAfterViewInit(){
@@ -294,6 +327,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
       this.tabs.select('placeOrder');
     }
   }
+
   checkOrderStage(order?, index?){
     if(this.orderSummary.length){
      this.orderplacementStage = this.orderSummary.some(obj => obj.OrderQty);
