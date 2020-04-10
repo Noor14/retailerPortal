@@ -65,7 +65,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
   
     if(this.requestId){
       this.activeTab = 'orderSummary';
-      this.getOrderDetailByID(this.requestId);
     }
   }
 
@@ -227,6 +226,9 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this._orderDetailService.getKYCAndTemplateListDetail('kyc/ConnectedKycList', requestId).then((data: any) => {
       this.kycList = data;
       this.showSpinner=false;
+      if(this.requestId){
+        this.getOrderDetailByID(this.requestId)
+      }
     })
     .catch(err => {
       this.showSpinner=false;
@@ -248,6 +250,12 @@ export class OrderComponent implements OnInit, AfterViewInit {
   companyDetail(dealerCode){
     let obj = this.kycList.find(obj=> obj.DealerCode == dealerCode);
     this.companyDetailForm.patchValue(obj);
+    if(obj.DealerCode != this.selectedDealerCode){
+      this.orderSummary = [];
+      this.selectedTemplate = false;
+      this.selectedTemplate = null;
+      this.selectedTemplateID = undefined;
+    }
   }
 
   nodeToggling(event){
