@@ -7,16 +7,18 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class SharedService {
   public dropDownValues= new BehaviorSubject<any>(undefined);
   public btnToggling = new BehaviorSubject<any>(undefined);
+  public loadingLogOut = new BehaviorSubject<any>(undefined);
   
   private userInfo = new BehaviorSubject<any>(undefined);
   public getUserInfo = this.userInfo.asObservable();
+
   public callLogout:boolean = false;
   constructor(public _jwtHelper: JwtHelperService) { }
 
-  setUser(data) {
+  public setUser(data) {
     this.userInfo.next(data);
   }
-  getUser() {
+  public getUser() {
     return this.userInfo.getValue();
   }
   public isAuthenticated(): boolean {

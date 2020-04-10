@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { SharedService } from 'src/app/services/shared.service';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,16 +7,27 @@ import { Router } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
 
-  constructor(private _route: Router) { }
+  public showSpinner: boolean;
+  private loadingSubscriber:any;
+  constructor(
+     private _route: Router,
+     private _sharedService: SharedService) { }
 
   @Output() navToggling = new EventEmitter();
   @Input() navigationState: boolean;
 
   ngOnInit() {
+   this.loadingSubscriber = this._sharedService.loadingLogOut.subscribe( res => {
+      if(res != undefined){
+        this.showSpinner= res;
+      }
+    });
   }
- 
+  ngOnDestroy(){
+    this.loadingSubscriber.unsubscribe();
+  }
   logout(){
     this._route.navigate(['login'],{ queryParams: { logout: true }})
   }
