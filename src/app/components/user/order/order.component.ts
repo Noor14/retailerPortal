@@ -252,7 +252,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this.companyDetailForm.patchValue(obj);
     if(obj.DealerCode != this.selectedDealerCode){
       this.orderSummary = [];
-      this.selectedTemplate = false;
+      this.orderplacementStage = false;
       this.selectedTemplate = null;
       this.selectedTemplateID = undefined;
     }
