@@ -386,6 +386,8 @@ export class OrderComponent implements OnInit, AfterViewInit {
           this._toast.success('Product successfully deleted');
           if(!this.orderSummary.length){
             this.tabs.select('placeOrder');
+          }else{
+            this.calculateSummary()
           }
         }
       }, (reason) => {
