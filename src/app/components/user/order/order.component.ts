@@ -452,12 +452,17 @@ export class OrderComponent implements OnInit, AfterViewInit {
   companyProducts(dealerCode){
     if(this.selectedDealerCode != dealerCode){
       this.selectedDealerCode = dealerCode;
+      this.searchProduct = undefined;
+      this.selectedCategoryForFilter = undefined;
      this.getTemplateList(dealerCode);
      this.showSpinner=true;
       this._orderDetailService.getKYCAndTemplateListDetail('products/GetProductByDealerCode', dealerCode).then((data: any) => {
         this.showSpinner=false;
         this.toggleCompanyProductList = true;
         this.setTableTreeClass();
+        if(data && data.MainCategory && data.MainCategory.length){
+          this.filterByMainCategory = data.MainCategory;
+        }
         if(data && data.SubCategory && data.Products && data.SubCategory.length && data.Products.length){
           this.generateProductCompany(data);
         }else{
@@ -475,7 +480,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
     }
   }
   generateProductCompany(data){
-    this.filterByMainCategory = data.MainCategory.length && data.MainCategory;
 
       let list = [];
       let dataList = [];
