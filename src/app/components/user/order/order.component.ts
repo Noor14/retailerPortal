@@ -38,7 +38,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
   private compareValueAfterToBeforeValue: number;
   private selectedDraftID = undefined;
   public orderplacementStage: boolean = false;
-  private requestId:Number;
   @ViewChild('tab', {static:false}) public tabs:NgbTabset;
   constructor(
     private _orderDetailService : OrderDetailService,
@@ -48,7 +47,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
     private _modalService: NgbModal,
 
     ) { 
-      this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path);
+      this.selectedDraftID = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path);
     }
 
   ngOnInit() {
@@ -63,27 +62,26 @@ export class OrderComponent implements OnInit, AfterViewInit {
       Address: new FormControl({value:null, disabled:true}, [Validators.required]),
     });
   
-    if(this.requestId){
+    if(this.selectedDraftID){
       this.activeTab = 'orderSummary';
     }
   }
 
-  getOrderDetailByID(requestId){
+  getOrderDetailByID(selectedDraftID){
     this.showSpinner=true;
-    this._orderDetailService.getDetail(requestId).then((data: any) => {
+    this._orderDetailService.getDetail(selectedDraftID).then((data: any) => {
     this.showSpinner=false;
     this.orderplacementStage = true;
     console.log(data);
     this.orderSummary = data.OrderDetails.map(obj => {
       obj.ProductUnitPrice = obj.UnitPrice;
       obj.UnitOFMeasure = obj.UOMTitle;
-      obj.ProductCode = obj.Title;;
-      obj.Title = obj.Code;
+      obj.Title = obj.ProductCode;
+      obj.ProductCode = obj.ProductName;;
       obj.DiscountAmount = (obj.Discount)? obj.UnitPrice - obj.Discount : 0;
       return obj;
     });
     this.calculateSummary();
-    this.fillProductsInfo(this.orderSummary);
     this.companyProducts(data.OrderPaymentDetails.DealerCode);
     this.selectedCompany = this.kycList.find(obj => obj.DealerCode == data.OrderPaymentDetails.DealerCode).DealerCode;
     this.companyDetail(this.selectedCompany);
@@ -148,13 +146,13 @@ export class OrderComponent implements OnInit, AfterViewInit {
   fillProductsInfo(orderSummary){
     for (let index = 0; index < this.categoryList.length; index++) {
         for (let ind = 0; ind < orderSummary.length; ind++) {
-          if(this.categoryList[index].data.CategoryId == orderSummary[ind].CategoryId){
+          // if(this.categoryList[index].data.CategoryId == orderSummary[ind].CategoryId){
             for (let child = 0; child < this.categoryList[index].children.length; child++) {
                 if(this.categoryList[index].children[child].data.ProductId == orderSummary[ind].ProductId){
                   this.categoryList[index].children[child].data.OrderQty = orderSummary[ind].OrderQty
                 }
             }
-          }
+          // }
           
         }
       
@@ -226,8 +224,8 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this._orderDetailService.getKYCAndTemplateListDetail('kyc/ConnectedKycList', requestId).then((data: any) => {
       this.kycList = data;
       this.showSpinner=false;
-      if(this.requestId){
-        this.getOrderDetailByID(this.requestId)
+      if(this.selectedDraftID){
+        this.getOrderDetailByID(this.selectedDraftID)
       }
     })
     .catch(err => {
@@ -292,7 +290,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
       this.orderSummary = this.orderSummary.filter(obj=> obj.OrderQty);
       this.showSpinner=true;
       let obj = {
-      ID:0,
+      ID:(!this.selectedDraftID)? 0: this.selectedDraftID,
       DealerCode:this.selectedDealerCode,
       OrderDetails:this.orderSummary
       }
@@ -455,6 +453,9 @@ export class OrderComponent implements OnInit, AfterViewInit {
           dataList.push(object)
         })
         this.categoryList = dataList;
+      }
+      if(this.categoryList && this.categoryList.length && this.selectedDraftID){
+        this.fillProductsInfo(this.orderSummary);
       }
  
     }
