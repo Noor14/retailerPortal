@@ -193,7 +193,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
       ,distinctUntilChanged()
       // subscription for response
       ).subscribe((text: string) => {
-            if(text.trim()){
+            if(Number(text.trim())){
               this.searchingobj[this.selectedObject.key[0]] = text.trim();
             }else{
               delete this.searchingobj[this.selectedObject.key[0]];
@@ -220,7 +220,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
         ,distinctUntilChanged()
         // subscription for response
         ).subscribe((text: string) => {
-              if(text.trim()){
+              if(Number(text.trim())){
                 this.searchingobj[this.selectedObject.key[1]] = text.trim();
               }else{
                 delete this.searchingobj[this.selectedObject.key[1]];

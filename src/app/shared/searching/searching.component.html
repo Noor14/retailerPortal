@@ -11,7 +11,7 @@
 
       <div class="col-md-4" [ngSwitch]="selectedObject?.type">
         <div class="form-group" *ngSwitchCase="'typing'">
-          <input class="form-control" #search [placeholder]="selectedObject?.placeholder" />
+          <input class="form-control" type="text" #search [placeholder]="selectedObject?.placeholder" />
         </div>
         <div class="form-group" *ngSwitchCase="'dateRange'">
           <input
@@ -49,9 +49,9 @@
         </div>
 
         <div class="form-group d-flex" *ngSwitchCase="'range'">
-          <input class="form-control" numbersOnly #searchRangeOne placeholder="Min Amount" /> 
+          <input class="form-control" type="number" min="1" autocomplete="off" numbersOnly #searchRangeOne placeholder="Min Amount" /> 
           <span class="mr-2 ml-2 separator"></span> 
-          <input class="form-control" numbersOnly #searchRangeTwo placeholder="Max Amount" />
+          <input class="form-control" type="number" min="1" autocomplete="off" numbersOnly #searchRangeTwo placeholder="Max Amount" />
         </div>
       </div>
   </div>
