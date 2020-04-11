@@ -45,7 +45,7 @@ export class UpdatepasswordComponent implements OnInit {
       .then(data => {
       this.showSpinner=false;
         if (data) {
-          this._toast.success("Your password has been updated. You would be logged out of your account");
+          this._toast.success("Profile has been changed successfully");
           this.logout();
         }
         else{
