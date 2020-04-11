@@ -66,13 +66,37 @@
                         </div>
                     </div>
                  </div>
-                 <div class="productInfo position-relative" *ngIf="toggleCompanyProductList">
-                    <app-searching></app-searching>
-                    <select class="form-control templateSelection" *ngIf="templateList && templateList.length" [(ngModel)]="selectedTemplateID" (change)="onSelectedTemplate(selectedTemplateID)">
-                        <option value="undefined">Select Template</option>
-                        <option [value]="item.ID" *ngFor="let item of templateList">{{item.Name}}</option>
-                    </select>
-                  <div class="content bg-white" >
+                 <div class="productInfo" *ngIf="toggleCompanyProductList">
+                     <div class="row">
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <select class="form-control">
+                                            <option value="">Select Category</option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Search Product">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-md-3" *ngIf="templateList && templateList.length">
+                                <div class="form-group">
+                                    <select class="form-control"  [(ngModel)]="selectedTemplateID" (change)="onSelectedTemplate(selectedTemplateID)">
+                                        <option value="undefined">Select Template</option>
+                                        <option [value]="item.ID" *ngFor="let item of templateList">{{item.Name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+             
+                  <div class="content bg-white">
                     <p-treeTable [value]="categoryList" (onNodeExpand)="nodeToggling($event)">
                         <ng-template pTemplate="header">
                             <tr>
