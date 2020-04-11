@@ -88,7 +88,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
             }
           });
         })
-        console.log(this.categoryListCopy)
         this.categoryList = data;
 
       }
@@ -105,7 +104,6 @@ export class OrderComponent implements OnInit, AfterViewInit {
               }
             });
           })
-          console.log(this.categoryListCopy)
           this.categoryList = data;
         }
         else{
