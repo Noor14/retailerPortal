@@ -319,7 +319,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
         product.OrderQty = undefined;
     }else{
       let index = this.orderSummary.findIndex(obj => obj.ProductId == product.ProductId);
-       if(index >=0){
+       if(index >=0 && !product.OrderQty){
         this.orderSummary.splice(index, 1);
         product.OrderQty = undefined;
       }
