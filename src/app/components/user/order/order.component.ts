@@ -28,12 +28,14 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public selectedTemplateID: undefined;
   public selectedTemplate: any;
   private userObject: any;
-  public orderSummary: any[]=[];
+  public orderSummary: any[] = [];
   public templateList: any[] = [];
+  public filterByMainCategory: any[] = [];
   public activeTab:string = 'placeOrder';
   public netAmount: number = 0;
   public totalDiscount: number = 0;
   public grossAmount: number = 0;
+  public selectedOrderStatus:string;
   private compareValueToCalculateSummary:number;
   private compareValueAfterToBeforeValue: number;
   private selectedDraftID = undefined;
@@ -72,7 +74,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
     this._orderDetailService.getDetail(selectedDraftID).then((data: any) => {
     this.showSpinner=false;
     this.orderplacementStage = true;
-    console.log(data);
+    this.selectedOrderStatus = data.OrderPaymentDetails.OrderStatus;
     this.orderSummary = data.OrderDetails.map(obj => {
       obj.ProductUnitPrice = obj.UnitPrice;
       obj.UnitOFMeasure = obj.UOMTitle;
@@ -424,6 +426,8 @@ export class OrderComponent implements OnInit, AfterViewInit {
     }
   }
   generateProductCompany(data){
+    this.filterByMainCategory = data.MainCategory.length && data.MainCategory;
+
       let list = [];
       let dataList = [];
       for (let index = 0; index < data.SubCategory.length; index++) {
