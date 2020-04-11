@@ -21,7 +21,10 @@ constructor(private el: ElementRef) {
       }
       let current: string = this.el.nativeElement.value;
       let next: string = current.concat(event.key);
-      if (next && !String(next).match(regex)) {
+      if(current && event.key != '0' && String(event.key).match(regex)){
+        return;
+      }
+      else if (next && !String(next).match(regex)) {
       event.preventDefault();
       }else if(next && next.length > 9){
         event.preventDefault();

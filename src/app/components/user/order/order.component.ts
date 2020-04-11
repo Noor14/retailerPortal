@@ -314,9 +314,12 @@ export class OrderComponent implements OnInit, AfterViewInit {
   selectProduct(product){
     if (!this.orderSummary.length && product.OrderQty){
         this.orderSummary.push(product)
+    }
+    else if(!this.orderSummary.length && !product.OrderQty){
+        product.OrderQty = undefined;
     }else{
       let index = this.orderSummary.findIndex(obj => obj.ProductId == product.ProductId);
-      if(index >=0 && !product.OrderQty){
+       if(index >=0){
         this.orderSummary.splice(index, 1);
         product.OrderQty = undefined;
       }
@@ -329,9 +332,9 @@ export class OrderComponent implements OnInit, AfterViewInit {
         }  
       }
     }
-    if (!this.orderSummary.length){
-      this.tabs.select('placeOrder');
-    }
+    // if (!this.orderSummary.length && this.activeTab == 'orderSummary'){
+    //   this.tabs.select('placeOrder');
+    // }
   }
 
   checkOrderStage(order?, index?){
@@ -384,7 +387,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
           })
           this.orderSummary.splice(index, 1);
           this._toast.success('Product successfully deleted');
-          if(!this.orderSummary.length){
+          if(!this.orderSummary.length && this.activeTab == 'orderSummary'){
             this.tabs.select('placeOrder');
           }else{
             this.calculateSummary()
