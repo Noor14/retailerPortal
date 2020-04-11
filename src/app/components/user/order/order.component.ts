@@ -36,10 +36,13 @@ export class OrderComponent implements OnInit, AfterViewInit {
   public totalDiscount: number = 0;
   public grossAmount: number = 0;
   public selectedOrderStatus:string;
+  public selectedCategoryForFilter = undefined;
   private compareValueToCalculateSummary:number;
   private compareValueAfterToBeforeValue: number;
   private selectedDraftID = undefined;
   public orderplacementStage: boolean = false;
+  private categoryListCopy:any[];
+  public searchProduct:string = undefined;
   @ViewChild('tab', {static:false}) public tabs:NgbTabset;
   constructor(
     private _orderDetailService : OrderDetailService,
@@ -68,7 +71,54 @@ export class OrderComponent implements OnInit, AfterViewInit {
       this.activeTab = 'orderSummary';
     }
   }
+  filterCategoryAndProuct(){
+    this.showSpinner = true;
+    setTimeout(()=>{
+      if(this.selectedCategoryForFilter != "undefined" && !this.searchProduct){
+        this.categoryList = this.categoryListCopy.filter((obj:any) => obj.data.ParentId == this.selectedCategoryForFilter);
+      }
+      else if(!this.selectedCategoryForFilter || this.selectedCategoryForFilter == "undefined" && this.searchProduct){
+        let data = [];
+        this.categoryListCopy.forEach((obj)=>{
+          let children = [];
+          obj.children.forEach((item:any) => {
+            if(item.data.ProductCode == this.searchProduct){
+              children.push(item);
+              data.push({data: obj.data, children: children});
+            }
+          });
+        })
+        console.log(this.categoryListCopy)
+        this.categoryList = data;
 
+      }
+      else if(this.selectedCategoryForFilter != "undefined" && this.searchProduct){
+        let category = this.categoryListCopy.filter((obj:any) => obj.data.ParentId == this.selectedCategoryForFilter);
+        if(category && category.length){
+          let data = [];
+          category.forEach((obj)=>{
+            let children = [];
+            obj.children.forEach((item:any) => {
+              if(item.data.ProductCode == this.searchProduct){
+                children.push(item);
+                data.push({data: obj.data, children: children});
+              }
+            });
+          })
+          console.log(this.categoryListCopy)
+          this.categoryList = data;
+        }
+        else{
+          this.categoryList = [];
+        }
+      }
+      else{
+        this.categoryList = this.categoryListCopy;
+      }
+    this.showSpinner = false;
+    },1000)
+
+  }
   getOrderDetailByID(selectedDraftID){
     this.showSpinner=true;
     this._orderDetailService.getDetail(selectedDraftID).then((data: any) => {
@@ -414,6 +464,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
           this.generateProductCompany(data);
         }else{
           this.categoryList = [];
+          this.categoryListCopy = [...this.categoryList];
         }
       })
       .catch(err => {
@@ -463,6 +514,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
           dataList.push(object)
         })
         this.categoryList = dataList;
+        this.categoryListCopy = [...this.categoryList];
       }
       if(this.categoryList && this.categoryList.length && this.selectedDraftID){
         this.fillProductsInfo(this.orderSummary);

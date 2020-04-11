@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
@@ -6,9 +6,8 @@ import { SharedService } from 'src/app/services/shared.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy, OnChanges {
+export class HeaderComponent implements OnInit, OnChanges {
 
-  private userInfoSubscriber:any;
   public userDetail: any = {};
   private navToggler:boolean = false;
   @Output() navToggling = new EventEmitter();
@@ -31,9 +30,6 @@ export class HeaderComponent implements OnInit, OnDestroy, OnChanges {
     navToggle() {
         this.navToggling.emit(!this.navToggler);
     }
-    ngOnDestroy(){
-      if(this.userInfoSubscriber)
-      this.userInfoSubscriber.unsubscribe();
-    }
+   
 
 }
