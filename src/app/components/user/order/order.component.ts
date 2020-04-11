@@ -503,6 +503,9 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
         }else{
           this.categoryList = [];
           this.categoryListCopy = [...this.categoryList];
+          if(this.onTypeSubscriber){
+            this.onTypeSubscriber.unsubscribe();
+          }
         }
       })
       .catch(err => {
