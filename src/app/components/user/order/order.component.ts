@@ -129,6 +129,7 @@ export class OrderComponent implements OnInit, AfterViewInit {
             obj.UnitOFMeasure = obj.UOMTitle;
             obj.ProductCode = obj.Title;;
             obj.Title = obj.Code;
+            obj.DiscountAmount = obj.Discount;
             return obj;
           });
           this.selectedTemplate = data.OrderTemplate[0];
