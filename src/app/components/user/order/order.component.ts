@@ -2,20 +2,21 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppMasks, AppPattern } from '../../../shared/app.mask';
-import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { OrderDetailService } from '../order-detail/order-detail.service';
 import { TreeNode } from 'primeng/api/treenode';
 import { NgbTabset, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { Observable, fromEvent } from 'rxjs';
+import { map, filter, debounceTime, tap, switchAll, distinctUntilChanged } from 'rxjs/operators';
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class OrderComponent implements OnInit, AfterViewInit {
+export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
   public cnicMask = AppMasks.cnic_Mask;
   public mobileMask = AppMasks.mobile_Mask;
   public showSpinner: boolean;
@@ -42,15 +43,17 @@ export class OrderComponent implements OnInit, AfterViewInit {
   private selectedDraftID = undefined;
   public orderplacementStage: boolean = false;
   private categoryListCopy:any[];
-  public searchProduct:string = undefined;
+  private onTypeSubscriber:any;
   @ViewChild('tab', {static:false}) public tabs:NgbTabset;
+  @ViewChild('searchProduct', {static: false}) search: ElementRef;
+
   constructor(
     private _orderDetailService : OrderDetailService,
     private _toast: ToastrService,
     private _route: Router,
     private activatedRoute: ActivatedRoute,
     private _modalService: NgbModal,
-
+    private _changeDetectorRef: ChangeDetectorRef
     ) { 
       this.selectedDraftID = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path);
     }
@@ -71,18 +74,23 @@ export class OrderComponent implements OnInit, AfterViewInit {
       this.activeTab = 'orderSummary';
     }
   }
+  ngOnDestroy(){
+    if(this.onTypeSubscriber){
+      this.onTypeSubscriber.unsubscribe();
+    }
+  }
   filterCategoryAndProuct(){
     this.showSpinner = true;
     setTimeout(()=>{
-      if(this.selectedCategoryForFilter != "undefined" && !this.searchProduct){
+      if(this.selectedCategoryForFilter != "undefined" && this.search.nativeElement && !this.search.nativeElement.value){
         this.categoryList = this.categoryListCopy.filter((obj:any) => obj.data.ParentId == this.selectedCategoryForFilter);
       }
-      else if(!this.selectedCategoryForFilter || this.selectedCategoryForFilter == "undefined" && this.searchProduct){
+      else if(!this.selectedCategoryForFilter || this.selectedCategoryForFilter == "undefined" && this.search.nativeElement && this.search.nativeElement.value){
         let data = [];
         this.categoryListCopy.forEach((obj)=>{
           let children = [];
           obj.children.forEach((item:any) => {
-            if(item.data.ProductCode == this.searchProduct){
+            if(item.data.ProductCode == this.search.nativeElement.value){
               children.push(item);
               data.push({data: obj.data, children: children});
             }
@@ -91,14 +99,14 @@ export class OrderComponent implements OnInit, AfterViewInit {
         this.categoryList = data;
 
       }
-      else if(this.selectedCategoryForFilter != "undefined" && this.searchProduct){
+      else if(this.selectedCategoryForFilter != "undefined" && this.search.nativeElement && this.search.nativeElement.value){
         let category = this.categoryListCopy.filter((obj:any) => obj.data.ParentId == this.selectedCategoryForFilter);
         if(category && category.length){
           let data = [];
           category.forEach((obj)=>{
             let children = [];
             obj.children.forEach((item:any) => {
-              if(item.data.ProductCode == this.searchProduct){
+              if(item.data.ProductCode == this.search.nativeElement.value){
                 children.push(item);
                 data.push({data: obj.data, children: children});
               }
@@ -117,6 +125,31 @@ export class OrderComponent implements OnInit, AfterViewInit {
     },1000)
 
   }
+
+
+  searchOntyping(){
+    this._changeDetectorRef.detectChanges();
+    this.onTypeSubscriber = fromEvent(this.search && this.search.nativeElement, 'keyup').pipe(
+      // get value
+      map((event: any) => {
+        return event.target.value;
+      })
+      // if character length greater then 2
+      // ,filter(res => res.length > 2)
+      // Time in milliseconds between key events
+      ,debounceTime(1000)        
+      // If previous query is diffent from current   
+      ,distinctUntilChanged()
+      // subscription for response
+      ).subscribe((text: string) => {
+            this.filterCategoryAndProuct()
+      });
+}
+
+
+
+
+
   getOrderDetailByID(selectedDraftID){
     this.showSpinner=true;
     this._orderDetailService.getDetail(selectedDraftID).then((data: any) => {
@@ -452,7 +485,9 @@ export class OrderComponent implements OnInit, AfterViewInit {
   companyProducts(dealerCode){
     if(this.selectedDealerCode != dealerCode){
       this.selectedDealerCode = dealerCode;
-      this.searchProduct = undefined;
+      if (this.search && this.search.nativeElement && this.search.nativeElement.value){
+        this.search.nativeElement.value = '';
+      }
       this.selectedCategoryForFilter = undefined;
      this.getTemplateList(dealerCode);
      this.showSpinner=true;
@@ -517,6 +552,12 @@ export class OrderComponent implements OnInit, AfterViewInit {
         })
         this.categoryList = dataList;
         this.categoryListCopy = [...this.categoryList];
+        if(this.onTypeSubscriber){
+          this.onTypeSubscriber.unsubscribe();
+          this.searchOntyping();
+        }else{
+          this.searchOntyping();
+        }
       }
       if(this.categoryList && this.categoryList.length && this.selectedDraftID){
         this.fillProductsInfo(this.orderSummary);
