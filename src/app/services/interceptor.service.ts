@@ -35,7 +35,7 @@ export class InterceptorService implements HttpInterceptor {
         if (err.status === 401 || err.status === 498) {
           // <Log the user out of your application code>
           if(err.status === 498){
-            this._toast.error(err.name || err.error);
+            this._toast.error("Token has been expired");
           }
           localStorage.clear()
           this._router.navigate([ '/login' ]);
