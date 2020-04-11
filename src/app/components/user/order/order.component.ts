@@ -554,10 +554,8 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
         this.categoryListCopy = [...this.categoryList];
         if(this.onTypeSubscriber){
           this.onTypeSubscriber.unsubscribe();
-          this.searchOntyping();
-        }else{
-          this.searchOntyping();
         }
+          this.searchOntyping();
       }
       if(this.categoryList && this.categoryList.length && this.selectedDraftID){
         this.fillProductsInfo(this.orderSummary);
