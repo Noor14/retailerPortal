@@ -80,6 +80,9 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   filterCategoryAndProuct(){
+    if(!this.categoryListCopy.length){
+      return;
+    }
     this.showSpinner = true;
     setTimeout(()=>{
       if(this.selectedCategoryForFilter != "undefined" && this.search.nativeElement && !this.search.nativeElement.value){
