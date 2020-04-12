@@ -23,35 +23,7 @@
             <input class="form-control ml-2" #dateSearchTwo (keydown)="onlyBackSpaceAllow($event)" placement="right-bottom" [placeholder]="selectedObject?.placeholder[1]"
             autocomplete="off" [maxDate]="maxDate" [minDate]="fromDate" (closed)="calenderSearching('toDate')" [(ngModel)]="toDate" ngbDatepicker #dp="ngbDatepicker" (click)="dp.toggle(); getCurrentDate(toDate, 'toDate')">
           </div>
-          
-         
-          
-
-          <!-- <input
-          #myRangeInput
-         class="form-control" 
-         placeholder="From Date - To Date"
-          name="dp" [displayMonths]="2" [navigation]="'arrows'" [outsideDays]="'visible'"
-         [showWeekNumbers]="false"  ngbDatepicker #d="ngbDatepicker" [dayTemplate]="t" (click)="d.toggle()" [autoClose]="'outside'"
-         [(ngModel)]="model" 
-         (focus)="getCurrentDate()"
-         (keydown)="onlyBackSpaceAllow($event)"
-         ngbDatepicker 
-         [maxDate]="maxDate"
-         autocomplete="off"
-         (closed)="calenderSearch()">
- 
-         <ng-template #t let-date="date" let-focused="focused" let-disabled="disabled">
-          <span class="custom-day"
-              [class.focused]="focused"
-              [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
-              [class.faded]="isHovered(date) || isInside(date)"
-              (click)="!disabled && onDateSelection(date)"
-              (mouseenter)="hoveredDate = date"
-              (mouseleave)="hoveredDate = null">
-          {{ date.day }}
-          </span>
-      </ng-template> -->
+       
         </div>
 
         <div class="form-group" *ngSwitchCase="'dropdown'">

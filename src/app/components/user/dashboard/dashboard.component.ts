@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
       {name:'Payment ID', placeholder: 'Payment ID', type: 'typing', key: 'InvoiceNumber'},
       {name:'Company', placeholder: 'Company', type: 'typing', key: 'CompanyName'},
       {name:'Status', placeholder: 'Status', type: 'dropdown', key: 'Status', filterBy : undefined},
-      {name:'Created Date', placeholder: ['From Date', 'To Date'], type: 'dateRange', key: ['DateFrom', 'DateTo']},
+      {name:'Paid Date', placeholder: ['From Date', 'To Date'], type: 'dateRange', key: ['DateFrom', 'DateTo']},
       {name:'Amount', placeholder: ['Min Amount', 'Max Amount'], type: 'range', key: ['PaymentAmountMin', 'PaymentAmountMax']}
      ],
      TotalRecords: 10,
