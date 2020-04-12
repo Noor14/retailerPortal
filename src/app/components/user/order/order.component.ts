@@ -44,8 +44,9 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
   public orderplacementStage: boolean = false;
   private categoryListCopy:any[];
   private onTypeSubscriber:any;
+  private selectedSearchProduct:string = undefined;
   @ViewChild('tab', {static:false}) public tabs:NgbTabset;
-  @ViewChild('searchProduct', {static: false}) search: ElementRef;
+  @ViewChild('searchProduct', {static: false, read: ElementRef}) search: ElementRef;
 
   constructor(
     private _orderDetailService : OrderDetailService,
@@ -145,7 +146,10 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
       ,distinctUntilChanged()
       // subscription for response
       ).subscribe((text: string) => {
-            this.filterCategoryAndProuct()
+          if(text.trim()){
+            this.selectedSearchProduct = text.trim();
+          }
+          this.filterCategoryAndProuct()
       });
 }
 
@@ -193,6 +197,16 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     else if(event.nextId == "placeOrder"){
       this.setTableTreeClass();
+      setTimeout(()=>{
+        if(this.selectedSearchProduct){
+          this.search.nativeElement.value = this.selectedSearchProduct 
+        }
+        if(this.onTypeSubscriber){
+          this.onTypeSubscriber.unsubscribe();
+        }
+        this.searchOntyping()
+      },0);
+
       if(this.selectedTemplateID && this.selectedTemplateID != "undefined" && this.compareValueToCalculateSummary != this.compareValueAfterToBeforeValue){
         this.fillProductsInfo(this.orderSummary);
         this.compareValueToCalculateSummary = this.compareValueAfterToBeforeValue;
@@ -518,6 +532,15 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
     }else{
       this.setTableTreeClass();
       this.toggleCompanyProductList = true;
+      setTimeout(()=>{
+        if(this.selectedSearchProduct){
+          this.search.nativeElement.value = this.selectedSearchProduct 
+        }
+        if(this.onTypeSubscriber){
+          this.onTypeSubscriber.unsubscribe();
+        }
+          this.searchOntyping();
+      },0)
     }
   }
   generateProductCompany(data){
