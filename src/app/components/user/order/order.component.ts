@@ -1,3 +1,4 @@
+import { fadeAnimation } from './../../../constant/animations';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -14,7 +15,11 @@ import { map, filter, debounceTime, tap, switchAll, distinctUntilChanged } from 
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+    fadeAnimation
+    // animation triggers go here
+  ]
 })
 export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
   public cnicMask = AppMasks.cnic_Mask;

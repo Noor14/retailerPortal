@@ -96,7 +96,7 @@
                             </div>
                     </div>
              
-                  <div class="content bg-white">
+                  <div class="content bg-white" [@fadeAnimation]>
                     <p-treeTable [value]="categoryList" (onNodeExpand)="nodeToggling($event)">
                         <ng-template pTemplate="header">
                             <tr>
