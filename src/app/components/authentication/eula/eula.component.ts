@@ -12,28 +12,31 @@ export class EULAComponent implements OnInit {
   private userIdentity:any;
 
   constructor(private _loginService : LoginService,private _route:Router) {
-    this.userIdentity= JSON.parse(sessionStorage.getItem('userIdentity') );
-    console.log(this.userIdentity);
-
-   }
+  }
   // users/termsandcondition
   ngOnInit() {
+    this.userIdentity = (localStorage.getItem('userIdentity'))? JSON.parse(localStorage.getItem('userIdentity')) : undefined;
   }
 
   agreeTermsAndConditions(){
       let userObj =
       { 
-        RetailerID:this.userIdentity.UserAccount.RetailerID
+        RetailerID: this.userIdentity && this.userIdentity.UserAccount && this.userIdentity.UserAccount.RetailerID
       };
       this._loginService.PostCalls(userObj,"users/termsandcondition", 9)
       .then( data=>{
         if(data){
-          this._route.navigate(['/updatePassword'])
+          if(this.userIdentity.SelfSignup){
+            this.userIdentity.UserAccount.IsTermAndConditionAccepted = 1;
+            localStorage.setItem('userIdentity', JSON.stringify(this.userIdentity));
+            this._route.navigate((['/user/dashboard']))
+          }
+          else{
+            this._route.navigate(['/updatePassword'])
+          }
 
         }
-        else{
-
-        }
+       
       })
       .catch(err =>{
 

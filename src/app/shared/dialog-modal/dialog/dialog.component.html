@@ -1,19 +1,18 @@
-<div class="modal fade show" tabindex="-1" role="dialog" >
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Modal title</h5>
-				<button type="button" class="close" (click)="cancelClicked()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-			</div>
-			<div class="modal-body">
-				<p>Modal body text goes here.</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" (click)="cancelClicked()">Close</button>
-				<button type="button" class="btn btn-primary" (click)="okClicked()">Save changes</button>
-			</div>
-		</div>
-	</div>
-</div>
+<section class="dialogBox">
+  <div class="modal-header">
+      <h4 class="modal-title title" id="modal-title" [ngClass]="dialogBoxObject?.titleTextColor">{{dialogBoxObject?.title}}</h4>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="activeModal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p class="text-center" *ngIf="dialogBoxObject?.detail">{{dialogBoxObject?.detail}}</p>
+      <div class="form-group" *ngIf="dialogBoxObject?.inputBox">
+        <input type="text" class="form-control" alphaNumericOnly [(ngModel)]="name" placeholder="Enter Template Name">
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" [disabled]="dialogBoxObject?.inputBox && !name" (click)="performAction()">{{dialogBoxObject?.btnText}}</button>
+      </div>
+    </div>
+  </section>
+  <ngx-spinner [visible]="showSpinner"></ngx-spinner>

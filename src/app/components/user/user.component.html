@@ -1,14 +1,20 @@
-<app-header></app-header>
-<section class="container-fluid">
-    <div class="row main">
-      <div class="col-md-2 navigation">
-        <app-sidebar></app-sidebar>
-    </div>
-    <div class="col-md-10 contentPages">
-            <div class="container-fluid pt-4 pb-4">
-              <router-outlet></router-outlet>
-            </div>
-    </div>
+<div class="overlay d-lg-none" *ngIf="navigationToggle" (click)="navigationToggle=false"></div>
+<app-header [navigationState]="navigationToggle" (navToggling)='navigationToggle = $event'></app-header>
+<main>
+  <section class="container-fluid h-100">
+    <div class="row h-100">
+      <div class="col-lg-2 d-none d-lg-block navigation">
+        <app-sidebar ></app-sidebar>
+      </div>
+      <div class="navigation d-lg-none" *ngIf="navigationToggle" [@slideInOut]>
+        <app-sidebar [navigationState]="navigationToggle" (navToggling)='navigationToggle = $event'></app-sidebar>
+      </div>
+      <div class="col-lg-10 contentPages">
+            <router-outlet></router-outlet>
+      </div>
     </div>
 </section>
+</main>
+
+
 

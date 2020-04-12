@@ -1,26 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { baseApi } from 'src/app/constant/baseurl';
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  head: any = {
-    "Content-Type": 'application/json; charset=utf-8',
-    "dataType": 'json',
-    "authorization": 'Bearer ' + JSON.parse(sessionStorage.getItem('userIdentity')).access_token
-
-  };
   constructor(private _http: HttpClient) { }
 
-  getById(obj, rightId, resourceName) {
-    this.head["rightid"] = rightId;
-    let httphead = {
-      headers: new HttpHeaders(this.head)
-    }
+  getById(fetchingId, rightId, resourceName) {
     let promise = new Promise((resolve, reject) => {
-      const apiURL = `${baseApi}/api/${resourceName}`;
-      this._http.get(apiURL + obj, httphead)
+      const apiURL = `${baseApi}/api/${resourceName}/${fetchingId}`;
+      this._http.get(apiURL)
         .toPromise()
         .then(res => {
           resolve(res);
@@ -33,13 +23,9 @@ export class ProfileService {
   }
 
   postCalls(obj, rightId, resourceName) {
-    this.head["rightid"] = rightId;
-    let httphead = {
-      headers: new HttpHeaders(this.head)
-    }
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${resourceName}`;
-      this._http.post(apiURL, obj, httphead)
+      this._http.post(apiURL, obj)
         .toPromise()
         .then(res => {
           resolve(res);

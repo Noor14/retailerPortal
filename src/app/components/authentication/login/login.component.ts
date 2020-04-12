@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { SharedService } from './../../../services/shared.service';
+import { validateAllFormFields } from './../../../constant/globalfunction';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginService } from './login.service';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
@@ -8,13 +9,15 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-
+export class LoginComponent implements OnInit, OnDestroy {
+  public showSpinner: boolean;
   public loginForm : FormGroup
   public loginFailure: boolean = false;
+  private loginFormSubscriber: any
+  public passToggle:boolean;
   constructor(
     private _loginService: LoginService,
-    private _toast: ToastrService,
+    private _sharedService: SharedService,
     private _router: Router) {
   }
 
@@ -26,26 +29,52 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(){
+    if(this.loginFormSubscriber){
+      this.loginFormSubscriber.unsubscribe();
+    }
+  }
+
+  onChanges():void{
+    this.loginFormSubscriber = this.loginForm.valueChanges.subscribe(val => {
+      if(val && Object.keys(val).length){
+          this.loginFailure = false;
+      }
+    });
+  }
   login() {
     if (this.loginForm.valid) {
+      this.loginFailure = false;
+      this.showSpinner = true;
       this._loginService.login(this.loginForm.value)
         .then((data:any) => {
+          this.showSpinner = false;
           if (data.ErrorCode) {
             this.loginFailure = true;
+            if(this.loginFormSubscriber){
+              this.loginFormSubscriber.unsubscribe();
+            }
+            this.onChanges();
           }
           else {
-            sessionStorage.setItem('userIdentity', JSON.stringify(data)); // can be used if you want to use session storage other chnge would be in Authentication Guard and home
+            localStorage.setItem('userIdentity', JSON.stringify(data)); // can be used if you want to use session storage other chnge would be in Authentication Guard and home
             if (!data.UserAccount.IsTermAndConditionAccepted) {
-              this._router.navigate(['/eula'])
+              this._router.navigate(['/eula']);
             }
             else {
-              this._router.navigate(['/user/dashboard'])
+              this._router.navigate(['/user/dashboard']);
+              this._sharedService.setUser(data.UserAccount);
+
             }
           }
         })
         .catch(err => {
+          this.showSpinner = false;
           console.log(err);
         })
+    }else{
+     this.loginFormSubscriber.unsubscribe();
+      validateAllFormFields(this.loginForm);
     }
 
   }

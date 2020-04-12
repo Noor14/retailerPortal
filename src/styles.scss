@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import './assets/_fonts/_source_sans_fonts.css';
 @import './assets/_scss/_globalstyles';
-
 .toast-container {
     .ngx-toastr:hover {
       box-shadow:unset;
@@ -81,6 +80,7 @@
   #navbarResponsive::-webkit-scrollbar {
     background-color: inherit;
     width: 5px;
+    height: 5px;
   }
   #navbarResponsive::-webkit-scrollbar-thumb {
     border-radius: 10px #FFFFFF;
@@ -95,6 +95,7 @@
   #nav-scrollbar::-webkit-scrollbar {
     background-color: #BCBCBC;
     width: 5px;
+    height: 5px;
   }
   #nav-scrollbar::-webkit-scrollbar-thumb {
     border-radius: 10px;

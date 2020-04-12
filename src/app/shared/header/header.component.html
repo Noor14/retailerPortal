@@ -1,12 +1,14 @@
 <header>
-    <nav class="navbar">
+    <nav class="navbar navbar-light navbar-expand-lg">
       <div class="container-fluid">
-                <a class="navbar-brand" routerLink="/user/dashboard">
+                <a class="navbar-brand d-none d-lg-block" routerLink="/user/dashboard">
                     <img src="../../../assets/_images/logo.png" class="logo" alt="logo">
                 </a>
-
+                <button class="navbar-toggler" type="button" (click)="navToggle()">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="d-flex align-items-center">
-                    <svg version="1.1" class="mr-5 pointer" width="28px" id="notificationIcon" fill="#96bb3d" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    <svg version="1.1" class="mr-3 pointer" width="25px" id="notificationIcon" fill="#96bb3d" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
                     <g>
                         <g>
@@ -24,8 +26,8 @@
                     </svg>
                     
                   <div class="d-flex flex-column">
-                      <h5 class="text-right m-0"><strong>Hi, Jawwad Ali</strong></h5>
-                      <small class="text-right">Jawwad Associates</small>
+                      <h5 class="text-right m-0"><strong>Hi, {{userDetail.Username}}</strong></h5>
+                      <small class="text-right">{{userDetail.CompanyName}}</small>
                   </div>
                 </div>
         </div>

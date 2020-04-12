@@ -1,0 +1,47 @@
+.dashboard{
+    .table{
+        .createDateWidth{
+            min-width: 115px;
+        }
+        .statusWidth{
+          min-width: 80px;
+      }
+      .dropdown-menu{
+          .dropdown-item{
+            &.payBy{
+                position: relative;
+                &::after{
+                    content: "\203A";
+                    position: absolute;
+                    right: 20px;
+                    font-size: 25px;
+                    top: -2px;
+                }
+            }
+            .paymentPayBY{
+                position: absolute;
+                left: -158px;
+                width: 100%;
+                top: 0;
+                border: 1px solid rgba(0, 0, 0, 0.125);
+                border-radius: .25rem;
+                .list-group-item{
+                    border: unset !important;
+                    padding: .35rem 1.5rem !important;
+                    color: #16181b;
+                    &:hover{
+                        background-color: #f8f9fa;
+                    }
+                    &:active{
+                        background-color: #afafaf;
+                        color: #fff;
+                    }
+                }
+              }
+          }
+      }
+
+      
+    }
+
+}

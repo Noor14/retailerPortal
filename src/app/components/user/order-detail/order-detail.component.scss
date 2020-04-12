@@ -1,0 +1,24 @@
+.orderDetail{
+    .content{
+        .gridArea{
+            border: 1px solid #BCBEC0;
+            border-radius: 3px;
+            height: unset;
+            .table{
+                th{
+                  background-color: transparent;
+                }
+             
+                
+            }
+        }
+    }
+    .summary{
+        border-bottom: 1px solid #BCBEC0;
+        span
+        {
+            font-weight: bold;
+        }
+    }
+    
+}

@@ -1,41 +1,42 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { SupportSignInService } from '../supportsign.service';
+import { CanComponentDeactivate } from './../../../../services/deactivate.guard';
+import { validateAllFormFields } from './../../../../constant/globalfunction';
+import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
-import { SharedService } from 'src/app/services/shared.service';
+import { SharedService } from '../../../../services/shared.service';
+import { TicketSupportService } from '../ticket-support.service';
 @Component({
   selector: 'app-supportscreen',
   templateUrl: './supportscreen.component.html',
   styleUrls: ['./supportscreen.component.scss']
 })
-export class SupportscreenComponent implements OnInit, OnDestroy {
-
+export class SupportscreenComponent implements OnInit, OnDestroy, CanComponentDeactivate {
+  public showSpinner: boolean;
   private supportDropDownSubscriber:any;
+  private routeSubscriber: any;
   public supportDetail: any = {};
-  public issueType: any[];
-  public criticality: any[];
-  public contacting: any[];
-  supportForm: FormGroup;
+  public issueType: any[] = [];
+  public criticality: any[] = [];
+  public contacting: any[] = [];
+  public supportForm: FormGroup;
   public mobileMask = AppMasks.mobile_Mask;
-  supportID: number;
-  breadcrumbSupport: string;
-  public message: boolean = false;
-  readonlyCheck: boolean = false
-  EmailEdit: boolean = true;
-  mobileEdit: boolean = true;
+  private supportID: number;
+  public breadcrumbSupport: string;
+  private readonlyCheck: boolean = false
+  public emailEdit: boolean = true;
   constructor(
-    private _supportService: SupportSignInService,
+    private _supportService: TicketSupportService,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _sharedService: SharedService) {
+    private _sharedService: SharedService,
+    private _toast : ToastrService) {
 
-    this._route.params.subscribe(params => {
+   this.routeSubscriber= this._route.params.subscribe(params => {
       this.supportID = +params['id'];
       if (!this.supportID) {
         this.breadcrumbSupport = "Add Ticket";
-        // this.EmailEdit = true
-        // this.mobileEdit = true
       }
       else {
         this.breadcrumbSupport = "Edit Ticket";
@@ -44,14 +45,21 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  canDeactivate(){
+    if(this.supportForm.dirty){
+        return false;
+   
+    }else{
+      return true;
+    }
+  }
   ngOnInit() {
-    let userObj = JSON.parse(sessionStorage.getItem('userIdentity')).UserAccount
-
-    this.getLookups();
-    if (this.supportID>0) {
+    this.getdropDownList();
+    let userObj = JSON.parse(localStorage.getItem('userIdentity')).UserAccount
+    if (this.supportID) {
       this.getByID(this.supportID);
     }
+
     this.supportForm = new FormGroup({
       ID: new FormControl(0),
       MobileNumber: new FormControl(userObj.RetailerMobile, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
@@ -64,11 +72,18 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(){
-    this.supportDropDownSubscriber.unsubscribe()
+    this.supportDropDownSubscriber.unsubscribe();
+    this.routeSubscriber.unsubscribe();
   }
-
-  getLookups() {
-    this.supportDropDownSubscriber = this._sharedService.supportDropdownValues.subscribe((res:any)=>{
+  elemFocus(elem){
+    elem.readOnly= false;
+    elem.focus()
+  }
+  elemFocusOut(elem){
+    elem.readOnly= true;
+  }
+  getdropDownList() {
+    this.supportDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
       if(res){
         this.contacting = res.CONTACTING_METHOD;
         this.criticality = res.CRITICALITY_PRIVATE;
@@ -77,33 +92,54 @@ export class SupportscreenComponent implements OnInit, OnDestroy {
     });
   }
   save() {
-    this._supportService.postCalls('support/PrivateSave', this.supportForm.value, 8)
-      .then((data: any) => {
-        this._router.navigate(["/user/support"]);
-      })
-      .catch(err => { 
-
-      })
+    if(this.supportForm.valid){
+      this.showSpinner=true;
+      this._supportService.postCalls('support/PrivateSave', this.supportForm.value, 8)
+        .then((data: any) => {
+           this.showSpinner=false;
+  
+          if(data.ID){
+            this._toast.success('Ticket successfully generated');
+            this._router.navigate(["/user/support"]);
+  
+          }
+  
+        })
+        .catch(err => { 
+          this.showSpinner=false;
+  
+        })
+    }
+    else{
+      validateAllFormFields(this.supportForm);
+    }
+ 
   }
 
   getByID(supportID) {
+    this.showSpinner=true;
     this._supportService.getCalls('support/TicketById/' + supportID, 5)
       .then((data: any) => {
+        this.showSpinner=false;
         this.supportDetail = data;
         this.supportForm.patchValue(this.supportDetail);
       })
       .catch(err => {
+        this.showSpinner=false;
         this.supportForm.reset();
-        this.message = true;
       })
   }
 
   delete() {
+    this.showSpinner=true;
     this._supportService.postCalls('support/Delete', { ID: this.supportForm.value.ID }, 7)
       .then((res: any) => {
+        this.showSpinner=false;
+        this._toast.success('Token successfully deleted')
         this._router.navigate(["/user/support"]);
       })
       .catch(err => {
+        this.showSpinner=false;
 
       })
   }

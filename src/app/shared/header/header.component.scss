@@ -5,8 +5,18 @@ header{
   position: relative;
     .navbar-brand{
       .logo{
-          width: 115px;
+          width: 90px;
           vertical-align: top;
+      }
+      &:focus{
+        outline: unset;
+      }
+    }
+    .navbar-toggler{
+      border: unset;
+      &:focus{
+        border: unset;
+        outline: unset;
       }
     }
   

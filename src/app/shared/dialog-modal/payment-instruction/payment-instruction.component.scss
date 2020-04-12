@@ -1,0 +1,27 @@
+.dialogBox{
+    .modal-header{
+        position: relative;
+        padding: 17px 25px;
+        .closeBtn{
+            position: absolute;
+            right: 7px;
+            top: 1px;
+            &:focus{
+                outline: unset;
+            }
+        }
+    }
+    .modal-body
+    {
+       max-height: 380px;
+       overflow-y: auto;
+       ol{
+           padding-left: 20px;
+           li{
+               padding: 5px;
+               font-size: 12px;
+           }
+       }
+    }
+
+}

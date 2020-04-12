@@ -1,61 +1,95 @@
 <section class="profile">
-    <div class="container-fluid">
+        <ol class="breadcrumb m-0">
+            <li class="breadcrumb-item">
+                <a routerLink="/user/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a class="breadcrumb-item">Profile</a>
+            </li>
+        </ol>
         <ngb-tabset>
             <ngb-tab>
-                <ng-template ngbTabTitle>Profile</ng-template>
+                <ng-template ngbTabTitle> <div class="mr-5"> Profile </div></ng-template>
                 <ng-template ngbTabContent>
 
                     <div class="contentArea bg-white p-4">
                         <h6 class="contentSubTitle">Profile Information</h6>
-                        <form [formGroup]="profileFormGroup">
+                        <form [formGroup]="profileForm">
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <input type="text" disabled class="form-control" formControlName="RetailerCode">
+                                    <div class="form-group has-float-label">
+                                        <input type="text" id="retailercode" class="form-control" formControlName="RetailerCode" placeholder="Retailer Code"
+                                        [ngClass]="{'validationError': profileForm.controls['RetailerCode'].errors && (profileForm.controls.RetailerCode.dirty || profileForm.controls.RetailerCode.touched)}">
+                                        <label for="retailercode">Retailer Code</label>
                                     </div>
                                 </div>
+ 
                                 <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" formControlName="Name" >
+                                    <div class="form-group has-float-label">
+                                        <input type="text" readOnly id="retailerName" class="form-control" formControlName="Name" placeholder="Retailer Name"
+                                        [ngClass]="{'validationError': profileForm.controls['Name'].errors && (profileForm.controls.Name.dirty || profileForm.controls.Name.touched)}">
+                                        <label for="retailerName">Full Name</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
-                                    <div class="form-group position-relative">
-                                        <input type="text"  class="form-control" formControlName="Email" >
-                                        <img src="../../../../assets/_images/bell.svg" width="10px" class="mr-3 position-absolute" style="right: 5px;  top: 45%;"
-                                        />
+                                    <div class="form-group has-float-label position-relative">
+                                        <input type="email" noWhiteSpace id="email" readOnly (focusout)="elemFocusOut(email)" #email class="form-control" formControlName="Email" placeholder="Email Address"
+                                        [ngClass]="{'validationError': profileForm.controls['Email'].errors && (profileForm.controls.Email.dirty || profileForm.controls.Email.touched)}">
+                                        <label for="Email">Email Address</label>
+                                        <img *ngIf="email.readOnly" src="../../../../assets/_images/edit.svg" width="15px" (click)="elemFocus(email)" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" />
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <input type="text"  class="form-control" formControlName="CNIC" [textMask]="{mask: cnicMask}" >
+                                    <div class="form-group has-float-label">
+                                        <input type="text" readOnly id="cnic"  class="form-control" formControlName="CNIC" [textMask]="{mask: cnicMask}" placeholder="CNIC No"
+                                        [ngClass]="{'validationError': profileForm.controls['CNIC'].errors && (profileForm.controls.CNIC.dirty || profileForm.controls.CNIC.touched)}">
+                                        <label for="cnic">CNIC No</label>                                        
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <input type="text" [textMask]="{mask: mobileMask}" class="form-control" formControlName="Mobile" >
+                                    <div class="form-group has-float-label">
+                                        <input type="text" id="mobile" readOnly (focusout)="elemFocusOut(mobile)" #mobile [textMask]="{mask: mobileMask}" class="form-control" formControlName="Mobile" placeholder="Mobile No" 
+                                        [ngClass]="{'validationError': profileForm.controls['Mobile'].errors && (profileForm.controls.Mobile.dirty || profileForm.controls.Mobile.touched)}">
+                                        <label for="mobile">Mobile No</label> 
+                                        <img *ngIf="mobile.readOnly" (click)="elemFocus(mobile)" src="../../../../assets/_images/edit.svg" width="15px" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" />                                        
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <input type="text"  class="form-control" formControlName="CreatedDate" >
+                                    <div class="form-group has-float-label">
+                                        <input type="text" id="createddate"  class="form-control" formControlName="CreatedDate" placeholder="Created Date"
+                                        [ngClass]="{'validationError': profileForm.controls['CreatedDate'].errors && (profileForm.controls.CreatedDate.dirty || profileForm.controls.CreatedDate.touched)}">
+                                        <label for="createddate">Created Date</label>                                         
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text"  class="form-control" formControlName="Address" >
+                                 <div class="col-md-6 col-sm-12">
+                                    <div class="form-group has-float-label">
+                                        <input type="text" readOnly id="companyName" class="form-control" formControlName="CompanyName" placeholder="Company Name"
+                                        [ngClass]="{'validationError': profileForm.controls['CompanyName'].errors && (profileForm.controls.CompanyName.dirty || profileForm.controls.CompanyName.touched)}">
+                                        <label for="companyName">Company Name</label>
+                                    </div>
+                                </div> 
+                                <div class="col-12">
+                                    <div class="form-group has-float-label">
+                                        <textarea rows="1" id="address" readOnly (focusout)="elemFocusOut(address)" #address cols="58" class="form-control" placeholder="Address" formControlName="Address"
+                                        [ngClass]="{'validationError': profileForm.controls['Address'].errors && (profileForm.controls.Address.dirty || profileForm.controls.Address.touched)}"></textarea>
+                                        <label for="address">Address</label>
+                                        <img *ngIf="address.readOnly" (click)="elemFocus(address)" src="../../../../assets/_images/edit.svg" width="15px" class="mr-3 position-absolute" style="right: 5px;  top: 35%;" /> 
+                                        <p *ngIf="profileForm.controls['Address'].errors" class="errorMessage">
+                                            <small *ngIf="profileForm.controls['Address'].hasError('maxlength') && (profileForm.controls.Address.dirty || profileForm.controls.Address.touched)">
+                                                Address should be maximum 250 characters
+                                            </small>
+                                        </p>
                                     </div>
                                 </div>
-
                             </div>
-                            <div class="d-flex flex-row-reverse">
-                                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="updateProfile()" [disabled]="!profileFormGroup.valid">Update</button>
+                            <div class="text-right">
+                                <button class="btn btn-primary" type="button" (click)="updateProfile()" [disabled]="profileForm.invalid || updateBtnDisabled">Update</button>
                             </div>
 
                         </form>
@@ -63,7 +97,7 @@
                 </ng-template>
             </ngb-tab>
             <ngb-tab>
-                <ng-template ngbTabTitle>Account & Wallet</ng-template>
+                <ng-template ngbTabTitle> <div class="mr-5"> Account & Wallet</div></ng-template>
                 <ng-template ngbTabContent>
 
                         <div class="contentArea bg-white p-4">
@@ -75,41 +109,55 @@
             </ngb-tab>
 
             <ngb-tab>
-                <ng-template ngbTabTitle>Change Password</ng-template>
+                <ng-template ngbTabTitle >Change Password </ng-template>
                 <ng-template ngbTabContent>
                     <div class="contentArea bg-white p-4">
                         <h6 class="contentSubTitle">Enter old password</h6>
-                        <form [formGroup]="passwordFormGroup">
+                        <form [formGroup]="passwordForm">
 
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
-                                    <div class="form-group position-relative">
-                                        <input [type]="passToggle ? 'text':'password'" class="form-control" formControlName="Password">
-                                        <img src="../../../../assets/_images/bell.svg" (click)="passToggle=!passToggle" width="10px" class="mr-3 position-absolute"
-                                            style="right: 10px; top: 45%;" />
+                                    <div class="form-group has-float-label password">
+                                        <input noWhiteSpace [type]="passToggle ? 'text':'password'" id="oldpassword" class="form-control" formControlName="Password" placeholder="Old Password"
+                                        [ngClass]="{'validationError':  oldPasswordError || (passwordForm.controls['Password'].errors && (passwordForm.controls.Password.dirty || passwordForm.controls.Password.touched))}">
+                                        <label for="oldpassword">Old Password</label>
+                                        <span (click)="passToggle=!passToggle">
+                                            <img src="../../../../assets/_images/eye.svg"  width="17" />
+                                        </span>
+                                        <p *ngIf="passwordForm.controls['Password'].errors || oldPasswordError" class="errorMessage">
+                                            <small *ngIf="oldPasswordError && !passwordForm.controls['Password'].errors">Wrong Password</small>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                             <h6 class="contentSubTitle">Enter new password</h6>
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
-                                    <div class="form-group position-relative">
-                                        <input [type]="newToggle ? 'text':'password'" class="form-control" formControlName="ConfirmPassword">
-                                        <img src="../../../../assets/_images/bell.svg" (click)="newToggle=!newToggle" width="10px" class="mr-3 position-absolute"
-                                            style="right: 10px; top: 45%;" />
-                                        <img src="../../../../assets/_images/bell.svg" width="10px" class="position-absolute" style="right: 10px; top: 45%;" />
+                                    <div class="form-group has-float-label password">
+                                        <input noWhiteSpace [type]="newToggle ? 'text':'password'" id="newpassword" class="form-control" formControlName="NewPassword"  placeholder="New Password"
+                                        [ngClass]="{'validationError': passwordForm.controls['NewPassword'].errors && (passwordForm.controls.NewPassword.dirty || passwordForm.controls.NewPassword.touched)}">
+                                        <label for="newpassword">New Password</label>
+                                        <span (click)="newToggle=!newToggle">
+                                            <img src="../../../../assets/_images/eye.svg" width="17" />
+                                        </span>
+                                        <img src="../../../../assets/_images/info.svg" width="14" class="infoIcon"
+                                        triggers="click" placement="bottom-right" [autoClose]="'outside'" ngbTooltip="Password must be minimum 6 characters long including 1 numeric value, 1 upper or lower case alphabet and 1 special character"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6 ">
-                                    <div class="form-group position-relative">
-                                        <input  [type]="confirmToggle ? 'text':'password'"  class="form-control" formControlName="NewPassword">
-                                        <img src="../../../../assets/_images/bell.svg" (click)="confirmToggle=!confirmToggle" width="10px" class="mr-3 position-absolute"
-                                            style="right: 10px; top: 45%;" />
+                                    <div class="form-group has-float-label password">
+                                        <input  noWhiteSpace [type]="confirmToggle ? 'text':'password'" id="confirmpassword"  class="form-control" formControlName="ConfirmPassword" placeholder="Confirm Password"
+                                        [ngClass]="{'validationError': passwordForm.controls['ConfirmPassword'].errors && (passwordForm.controls.ConfirmPassword.dirty || passwordForm.controls.ConfirmPassword.touched)}">
+                                        <label for="confirmpassword">Confirm Password</label>
+                                        <span (click)="confirmToggle=!confirmToggle">
+                                            <img src="../../../../assets/_images/eye.svg"  width="17" />
+                                        </span>
+                                        
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex flex-row-reverse">
-                                <button class="btn btn-lg btn-primary ml-3" type="button" (click)="changePassword()" [disabled]="!passwordFormGroup.valid">Update Password</button>
+                            <div class="text-right">
+                                <button class="btn btn-primary" type="button" (click)="changePassword()" [disabled]="passwordForm.invalid">Update Password</button>
                             </div>
                         </form>
                     </div>
@@ -117,5 +165,5 @@
             </ngb-tab>
 
         </ngb-tabset>
-    </div>
 </section>
+<ngx-spinner [visible]="showSpinner"></ngx-spinner>

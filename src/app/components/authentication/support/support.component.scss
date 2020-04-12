@@ -1,6 +1,8 @@
-.support{
-    textarea{
-        resize: unset;
-        height: unset;
+.support
+{
+    .spForm{
+        max-height: 440px;
+        overflow-y: auto;
     }
+
 }

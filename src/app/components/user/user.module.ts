@@ -1,49 +1,64 @@
-import { SidebarComponent } from './../../shared/sidebar/sidebar.component';
-import { HeaderComponent } from './../../shared/header/header.component';
+import { DeactivateGuard } from './../../services/deactivate.guard';
+import { TreeTableModule } from 'primeng/treetable';
+import { SharedModule } from './../../shared/shared.module';
+import { UserService } from './user.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserRoutingModule } from './user-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user.component';
 import { ProfileComponent } from './profile/profile.component';
-import { HttpClientModule } from "@angular/common/http";
 import { ProfileService } from './profile/profile.service';
 import { TextMaskModule } from 'angular2-text-mask';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SupportgridComponent } from './support/supportgrid/supportgrid.component';
 import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
-import { SupportSignInService } from './support/supportsign.service';
-import { NoWhiteSpace } from 'src/app/shared/pipes-directives/singlespace';
-import { NoDualSpaceSpecial } from 'src/app/shared/pipes-directives/dualspacespecialcharacter';
+import { DashboardService } from './dashboard/dashboard.service';
+import { TicketSupportService } from './support/ticket-support.service';
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentService } from './payment/payment.service';
+import { NetworkComponent } from './network/network.component';
+import { NetworkService } from './network/network.service';
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+import { PaymentDetailService } from './payment-details/payment-detail.service';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { OrderDetailService } from './order-detail/order-detail.service';
+import { OrderComponent } from './order/order.component';
 
-import { TableComponent } from '../../shared/table/table.component';
-import { PaymentComponent } from '../../shared/payment/payment.component';
-import { SharedService } from 'src/app/services/shared.service';
 @NgModule({
   declarations: [
     DashboardComponent,
     UserComponent, 
-    HeaderComponent,
-    SidebarComponent, 
     ProfileComponent,
     SupportgridComponent,
     SupportscreenComponent,
-    TableComponent,
-    NoWhiteSpace,
-    NoDualSpaceSpecial,
-    PaymentComponent
+    PaymentComponent,
+    NetworkComponent,
+    PaymentDetailsComponent,
+    OrderDetailComponent,
+    OrderComponent
   ],
+
   imports: [
     CommonModule,
     UserRoutingModule,
-    NgbModule,
-    HttpClientModule,
     TextMaskModule,
     ReactiveFormsModule,
-    // SharedModule
+    FormsModule,
+    TreeTableModule,
+    SharedModule
   ],
-  providers:[ProfileService,SupportSignInService,SharedService]
+  providers:[
+    ProfileService,
+    TicketSupportService,
+    DashboardService,
+    PaymentService,
+    UserService,
+    NetworkService,
+    PaymentDetailService,
+    OrderDetailService,
+    DeactivateGuard
+  ]
 
 })
 export class UserModule { }

@@ -1,0 +1,24 @@
+.registration{
+    .registrationForm{
+        max-height: 440px;
+        overflow-y: auto;
+        ngb-tooltip-window{
+            top:5px !important;
+            &.show{
+                opacity: 1;
+            }
+            .arrow{
+                right: 0.1rem !important;
+                &::before{
+                    border-bottom-color: #a7a7a7;
+                }
+            }
+            .tooltip-inner{
+                font-size: 12px;
+                max-width: 300px;
+                background-color: #c1c1c1;
+            }
+        }
+    }
+
+}

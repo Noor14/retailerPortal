@@ -1,0 +1,85 @@
+@import "../../../assets/_scss/_variables";
+
+.searching{
+  ngb-datepicker{
+    right: 15px !important;
+    .ngb-dp-header{
+      background-color: unset;
+      ngb-datepicker-navigation{
+        .ngb-dp-arrow{
+          .ngb-dp-arrow-btn{
+            color: $baseColor;
+            &:focus{
+              outline: unset;
+            }
+          }
+        }
+        .ngb-dp-month-name{
+          color: $baseColor;
+          background-color: unset;
+          font-size: large;
+        }
+      }
+    }
+    .ngb-dp-months{
+      .ngb-dp-month{
+        &:first-child{
+          border-right: 1px solid #eee;
+        }
+        &:first-child, &:last-child{
+          .ngb-dp-week{
+            padding-left: 1rem;
+            padding-right: 1rem;
+            background-color: unset;
+            .ngb-dp-day{
+              &:last-child{
+                color: red;
+              }
+              &.disabled{
+                opacity: 0.5;
+              }
+            }
+            
+          }
+        }
+        .ngb-dp-week{
+          .ngb-dp-weekday{
+            font-style: normal;
+            color: #777777;
+          }
+          .ngb-dp-day{
+            &:focus{
+              outline: unset;
+            }
+            .custom-day {
+              text-align: center;
+              padding: 0.185rem 0.25rem;
+              display: inline-block;
+              height: 2rem;
+              width: 2rem;
+              &:focus{
+                outline: unset;
+              }
+              &.focused {
+                  background-color: $baseColor;
+                  color: white;
+                }
+                &.range, &:hover {
+                  background-color: $baseColor;
+                  color: white;
+                }
+                &.faded {
+                  background-color: #97bb3d8c;
+                }
+            }
+          }
+        }
+      }
+ 
+    }
+   
+    
+  }
+ 
+
+}

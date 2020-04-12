@@ -1,9 +1,10 @@
+import { DeactivateGuard } from './../../services/deactivate.guard';
+import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationComponent } from './authentication.component';
-import { HttpClientModule } from "@angular/common/http";
 import { LoginService } from './login/login.service';
 import { RegistrationComponent } from './registration/registration.component';
 import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
@@ -13,6 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 import { SupportComponent } from './support/support.component';
 import { SupportService } from './support/support.service';
+import { NgxCaptchaModule } from 'ngx-captcha';
+
 @NgModule({
   declarations: [
     RegistrationComponent,
@@ -20,14 +23,20 @@ import { SupportService } from './support/support.service';
     AuthenticationComponent, 
     ForgetpasswordComponent, 
     UpdatepasswordComponent, 
-    EULAComponent, SupportComponent],
+    EULAComponent, 
+    SupportComponent
+  ],
   imports: [
     CommonModule,
-    HttpClientModule,
     AuthenticationRoutingModule,
     ReactiveFormsModule,
-    TextMaskModule
+    TextMaskModule,
+    NgxCaptchaModule,
+    SharedModule
   ],
-  providers:[LoginService, SupportService]
+  providers:[
+    LoginService, 
+    SupportService,
+    DeactivateGuard]
 })
 export class AuthenticationModule { }

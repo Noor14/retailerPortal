@@ -1,15 +1,39 @@
-.main{
-  height: calc(100vh - 61px);
+ .overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.1);
+    z-index: 1;
+  }
+  main{
   .navigation{
     box-shadow: 5px 0 10px -5px #7a7979;
     border-right: 1px solid #a7a7a7;
     padding: 0;
     z-index: 1;
+@media screen and (max-width: 991.9px) {
+    position: fixed;
+    background: #fff;
+    top: 0;
+    bottom: 0;
+    width: 20em;
+    z-index: 2;
 
+  }
   }
 .contentPages{
   background-color: #F8F8F8;
+  padding: 15px 50px;
   }
 }
+
+
+
+
+
+
+
 
   

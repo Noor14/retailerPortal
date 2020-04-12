@@ -1,0 +1,211 @@
+<section class="order">
+    <ol class="breadcrumb m-0">
+        <li class="breadcrumb-item">
+            <a routerLink="/user/dashboard">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="breadcrumb-item">Order</a>
+        </li>
+    </ol>
+    <ngb-tabset #tab="ngbTabset" (tabChange)="onTabChange($event)" [activeId]="activeTab">
+        <ngb-tab id="placeOrder">
+            <ng-template ngbTabTitle>Place Order</ng-template>
+            <ng-template ngbTabContent>
+                <div class="contentArea bg-white p-4"  *ngIf="!toggleCompanyProductList">
+                    <h6 class="contentSubTitle">What do you want to order from?</h6>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group has-float-label">
+                                <select id="company" class="form-control" [(ngModel)]="selectedCompany" (change)="companyDetail(selectedCompany)">
+                                    <option disabled value='undefined'>Select Company</option>
+                                    <option *ngFor="let obj of kycList" [value]="obj.DealerCode">{{obj.CompanyName}}</option>
+                                </select>
+                                <label for="company">Company</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12" *ngIf="selectedCompany">
+                            <form [formGroup]="companyDetailForm">
+                              <h5 class="text-muted mb-4"> {{companyDetailForm.controls['CompanyName'].value}}</h5>
+                               <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group has-float-label">
+                                        <input type="text" id="mobile" class="form-control" [textMask]="{mask: mobileMask}" placeholder="Mobile No" formControlName="Mobile">
+                                        <label for="mobile">Mobile No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group has-float-label">
+                                        <input type="email" id="email" class="form-control" placeholder="Email Address" formControlName="Email">
+                                        <label for="email">Email Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group has-float-label">
+                                        <input type="text" id="cnic" class="form-control" [textMask]="{mask: cnicMask}" placeholder="CNIC No" formControlName="CNIC">
+                                        <label for="cnic">CNIC No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group has-float-label">
+                                        <input type="text" id="ntn" class="form-control" placeholder="NTN No" formControlName="CompanyNTN">
+                                        <label for="ntn">NTN No</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group has-float-label">
+                                        <textarea id="address" rows="1" class="form-control" placeholder="Address" formControlName="Address"></textarea>
+                                        <label for="address">Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-right">
+                                    <button class="btn btn-primary" (click)="companyProducts(selectedCompany)">Next</button>
+                                </div>
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="productInfo" *ngIf="toggleCompanyProductList">
+                 <div class="row" *ngIf="filterByMainCategory.length || templateList.length">
+                        <div class="col-md-9" *ngIf="filterByMainCategory.length">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <select class="form-control" [(ngModel)]="selectedCategoryForFilter" (change)="filterCategoryAndProuct()">
+                                            <option value="undefined">All Category</option>
+                                            <option [value]="item.CategoryId" *ngFor="let item of filterByMainCategory">{{item.Title}}</option>
+                                        </select>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" #searchProduct placeholder="Search Product">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-md-3" *ngIf="templateList && templateList.length">
+                                <div class="form-group">
+                                    <select class="form-control"  [(ngModel)]="selectedTemplateID" (change)="onSelectedTemplate(selectedTemplateID)">
+                                        <option value="undefined">Select Template</option>
+                                        <option [value]="item.ID" *ngFor="let item of templateList">{{item.Name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+             
+                  <div class="content bg-white">
+                    <p-treeTable [value]="categoryList" (onNodeExpand)="nodeToggling($event)">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th class="productCode">Product Code</th>
+                                <th class="productTitle">Product Title</th>
+                                <th>Price</th>
+                                <th class="dicountedPrice">Discounted Price</th>
+                                <th>UOM</th>
+                                <th class="packSize"x>Pack Size</th>
+                                <th class="qty">Quantity</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                            <tr>
+                                <td [ngClass]="{'node': rowNode.node.children && rowNode.node.children.length}">
+                                    <p-treeTableToggler class="pointer" [rowNode]="rowNode"></p-treeTableToggler>
+                                    <span>{{rowData.Title}}</span>
+                                </td>
+                                <td>{{rowData.ProductCode}}</td>
+                                <td>{{rowData.ProductUnitPrice  | currency:'PKR '}}</td>
+                                <td>
+                                    <span *ngIf="rowData.DiscountAmount; else otherTemp">{{rowData.ProductUnitPrice - rowData.DiscountAmount  | currency:'PKR '}}</span>
+                                    <ng-template #otherTemp> {{rowData.ProductUnitPrice | currency:'PKR '}}</ng-template>
+                                </td>
+                                <td>{{rowData.UnitOFMeasure}}</td>
+                                <td>{{rowData.PackSize}}</td>
+                                <td>
+                                    <input type="number" min="1" numbersOnly *ngIf="!rowNode.node.children || (rowNode.node.children && !rowNode.node.children.length)"
+                                    class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="rowData.OrderQty"
+                                      (blur)="selectProduct(rowData)" />
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-treeTable>
+                </div>
+                <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end pt-3" >
+                    <button class="btn btn-primary ml-3" type="button" (click)="toggleCompanyProductList = !toggleCompanyProductList">Back</button>
+                    <button class="btn btn-primary ml-3" type="button" [ngClass]="{'mutedBtn': !orderSummary.length}" (click)="tab.select('orderSummary')">Checkout</button>
+                </div>
+
+            </div>
+
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="orderSummary">
+            <ng-template ngbTabTitle>Order Summary</ng-template>
+            <ng-template ngbTabContent>
+                <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end mb-3 templateBtn" *ngIf="orderSummary.length">
+                    <button class="btn btn-primary" type="button" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="openDialog()">
+                       Save Template
+                    </button>
+                </div>
+                <div class="content bg-white" *ngIf="orderSummary && orderSummary.length">
+                    <div class="gridArea table-responsive" id="nav-scrollbar">
+                      <table class="table" >
+                            <thead>
+                            <tr>
+                                <th class="productCode">Product Code</th>
+                                <th class="productTitle">Product Title</th>
+                                <th>Price</th>
+                                <th class="dicountedPrice">Discounted Price</th>
+                                <th>UOM</th>
+                                <th class="packSize"x>Pack Size</th>
+                                <th class="qty">Quantity</th>
+                                <th>Amount</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let order of orderSummary; let i = index">
+                                <td>{{order.Title}}</td>
+                                <td>{{order.ProductCode}}</td>
+                                <td>{{order.ProductUnitPrice  | currency:'PKR '}}</td>
+                                <td> 
+                                   <span *ngIf="order.DiscountAmount; else other">{{order.ProductUnitPrice - order.DiscountAmount  | currency:'PKR '}}</span>
+                                   <ng-template #other> {{order.ProductUnitPrice | currency:'PKR '}}</ng-template>
+                                </td>
+                                <td>{{order.UnitOFMeasure}}</td>
+                                <td>{{order.PackSize}}</td>
+                                <td>
+                                    <input type="number" (focus)="checkValue(order.OrderQty)" min="1" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
+                                     (blur)="checkOrderStage(order, i)"  />
+                                </td>
+                                <td>{{order.OrderQty * (order.ProductUnitPrice - order.DiscountAmount) * order.PackSize | currency:'PKR '}}</td>
+                                <td><img src="../../../../assets/_images/trash.svg" alt="delIcon" class="delIcon" (click)="deleteSummaryRow(i)"></td>
+                            </tr>
+                            </tbody>
+                 
+                        </table>
+                    </div>
+                </div>
+                <div class="summary mt-3 d-md-flex flex-md-row flex-sm-column justify-content-between pb-2" *ngIf="orderSummary && orderSummary.length">
+                    <div class="d-flex flex-column flex-fill">
+                        <div>
+                            Gross Amount: <span>{{grossAmount | currency : "PKR "}}</span> 
+                        </div>
+                        <div class="d-sm-flex flex-sm-row flex-xs-column">
+                        <div class="flex-fill">Total Discount: <span>{{totalDiscount | currency:'PKR '}}</span></div>
+                        <div class="flex-fill">Net Amount: <span>{{netAmount | currency : "PKR "}}</span></div>
+                        </div>
+                    </div>
+                        <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end" *ngIf="orderSummary.length">
+                            <button class="btn btn-primary ml-3" type="button" *ngIf="selectedOrderStatus != 'Pending'" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="saveDraft()">Draft</button>
+                            <button class="btn btn-primary ml-3" type="button" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="confirmOrder()">Confirm Order</button>
+                        </div>
+                </div>
+                <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!orderSummary.length && !showSpinner">No Data Available</span>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</section>
+<ngx-spinner [visible]="showSpinner"></ngx-spinner>

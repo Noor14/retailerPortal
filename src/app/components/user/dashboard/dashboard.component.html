@@ -1,6 +1,5 @@
 <section class="dashboard">
-  <div class="container-fluid">
-    <ol class="breadcrumb">
+    <ol class="breadcrumb m-0">
       <li class="breadcrumb-item">
           <a routerLink="/user/dashboard">Dashboard</a>
       </li>
@@ -8,101 +7,110 @@
           <a class="breadcrumb-item">Payment</a>
       </li>
   </ol>
-    <ngb-tabset>
-        <ngb-tab>
+
+    <ngb-tabset (tabChange)="onTabChange($event)">
+        <ngb-tab id="payment">
           <ng-template ngbTabTitle>Payment</ng-template>
           <ng-template ngbTabContent>
             <div class="content">
-              <div class="gridArea">
-                <div class="table-responsive">
-                  <table class="table table-striped">
+              <app-searching [searchingCriteria]='filterObjPayment' (filteredData)="onSearchResult($event)"></app-searching>
+              <div class="gridArea table-responsive" id="nav-scrollbar">
+                <table class="table" *ngIf="paymentsList && paymentsList.length">
                       <thead>
                       <tr>
                           <th>Payment ID</th>
                           <th>Company</th>
-                          <th>Created Date</th>
-                          <th>Transaction Date</th>
                           <th>Status</th>
                           <th>Amount</th>
                           <th>Action</th>
                       </tr>
                       </thead>
                       <tbody>
-                      <tr>
-                          <td>1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                              <td>
+                      <tr *ngFor="let payment of paymentsList; let i = index">
+                          <td>{{payment.InvoiceNumber}}</td>
+                          <td>{{payment.CompanyName}}</td>
+                          <td class="statusWidth">{{payment.Status}}</td>
+                          <td>{{payment.TotalPrice | currency:'PKR '}}</td>
+                          <td>
                             <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
-                                <button ngbDropdownItem>View</button>
-                                <button ngbDropdownItem>Delete</button>
+                                <button ngbDropdownItem *ngIf="(payment.IsEditable && payment.Status == 'Paid') || (!payment.IsEditable && (payment.Status == 'Blocked' || payment.Status == 'Payment Processing' || payment.Status == 'Paid' || payment.Status == 'Un-paid'))" [routerLink] = "['/user/paymentDetail', payment.RetailerInvoiceId, payment.IsEditable]">View</button>
+                                <button ngbDropdownItem *ngIf="payment.Status == 'Un-Paid'" [routerLink] = "['/user/payment', payment.RetailerInvoiceId, payment.IsEditable]">
+                                  <span *ngIf="payment.IsEditable; else temp">Edit</span>
+                                  <ng-template #temp>View</ng-template>
+                                </button>
+                                <button ngbDropdownItem *ngIf="payment.IsEditable && payment.Status == 'Un-Paid'" (click)="openDialog(payment.RetailerInvoiceId, 'delete', 'payment')">Delete</button>
+                                <button ngbDropdownItem class="payBy" *ngIf="payment.IsEditable && payment.Status == 'Un-Paid'" (mouseenter)="payBygroupList = true" (mouseleave)="payBygroupList = false">Pay By
+                                  <ul class="list-group paymentPayBY" *ngIf="payBygroupList">
+                                    <li class="list-group-item" (click)= "openDialogPSID(payment.InvoiceNumber, payment.RetailerInvoiceId)">PS ID </li>
+                                  </ul>
+                                </button>
                               </div>
                             </div>
                            
                         </td>
                       </tr>
-                      <tr>
-                          <td>2</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                              <td>
-                            <div ngbDropdown class="d-inline" placement="bottom-right">
-                            <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
-                            <div ngbDropdownMenu>
-                                <button ngbDropdownItem>View</button>
-                                <button ngbDropdownItem>Delete</button>
-                              </div>
-                            </div>
-                           
-                        </td>
-
-                      </tr>
-                      <tr>
-                          <td>3</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                              <td>
-                            <div ngbDropdown class="d-inline" placement="bottom-right">
-                            <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
-                            <div ngbDropdownMenu>
-                                <button ngbDropdownItem>View</button>
-                                <button ngbDropdownItem>Delete</button>
-                              </div>
-                            </div>
-                           
-                        </td>
-                      </tr>
+                      <tr  class="text-center" *ngIf="loadAvailableCount > paymentsList.length">
+                        <td colspan="6"> <button class="btn" (click)="loadMore(filterObjPayment.searchMode)" >Load More</button></td>
+                     </tr>
                       </tbody>
                   </table>
-              </div>
+                <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!paymentsList.length && !showSpinner">No Data Available</span>
               </div>
           
             </div>
            
           </ng-template>
         </ngb-tab>
-        <!-- <ngb-tab [disabled]="true">
+        <ngb-tab id="order">
           <ng-template ngbTabTitle>Order</ng-template>
-          <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-            <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
-            craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
-            cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia
-            yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
-            shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero
-            sint qui sapiente accusamus tattooed echo park.</p>
+          <ng-template ngbTabContent>
+            <div class="content">
+              <app-searching [searchingCriteria]='filterObjOrder' (filteredData)="onSearchResult($event)"></app-searching>
+              <div class="gridArea table-responsive" id="nav-scrollbar">
+                <table class="table" *ngIf="orderList && orderList.length">
+                      <thead>
+                      <tr>
+                          <th>Order ID</th>
+                          <th>Company</th>
+                          <th>Created Date</th>
+                          <th>Amount</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let order of orderList; let i = index">
+                          <td>{{order.OrderNumber}}</td>
+                          <td>{{order.CompanyName}}</td>
+                          <td class="createDateWidth">{{order.CreatedDate |  date: 'dd-MM-yyyy'}}</td>
+                          <td>{{order.TotalPrice | currency:'PKR '}}</td>
+                          <td class="statusWidth">{{order.Status}}</td>
+                          <td>
+                            <div ngbDropdown class="d-inline" placement="bottom-right">
+                            <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
+                            <div ngbDropdownMenu>
+                                <button ngbDropdownItem *ngIf="order.Status != 'Draft'" [routerLink] = "['/user/orderDetail', order.ID]">View</button>
+                                <button ngbDropdownItem *ngIf="order.Status == 'Draft' || order.Status == 'Pending'" [routerLink] = "['/user/order', order.ID]">Edit </button>
+                                <button ngbDropdownItem *ngIf="order.Status == 'Draft'" (click)="openDialog(order.ID, 'delete', 'order')">Delete</button>
+                                <button ngbDropdownItem *ngIf="(order.Status == 'Approved' && order.InvoiceStatus == 'Un-Paid') || order.Status == 'Pending'" (click)="openDialog(order.ID, 'cancel', 'order')">Cancel</button>
+                              </div>
+                            </div>
+                           
+                        </td>
+                      </tr>
+                      <tr  class="text-center" *ngIf="loadAvailableOrderCount > orderList.length">
+                        <td colspan="6"> <button class="btn" (click)="loadMore(filterObjOrder.searchMode)" >Load More</button></td>
+                     </tr>
+                      </tbody>
+                  </table>
+                <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!orderList.length && !showSpinner">No Data Available</span>
+              </div>
+          
+            </div>
           </ng-template>
-        </ngb-tab> -->
+        </ngb-tab>
       </ngb-tabset>
-    </div>
 </section>
+<ngx-spinner [visible]="showSpinner"></ngx-spinner>
