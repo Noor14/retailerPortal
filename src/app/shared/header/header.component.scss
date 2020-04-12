@@ -8,6 +8,9 @@ header{
           width: 90px;
           vertical-align: top;
       }
+      &:focus{
+        outline: unset;
+      }
     }
     .navbar-toggler{
       border: unset;
