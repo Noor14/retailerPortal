@@ -35,7 +35,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
   private onDateSubscriberOne:any;
   private onDateSubscriberTwo:any;
   public maxDate: NgbDateStruct = { year: now.year(), month: now.month() + 1, day: now.date()};
-
+  public focusEvent:string= undefined;
   public fromDate: NgbDateStruct;
   public toDate: NgbDateStruct;
   private inputCurrentDate:any;
@@ -378,8 +378,9 @@ export class SearchingComponent implements OnInit, OnDestroy {
         console.log(err)
         })
   }
-  getCurrentDate(value){
+  getCurrentDate(value,focusEvent){
     this.inputCurrentDate = value;
+    this.focusEvent = focusEvent;
   }
   onlyBackSpaceAllow(event){
     if (event.key == 'Backspace') {
@@ -401,9 +402,10 @@ export class SearchingComponent implements OnInit, OnDestroy {
       }
   }
   calenderSearching(closeEvent){
-    if(this.inputCurrentDate == this.fromDate && closeEvent=='fromDate'){
+  
+    if(this.inputCurrentDate == this.fromDate && (closeEvent=='fromDate' || this.focusEvent == 'fromDate')){
       return;
-    }else if(this.inputCurrentDate == this.toDate && closeEvent=='toDate'){
+    }else if(this.inputCurrentDate == this.toDate && (closeEvent=='toDate' || this.focusEvent =='toDate')){
       return;
     }
     this.selectedKey = this.selectedObject.key;
