@@ -8,16 +8,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 
 const now = moment();
-const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
-  one && two && two.year === one.year && two.month === one.month && two.day === one.day;
 
-const before = (one: NgbDateStruct, two: NgbDateStruct) =>
-  !one || !two ? false : one.year === two.year ? one.month === two.month ? one.day === two.day
-    ? false : one.day < two.day : one.month < two.month : one.year < two.year;
-
-const after = (one: NgbDateStruct, two: NgbDateStruct) =>
-  !one || !two ? false : one.year === two.year ? one.month === two.month ? one.day === two.day
-    ? false : one.day > two.day : one.month > two.month : one.year > two.year;
 @Component({
   selector: 'app-searching',
   templateUrl: './searching.component.html',
@@ -41,29 +32,21 @@ export class SearchingComponent implements OnInit, OnDestroy {
   private onTypeSubscriber:any;
   private onRangeSubscriberOne:any;
   private onRangeSubscriberTwo:any;
-
-  startDate: NgbDateStruct;
-  maxDate: NgbDateStruct = { year: now.year(), month: now.month() + 1, day: now.date()};
-  hoveredDate: NgbDateStruct;
-
-  private fromDate: NgbDateStruct;
-  private toDate: any;
-  public model: any;
-  private inputCurrentDate;
+  private onDateSubscriberOne:any;
+  private onDateSubscriberTwo:any;
+  public maxDate: NgbDateStruct = { year: now.year(), month: now.month() + 1, day: now.date()};
+  public focusEvent:string= undefined;
+  public fromDate: NgbDateStruct;
+  public toDate: NgbDateStruct;
+  private inputCurrentDate:any;
   private inputRemovingCurrentDate;
-  @ViewChild("d", {static: false}) input: NgbInputDatepicker;
-  @ViewChild('myRangeInput' , {static: false}) myRangeInput: ElementRef;
   @ViewChild('search', {static: false}) search: ElementRef;
   @ViewChild('searchRangeOne', {static: false}) searchRangeOne: ElementRef;
   @ViewChild('searchRangeTwo', {static: false}) searchRangeTwo: ElementRef;
+  @ViewChild('dateSearchOne', {static: false}) dateSearchOne: ElementRef;
+  @ViewChild('dateSearchTwo', {static: false}) dateSearchTwo: ElementRef;
 
-  isHovered = date => 
-  this.fromDate && !this.toDate && this.hoveredDate && after(date, this.fromDate) && before(date, this.hoveredDate)
-  isInside = date => after(date, this.fromDate) && before(date, this.toDate);
-  isFrom = date => equals(date, this.fromDate);
-  isTo = date => equals(date, this.toDate);
   constructor(  private renderer: Renderer2, 
-    private _parserFormatter: NgbDateParserFormatter,
     private _userService: UserService,
     private _toast:ToastrService,
     private changeDetectorRef: ChangeDetectorRef) { }
@@ -72,6 +55,10 @@ export class SearchingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
+    this.unSubscriber();
+  }
+
+  unSubscriber(){
     if(this.onTypeSubscriber){
       this.onTypeSubscriber.unsubscribe();
     }
@@ -80,21 +67,18 @@ export class SearchingComponent implements OnInit, OnDestroy {
     }
     if(this.onRangeSubscriberTwo){
       this.onRangeSubscriberTwo.unsubscribe();
+    }
+    if(this.onDateSubscriberOne){
+      this.onDateSubscriberOne.unsubscribe();
+    }
+    if(this.onDateSubscriberTwo){
+      this.onDateSubscriberTwo.unsubscribe();
     }
   }
   selectedOption(option){
-    this.model = null;
     this.fromDate = null;
     this.toDate = null;
-    if(this.onTypeSubscriber){
-      this.onTypeSubscriber.unsubscribe();
-    }
-    if(this.onRangeSubscriberOne){
-      this.onRangeSubscriberOne.unsubscribe();
-    }
-    if(this.onRangeSubscriberTwo){
-      this.onRangeSubscriberTwo.unsubscribe();
-    }
+    this.unSubscriber();
     this.selectedObject = this.searchingCriteria.searchBy.find(obj=> obj.key == option);
     if(this.selectedObject && this.selectedObject.type == "typing" && !this.selectedKey){
       this.searchOntyping();
@@ -172,7 +156,6 @@ export class SearchingComponent implements OnInit, OnDestroy {
 
   searchOnRange(){
     this.searchingobj = {};
-    this.selectedKey = this.selectedObject.key;
     if(this.searchingCriteria.TotalRecords){
       this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
     }
@@ -193,6 +176,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
       ,distinctUntilChanged()
       // subscription for response
       ).subscribe((text: string) => {
+        this.selectedKey = this.selectedObject.key;
             if(Number(text.trim())){
               this.searchingobj[this.selectedObject.key[0]] = text.trim();
             }else{
@@ -220,6 +204,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
         ,distinctUntilChanged()
         // subscription for response
         ).subscribe((text: string) => {
+         this.selectedKey = this.selectedObject.key;
               if(Number(text.trim())){
                 this.searchingobj[this.selectedObject.key[1]] = text.trim();
               }else{
@@ -234,8 +219,22 @@ export class SearchingComponent implements OnInit, OnDestroy {
 
 
   searchOnDateRemoving(){
+    this.searchingobj = {};
+    if(this.searchingCriteria.TotalRecords){
+      this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
+    }
+    if(this.searchingCriteria.PageNumber == 0){
+      this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
+    }
+    if(this.fromDate){
+      this.searchingobj[this.selectedObject.key[0]] = moment(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`, 'YYYY-M-D').toISOString();
+    }
+    if(this.toDate){
+      this.searchingobj[this.selectedObject.key[1]] = moment(`${this.toDate.year}-${this.toDate.month}-${this.toDate.day}`, 'YYYY-M-D').toISOString();
+    }
+     
     this.changeDetectorRef.detectChanges();
-    this.onTypeSubscriber = fromEvent(this.myRangeInput && this.myRangeInput.nativeElement, 'keyup').pipe(
+    this.onDateSubscriberOne  = fromEvent(this.dateSearchOne && this.dateSearchOne.nativeElement, 'keyup').pipe(
       // get value
       map((event: any) => {
         return event.target.value;
@@ -248,39 +247,75 @@ export class SearchingComponent implements OnInit, OnDestroy {
       ,distinctUntilChanged()
       // subscription for response
       ).subscribe((text: string) => {
-        if(text != this.inputCurrentDate){
+        // if(text != dateCasting){
             this.selectedKey = this.selectedObject.key;
-            this.searchingobj = {};
               if(text && text.trim() &&  moment(text.trim()).isValid()){
                 this.searchingobj[this.selectedObject.key[0]] = moment(text.trim()).toISOString();
-                this.searchingobj[this.selectedObject.key[1]] = moment(text.trim()).toISOString();
               }else{
                 delete this.searchingobj[this.selectedObject.key[0]];
-                delete this.searchingobj[this.selectedObject.key[1]];
-                this.selectedKey = undefined;
-                if(text && text.trim()){
-                  this.showSpinner = true;
-                    setTimeout(()=> { 
-                    this.showSpinner = false;
-                    this._toast.error('Date Format is incorrect');
-                    }, 2000);
-
-                    this.inputRemovingCurrentDate = text.trim();
-                    return;
+                if(Object.keys(this.searchingobj).length==2){
+                  this.selectedKey = undefined;
                 }
-                this.model = null;
+                // if(text && text.trim()){
+                //   this.showSpinner = true;
+                //     setTimeout(()=> { 
+                //     this.showSpinner = false;
+                //     this._toast.error('Date Format is incorrect');
+                //     }, 2000);
+
+                //     this.inputRemovingCurrentDate = text.trim();
+                //     return;
+                // }
                 this.fromDate = null;
-                this.toDate = null;
-              }
-              if(this.searchingCriteria.TotalRecords){
-                this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
-              }
-              if(this.searchingCriteria.PageNumber == 0){
-                this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
+                this.inputCurrentDate = null;
               }
               this.filter(this.searchingobj);
-            }
+            // }
       });
+
+
+
+      this.onDateSubscriberTwo  = fromEvent(this.dateSearchTwo && this.dateSearchTwo.nativeElement, 'keyup').pipe(
+        // get value
+        map((event: any) => {
+          return event.target.value;
+        })
+        // if character length greater then 2
+        // ,filter(res => res.length > 2)
+        // Time in milliseconds between key events
+        ,debounceTime(1000)        
+        // If previous query is diffent from current   
+        ,distinctUntilChanged()
+        // subscription for response
+        ).subscribe((text: string) => {
+          // if(text != dateCasting){
+              this.selectedKey = this.selectedObject.key;
+                if(text && text.trim() &&  moment(text.trim()).isValid()){
+                  this.searchingobj[this.selectedObject.key[1]] = moment(text.trim()).toISOString();
+                }else{
+                  delete this.searchingobj[this.selectedObject.key[1]];
+                  if(Object.keys(this.searchingobj).length==2){
+                    this.selectedKey = undefined;
+                  };
+                  // if(text && text.trim()){
+                  //   this.showSpinner = true;
+                  //     setTimeout(()=> { 
+                  //     this.showSpinner = false;
+                  //     this._toast.error('Date Format is incorrect');
+                  //     }, 2000);
+  
+                  //     this.inputRemovingCurrentDate = text.trim();
+                  //     return;
+                  // }
+                  this.toDate = null;
+                  this.inputCurrentDate = null;
+                }
+                this.filter(this.searchingobj);
+              // }
+        });
+
+
+
 }
 
   searchOnChange(elem){
@@ -308,7 +343,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
     this.filter(this.searchingobj);
     this.selectedKey = undefined;
   }
-}
+  }
 
   filter(obj){
     this.showSpinner = true;
@@ -343,78 +378,53 @@ export class SearchingComponent implements OnInit, OnDestroy {
         console.log(err)
         })
   }
-  getCurrentDate(){
-    this.inputCurrentDate = '';
-    if(!this.toDate) {
-      this.inputCurrentDate = this.myRangeInput.nativeElement.value;
-    }else {
-      if(this.fromDate) {
-        this.inputCurrentDate += this._parserFormatter.format(this.fromDate);
-      }
-      if(this.toDate){
-        this.inputCurrentDate += ' - ' + this._parserFormatter.format(this.toDate);
-        // delete this.toDate['updated']
-      }
-    }
+  getCurrentDate(value,focusEvent){
+    this.inputCurrentDate = value;
+    this.focusEvent = focusEvent;
   }
   onlyBackSpaceAllow(event){
     if (event.key == 'Backspace') {
+      if(this.fromDate || this.toDate){
+        if(this.onDateSubscriberOne){
+          this.onDateSubscriberOne.unsubscribe();
+        }
+        if(this.onDateSubscriberTwo){
+          this.onDateSubscriberTwo.unsubscribe();
+        }
+          this.searchOnDateRemoving();
+      }
+      event.target.value = '';
       return;
-      }else{
+      }
+      else{
         event.preventDefault();
 
       }
   }
-  onDateSelection(date: NgbDateStruct) {
-    let parsed = '';
-    if (!this.fromDate && !this.toDate) {
-        this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && after(date, this.fromDate)) {
-        this.toDate = date;
-        // this.model = `${this.fromDate.year} - ${this.toDate.year}`;
-        this.input.close();
-    } else {
-        this.toDate = null;
-        this.fromDate = date;
+  calenderSearching(closeEvent){
+  
+    if(this.inputCurrentDate == this.fromDate && (closeEvent=='fromDate' || this.focusEvent == 'fromDate')){
+      return;
+    }else if(this.inputCurrentDate == this.toDate && (closeEvent=='toDate' || this.focusEvent =='toDate')){
+      return;
     }
-    if(this.fromDate) {
-      parsed += this._parserFormatter.format(this.fromDate);
+    this.selectedKey = this.selectedObject.key;
+    if(this.searchingCriteria.TotalRecords){
+      this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
     }
-    if(this.toDate) {
-      parsed += ' - ' + this._parserFormatter.format(this.toDate);
+    if(this.searchingCriteria.PageNumber == 0){
+      this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
     }
-    this.renderer.setProperty(this.myRangeInput.nativeElement, 'value', parsed);
+
+    if(this.fromDate){
+      this.searchingobj[this.selectedObject.key[0]] = moment(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`, 'YYYY-M-D').toISOString();
+    }
+    if(this.toDate){
+      this.searchingobj[this.selectedObject.key[1]] = moment(`${this.toDate.year}-${this.toDate.month}-${this.toDate.day}`, 'YYYY-M-D').toISOString();
+    }
+    
+    this.filter(this.searchingobj);
    
   }
-  calenderSearch(){
-    if(this.toDate && !this.toDate.hasOwnProperty('updated')){
-      this.myRangeInput.nativeElement.value += ' - ' + this._parserFormatter.format(this.toDate);
-      this.toDate.updated = true;
-    }
-    if(this.selectedObject.key && this.myRangeInput.nativeElement.value && this.inputCurrentDate != this.myRangeInput.nativeElement.value && this.inputRemovingCurrentDate != this.myRangeInput.nativeElement.value){
-      this.selectedKey = this.selectedObject.key;
-      if(this.fromDate){
-        this.searchingobj[this.selectedObject.key[0]] = moment(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`, 'YYYY-M-D').toISOString();
-      }
-      if(this.toDate){
-        this.searchingobj[this.selectedObject.key[1]] = moment(`${this.toDate.year}-${this.toDate.month}-${this.toDate.day}`, 'YYYY-M-D').toISOString();
-      }
-      else {
-        this.searchingobj[this.selectedObject.key[1]] = moment(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`, 'YYYY-M-D').toISOString();
-      }
-      if(this.searchingCriteria.TotalRecords){
-        this.searchingobj.TotalRecords = this.searchingCriteria.TotalRecords;
-      }
-      if(this.searchingCriteria.PageNumber == 0){
-        this.searchingobj.PageNumber = this.searchingCriteria.PageNumber;
-      }
-      this.filter(this.searchingobj);
-      if(this.myRangeInput.nativeElement.value){
-        if(this.onTypeSubscriber){
-          this.onTypeSubscriber.unsubscribe();
-        }
-          this.searchOnDateRemoving();
-      }
-    }
-  }
+ 
 }
