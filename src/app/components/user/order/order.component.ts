@@ -99,7 +99,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       else if(!this.selectedCategoryForFilter || this.selectedCategoryForFilter == "undefined" && this.search.nativeElement && this.search.nativeElement.value){
         let data:any[] = [];
-        this.categoryListCopy.forEach((obj,i)=>{
+        this.categoryListCopy.forEach((obj)=>{
           let children = [];
           obj.children.forEach((item:any) => {
             let regex = new RegExp("^".concat(this.search.nativeElement.value), "gi");
@@ -121,7 +121,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
         let category = this.categoryListCopy.filter((obj:any) => obj.data.ParentId == this.selectedCategoryForFilter);
         if(category && category.length){
           let data = [];
-          category.forEach((obj, i)=>{
+          category.forEach((obj)=>{
             let children = [];
             obj.children.forEach((item:any) => {
             let regex = new RegExp("^".concat(this.search.nativeElement.value), "gi");
