@@ -85,7 +85,7 @@ export class DashboardComponent implements OnInit {
             [item['value'], item])).values()];
 
           // set key name with the name of value
-            statusesPayment = statusesPayment.filter((item:any)=> item.value != 'Payment Processing' && item.value !='Pending' && item.value !='Delete' && item.value !='Partially Paid');
+            statusesPayment = statusesPayment.filter((item:any) => item.value !='Pending' && item.value !='Delete' && item.value !='Partially Paid');
             statusesPayment.map((obj:any) => {obj.key = obj.value});
             let objPayment = this.filterObjPayment.searchBy.find(obj => obj.key == 'Status');
             let ind = this.filterObjPayment.searchBy.findIndex(obj => obj.key == 'Status');
