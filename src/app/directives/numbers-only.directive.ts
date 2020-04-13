@@ -21,14 +21,15 @@ constructor(private el: ElementRef) {
       }
       let current: string = this.el.nativeElement.value;
       let next: string = current.concat(event.key);
-      if(current && event.key != '0' && String(event.key).match(regex)){
+      if(current && event.key != '0' && String(event.key).match(regex) && next && next.length <= 9){
         return;
       }
       else if (next && !String(next).match(regex)) {
       event.preventDefault();
-      }else if(next && next.length > 9){
+      }
+      else if(next && next.length > 9){
         event.preventDefault();
-       }
+      }
  }
 
 }

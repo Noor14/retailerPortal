@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     });
     this._connectionService.monitor().subscribe(isConnected => {
       if (!isConnected) {
-        this._toast.error("Internet connection lost")
+        this._toast.error("Network Error")
       }
 
     })
