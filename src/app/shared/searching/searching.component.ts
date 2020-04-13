@@ -1,3 +1,4 @@
+import { loadingConfig } from './../../constant/globalfunction';
 import { DateFormater } from './../../constant/date-formater';
 import { UserService } from './../../components/user/user.service';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, ChangeDetectorRef, ViewEncapsulation, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
@@ -21,6 +22,7 @@ const now = moment();
 export class SearchingComponent implements OnInit, OnDestroy {
 
   public showSpinner: boolean;
+  public spinnerConfig:any;
   private selectedKey: any = undefined;
   @Input() searchingCriteria: any;
   @Output() filteredData = new EventEmitter();
@@ -52,6 +54,7 @@ export class SearchingComponent implements OnInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
   }
 
   ngOnDestroy(){

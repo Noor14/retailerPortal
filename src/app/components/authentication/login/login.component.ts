@@ -1,5 +1,5 @@
 import { SharedService } from './../../../services/shared.service';
-import { validateAllFormFields } from './../../../constant/globalfunction';
+import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public showSpinner: boolean;
+  public spinnerConfig: any;
   public loginForm : FormGroup
   public loginFailure: boolean = false;
   private loginFormSubscriber: any
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
     this.loginForm = new FormGroup ({
       Username: new FormControl(null, [Validators.required]),
       Password: new FormControl(null, [Validators.required]),

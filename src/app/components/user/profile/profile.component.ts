@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { validateAllFormFields } from './../../../constant/globalfunction';
+import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
   public cnicMask = AppMasks.cnic_Mask;
   public mobileMask = AppMasks.mobile_Mask;
   public showSpinner:boolean;
+  public spinnerConfig:any;
   public passToggle:boolean;
   public newToggle:boolean;
   public confirmToggle:boolean;
@@ -44,6 +45,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
   }
 
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
     this.userObject = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
     this.profileForm = new FormGroup({
       ID: new FormControl(null, [Validators.required, Validators.min(0)]),

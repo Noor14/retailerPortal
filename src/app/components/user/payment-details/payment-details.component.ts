@@ -1,3 +1,4 @@
+import { loadingConfig } from './../../../constant/globalfunction';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, SecurityContext } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -15,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 export class PaymentDetailsComponent implements OnInit {
 
   public showSpinner: boolean;
+  public spinnerConfig:any;
   public paymentDetailForm: FormGroup;
   private requestId: Number;
   private requestType: Number;
@@ -30,6 +32,7 @@ export class PaymentDetailsComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
       if(this.requestType){
         this.getPaymentDetails('prepaidrequests', this.requestId);
       }else{

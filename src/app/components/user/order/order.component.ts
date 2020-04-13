@@ -1,3 +1,4 @@
+import { loadingConfig } from './../../../constant/globalfunction';
 import { fadeAnimation } from './../../../constant/animations';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
@@ -25,6 +26,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
   public cnicMask = AppMasks.cnic_Mask;
   public mobileMask = AppMasks.mobile_Mask;
   public showSpinner: boolean;
+  public spinnerConfig:any;
   public kycList: any[]= [];
   public selectedCompany: string= undefined;
   public companyDetailForm: FormGroup;
@@ -65,6 +67,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
     this.userObject = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
     this.getKYCList(this.userObject.RetailerID);
     this.companyDetailForm = new FormGroup({

@@ -1,6 +1,6 @@
 import { CanComponentDeactivate } from '../../../services/deactivate.guard';
 import { ToastrService } from 'ngx-toastr';
-import { validateAllFormFields } from './../../../constant/globalfunction';
+import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
@@ -20,6 +20,7 @@ export class SupportComponent implements OnInit, OnDestroy, CanComponentDeactiva
   public criticality: any[] = [];
   public contacting: any[] = [];
   public showSpinner: boolean;
+  public spinnerConfig:any;
   public mobileMask = AppMasks.mobile_Mask;
 
   constructor(
@@ -42,6 +43,7 @@ export class SupportComponent implements OnInit, OnDestroy, CanComponentDeactiva
       }
     }
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
     this.getdropDownList();
     this.supportForm = new FormGroup({
       MobileNumber: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),

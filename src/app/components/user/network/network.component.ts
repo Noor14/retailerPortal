@@ -1,3 +1,4 @@
+import { loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit } from '@angular/core';
 import { NetworkService } from './network.service';
 
@@ -10,6 +11,7 @@ export class NetworkComponent implements OnInit {
 
   public lstTotalNetwork:any[] = [];
   public showSpinner: boolean;
+  public spinnerConfig:any;
   public loadAvailable: boolean;
   private searchObj: any = {
     TotalRecords: 10,
@@ -27,13 +29,12 @@ export class NetworkComponent implements OnInit {
   constructor(private _networkService: NetworkService) { }
 
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
     this.getNetwork(this.searchObj);
   }
 
   getNetwork(searchObj) {
     this.showSpinner=true;
-
-
       this._networkService.postCalls("kyc/Search", this.searchObj, 7)
         .then((data: any) => {
           this.showSpinner=false;

@@ -1,3 +1,4 @@
+import { loadingConfig } from './../../constant/globalfunction';
 import { SharedService } from 'src/app/services/shared.service';
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit, OnDestroy {
 
+  public spinnerConfig:any;
   public showSpinner: boolean;
   private loadingSubscriber:any;
   constructor(
@@ -19,6 +21,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   @Input() navigationState: boolean;
 
   ngOnInit() {
+   this.spinnerConfig = loadingConfig;
    this.loadingSubscriber = this._sharedService.loadingLogOut.subscribe( res => {
       if(res != undefined){
         if(!res){

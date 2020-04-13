@@ -1,6 +1,6 @@
 import { CanComponentDeactivate } from './../../../services/deactivate.guard';
 import { AppPattern } from '../../../shared/app.mask';
-import { validateAllFormFields } from './../../../constant/globalfunction';
+import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, OnDestroy, SecurityContext } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -18,6 +18,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   public showSpinner:boolean;
+  public spinnerConfig:any;
   public paymentForm: FormGroup; 
   public distributorList:any[];
   public paymentPrepaidNumber:number = undefined;
@@ -55,6 +56,7 @@ export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactiva
       }
     }
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
     if(this.requestId){
       if(this.requestType){
         this.getPaymentDetails('prepaidrequests', this.requestId);

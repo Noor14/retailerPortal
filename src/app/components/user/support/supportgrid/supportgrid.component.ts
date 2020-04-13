@@ -1,3 +1,4 @@
+import { loadingConfig } from './../../../../constant/globalfunction';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { TicketSupportService } from '../ticket-support.service';
 import { Router } from '@angular/router';
@@ -14,6 +15,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
 
   @ViewChild('search', {static: false}) search: ElementRef;
   public showSpinner: boolean;
+  public spinnerConfig:any;
   private supportDropDownSubscriber:any;
   public supportList:any[] = [];
   public loadAvailableCount: number;
@@ -44,6 +46,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
     private _modalService: NgbModal) { }
 
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
     this.getdropDownList();
     this.getSupportList(this.searchObj);
   }

@@ -1,4 +1,3 @@
-import { loadingConfig } from './../constant/globalfunction';
 import { AlphaNumericOnlyDirective } from '../directives/alpha-numeric-only.directive';
 import { NumberDirective } from 'src/app/directives/numbers-only.directive';
 import { NoWhiteSpaceDirective } from './../directives/no-white-space.directive';
@@ -30,7 +29,7 @@ import { FooterComponent } from './footer/footer.component';
   ],
   imports: [
     CommonModule,
-    NgxSpinnerModule.config(loadingConfig),
+    NgxSpinnerModule,
     RouterModule,
     FormsModule,
     NgbModule,
@@ -48,7 +47,7 @@ import { FooterComponent } from './footer/footer.component';
     NumberDirective,
     AlphaNumericOnlyDirective,
     NgbModule,
-    NgxSpinnerModule.config(loadingConfig)
+    NgxSpinnerModule
   ],
 
   providers:[]

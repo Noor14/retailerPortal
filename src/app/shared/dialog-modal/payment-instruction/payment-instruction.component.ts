@@ -1,3 +1,4 @@
+import { loadingConfig } from './../../../constant/globalfunction';
 import { PaymentService } from './../../../components/user/payment/payment.service';
 import { Component, OnInit, Input, SecurityContext } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,6 +14,7 @@ export class PaymentInstructionComponent implements OnInit {
   @Input() obj:any;
   public paymentInstructions: any;
   public showSpinner:boolean;
+  public spinnerConfig:any;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -23,6 +25,7 @@ export class PaymentInstructionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
     if(this.obj && Object.keys(this.obj).length){
       this.paymentInstructions = this.obj;
     }

@@ -1,5 +1,5 @@
 import { CanComponentDeactivate } from './../../../services/deactivate.guard';
-import { validateAllFormFields } from './../../../constant/globalfunction';
+import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
@@ -23,6 +23,7 @@ export class RegistrationComponent implements OnInit, OnDestroy, CanComponentDea
   public companyExist = false;
   public mobileExist = false;
   public showSpinner: boolean;
+  public spinnerConfig:any;
   public passToggle:boolean;
   public confirmPassToggle:boolean;
   private registerFormMobileSubscriber:any;
@@ -62,6 +63,7 @@ export class RegistrationComponent implements OnInit, OnDestroy, CanComponentDea
       }
     }
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
     this.registerForm = new FormGroup({
       ID: new FormControl(0, [Validators.required]),
       Name: new FormControl(null, [Validators.required]),
