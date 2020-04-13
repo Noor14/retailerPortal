@@ -98,13 +98,19 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
         this.categoryList = this.categoryListCopy.filter((obj:any) => obj.data.ParentId == this.selectedCategoryForFilter);
       }
       else if(!this.selectedCategoryForFilter || this.selectedCategoryForFilter == "undefined" && this.search.nativeElement && this.search.nativeElement.value){
-        let data = [];
-        this.categoryListCopy.forEach((obj)=>{
+        let data:any[] = [];
+        this.categoryListCopy.forEach((obj,i)=>{
           let children = [];
           obj.children.forEach((item:any) => {
-            if(item.data.ProductCode == this.search.nativeElement.value){
+            let regex = new RegExp("^".concat(this.search.nativeElement.value), "gi");
+            if(regex.test(item.data.ProductCode)){
               children.push(item);
-              data.push({data: obj.data, children: children});
+              let index = data.findIndex(obj => obj.data.CategoryId == item.data.ProductCategoryId)
+              if(index >= 0){
+                data[index].children.concat(children);
+              }else{
+                  data.push({data: obj.data, children: children});
+              }
             }
           });
         })
@@ -115,12 +121,18 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
         let category = this.categoryListCopy.filter((obj:any) => obj.data.ParentId == this.selectedCategoryForFilter);
         if(category && category.length){
           let data = [];
-          category.forEach((obj)=>{
+          category.forEach((obj, i)=>{
             let children = [];
             obj.children.forEach((item:any) => {
-              if(item.data.ProductCode == this.search.nativeElement.value){
+            let regex = new RegExp("^".concat(this.search.nativeElement.value), "gi");
+              if(regex.test(item.data.ProductCode)){
                 children.push(item);
-                data.push({data: obj.data, children: children});
+                let index = data.findIndex(obj => obj.data.CategoryId == item.data.ProductCategoryId)
+                if(index >= 0){
+                  data[index].children.concat(children);
+                }else{
+                    data.push({data: obj.data, children: children});
+                }
               }
             });
           })
