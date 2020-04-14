@@ -103,7 +103,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
           let children = [];
           obj.children.forEach((item:any) => {
             let regex = new RegExp("^".concat(this.search.nativeElement.value), "gi");
-            if(regex.test(item.data.ProductCode)){
+            if(regex.test(item.data.ProductCode) || regex.test(item.data.Title)){
               children.push(item);
               let index = data.findIndex(obj => obj.data.CategoryId == item.data.ProductCategoryId)
               if(index >= 0){
@@ -125,7 +125,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
             let children = [];
             obj.children.forEach((item:any) => {
             let regex = new RegExp("^".concat(this.search.nativeElement.value), "gi");
-              if(regex.test(item.data.ProductCode)){
+              if(regex.test(item.data.ProductCode) || regex.test(item.data.Title)){
                 children.push(item);
                 let index = data.findIndex(obj => obj.data.CategoryId == item.data.ProductCategoryId)
                 if(index >= 0){
@@ -492,7 +492,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
         keyboard: false,
         backdrop:'static'
       });
-      modalRef.componentInstance.obj = {btnText: 'Yes, I want', titleTextColor: 'warning', title: 'Delete Product', detail: 'Are you sure, you want to delete this product', mode: 'confirmDialog'};
+      modalRef.componentInstance.obj = {btnText: 'Yes, I want', titleTextColor: 'warning', title: 'Delete Product', detail: 'Are you sure, you want to delete this product?', mode: 'confirmDialog'};
       modalRef.result.then((result) => {
         if(result){
           this.categoryList.forEach(obj => {
