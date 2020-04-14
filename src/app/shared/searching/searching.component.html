@@ -15,12 +15,12 @@
         </div>
         <div class="form-group d-flex" *ngSwitchCase="'dateRange'">
           <div class="position-relative">
-            <input class="form-control mr-2" #dateSearchOne (keydown)="onlyBackSpaceAllow($event)" placement="right-bottom" [placeholder]="selectedObject?.placeholder[0]"
+            <input class="form-control mr-2 leftOpen" #dateSearchOne (keydown)="onlyBackSpaceAllow($event)" placement="left-bottom" [placeholder]="selectedObject?.placeholder[0]"
             autocomplete="off" [maxDate]="toDate || maxDate" (closed)="calenderSearching('fromDate')" [(ngModel)]="fromDate" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle(); getCurrentDate(fromDate, 'fromDate')">
           </div>
 
           <div class="position-relative">
-            <input class="form-control ml-2" #dateSearchTwo (keydown)="onlyBackSpaceAllow($event)" placement="right-bottom" [placeholder]="selectedObject?.placeholder[1]"
+            <input class="form-control ml-2 rightOpen" #dateSearchTwo (keydown)="onlyBackSpaceAllow($event)" placement="right-bottom" [placeholder]="selectedObject?.placeholder[1]"
             autocomplete="off" [maxDate]="maxDate" [minDate]="fromDate" (closed)="calenderSearching('toDate')" [(ngModel)]="toDate" ngbDatepicker #dp="ngbDatepicker" (click)="dp.toggle(); getCurrentDate(toDate, 'toDate')">
           </div>
        

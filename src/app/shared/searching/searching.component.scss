@@ -61,6 +61,10 @@
    
     
   }
- 
-
+ .rightOpen + ngb-datepicker{
+   right: -8px !important;
+ }
+  .leftOpen + ngb-datepicker{
+    right: auto !important;
+  }
 }
