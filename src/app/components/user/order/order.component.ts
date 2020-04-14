@@ -94,7 +94,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.showSpinner = true;
     setTimeout(()=>{
-      if(this.selectedCategoryForFilter != "undefined" && this.search.nativeElement && !this.search.nativeElement.value){
+      if(this.selectedCategoryForFilter && this.selectedCategoryForFilter != "undefined" && this.search.nativeElement && !this.search.nativeElement.value){
         this.categoryList = this.categoryListCopy.filter((obj:any) => obj.data.ParentId == this.selectedCategoryForFilter);
       }
       else if(!this.selectedCategoryForFilter || this.selectedCategoryForFilter == "undefined" && this.search.nativeElement && this.search.nativeElement.value){
@@ -117,7 +117,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
         this.categoryList = data;
 
       }
-      else if(this.selectedCategoryForFilter != "undefined" && this.search.nativeElement && this.search.nativeElement.value){
+      else if(this.selectedCategoryForFilter && this.selectedCategoryForFilter != "undefined" && this.search.nativeElement && this.search.nativeElement.value){
         let category = this.categoryListCopy.filter((obj:any) => obj.data.ParentId == this.selectedCategoryForFilter);
         if(category && category.length){
           let data = [];
