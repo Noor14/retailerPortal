@@ -519,7 +519,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
           if(!this.orderSummary.length){
             this.tabs.select('placeOrder');
           }else{
-            this.calculateSummary()
+            this.calculateSummary();
           }
         }
       }, (reason) => {
