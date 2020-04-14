@@ -1,3 +1,4 @@
+import { CanComponentDeactivate } from './../../../services/deactivate.guard';
 import { loadingConfig } from './../../../constant/globalfunction';
 import { fadeAnimation } from './../../../constant/animations';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -22,7 +23,7 @@ import { map, filter, debounceTime, tap, switchAll, distinctUntilChanged } from 
     // animation triggers go here
   ]
 })
-export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
+export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComponentDeactivate {
   public cnicMask = AppMasks.cnic_Mask;
   public mobileMask = AppMasks.mobile_Mask;
   public showSpinner: boolean;
@@ -65,7 +66,14 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
     ) { 
       this.selectedDraftID = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path);
     }
-
+  canDeactivate(){
+      if(this.orderplacementStage){
+        return false;
+      }
+      else{
+        return true;
+      }
+    }
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     this.userObject = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
@@ -209,7 +217,6 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
       if(!this.orderSummary.length){
         event.preventDefault();
       }else{
-        this.checkOrderStage();
         if(this.orderplacementStage){
           this.calculateSummary();
         }
@@ -453,6 +460,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
         }  
       }
     }
+    this.orderplacementStage = (this.orderSummary.length)? true : false;
     // if (!this.orderSummary.length && this.activeTab == 'orderSummary'){
     //   this.tabs.select('placeOrder');
     // }

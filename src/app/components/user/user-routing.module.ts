@@ -25,8 +25,8 @@ const routes: Routes = [
     { path: 'payment', component: PaymentComponent, canDeactivate: [DeactivateGuard]},
     { path: 'payment/:id/:viewType', component: PaymentComponent, canDeactivate: [DeactivateGuard] },
     { path: 'paymentDetail/:id/:viewType', component: PaymentDetailsComponent },
-    { path: 'order', component: OrderComponent },
-    { path: 'order/:id', component: OrderComponent },
+    { path: 'order', component: OrderComponent, canDeactivate: [DeactivateGuard] },
+    { path: 'order/:id', component: OrderComponent, canDeactivate: [DeactivateGuard] },
     { path: 'orderDetail/:id', component: OrderDetailComponent },
     { path: 'network', component: NetworkComponent },
     { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
