@@ -225,13 +225,16 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
     else if(event.nextId == "placeOrder"){
       this.setTableTreeClass();
       setTimeout(()=>{
-        if(this.selectedSearchProduct){
-          this.search.nativeElement.value = this.selectedSearchProduct 
+        if(this.filterByMainCategory.length){
+          if(this.selectedSearchProduct){
+            this.search.nativeElement.value = this.selectedSearchProduct 
+          }
+          if(this.onTypeSubscriber){
+            this.onTypeSubscriber.unsubscribe();
+          }
+          this.searchOntyping();
         }
-        if(this.onTypeSubscriber){
-          this.onTypeSubscriber.unsubscribe();
-        }
-        this.searchOntyping()
+
       },0);
 
       if(this.selectedTemplateID && this.selectedTemplateID != "undefined" && this.compareValueToCalculateSummary != this.compareValueAfterToBeforeValue){
@@ -561,13 +564,15 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
       this.setTableTreeClass();
       this.toggleCompanyProductList = true;
       setTimeout(()=>{
-        if(this.selectedSearchProduct){
-          this.search.nativeElement.value = this.selectedSearchProduct 
-        }
-        if(this.onTypeSubscriber){
-          this.onTypeSubscriber.unsubscribe();
-        }
+        if(this.filterByMainCategory.length){
+          if(this.selectedSearchProduct){
+            this.search.nativeElement.value = this.selectedSearchProduct 
+          }
+          if(this.onTypeSubscriber){
+            this.onTypeSubscriber.unsubscribe();
+          }
           this.searchOntyping();
+        }
       },0)
     }
   }
@@ -609,10 +614,13 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
         })
         this.categoryList = dataList;
         this.categoryListCopy = [...this.categoryList];
-        if(this.onTypeSubscriber){
-          this.onTypeSubscriber.unsubscribe();
-        }
+        
+        if(this.filterByMainCategory.length){
+          if(this.onTypeSubscriber){
+            this.onTypeSubscriber.unsubscribe();
+          }
           this.searchOntyping();
+        }
       }
       if(this.categoryList && this.categoryList.length && this.selectedDraftID){
         this.fillProductsInfo(this.orderSummary);
