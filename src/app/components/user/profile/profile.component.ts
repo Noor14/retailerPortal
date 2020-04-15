@@ -149,7 +149,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
       this.showSpinner = false;
       if(data.ID){
         this.updateBtnDisabled = true;
-        this._toast.success(`Retailer Code ${this.profileForm.controls['RetailerCode'].value} has been updated successfully`)
+        this._toast.success("Profile updated")
       }
     })
     .catch(err=>{
