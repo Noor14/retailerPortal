@@ -20,7 +20,8 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
   public passToggle:boolean;
   public confirmPassToggle:boolean;
   private userIdentity:any;
-
+  public passwordMisMatchError:boolean;
+  private updatePasswordFormSubscriber:any;
   constructor(
     private _loginService: LoginService,
     private _route:Router,
@@ -43,6 +44,7 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
     }
   }
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
     this.userIdentity = (localStorage.getItem('userIdentity'))? JSON.parse(localStorage.getItem('userIdentity')) : undefined;
     let userName = (this.userIdentity && this.userIdentity.UserAccount)? this.userIdentity.UserAccount.Username : null;
     this.updatePasswordForm = new FormGroup({
@@ -51,11 +53,14 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
       ConfirmPassword: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.password)]),
     })
   }
-
+  ngOnDestroy(){
+    if(this.updatePasswordFormSubscriber){
+      this.updatePasswordFormSubscriber.unsubscribe();
+    }
+  }
   updatePassword() {
-    this.spinnerConfig = loadingConfig;
-    if(this.updatePasswordForm.valid){
-      this.showSpinner=true;
+    if(this.updatePasswordForm.valid && this.updatePasswordForm.controls['ConfirmPassword'].value == this.updatePasswordForm.controls['NewPassword'].value){
+      this.showSpinner = true;
     this._loginService.PostCalls(this.updatePasswordForm.value, "users/UpdatePassword", 8)
       .then(data => {
       this.showSpinner=false;
@@ -74,12 +79,20 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
         this.showSpinner=false;
       })
     }
+    else if (this.updatePasswordForm.valid){
+      this.passwordMisMatchError = true;
+      this.onChanges()
+    }
     else{
       validateAllFormFields(this.updatePasswordForm);
     }
   }
 
-
+  onChanges():void{
+    this.updatePasswordFormSubscriber = this.updatePasswordForm.valueChanges.subscribe(val => {
+          this.passwordMisMatchError = false;
+    });
+  }
   openDialog(){
       const modalRef = this._modalService.open(DialogComponent, { 
         centered: true,
