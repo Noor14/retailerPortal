@@ -5,7 +5,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group has-float-label">
-                                <input type="text" id="username" noWhiteSpace class="form-control" formControlName="Username" placeholder="Username"
+                                <input type="text" id="username" maxlength="25" noWhiteSpace class="form-control" formControlName="Username" placeholder="Username"
                                 [ngClass]="{'validationError': userExist || (registerForm.controls['Username'].errors && (registerForm.controls.Username.dirty || registerForm.controls.Username.touched))}">
                                 <label for="username">Username</label>
                                 <p *ngIf="registerForm.controls['Username'].errors || userExist" class="errorMessage">
@@ -43,7 +43,7 @@
 
                         <div class="col-12">
                             <div class="form-group has-float-label">
-                                <input type="text" id="name" class="form-control" formControlName="Name" placeholder="Full Name"
+                                <input type="text" id="name" maxlength="25" class="form-control" formControlName="Name" placeholder="Full Name"
                                 [ngClass]="{'validationError': registerForm.controls['Name'].errors && (registerForm.controls.Name.dirty || registerForm.controls.Name.touched)}">
                                 <label for="name">Full Name</label>
                                 <p *ngIf="registerForm.controls['Name'].errors" class="errorMessage">
@@ -87,7 +87,7 @@
                           </div>
                           <div class="col-sm-12 col-md-6">
                               <div class="form-group has-float-label">
-                                  <input type="text" id="store" class="form-control" formControlName="CompanyName" placeholder="Store Name"
+                                  <input type="text" id="store" maxlength="50" class="form-control" formControlName="CompanyName" placeholder="Store Name"
                                   [ngClass]="{'validationError': companyExist || (registerForm.controls['CompanyName'].errors && (registerForm.controls.CompanyName.dirty || registerForm.controls.CompanyName.touched))}">
                                   <label for="store">Store Name</label>
                                   <p *ngIf="registerForm.controls['CompanyName'].errors || companyExist" class="errorMessage">
@@ -100,7 +100,7 @@
                           </div>
                             <div class="col-12">
                                 <div class="form-group has-float-label">
-                                    <textarea rows="1" cols="58" id="address" class="form-control" placeholder="Address" formControlName="Address"
+                                    <textarea rows="1" cols="58" id="address" maxlength="250" class="form-control" placeholder="Address" formControlName="Address"
                                     [ngClass]="{'validationError': registerForm.controls['Address'].errors && (registerForm.controls.Address.dirty || registerForm.controls.Address.touched)}"></textarea>
                                     <label for="address">Address</label>
                                     <p *ngIf="registerForm.controls['Address'].errors" class="errorMessage">
