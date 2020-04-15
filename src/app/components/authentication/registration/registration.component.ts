@@ -185,6 +185,7 @@ export class RegistrationComponent implements OnInit, OnDestroy, CanComponentDea
               this.onChanges();
             }
             else {
+              this.registerForm.reset();
               this._toast.success("Registered successfully");
               this._router.navigate(['/login'])
             }

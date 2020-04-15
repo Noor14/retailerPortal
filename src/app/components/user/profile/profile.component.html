@@ -125,7 +125,7 @@
                                             <img src="../../../../assets/_images/eye.svg"  width="17" />
                                         </span>
                                         <p *ngIf="passwordForm.controls['Password'].errors || oldPasswordError" class="errorMessage">
-                                            <small *ngIf="oldPasswordError && !passwordForm.controls['Password'].errors">Wrong Password</small>
+                                            <small *ngIf="oldPasswordError && !passwordForm.controls['Password'].errors">Password mismatch</small>
                                         </p>
                                     </div>
                                 </div>
@@ -156,8 +156,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-right">
-                                <button class="btn btn-primary" type="button" (click)="changePassword()" [disabled]="passwordForm.invalid">Update Password</button>
+                            <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
+                                <button class="btn btn-primary" type="button" routerLink="/user/dashboard">Back</button>
+                                <button class="btn btn-primary ml-3" type="button" (click)="changePassword()" [disabled]="passwordForm.invalid">Update Password</button>
                             </div>
                         </form>
                     </div>

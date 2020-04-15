@@ -26,7 +26,7 @@ export class EULAComponent implements OnInit {
       this._loginService.PostCalls(userObj,"users/termsandcondition", 9)
       .then( data=>{
         if(data){
-          if(this.userIdentity.SelfSignup){
+          if(this.userIdentity.UserAccount.SelfSignup){
             this.userIdentity.UserAccount.IsTermAndConditionAccepted = 1;
             localStorage.setItem('userIdentity', JSON.stringify(this.userIdentity));
             this._route.navigate((['/user/dashboard']))

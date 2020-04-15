@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
   public oldPasswordError: boolean;
   public updateBtnDisabled:boolean = true;
   private profileFormSubscriber:any;
+  private passwordFormSubscriber:any;
   constructor(
     private _profileService: ProfileService,
     private _toast:ToastrService,
@@ -73,6 +74,9 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     if(this.profileFormSubscriber){
       this.profileFormSubscriber.unsubscribe();
     }
+    if(this.passwordFormSubscriber){
+      this.passwordFormSubscriber.unsubscribe();
+    }
   }
 
   getProfile() {
@@ -110,15 +114,15 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     .then((data:any)=>{
       this._toast.success("Your password has been updated. You would be logged out of your account");
       this.logout();
-
     })
     .catch(err=>{
       this.showSpinner = false;
-      if(err.error.status==405){
+      if(err.error.status == 405){
         if(err.error.message === 'Incorrect Old Password'){
           this.oldPasswordError = true;
+          this.onChangesPasswordChange()
         }
-        this._toast.error(err.error.message,"Error")
+        // this._toast.error(err.error.message,"Error")
       }
     })
   }
@@ -126,6 +130,13 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     validateAllFormFields(this.passwordForm);
   }
   }
+
+  onChangesPasswordChange(){
+    this.passwordFormSubscriber = this.passwordForm.get('Password').valueChanges.subscribe(val => {
+         this.oldPasswordError = false;
+    });
+  }
+
   logout(){
     this._userService.logoutUser()
     .then((res:boolean)=>{
