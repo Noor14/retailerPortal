@@ -199,7 +199,8 @@ export class DashboardComponent implements OnInit {
       backdrop:'static'
      });
     let title = type.charAt(0).toUpperCase() + type.slice(1) + " " + mode.charAt(0).toUpperCase() + mode.slice(1);
-    modalRef.componentInstance.obj = {id : id, title: title, titleTextColor: 'warning', mode: mode, type: type, btnText: 'Yes, I want', detail: `Are you sure, you want to ${type} this ${mode}? `};
+    let btnText = (mode == 'order' && type == 'cancel')? title : type.charAt(0).toUpperCase() + type.slice(1);
+    modalRef.componentInstance.obj = {id : id, title: title, titleTextColor: 'warning', mode: mode, type: type, btnText: btnText, detail: `Are you sure, you want to ${type} this ${mode}? `};
     modalRef.result.then((result) => {
       if(result){
         if(mode == 'payment' && type == 'delete'){

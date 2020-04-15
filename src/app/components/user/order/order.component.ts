@@ -503,7 +503,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
         keyboard: false,
         backdrop:'static'
       });
-      modalRef.componentInstance.obj = {btnText: 'Yes, I want', titleTextColor: 'warning', title: 'Delete Product', detail: 'Are you sure, you want to delete this product?', mode: 'confirmDialog'};
+      modalRef.componentInstance.obj = {btnText: 'Delete', titleTextColor: 'warning', title: 'Delete Product', detail: 'Are you sure, you want to delete this product?', mode: 'confirmDialog'};
       modalRef.result.then((result) => {
         if(result){
           this.categoryList.forEach(obj => {
