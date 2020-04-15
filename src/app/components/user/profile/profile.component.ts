@@ -27,9 +27,12 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
   public newToggle:boolean;
   public confirmToggle:boolean;
   public oldPasswordError: boolean;
+  public newPasswordError: boolean;
   public updateBtnDisabled:boolean = true;
   private profileFormSubscriber:any;
   private passwordFormSubscriber:any;
+  private newPasswordSubscriber:any;
+  private confirmpasswordSubscriber:any;
   constructor(
     private _profileService: ProfileService,
     private _toast:ToastrService,
@@ -38,7 +41,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     ) { }
 
   canDeactivate(){
-    if(!this.updateBtnDisabled){
+    if(!this.updateBtnDisabled || this.passwordForm.dirty){
       return false
     }else{
       return true
@@ -77,6 +80,12 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     if(this.passwordFormSubscriber){
       this.passwordFormSubscriber.unsubscribe();
     }
+    if(this.newPasswordSubscriber){
+      this.newPasswordSubscriber.unsubscribe();
+    }
+    if(this.confirmpasswordSubscriber){
+      this.confirmpasswordSubscriber.unsubscribe();
+    }
   }
 
   getProfile() {
@@ -108,10 +117,11 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     elem.readOnly= true;
   }
   changePassword(){
-    if(this.passwordForm.valid){
+    if(this.passwordForm.valid && this.passwordForm.controls['NewPassword'].value == this.passwordForm.controls['ConfirmPassword'].value){
     this.showSpinner = true;
     this._profileService.postCalls(this.passwordForm.value,8,"users/ChangePassword")
     .then((data:any)=>{
+      this.passwordForm.reset();
       this._toast.success("Your password has been updated. You would be logged out of your account");
       this.logout();
     })
@@ -120,23 +130,37 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
       if(err.error.status == 405){
         if(err.error.message === 'Incorrect Old Password'){
           this.oldPasswordError = true;
-          this.onChangesPasswordChange()
+          this.onChangesAtPasswordChange();
         }
         // this._toast.error(err.error.message,"Error")
       }
     })
+  } else if(this.passwordForm.valid){
+    this.newPasswordError = true;
+    this.onChangesAtnewPassChange();
+    this.onChangesAtnewConfirmChange();
+
   }
   else{
     validateAllFormFields(this.passwordForm);
-  }
+    }
   }
 
-  onChangesPasswordChange(){
+  onChangesAtPasswordChange(){
     this.passwordFormSubscriber = this.passwordForm.get('Password').valueChanges.subscribe(val => {
          this.oldPasswordError = false;
     });
   }
-
+  onChangesAtnewPassChange(){
+    this.newPasswordSubscriber = this.passwordForm.get('NewPassword').valueChanges.subscribe(val => {
+         this.newPasswordError = false;
+    });
+  }
+  onChangesAtnewConfirmChange(){
+    this.confirmpasswordSubscriber = this.passwordForm.get('ConfirmPassword').valueChanges.subscribe(val => {
+         this.newPasswordError = false;
+    });
+  }
   logout(){
     this._userService.logoutUser()
     .then((res:boolean)=>{

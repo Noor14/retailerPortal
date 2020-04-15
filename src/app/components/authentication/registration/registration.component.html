@@ -10,6 +10,9 @@
                                 <label for="username">Username</label>
                                 <p *ngIf="registerForm.controls['Username'].errors || userExist" class="errorMessage">
                                     <small *ngIf="userExist && !registerForm.controls['Username'].errors">Username Already Exist</small>
+                                    <small *ngIf="registerForm.controls['Username'].hasError('maxlength') && (registerForm.controls.Username.dirty || registerForm.controls.Username.touched)">
+                                        Username should be maximum 25 characters
+                                     </small>
                                 </p>
                               </div>
                         </div>
@@ -43,6 +46,11 @@
                                 <input type="text" id="name" class="form-control" formControlName="Name" placeholder="Full Name"
                                 [ngClass]="{'validationError': registerForm.controls['Name'].errors && (registerForm.controls.Name.dirty || registerForm.controls.Name.touched)}">
                                 <label for="name">Full Name</label>
+                                <p *ngIf="registerForm.controls['Name'].errors" class="errorMessage">
+                                <small *ngIf="registerForm.controls['Name'].hasError('maxlength') && (registerForm.controls.Name.dirty || registerForm.controls.Name.touched)">
+                                    Full name should be maximum 25 characters
+                                 </small>
+                                 </p>
                             </div>
                         </div>
 
@@ -82,8 +90,11 @@
                                   <input type="text" id="store" class="form-control" formControlName="CompanyName" placeholder="Store Name"
                                   [ngClass]="{'validationError': companyExist || (registerForm.controls['CompanyName'].errors && (registerForm.controls.CompanyName.dirty || registerForm.controls.CompanyName.touched))}">
                                   <label for="store">Store Name</label>
-                                  <p *ngIf="registerForm.controls['Mobile'].errors || companyExist" class="errorMessage">
+                                  <p *ngIf="registerForm.controls['CompanyName'].errors || companyExist" class="errorMessage">
                                       <small *ngIf="companyExist && !registerForm.controls['CompanyName'].errors">Company Already Exist</small>
+                                      <small *ngIf="registerForm.controls['CompanyName'].hasError('maxlength') && (registerForm.controls.CompanyName.dirty || registerForm.controls.CompanyName.touched)">
+                                        Strore name should be maximum 50 characters
+                                     </small>
                                   </p>
                               </div>
                           </div>

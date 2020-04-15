@@ -427,6 +427,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
       }
       this._orderDetailService.save('Orders/saveOrder', obj).then((data: any) => {
         if(data.OrderNumber && data.ID){
+          this.orderplacementStage = false;
           this._toast.success("Order created");
             this._route.navigate(['/user/dashboard'])
         }

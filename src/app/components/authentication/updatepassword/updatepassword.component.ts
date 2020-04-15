@@ -1,3 +1,4 @@
+import { CanComponentDeactivate } from './../../../services/deactivate.guard';
 import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
 import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
@@ -12,7 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './updatepassword.component.html',
   styleUrls: ['./updatepassword.component.scss']
 })
-export class UpdatepasswordComponent implements OnInit {
+export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
   public updatePasswordForm: FormGroup;
   public showSpinner: boolean;
   public spinnerConfig:any;
@@ -28,7 +29,19 @@ export class UpdatepasswordComponent implements OnInit {
     ) {
 
    }
-
+  canDeactivate(){
+    if(this.updatePasswordForm.dirty){
+      let object = this.updatePasswordForm.value;
+      if(Object.values(object).filter(item => item).length){
+        return false;
+      }else{
+        return true;
+      }
+   
+    }else{
+      return true;
+    }
+  }
   ngOnInit() {
     this.userIdentity = (localStorage.getItem('userIdentity'))? JSON.parse(localStorage.getItem('userIdentity')) : undefined;
     let userName = (this.userIdentity && this.userIdentity.UserAccount)? this.userIdentity.UserAccount.Username : null;

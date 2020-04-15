@@ -147,12 +147,14 @@
                                 <div class="col-md-6 ">
                                     <div class="form-group has-float-label password">
                                         <input  noWhiteSpace [type]="confirmToggle ? 'text':'password'" id="confirmpassword"  class="form-control" formControlName="ConfirmPassword" placeholder="Confirm Password"
-                                        [ngClass]="{'validationError': passwordForm.controls['ConfirmPassword'].errors && (passwordForm.controls.ConfirmPassword.dirty || passwordForm.controls.ConfirmPassword.touched)}">
+                                        [ngClass]="{'validationError': newPasswordError || passwordForm.controls['ConfirmPassword'].errors && (passwordForm.controls.ConfirmPassword.dirty || passwordForm.controls.ConfirmPassword.touched)}">
                                         <label for="confirmpassword">Confirm Password</label>
                                         <span (click)="confirmToggle=!confirmToggle">
                                             <img src="../../../../assets/_images/eye.svg"  width="17" />
                                         </span>
-                                        
+                                        <p *ngIf="passwordForm.controls['Password'].errors || newPasswordError" class="errorMessage">
+                                            <small *ngIf="newPasswordError && !passwordForm.controls['Password'].errors">Password mismatch</small>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

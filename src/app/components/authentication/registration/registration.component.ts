@@ -66,14 +66,14 @@ export class RegistrationComponent implements OnInit, OnDestroy, CanComponentDea
     this.spinnerConfig = loadingConfig;
     this.registerForm = new FormGroup({
       ID: new FormControl(0, [Validators.required]),
-      Name: new FormControl(null, [Validators.required]),
+      Name: new FormControl(null, [Validators.required, Validators.maxLength(25)]),
       Email: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.email_Pattern)]),
       Mobile: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.mobile_Pattern)]),
       Password: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.password)]),
       ConfirmPassword: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.password)]),
-      Username: new FormControl(null, [Validators.required]),
+      Username: new FormControl(null, [Validators.required,Validators.maxLength(25)]),
       CNIC: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.cnic_Pattern)]),
-      CompanyName: new FormControl(null, [Validators.required]),
+      CompanyName: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
       Address: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
       recaptcha: new FormControl(null, [Validators.required])
     });

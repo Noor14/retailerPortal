@@ -18,7 +18,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'registration', component: RegistrationComponent, canDeactivate: [DeactivateGuard] },
     { path: 'forgetPassword', component: ForgetpasswordComponent },
-    { path: 'updatePassword', component: UpdatepasswordComponent },
+    { path: 'updatePassword', component: UpdatepasswordComponent, canDeactivate: [DeactivateGuard] },
     { path: 'eula', component: EULAComponent },
     { path: 'support', component: SupportComponent, canDeactivate: [DeactivateGuard] },
     { path: '**', redirectTo: 'login', pathMatch: 'full' }
