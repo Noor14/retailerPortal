@@ -28,7 +28,7 @@ export class PaymentDetailsComponent implements OnInit {
    private _domSanitizer: DomSanitizer
    ) {
       this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path)
-      this.requestType = this.activatedRoute.snapshot.url[2] && Number(this.activatedRoute.snapshot.url[2].path);
+      this.requestType = (this.activatedRoute.snapshot.url[2])? Number(this.activatedRoute.snapshot.url[2].path) : 1;
    }
 
   ngOnInit() {

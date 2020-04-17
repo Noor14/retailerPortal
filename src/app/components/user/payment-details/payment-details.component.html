@@ -11,7 +11,7 @@
             <div class="contentHeader">
                 <h5>Payments</h5>
             </div>
-            <div class="text-right makePaymentBtn">
+            <div class="text-right makePaymentBtn"  *ngIf="requestType">
                 <button class="btn btn-primary" type="button" routerLink="/user/payment">Make New Payment</button>
             </div>
             <div class="contentArea bg-white p-4" id="nav-scrollbar">
