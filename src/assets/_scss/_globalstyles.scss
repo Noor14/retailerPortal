@@ -64,7 +64,7 @@ html{
       color: #939598;
     }
       .errorMessage{
-        color: #ff0000;
+        color: $basevalidationErrorColor;
         position: absolute;
         margin: 0;
       }
@@ -137,10 +137,10 @@ html{
           -moz-appearance: textfield;
         }
         &.validationError{
-          border-color: #ff0000;
-          color: #ff0000;
+          border-color: $basevalidationErrorColorx;
+          color: $basevalidationErrorColor;
             +label{
-              color: #ff0000;
+              color: $basevalidationErrorColor;
           }
         }
         &.totalAmount
