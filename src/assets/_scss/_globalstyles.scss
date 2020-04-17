@@ -91,13 +91,13 @@ html{
           padding-right: 55px;
         }
         span{
-            position: absolute;
-            right: 30px;
-            top: 23%;
-            left: auto;
-            font-size: inherit;
-            cursor: pointer;
-
+          position: absolute;
+          right: 30px;
+          left: auto;
+          font-size: inherit;
+          cursor: pointer;
+          bottom: 0;
+          display: flex;
         }
         .form-control[type="text"] + label + span{
             &::after{
@@ -108,12 +108,14 @@ html{
                 position: inherit;
                 transform: rotate(45deg);
                 right: 7px;
-                top: 4.5px;
+                top: 12.5px;
             }
         }
         .infoIcon{
             right: 10px;
-            top: 38%;
+            bottom: 0;
+            top: 0;
+            margin: auto;
             position: absolute;
         }
     }
