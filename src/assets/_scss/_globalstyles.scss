@@ -137,7 +137,7 @@ html{
           -moz-appearance: textfield;
         }
         &.validationError{
-          border-color: $basevalidationErrorColorx;
+          border-color: $basevalidationErrorColor;
           color: $basevalidationErrorColor;
             +label{
               color: $basevalidationErrorColor;
