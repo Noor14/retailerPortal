@@ -19,7 +19,7 @@ export class PaymentDetailsComponent implements OnInit {
   public spinnerConfig:any;
   public paymentDetailForm: FormGroup;
   private requestId: Number;
-  private requestType: Number;
+  public requestType: Number;
 
  constructor(
    private activatedRoute: ActivatedRoute,
