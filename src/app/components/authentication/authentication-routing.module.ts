@@ -16,10 +16,10 @@ const routes: Routes = [
     // pathMatch: 'full',
     children: [
     { path: 'login', component: LoginComponent },
-    { path: 'registration', component: RegistrationComponent, canDeactivate: [DeactivateGuard] },
-    { path: 'forgetPassword', component: ForgetpasswordComponent },
-    { path: 'updatePassword', component: UpdatepasswordComponent, canDeactivate: [DeactivateGuard] },
     { path: 'eula', component: EULAComponent },
+    { path: 'registration', component: RegistrationComponent, canDeactivate: [DeactivateGuard] },
+    { path: 'forgetPassword', component: ForgetpasswordComponent, canDeactivate: [DeactivateGuard] },
+    { path: 'updatePassword', component: UpdatepasswordComponent, canDeactivate: [DeactivateGuard] },
     { path: 'support', component: SupportComponent, canDeactivate: [DeactivateGuard] },
     { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]

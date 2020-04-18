@@ -118,7 +118,7 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
     .then((res:boolean)=>{
       if(res){
         localStorage.clear();
-        this._route.navigate(['/login'])
+        this._route.navigate(['login'])
       }
       this.showSpinner=false;
     })
