@@ -16,7 +16,6 @@ const routes: Routes = [
   {
     path: '',
     component: UserComponent,
-    // pathMatch: 'full',
     children: [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'profile', component: ProfileComponent, canDeactivate: [DeactivateGuard] },
@@ -29,7 +28,7 @@ const routes: Routes = [
     { path: 'order/:id', component: OrderComponent, canDeactivate: [DeactivateGuard] },
     { path: 'orderDetail/:id', component: OrderDetailComponent },
     { path: 'network', component: NetworkComponent },
-    { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
+    { path: '**', redirectTo: 'dashboard' }
     ]
   }
 
