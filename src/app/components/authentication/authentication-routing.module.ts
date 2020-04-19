@@ -20,7 +20,7 @@ const routes: Routes = [
     { path: 'forgetPassword', component: ForgetpasswordComponent, canDeactivate: [DeactivateGuard] },
     { path: 'updatePassword', component: UpdatepasswordComponent, canDeactivate: [DeactivateGuard] },
     { path: 'support', component: SupportComponent, canDeactivate: [DeactivateGuard] },
-    { path: '**', redirectTo: 'login' },
+    { path: '**', redirectTo: 'login' }
     ]
   }
 ];
