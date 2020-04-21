@@ -23,6 +23,7 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
   private userIdentity:any;
   public passwordMisMatchError:boolean;
   private updatePasswordFormSubscriber:any;
+  public accessToken:string;
   constructor(
     private _loginService: LoginService,
     private _route:Router,
@@ -33,11 +34,11 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
     ) {
       let queryString = this.activatedRoute.snapshot.queryParams;
       if(queryString){
-        let accessToken = Object.keys(queryString).pop();
-        if(accessToken && !this._jwtHelper.isTokenExpired(accessToken)){
-         let obj =  _jwtHelper.decodeToken(accessToken);
+        this.accessToken = Object.keys(queryString).pop();
+        if(this.accessToken && !this._jwtHelper.isTokenExpired(this.accessToken)){
+         let obj =  _jwtHelper.decodeToken(this.accessToken);
          let object = {
-          access_token: accessToken,
+          access_token: this.accessToken,
           UserAccount: obj.user
          }
           localStorage.setItem('userIdentity', JSON.stringify(object))
@@ -87,10 +88,10 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
           this.logout();
         }
         else{
-          this._toast.success("Password not updated please try after some few minutes");
-          this.userIdentity.UserAccount.IsTermAndConditionAccepted = 1;
-          localStorage.setItem('userIdentity', JSON.stringify(this.userIdentity));
-          this._route.navigate(['/user/dashboard']);
+          this._toast.error("Password not updated please try after some few minutes");
+        //   this.userIdentity.UserAccount.IsTermAndConditionAccepted = 1;
+        //   localStorage.setItem('userIdentity', JSON.stringify(this.userIdentity));
+        //   this._route.navigate(['/user/dashboard']);
         }
       })
       .catch(err => {
