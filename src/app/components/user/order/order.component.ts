@@ -263,6 +263,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
             return obj;
           });
           this.selectedTemplate = data.OrderTemplate[0];
+          this.orderplacementStage = true;
           this.tabs.select('orderSummary');
           this.fillProductsInfo(this.orderSummary);
         }
