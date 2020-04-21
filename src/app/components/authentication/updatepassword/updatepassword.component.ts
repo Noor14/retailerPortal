@@ -1,3 +1,4 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { CanComponentDeactivate } from './../../../services/deactivate.guard';
 import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
 import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { AppPattern } from '../../../shared/app.mask'
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-updatepassword',
@@ -26,9 +27,23 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
     private _loginService: LoginService,
     private _route:Router,
     private _toast: ToastrService,
-    private _modalService : NgbModal
+    private _modalService : NgbModal,
+    public _jwtHelper: JwtHelperService,
+    private activatedRoute: ActivatedRoute
     ) {
-
+      let queryString = this.activatedRoute.snapshot.queryParams;
+      if(queryString){
+        let accessToken = Object.keys(queryString).pop();
+        if(accessToken && !this._jwtHelper.isTokenExpired(accessToken)){
+         let obj =  _jwtHelper.decodeToken(accessToken);
+         let object = {
+          access_token: accessToken,
+          UserAccount: obj.user
+         }
+          localStorage.setItem('userIdentity', JSON.stringify(object))
+        }
+      }
+   
    }
   canDeactivate(){
     if(this.updatePasswordForm.dirty){
@@ -52,6 +67,8 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
       NewPassword: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.password)]),
       ConfirmPassword: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.password)]),
     })
+
+ 
   }
   ngOnDestroy(){
     if(this.updatePasswordFormSubscriber){
