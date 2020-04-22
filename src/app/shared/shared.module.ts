@@ -47,7 +47,8 @@ import { FooterComponent } from './footer/footer.component';
     NumberDirective,
     AlphaNumericOnlyDirective,
     NgbModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FormsModule
   ],
 
   providers:[]

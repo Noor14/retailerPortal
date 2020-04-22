@@ -44,7 +44,6 @@ import { OrderComponent } from './order/order.component';
     UserRoutingModule,
     TextMaskModule,
     ReactiveFormsModule,
-    FormsModule,
     TreeTableModule,
     SharedModule
   ],
