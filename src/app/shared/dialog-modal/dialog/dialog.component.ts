@@ -42,7 +42,7 @@ export class DialogComponent implements OnInit {
       this.showSpinner = true;
       this._supportService.postCalls('support/Delete', { ID: this.dialogBoxObject.id }, 7)
       .then((res: any) => {
-        this._toast.success('Token successfully deleted');
+        this._toast.success('Token deleted');
         this.showSpinner = false;
         this.activeModal.close(this.dialogBoxObject.id);
       })
@@ -58,7 +58,7 @@ export class DialogComponent implements OnInit {
       this.showSpinner = true;
       this._dashboardService.deletePayment(this.dialogBoxObject.id)
       .then((res: any) => {
-        this._toast.success('Payment successfully deleted');
+        this._toast.success('Payment deleted');
         this.showSpinner = false;
         this.activeModal.close(this.dialogBoxObject.id);
       })
