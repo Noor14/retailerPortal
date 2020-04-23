@@ -79,7 +79,8 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
   updatePassword() {
     if(this.updatePasswordForm.valid && this.updatePasswordForm.controls['ConfirmPassword'].value == this.updatePasswordForm.controls['NewPassword'].value){
       this.showSpinner = true;
-    this._loginService.PostCalls(this.updatePasswordForm.value, "users/UpdatePassword", 8)
+      let endPoint = (this.accessToken)? "users/UpdatePasswordByLink" : "users/UpdatePassword";
+      this._loginService.PostCalls(this.updatePasswordForm.value, endPoint, 8)
       .then(data => {
       this.showSpinner=false;
       this.updatePasswordForm.reset();
