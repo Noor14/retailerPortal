@@ -33,7 +33,7 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
     private activatedRoute: ActivatedRoute
     ) {
       let queryString = this.activatedRoute.snapshot.queryParams;
-      if(queryString){
+      if(queryString && Object.keys(queryString).length){
         this.accessToken = Object.keys(queryString).pop();
         if(this.accessToken && !this._jwtHelper.isTokenExpired(this.accessToken)){
          let obj =  _jwtHelper.decodeToken(this.accessToken);
@@ -42,6 +42,10 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
           UserAccount: obj.user
          }
           localStorage.setItem('userIdentity', JSON.stringify(object))
+        }
+        else{
+          this._toast.error("Session has been expired");
+          this._route.navigate(['login']);
         }
       }
    
