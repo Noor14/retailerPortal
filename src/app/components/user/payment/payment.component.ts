@@ -14,8 +14,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./payment.component.scss']
+  styleUrls: ['./payment.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   public showSpinner:boolean;
