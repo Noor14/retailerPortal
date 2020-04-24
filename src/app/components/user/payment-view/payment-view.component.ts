@@ -1,19 +1,19 @@
-import { loadingConfig } from './../../../constant/globalfunction';
+import { loadingConfig } from '../../../constant/globalfunction';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, SecurityContext } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PaymentDetailService } from './payment-detail.service';
+import { PaymentViewService } from './payment-view.service';
 import * as moment from 'moment';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-payment-details',
-  templateUrl: './payment-details.component.html',
-  styleUrls: ['./payment-details.component.scss']
+  selector: 'app-payment-view',
+  templateUrl: './payment-view.component.html',
+  styleUrls: ['./payment-view.component.scss']
 })
-export class PaymentDetailsComponent implements OnInit {
+export class PaymentViewComponent implements OnInit {
 
   public showSpinner: boolean;
   public spinnerConfig:any;
@@ -23,7 +23,7 @@ export class PaymentDetailsComponent implements OnInit {
 
  constructor(
    private activatedRoute: ActivatedRoute,
-   private _paymentDetailService: PaymentDetailService,
+   private _paymentViewService: PaymentViewService,
    private _toast: ToastrService,
    private _domSanitizer: DomSanitizer
    ) {
@@ -54,7 +54,7 @@ export class PaymentDetailsComponent implements OnInit {
   }
   getPaymentDetails(resourceName, requestId){
       this.showSpinner=true;
-    this._paymentDetailService.getDetail(resourceName, requestId).then((data: any) => {
+    this._paymentViewService.getDetail(resourceName, requestId).then((data: any) => {
       if(!this.requestType && this.requestId){
         data = data.Invoice;
       }
@@ -74,7 +74,7 @@ export class PaymentDetailsComponent implements OnInit {
   }
   viewReceipt(){
       this.showSpinner=true;
-      this._paymentDetailService.getDetail('prepaidrequests/paymentreceipt', this.requestId)
+      this._paymentViewService.getDetail('prepaidrequests/paymentreceipt', this.requestId)
       .then((res:any)=>{
         this.showSpinner=false;
         if(res.data && res.data.length){

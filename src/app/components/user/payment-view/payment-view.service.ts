@@ -5,7 +5,7 @@ import { baseApi } from 'src/app/constant/baseurl';
 @Injectable({
   providedIn: 'root'
 })
-export class PaymentDetailService {
+export class PaymentViewService {
 
   constructor(private _http: HttpClient) { }
 

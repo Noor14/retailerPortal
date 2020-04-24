@@ -1,0 +1,115 @@
+<section class="orderView">
+    <ol class="breadcrumb m-0">
+        <li class="breadcrumb-item">
+            <a routerLink="/user/dashboard">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="breadcrumb-item">Order</a>
+        </li>
+    </ol>
+    <ngb-tabset>
+        <ngb-tab>
+          <ng-template ngbTabTitle>Order</ng-template>
+          <ng-template ngbTabContent>
+            <app-order-description [orderDescription]="orderInfo"></app-order-description>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab>
+          <ng-template ngbTabTitle>Order Detail</ng-template>
+          <ng-template ngbTabContent>
+            <app-order-detail [orderList]="orderDetailList"></app-order-detail>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab *ngIf="orderPaymentDetailForm.controls['InvoiceNumber'].value">
+          <ng-template ngbTabTitle>Payment</ng-template>
+          <ng-template ngbTabContent>
+            <div class="contentArea bg-white p-4">
+                <form [formGroup]="orderPaymentDetailForm">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group has-float-label">
+                                <input type="text" id="invoiceCompanyName" class="form-control" formControlName="CompanyName" placeholder="Company Name">
+                                <label for="invoiceCompanyName">Company Name</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group has-float-label">
+                                <input type="text" id="paymentID" class="form-control" formControlName="InvoiceNumber" placeholder="Payment ID">
+                                <label for="paymentID">Payment ID</label>
+                            </div>
+                        </div>
+                   
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group has-float-label">
+                                <input type="text" id="invoiceCreatedDate" class="form-control" formControlName="InvoiceCreatedDate" placeholder="Created Date" >
+                                <label for="invoiceCreatedDate">Created Date</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group has-float-label">
+                                <input type="text"  id="transactionDate"  class="form-control" formControlName="TransactionDate" placeholder="Transaction Date">
+                                <label for="transactionDate">Transaction Date</label>                                        
+                            </div>
+                        </div>
+                 
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group has-float-label">
+                                <input type="text" id="bank" class="form-control" formControlName="BankName" placeholder="Bank" >
+                                <label for="bank">Bank</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group has-float-label">
+                                <input type="text"  id="authID"  class="form-control" formControlName="AuthID" placeholder="Authorization ID">
+                                <label for="authID">Authorization ID</label>                                        
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-6 col-sm-12" *ngIf="orderPaymentDetailForm.controls['SettlementID'].value">
+                            <div class="form-group has-float-label">
+                                <input type="text" id="settlementID" class="form-control" formControlName="SettlementID" placeholder="Settlement ID" >
+                                <label for="settlementID">Settlement ID</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group has-float-label">
+                                <input type="text"  id="invoiceStatus"  class="form-control" formControlName="InvoiceStatus"  placeholder="Invoice Status">
+                                <label for="invoiceStatus">Status</label>                                        
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group has-float-label position-relative">
+                                <input type="text" id="paidAmount" class="form-control" formControlName="InvoiceTotalAmount" placeholder="Amount" >
+                                <label for="paidAmount">Amount</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group has-float-label">
+                                <input type="text"  id="transactionCharges"  class="form-control" formControlName="TransactionCharges" placeholder="Transaction Charges">
+                                <label for="transactionCharges">Transaction Charges</label>                                        
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group has-float-label position-relative">
+                                <input type="text" id="invoiceTotalAmount" class="form-control totalAmount" formControlName="TotalAmount" placeholder="Total Amount" >
+                                <label for="invoiceTotalAmount">Total Amount</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="text-right">
+                        <button class="btn btn-primary ml-3" type="button" routerLink="/user/dashboard">Back</button>
+                    </div>
+
+                </form>
+            </div>
+          </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</section>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

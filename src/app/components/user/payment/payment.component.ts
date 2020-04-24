@@ -2,18 +2,19 @@ import { CanComponentDeactivate } from './../../../services/deactivate.guard';
 import { AppPattern } from '../../../shared/app.mask';
 import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit, OnDestroy, SecurityContext } from '@angular/core';
+import { Component, OnInit, OnDestroy, SecurityContext, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PaymentService } from './payment.service';
 import { PaymentInstructionComponent } from '../../../shared/dialog-modal/payment-instruction/payment-instruction.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PaymentDetailService } from '../payment-details/payment-detail.service';
+import { PaymentViewService } from '../payment-view/payment-view.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactivate {
@@ -24,14 +25,17 @@ export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactiva
   public paymentPrepaidNumber:number = undefined;
   private paymentFormSubscriber:any;
   public updateBtn:boolean = false;
-  private requestId:Number;
+  public requestId:Number;
   public requestType: Number;
+  public orderInfo:any;
+  public orderDetailList: any[] =[];
+
   constructor(
     private _paymentService: PaymentService,
     private _toast: ToastrService,
     private _modalService: NgbModal,
     private activatedRoute: ActivatedRoute,
-    private _paymentDetailService: PaymentDetailService,
+    private _paymentViewService: PaymentViewService,
     private _route: Router,
     private _domSanitizer: DomSanitizer
     ) {
@@ -76,11 +80,15 @@ export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactiva
 
   getPaymentDetails(resourceName, requestId){
     this.showSpinner=true;
-    this._paymentDetailService.getDetail(resourceName, requestId).then((data: any) => {
+    this._paymentViewService.getDetail(resourceName, requestId).then((data: any) => {
     this.showSpinner=false;
     if(!this.requestType && this.requestId){
+     this.orderDetailList = data.OrderDetails;
       data = data.Invoice;
       data.PaidAmount = data.TotalAmount;
+      data.OrderCreatedDate = data.CreatedDate;
+      data.OrderStatus = data.Status;
+      this.orderInfo = data;
     }
     this.paymentForm.patchValue(data);
     this.paymentPrepaidNumber = data.PrePaidNumber;

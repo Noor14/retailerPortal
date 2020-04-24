@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from 'src/app/shared/app.mask';
 import { SharedService } from '../../../../services/shared.service';
-import { TicketSupportService } from '../ticket-support.service';
+import { SupportService } from '../support.service';
 @Component({
   selector: 'app-supportscreen',
   templateUrl: './supportscreen.component.html',
@@ -28,7 +28,7 @@ export class SupportscreenComponent implements OnInit, OnDestroy, CanComponentDe
   private readonlyCheck: boolean = false
   public emailEdit: boolean = true;
   constructor(
-    private _supportService: TicketSupportService,
+    private _supportService: SupportService,
     private _router: Router,
     private _route: ActivatedRoute,
     private _sharedService: SharedService,

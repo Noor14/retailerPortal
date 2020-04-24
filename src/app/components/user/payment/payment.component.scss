@@ -1,13 +1,31 @@
+@import "../../../../assets/_scss/_variables";
+
 .payment{
   .makePaymentBtn{
-    margin-top: -16px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
     .bankingChannelBtn{
       img{
         width: 20px;
         margin-right: 5px;
         vertical-align: top;
+      }
+    }
+    &.tabHeading{
+      ngb-tabset{
+        ul{
+          border-bottom: 1px solid $baseFontColor;
+          li:first-child{
+            a{
+              border-bottom: 1px solid $baseFontColor !important;
+              font-weight: 500;
+              color: $baseFontColor !important;
+              font-size: 1.25rem;
+              font-family: $baseSourceSansproSemiBold;
+              cursor: auto;
+            }
+          }
+        }
       }
     }
 }

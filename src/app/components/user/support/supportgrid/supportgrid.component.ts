@@ -1,6 +1,6 @@
 import { loadingConfig } from './../../../../constant/globalfunction';
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
-import { TicketSupportService } from '../ticket-support.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { SupportService } from '../support.service';
 import { Router } from '@angular/router';
 import { SharedService } from '../../../../services/shared.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,7 +13,6 @@ import { DialogComponent } from 'src/app/shared/dialog-modal/dialog/dialog.compo
 })
 export class SupportgridComponent implements OnInit, OnDestroy {
 
-  @ViewChild('search', {static: false}) search: ElementRef;
   public showSpinner: boolean;
   public spinnerConfig:any;
   private supportDropDownSubscriber:any;
@@ -40,7 +39,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
    private searchingByKey:any;
 
   constructor(
-    private _supportService: TicketSupportService,
+    private _supportService: SupportService,
     private _sharedService: SharedService,
     private _router: Router,
     private _modalService: NgbModal) { }

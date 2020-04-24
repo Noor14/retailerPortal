@@ -6,7 +6,7 @@ import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.co
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppMasks, AppPattern } from '../../../shared/app.mask';
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { OrderDetailService } from '../order-detail/order-detail.service';
+import { OrderService } from './order.service';
 import { TreeNode } from 'primeng/api/treenode';
 import { NgbTabset, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -57,7 +57,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
   @ViewChild('searchProduct', {static: false, read: ElementRef}) search: ElementRef;
 
   constructor(
-    private _orderDetailService : OrderDetailService,
+    private _orderService : OrderService,
     private _toast: ToastrService,
     private _route: Router,
     private activatedRoute: ActivatedRoute,
@@ -187,7 +187,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
 
   getOrderDetailByID(selectedDraftID){
     this.showSpinner=true;
-    this._orderDetailService.getDetail(selectedDraftID).then((data: any) => {
+    this._orderService.getDetail(selectedDraftID).then((data: any) => {
     this.showSpinner=false;
     this.orderplacementStage = true;
     this.selectedOrderStatus = data.OrderPaymentDetails.OrderStatus;
@@ -252,7 +252,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
     })
     if(templateId != 'undefined'){
       this.showSpinner = true;
-      this._orderDetailService.getTemplateDetail('ordertemplate/GetByTemplateID', templateId, this.selectedDealerCode).then((data: any) => {
+      this._orderService.getTemplateDetail('ordertemplate/GetByTemplateID', templateId, this.selectedDealerCode).then((data: any) => {
         if(data && data.OrderTemplateDetails && data.OrderTemplateDetails.length){
           this.orderSummary = data.OrderTemplateDetails.map(obj => {
             obj.ProductUnitPrice = obj.UnitPrice;
@@ -353,7 +353,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
   }
   getKYCList(requestId){
     this.showSpinner=true;
-    this._orderDetailService.getKYCAndTemplateListDetail('kyc/ConnectedKycList', requestId).then((data: any) => {
+    this._orderService.getKYCAndTemplateListDetail('kyc/ConnectedKycList', requestId).then((data: any) => {
       this.kycList = data;
       this.showSpinner=false;
       if(this.selectedDraftID){
@@ -367,7 +367,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
 
   getTemplateList(dealerCode){
     this.showSpinner=true;
-    this._orderDetailService.getKYCAndTemplateListDetail('ordertemplate/GetAllByDealerCode', dealerCode).then((data: any) => {
+    this._orderService.getKYCAndTemplateListDetail('ordertemplate/GetAllByDealerCode', dealerCode).then((data: any) => {
       if(data){
         this.templateList = data;
       }
@@ -400,7 +400,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
       DealerCode:this.selectedDealerCode,
       OrderDetails: this.orderSummary.filter(obj=> obj.OrderQty)
       }
-      this._orderDetailService.save('Orders/draft', obj).then((data: any) => {
+      this._orderService.save('Orders/draft', obj).then((data: any) => {
         if(data.OrderNumber && data.ID){
           this._toast.success("Order saved");
           this.selectedDraftID = data.ID
@@ -426,7 +426,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
       DealerCode:this.selectedDealerCode,
       OrderDetails:this.orderSummary
       }
-      this._orderDetailService.save('Orders/saveOrder', obj).then((data: any) => {
+      this._orderService.save('Orders/saveOrder', obj).then((data: any) => {
         if(data.OrderNumber && data.ID){
           this.orderplacementStage = false;
           this._toast.success("Order created");
@@ -541,7 +541,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
       this.selectedCategoryForFilter = undefined;
      this.getTemplateList(dealerCode);
      this.showSpinner=true;
-      this._orderDetailService.getKYCAndTemplateListDetail('products/GetProductByDealerCode', dealerCode).then((data: any) => {
+      this._orderService.getKYCAndTemplateListDetail('products/GetProductByDealerCode', dealerCode).then((data: any) => {
         this.showSpinner=false;
         this.toggleCompanyProductList = true;
         this.setTableTreeClass();

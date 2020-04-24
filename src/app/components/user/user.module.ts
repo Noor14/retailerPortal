@@ -10,20 +10,22 @@ import { UserComponent } from './user.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileService } from './profile/profile.service';
 import { TextMaskModule } from 'angular2-text-mask';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { SupportgridComponent } from './support/supportgrid/supportgrid.component';
 import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
 import { DashboardService } from './dashboard/dashboard.service';
-import { TicketSupportService } from './support/ticket-support.service';
+import { SupportService } from './support/support.service';
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentService } from './payment/payment.service';
 import { NetworkComponent } from './network/network.component';
 import { NetworkService } from './network/network.service';
-import { PaymentDetailsComponent } from './payment-details/payment-details.component';
-import { PaymentDetailService } from './payment-details/payment-detail.service';
+import { PaymentViewComponent } from './payment-view/payment-view.component';
+import { PaymentViewService } from './payment-view/payment-view.service';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
-import { OrderDetailService } from './order-detail/order-detail.service';
+import { OrderService } from './order/order.service';
 import { OrderComponent } from './order/order.component';
+import { OrderViewComponent } from './order-view/order-view.component';
+import { OrderDescriptionComponent } from './order-description/order-description.component';
 
 @NgModule({
   declarations: [
@@ -34,9 +36,11 @@ import { OrderComponent } from './order/order.component';
     SupportscreenComponent,
     PaymentComponent,
     NetworkComponent,
-    PaymentDetailsComponent,
+    PaymentViewComponent,
     OrderDetailComponent,
-    OrderComponent
+    OrderComponent,
+    OrderViewComponent,
+    OrderDescriptionComponent
   ],
 
   imports: [
@@ -49,13 +53,13 @@ import { OrderComponent } from './order/order.component';
   ],
   providers:[
     ProfileService,
-    TicketSupportService,
+    SupportService,
     DashboardService,
     PaymentService,
     UserService,
     NetworkService,
-    PaymentDetailService,
-    OrderDetailService,
+    PaymentViewService,
+    OrderService,
     DeactivateGuard
   ]
 

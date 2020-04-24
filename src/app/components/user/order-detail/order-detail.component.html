@@ -1,210 +1,54 @@
 <section class="orderDetail">
-        <ol class="breadcrumb m-0">
-            <li class="breadcrumb-item">
-                <a routerLink="/user/dashboard">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a class="breadcrumb-item">Order</a>
-            </li>
-        </ol>
-        <ngb-tabset>
-            <ngb-tab>
-              <ng-template ngbTabTitle>Order</ng-template>
-              <ng-template ngbTabContent>
-                <div class="contentArea bg-white p-4">
-                    <form [formGroup]="orderDetailForm">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group has-float-label">
-                                    <input type="text" id="CompanyName" class="form-control" formControlName="CompanyName" placeholder="Company Name">
-                                    <label for="CompanyName">Company Name</label>
-                                </div>
-                            </div>
+    <div class="content bg-white">
+        <div class="gridArea table-responsive" id="nav-scrollbar">
+          <table class="table" *ngIf="orderDetailList && orderDetailList.length">
+                <thead>
+                <tr>
+                    <th>Product Code</th>
+                    <th>Product Title</th>
+                    <th>Price</th>
+                    <th>Discounted Price</th>
+                    <th>UOM</th>
+                    <th>Pack Size</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let order of orderDetailList; let i = index">
+                    <td>{{order.ProductCode}}</td>
+                    <td>{{order.ProductName}}</td>
+                    <td>{{order.UnitPrice  | currency:'PKR '}}</td>
+                    <td>
+                        <span *ngIf="order.Discount; else otherTemp">{{order.Discount  | currency:'PKR '}}</span>
+                        <ng-template #otherTemp>{{order.UnitPrice  | currency:'PKR '}}</ng-template>
+                    </td>
+                    <td>{{order.UOMTitle}}</td>
+                    <td>{{order.PackSize}}</td>
+                    <td>{{order.OrderQty}}</td>
+                    <td>{{order.TotalPrice  | currency:'PKR '}}</td>
+               
+                </tr>
+                </tbody>
+     
+            </table>
+  
+          <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!orderDetailList.length">No Data Available</span>
+        </div>
+    </div>
+    <div class="summary mt-3 d-md-flex flex-md-row flex-sm-column justify-content-between pb-2" *ngIf="orderDetailList.length">
+        <div class="d-flex flex-column flex-fill">
+            <div>
+                Gross Amount: <span>{{grossAmount | currency : "PKR "}}</span> 
+            </div>
+            <div class="d-sm-flex flex-sm-row flex-xs-column">
+            <div class="flex-fill">Total Discount: <span>{{totalDiscount | currency:'PKR '}}</span></div>
+            <div class="flex-fill">Net Amount: <span>{{netAmount | currency : "PKR "}}</span></div>
+            </div>
+        </div>
+        <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
+            <button class="btn btn-primary" routerLink="/user/dashboard">Back</button>
+        </div>
+    </div>
 
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group has-float-label">
-                                    <input type="text"  id="OrderNumber" class="form-control" formControlName="OrderNumber" placeholder="Order ID">
-                                    <label for="OrderNumber">Order ID</label>
-                                </div>
-                            </div>
-                    
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group has-float-label">
-                                    <input type="text" id="CreatedDate" class="form-control" formControlName="OrderCreatedDate" placeholder="Created Date" >
-                                    <label for="CreatedDate">Created Date</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group has-float-label">
-                                    <input type="text"  id="OrderStatus"  class="form-control" formControlName="OrderStatus"  placeholder="Order Status">
-                                    <label for="OrderStatus">Order Status</label>                                        
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group has-float-label">
-                                    <textarea rows="2" id="Comment" class="form-control" placeholder="Comments" formControlName="Comment"></textarea>
-                                    <label for="Comment">Comments</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="text-right">
-                            <button class="btn btn-primary ml-3" type="button" routerLink="/user/dashboard">Back</button>
-                        </div>
-
-                    </form>
-                </div>
-              </ng-template>
-            </ngb-tab>
-            <ngb-tab>
-              <ng-template ngbTabTitle>Order Detail</ng-template>
-              <ng-template ngbTabContent>
-                <div class="content bg-white">
-                    <div class="gridArea table-responsive" id="nav-scrollbar">
-                      <table class="table" *ngIf="orderDetaiList && orderDetaiList.length">
-                            <thead>
-                            <tr>
-                                <th>Product Code</th>
-                                <th>Product Title</th>
-                                <th>Price</th>
-                                <th>Discounted Price</th>
-                                <th>UOM</th>
-                                <th>Pack Size</th>
-                                <th>Quantity</th>
-                                <th>Amount</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr *ngFor="let order of orderDetaiList; let i = index">
-                                <td>{{order.ProductCode}}</td>
-                                <td>{{order.ProductName}}</td>
-                                <td>{{order.UnitPrice  | currency:'PKR '}}</td>
-                                <td>
-                                    <span *ngIf="order.Discount; else otherTemp">{{order.Discount  | currency:'PKR '}}</span>
-                                    <ng-template #otherTemp>{{order.UnitPrice  | currency:'PKR '}}</ng-template>
-                                </td>
-                                <td>{{order.UOMTitle}}</td>
-                                <td>{{order.PackSize}}</td>
-                                <td>{{order.OrderQty}}</td>
-                                <td>{{order.TotalPrice  | currency:'PKR '}}</td>
-                           
-                            </tr>
-                            </tbody>
-                 
-                        </table>
-              
-                      <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!orderDetaiList.length && !showSpinner">No Data Available</span>
-                    </div>
-                  </div>
-                  <div class="summary mt-3 d-md-flex flex-md-row flex-sm-column justify-content-between pb-2">
-                    <div class="d-flex flex-column flex-fill">
-                        <div>
-                            Gross Amount: <span>{{grossAmount | currency : "PKR "}}</span> 
-                        </div>
-                        <div class="d-sm-flex flex-sm-row flex-xs-column">
-                        <div class="flex-fill">Total Discount: <span>{{totalDiscount | currency:'PKR '}}</span></div>
-                        <div class="flex-fill">Net Amount: <span>{{netAmount | currency : "PKR "}}</span></div>
-                        </div>
-                    </div>
-                        <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
-                            <button class="btn btn-primary" routerLink="/user/dashboard">Back</button>
-                        </div>
-                </div>
-
-              </ng-template>
-            </ngb-tab>
-            <ngb-tab *ngIf="orderPaymentDetailForm.controls['InvoiceNumber'].value">
-              <ng-template ngbTabTitle>Payment</ng-template>
-              <ng-template ngbTabContent>
-                <div class="contentArea bg-white p-4">
-                    <form [formGroup]="orderPaymentDetailForm">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group has-float-label">
-                                    <input type="text" id="invoiceCompanyName" class="form-control" formControlName="CompanyName" placeholder="Company Name">
-                                    <label for="invoiceCompanyName">Company Name</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group has-float-label">
-                                    <input type="text" id="paymentID" class="form-control" formControlName="InvoiceNumber" placeholder="Payment ID">
-                                    <label for="paymentID">Payment ID</label>
-                                </div>
-                            </div>
-                       
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group has-float-label">
-                                    <input type="text" id="invoiceCreatedDate" class="form-control" formControlName="InvoiceCreatedDate" placeholder="Created Date" >
-                                    <label for="invoiceCreatedDate">Created Date</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group has-float-label">
-                                    <input type="text"  id="transactionDate"  class="form-control" formControlName="TransactionDate" placeholder="Transaction Date">
-                                    <label for="transactionDate">Transaction Date</label>                                        
-                                </div>
-                            </div>
-                     
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group has-float-label">
-                                    <input type="text" id="bank" class="form-control" formControlName="BankName" placeholder="Bank" >
-                                    <label for="bank">Bank</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group has-float-label">
-                                    <input type="text"  id="authID"  class="form-control" formControlName="AuthID" placeholder="Authorization ID">
-                                    <label for="authID">Authorization ID</label>                                        
-                                </div>
-                            </div>
-                        
-                            <div class="col-md-6 col-sm-12" *ngIf="orderPaymentDetailForm.controls['SettlementID'].value">
-                                <div class="form-group has-float-label">
-                                    <input type="text" id="settlementID" class="form-control" formControlName="SettlementID" placeholder="Settlement ID" >
-                                    <label for="settlementID">Settlement ID</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group has-float-label">
-                                    <input type="text"  id="invoiceStatus"  class="form-control" formControlName="InvoiceStatus"  placeholder="Invoice Status">
-                                    <label for="invoiceStatus">Status</label>                                        
-                                </div>
-                            </div>
-                        
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group has-float-label position-relative">
-                                    <input type="text" id="paidAmount" class="form-control" formControlName="InvoiceTotalAmount" placeholder="Amount" >
-                                    <label for="paidAmount">Amount</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group has-float-label">
-                                    <input type="text"  id="transactionCharges"  class="form-control" formControlName="TransactionCharges" placeholder="Transaction Charges">
-                                    <label for="transactionCharges">Transaction Charges</label>                                        
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group has-float-label position-relative">
-                                    <input type="text" id="invoiceTotalAmount" class="form-control totalAmount" formControlName="TotalAmount" placeholder="Total Amount" >
-                                    <label for="invoiceTotalAmount">Total Amount</label>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="text-right">
-                            <button class="btn btn-primary ml-3" type="button" routerLink="/user/dashboard">Back</button>
-                        </div>
-
-                    </form>
-                </div>
-              </ng-template>
-            </ngb-tab>
-          </ngb-tabset>
 </section>
-<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

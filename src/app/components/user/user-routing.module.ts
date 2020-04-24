@@ -1,3 +1,4 @@
+import { OrderViewComponent } from './order-view/order-view.component';
 import { DeactivateGuard } from './../../services/deactivate.guard';
 import { NgModule } from '@angular/core';
 import { PaymentComponent } from './payment/payment.component';
@@ -8,8 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SupportgridComponent } from './support/supportgrid/supportgrid.component';
 import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
 import { NetworkComponent } from './network/network.component';
-import { PaymentDetailsComponent } from './payment-details/payment-details.component';
-import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { PaymentViewComponent } from './payment-view/payment-view.component';
 import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
@@ -23,10 +23,10 @@ const routes: Routes = [
     { path: 'support/:id', component: SupportscreenComponent, canDeactivate: [DeactivateGuard] },
     { path: 'payment', component: PaymentComponent, canDeactivate: [DeactivateGuard]},
     { path: 'payment/:id/:viewType', component: PaymentComponent, canDeactivate: [DeactivateGuard] },
-    { path: 'paymentDetail/:id/:viewType', component: PaymentDetailsComponent },
+    { path: 'paymentView/:id/:viewType', component: PaymentViewComponent },
     { path: 'order', component: OrderComponent, canDeactivate: [DeactivateGuard] },
     { path: 'order/:id', component: OrderComponent, canDeactivate: [DeactivateGuard] },
-    { path: 'orderDetail/:id', component: OrderDetailComponent },
+    { path: 'orderView/:id', component: OrderViewComponent },
     { path: 'network', component: NetworkComponent },
     { path: '**', redirectTo: 'dashboard' }
     ]

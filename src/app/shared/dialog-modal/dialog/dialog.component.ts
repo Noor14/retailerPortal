@@ -1,10 +1,10 @@
 import { loadingConfig } from './../../../constant/globalfunction';
 import { HttpErrorResponse } from '@angular/common/http';
-import { OrderDetailService } from './../../../components/user/order-detail/order-detail.service';
+import { OrderService } from '../../../components/user/order/order.service';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { TicketSupportService } from './../../../components/user/support/ticket-support.service';
+import { SupportService } from '../../../components/user/support/support.service';
 import { DashboardService } from '../../../components/user/dashboard/dashboard.service';
 
 @Component({
@@ -21,9 +21,9 @@ export class DialogComponent implements OnInit {
   public name: string = undefined;
   constructor(
     public activeModal: NgbActiveModal,
-    private _supportService: TicketSupportService,
+    private _supportService: SupportService,
     private _dashboardService :DashboardService,
-    private _orderDetailService: OrderDetailService,
+    private _orderService: OrderService,
     private _toast: ToastrService) { }
 
   ngOnInit() {
@@ -117,7 +117,7 @@ export class DialogComponent implements OnInit {
       if(this.name.trim()){
         this.showSpinner = true;
         this.dialogBoxObject.object.Name = this.name.trim();
-        this._orderDetailService.save('ordertemplate/save', this.dialogBoxObject.object)
+        this._orderService.save('ordertemplate/save', this.dialogBoxObject.object)
         .then((res: any) => {
           this.showSpinner = false;
           if(res.ID){

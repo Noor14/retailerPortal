@@ -35,7 +35,7 @@
                             <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
-                                <button ngbDropdownItem *ngIf="(payment.IsEditable && payment.Status == 'Paid') || (!payment.IsEditable && (payment.Status == 'Blocked' || payment.Status == 'Payment Processing' || payment.Status == 'Paid' || payment.Status == 'Un-paid'))" [routerLink] = "['/user/paymentDetail', payment.RetailerInvoiceId, payment.IsEditable]">View</button>
+                                <button ngbDropdownItem *ngIf="(payment.IsEditable && payment.Status == 'Paid') || (!payment.IsEditable && (payment.Status == 'Blocked' || payment.Status == 'Payment Processing' || payment.Status == 'Paid' || payment.Status == 'Un-paid'))" [routerLink] = "['/user/paymentView', payment.RetailerInvoiceId, payment.IsEditable]">View</button>
                                 <button ngbDropdownItem *ngIf="payment.Status == 'Un-Paid'" [routerLink] = "['/user/payment', payment.RetailerInvoiceId, payment.IsEditable]">
                                   <span *ngIf="payment.IsEditable; else temp">Edit</span>
                                   <ng-template #temp>View</ng-template>
@@ -52,7 +52,7 @@
                         </td>
                       </tr>
                       <tr  class="text-center" *ngIf="loadAvailableCount > paymentsList.length">
-                        <td colspan="6"> <button class="btn" (click)="loadMore(filterObjPayment.searchMode)" >Load More</button></td>
+                        <td colspan="6"> <button class="btn" (click)="loadMore(filterObjPayment.searchMode)">Load More</button></td>
                      </tr>
                       </tbody>
                   </table>
@@ -91,7 +91,7 @@
                             <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
-                                <button ngbDropdownItem *ngIf="order.Status != 'Draft'" [routerLink] = "['/user/orderDetail', order.ID]">View</button>
+                                <button ngbDropdownItem *ngIf="order.Status != 'Draft'" [routerLink] = "['/user/orderView', order.ID]">View</button>
                                 <button ngbDropdownItem *ngIf="order.Status == 'Draft' || order.Status == 'Pending'" [routerLink] = "['/user/order', order.ID]">Edit </button>
                                 <button ngbDropdownItem *ngIf="order.Status == 'Draft'" (click)="openDialog(order.ID, 'delete', 'order')">Delete</button>
                                 <button ngbDropdownItem *ngIf="(order.Status == 'Approved' && order.InvoiceStatus == 'Un-Paid') || order.Status == 'Pending'" (click)="openDialog(order.ID, 'cancel', 'order')">Cancel</button>
