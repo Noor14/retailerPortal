@@ -200,9 +200,9 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
       return obj;
     });
     this.calculateSummary();
-    this.companyProducts(data.OrderPaymentDetails.DealerCode);
     this.selectedCompany = this.kycList.find(obj => obj.DealerCode == data.OrderPaymentDetails.DealerCode).DealerCode;
     this.companyDetail(this.selectedCompany);
+    this.companyProducts(data.OrderPaymentDetails.DealerCode);
   })
   .catch((err:HttpErrorResponse) => {
     this.showSpinner=false;
