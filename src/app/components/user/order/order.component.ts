@@ -200,9 +200,9 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
       return obj;
     });
     this.calculateSummary();
+    this.companyProducts(data.OrderPaymentDetails.DealerCode);
     this.selectedCompany = this.kycList.find(obj => obj.DealerCode == data.OrderPaymentDetails.DealerCode).DealerCode;
     this.companyDetail(this.selectedCompany);
-    this.companyProducts(data.OrderPaymentDetails.DealerCode);
   })
   .catch((err:HttpErrorResponse) => {
     this.showSpinner=false;
@@ -620,14 +620,14 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
         this.categoryList = dataList;
         this.categoryListCopy = [...this.categoryList];
         
-        if(this.filterByMainCategory.length){
+        if(this.filterByMainCategory.length && !this.orderSummary.length){
           if(this.onTypeSubscriber){
             this.onTypeSubscriber.unsubscribe();
           }
           this.searchOntyping();
         }
       }
-      if(this.categoryList && this.categoryList.length && this.orderSummary && this.orderSummary.length && this.selectedDraftID){
+      if(this.categoryList.length && this.orderSummary.length && this.selectedDraftID){
         this.fillProductsInfo(this.orderSummary);
       }
  
