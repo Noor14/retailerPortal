@@ -83,11 +83,9 @@ export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactiva
     this._paymentViewService.getDetail(resourceName, requestId).then((data: any) => {
     this.showSpinner=false;
     if(!this.requestType && this.requestId){
-     this.orderDetailList = data.OrderDetails;
+      this.orderDetailList = data.OrderDetails;
       data = data.Invoice;
       data.PaidAmount = data.TotalAmount;
-      data.OrderCreatedDate = data.CreatedDate;
-      data.OrderStatus = data.Status;
       this.orderInfo = data;
     }
     this.paymentForm.patchValue(data);
