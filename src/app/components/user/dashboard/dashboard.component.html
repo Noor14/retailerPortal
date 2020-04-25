@@ -18,20 +18,20 @@
                 <table class="table" *ngIf="paymentsList && paymentsList.length">
                       <thead>
                       <tr>
-                          <th>Payment ID</th>
+                          <th >Payment ID</th>
                           <th>Company</th>
                           <th>Status</th>
                           <th>Amount</th>
-                          <th>Action</th>
+                          <th class="first-col">Action</th>
                       </tr>
                       </thead>
                       <tbody>
                       <tr *ngFor="let payment of paymentsList; let i = index">
-                          <td>{{payment.InvoiceNumber}}</td>
+                          <td >{{payment.InvoiceNumber}}</td>
                           <td>{{payment.CompanyName}}</td>
                           <td class="statusWidth">{{payment.Status}}</td>
                           <td>{{payment.TotalPrice | currency:'PKR '}}</td>
-                          <td>
+                          <td class="first-col">
                             <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
