@@ -607,7 +607,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
           list.push(object);
         }
       }
-      if(list && list.length){
+      if(list.length){
         list.forEach((obj)=>{
           let child = obj.children;
           delete obj.children;
@@ -626,9 +626,9 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
           }
           this.searchOntyping();
         }
-      }
-      if(this.categoryList.length && this.orderSummary.length && this.selectedDraftID){
-        this.fillProductsInfo(this.orderSummary);
+        if(this.categoryList.length && this.orderSummary.length && this.selectedDraftID){
+          this.fillProductsInfo(this.orderSummary);
+        }
       }
  
     }
