@@ -385,6 +385,9 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
       this.orderplacementStage = false;
       this.selectedTemplate = null;
       this.selectedTemplateID = undefined;
+      if(!this.activatedRoute.snapshot.url[1]){
+        this.selectedDraftID = undefined;
+      }
     }
   }
 
@@ -624,7 +627,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
           this.searchOntyping();
         }
       }
-      if(this.categoryList && this.categoryList.length && this.selectedDraftID){
+      if(this.categoryList && this.categoryList.length && this.orderSummary && this.orderSummary.length && this.selectedDraftID){
         this.fillProductsInfo(this.orderSummary);
       }
  
