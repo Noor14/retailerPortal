@@ -102,7 +102,7 @@ export class SupportscreenComponent implements OnInit, OnDestroy, CanComponentDe
   
           if(data.ID){
             this.supportForm.reset();
-            this._toast.success('Ticket successfully generated');
+            this._toast.success('Ticket created');
             this._router.navigate(["/user/support"]);
           }
   
@@ -137,7 +137,7 @@ export class SupportscreenComponent implements OnInit, OnDestroy, CanComponentDe
     this._supportService.postCalls('support/Delete', { ID: this.supportForm.value.ID }, 7)
       .then((res: any) => {
         this.showSpinner=false;
-        this._toast.success('Token successfully deleted')
+        this._toast.success('Token deleted')
         this._router.navigate(["/user/support"]);
       })
       .catch(err => {
