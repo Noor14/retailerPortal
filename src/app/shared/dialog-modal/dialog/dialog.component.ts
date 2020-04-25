@@ -42,7 +42,7 @@ export class DialogComponent implements OnInit {
       this.showSpinner = true;
       this._supportService.postCalls('support/Delete', { ID: this.dialogBoxObject.id }, 7)
       .then((res: any) => {
-        this._toast.success('Token deleted');
+        this._toast.success('Ticket deleted');
         this.showSpinner = false;
         this.activeModal.close(this.dialogBoxObject.id);
       })

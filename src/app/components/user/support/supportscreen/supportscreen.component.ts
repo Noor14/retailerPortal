@@ -137,7 +137,7 @@ export class SupportscreenComponent implements OnInit, OnDestroy, CanComponentDe
     this._supportService.postCalls('support/Delete', { ID: this.supportForm.value.ID }, 7)
       .then((res: any) => {
         this.showSpinner=false;
-        this._toast.success('Token deleted')
+        this._toast.success('Ticket deleted')
         this._router.navigate(["/user/support"]);
       })
       .catch(err => {
