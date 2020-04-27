@@ -24,7 +24,9 @@ export class OrderDescriptionComponent implements OnInit, OnChanges {
       Comment: new FormControl({value:null, disabled:true}, [Validators.required]),
     });
     if(this.orderDescription && Object.keys(this.orderDescription).length){
-      this.orderDescription.OrderCreatedDate =  moment(this.orderDescription.OrderCreatedDate,'DD-MM-YYYY').format('DD-MM-YYYY');
+      if(moment(this.orderDescription.OrderCreatedDate).isValid()){
+        this.orderDescription.OrderCreatedDate =  moment(this.orderDescription.OrderCreatedDate).format('DD-MM-YYYY');
+      }
       this.orderDetailForm.patchValue(this.orderDescription);
     }
   }
