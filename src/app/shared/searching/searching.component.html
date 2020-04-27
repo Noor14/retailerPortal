@@ -1,6 +1,6 @@
 <section class="searching">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3 col-sm-6">
         <div class="form-group">
           <select class="form-control" [(ngModel)]="searchingOption" (change)="selectedOption(searchingOption)">
             <option value="undefined" selected>Select Criteria</option>
@@ -9,17 +9,17 @@
         </div>
       </div>
 
-      <div class="col-md-4" [ngSwitch]="selectedObject?.type">
+      <div class="col-md-4 col-sm-6" [ngSwitch]="selectedObject?.type">
         <div class="form-group" *ngSwitchCase="'typing'">
           <input class="form-control" type="text" #search [placeholder]="selectedObject?.placeholder" />
         </div>
         <div class="form-group d-flex" *ngSwitchCase="'dateRange'">
-          <div class="position-relative pr-2">
+          <div class="position-relative pr-2 flex-fill">
             <input class="form-control leftOpen" #dateSearchOne (keydown)="onlyBackSpaceAllow($event)" placement="left-bottom" [placeholder]="selectedObject?.placeholder[0]"
             autocomplete="off" [maxDate]="toDate || maxDate" (closed)="calenderSearching('fromDate')" [(ngModel)]="fromDate" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle(); getCurrentDate(fromDate, 'fromDate')">
           </div>
 
-          <div class="position-relative pl-2">
+          <div class="position-relative pl-2 flex-fill">
             <input class="form-control rightOpen" #dateSearchTwo (keydown)="onlyBackSpaceAllow($event)" placement="right-bottom" [placeholder]="selectedObject?.placeholder[1]"
             autocomplete="off" [maxDate]="maxDate" [minDate]="fromDate" (closed)="calenderSearching('toDate')" [(ngModel)]="toDate" ngbDatepicker #dp="ngbDatepicker" (click)="dp.toggle(); getCurrentDate(toDate, 'toDate')">
           </div>
