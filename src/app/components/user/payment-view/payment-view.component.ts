@@ -74,7 +74,8 @@ export class PaymentViewComponent implements OnInit {
   }
   viewReceipt(){
       this.showSpinner=true;
-      this._paymentViewService.getDetail('prepaidrequests/paymentreceipt', this.requestId)
+      let endPoint = (!this.requestType && this.requestId)? 'invoices/receipt' : 'prepaidrequests/paymentreceipt';
+      this._paymentViewService.getDetail(endPoint, this.requestId)
       .then((res:any)=>{
         this.showSpinner=false;
         if(res.data && res.data.length){
