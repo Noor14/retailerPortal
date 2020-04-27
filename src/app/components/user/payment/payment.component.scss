@@ -16,6 +16,7 @@
         ul{
           border-bottom: 1px solid $baseFontColor;
           li:first-child{
+            width:unset;
             a{
               border-bottom: 1px solid $baseFontColor !important;
               font-weight: 500;
