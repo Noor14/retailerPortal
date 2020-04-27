@@ -76,7 +76,7 @@ export class SupportComponent implements OnInit, OnDestroy, CanComponentDeactiva
       this.showSpinner = false;
       if(data.ID){
         this.supportForm.reset();
-        this._toast.success('Ticket successfully generated');
+        this._toast.success('Ticket generated');
         this._router.navigate(["/login"]);
       }
       })
