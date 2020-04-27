@@ -61,14 +61,6 @@ export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactiva
     }
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
-    if(this.requestId){
-      if(this.requestType){
-        this.getPaymentDetails('prepaidrequests', this.requestId);
-      }else{
-        this.getPaymentDetails('invoices', this.requestId);
-      }
-    }
-
     this.getDistributionList();
     this.paymentForm= new FormGroup ({
       ID: new FormControl(0, Validators.required),
@@ -118,7 +110,14 @@ export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactiva
     .then((res:any)=>{
       this.showSpinner=false;
       if(res && res.length){
-        this.distributorList = res
+        this.distributorList = res;
+        if(this.requestId){
+          if(this.requestType){
+            this.getPaymentDetails('prepaidrequests', this.requestId);
+          }else{
+            this.getPaymentDetails('invoices', this.requestId);
+          }
+        }
       }
     })
     .catch(err=>{
