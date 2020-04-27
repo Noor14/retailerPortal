@@ -22,7 +22,7 @@
                           <th>Company</th>
                           <th>Status</th>
                           <th>Amount</th>
-                          <th class="first-col">Action</th>
+                          <th>Action</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -31,7 +31,7 @@
                           <td>{{payment.CompanyName}}</td>
                           <td class="statusWidth">{{payment.Status}}</td>
                           <td>{{payment.TotalPrice | currency:'PKR '}}</td>
-                          <td class="first-col">
+                          <td>
                             <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
