@@ -46,13 +46,13 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         return Promise.resolve(res);
       }else{
         this._sharedService.callLogout = false;
-        return Promise.resolve(false);
+        return Promise.resolve(this._sharedService.callLogout);
       }   
     })
     .catch((err:HttpErrorResponse)=>{
       this._sharedService.callLogout = false;
       this._sharedService.loadingLogOut.next(this._sharedService.callLogout);
-      return Promise.resolve(false);
+      return Promise.resolve(this._sharedService.callLogout);
       })
   }
  

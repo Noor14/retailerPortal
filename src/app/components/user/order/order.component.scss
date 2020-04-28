@@ -16,12 +16,11 @@
             .gridArea{
                 height: unset;
                 .table{
+                    thead{
                     tr{
-                        background-color: #fff !important;
-                        &:hover{
-                            background-color: #e9ecef !important;
-                        }
                         th{
+                            background-color: #fff;
+                            z-index: auto;
                             &.productCode{
                                 min-width:105px
                             }
@@ -37,49 +36,60 @@
                             &.qty{
                                 min-width:200px
                             }
-                            @extend tr;
-                        }
-                        td{
-                            vertical-align: middle;
-                            .delIcon{
-                                width: 15px;
-                                cursor:pointer;
-                                vertical-align: top;
-                            }
-                            input{
-                                height: unset;
-                                margin: auto;
-                            }
-                            &.node{
-                                    font-weight: bold;
-                                    text-align: left;
-                                    text-indent: 10px;
-                                    p-treetabletoggler{
-                                        .ui-treetable-toggler {
-                                            position: relative;
-                                            .pi-chevron-right::before{
-                                                content: "+";
-                                                font-style: normal;
-                                                position: absolute;
-                                                font-size: 22px;
-                                                color: #96bb3d;
-                                                bottom: -9px;
-                                                font-weight: normal;
-                                            }
-                                            .pi-chevron-down::before{
-                                                @extend .pi-chevron-right,::before;
-                                                content: "–";
-                                                
-                                            }
-                                        }
-                                    }
-                                    span{
-                                      margin-left: 35px;
-                                    }
-                            }
+                          
                         }
                     }
-                  
+                    }
+                    tbody{
+                        tr{
+                            background-color: transparent;
+                            &:hover{
+                                background-color: #e9ecef;
+                            }
+                          
+                            td{
+                                vertical-align: middle;
+                                .delIcon{
+                                    width: 15px;
+                                    cursor:pointer;
+                                    vertical-align: top;
+                                }
+                                input{
+                                    height: unset;
+                                    margin: auto;
+                                }
+                                &.node{
+                                        font-weight: bold;
+                                        text-align: left;
+                                        text-indent: 10px;
+                                        p-treetabletoggler{
+                                            .ui-treetable-toggler {
+                                                position: relative;
+                                                .pi-chevron-right::before{
+                                                    content: "+";
+                                                    font-style: normal;
+                                                    position: absolute;
+                                                    font-size: 22px;
+                                                    color: #96bb3d;
+                                                    bottom: -9px;
+                                                    font-weight: normal;
+                                                }
+                                                .pi-chevron-down::before{
+                                                    @extend .pi-chevron-right,::before;
+                                                    content: "–";
+                                                    
+                                                }
+                                            }
+                                        }
+                                        span{
+                                          margin-left: 35px;
+                                        }
+                                }
+                            }
+                        }
+                      
+                    }
+                    
                 }
             }
          
