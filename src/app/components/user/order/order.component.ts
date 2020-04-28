@@ -272,6 +272,8 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
       .catch(err => {
         this.showSpinner=false;
       })
+    }else{
+      this.orderplacementStage = false;
     }
 
   }
