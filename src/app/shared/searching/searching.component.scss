@@ -2,6 +2,7 @@
 
 .searching{
   ngb-datepicker{
+    z-index: 3;
     .ngb-dp-header{
       background-color: unset;
       ngb-datepicker-navigation{

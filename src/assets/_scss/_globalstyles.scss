@@ -329,6 +329,7 @@ html{
       top: auto !important;
       transform: unset !important;
       padding: 0;
+      z-index: 1;
     }
   }
   .content{
@@ -344,7 +345,7 @@ html{
             background-color: #e9ecef;
             position: sticky;
             top: 0;
-            z-index: 1;
+            z-index: 2;
   
           }
           tbody{
