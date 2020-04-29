@@ -527,6 +527,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
           this.orderSummary.splice(index, 1);
           this._toast.success('Product deleted');
           if(!this.orderSummary.length){
+            this.orderplacementStage = false;
             this.tabs.select('placeOrder');
           }else{
             this.calculateSummary();
