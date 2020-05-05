@@ -173,7 +173,7 @@ export class RegistrationComponent implements OnInit, OnDestroy, CanComponentDea
     if (this.registerForm.valid) {
       if (this.registerForm.value.Password === this.registerForm.value.ConfirmPassword) {
       this.showSpinner = true;
-        this._loginService.PostCalls(this.registerForm.value, "retailer/Register", null)
+        this._loginService.postCalls(this.registerForm.value, "retailer/Register", null)
           .then((data: any) => {
             this.showSpinner = false;
             if (data.Found) {
@@ -187,7 +187,7 @@ export class RegistrationComponent implements OnInit, OnDestroy, CanComponentDea
             else {
               this.registerForm.reset();
               this._toast.success("Registered successfully");
-              this._router.navigate(['/login'])
+              this._router.navigate(['login'])
             }
           })
           .catch(err => {

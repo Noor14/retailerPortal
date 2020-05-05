@@ -62,7 +62,7 @@ export class ForgetpasswordComponent  implements OnInit, CanComponentDeactivate 
    }
     else{
       this.showSpinner = true;
-      this._loginService.PostCalls(this.forgetPasswordForm.value, "users/forgot", null)
+      this._loginService.postCalls(this.forgetPasswordForm.value, "users/forgot", null)
       .then((data:string) =>{
       this.showSpinner = false;
         if(data && (/true/i).test(data)){

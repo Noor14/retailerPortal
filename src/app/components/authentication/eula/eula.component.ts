@@ -27,12 +27,13 @@ export class EULAComponent implements OnInit {
       let userObj = { 
         RetailerID: this.userIdentity && this.userIdentity.UserAccount && this.userIdentity.UserAccount.RetailerID
       };
-      this._loginService.PostCalls(userObj,"users/termsandcondition", 9)
+      this._loginService.postCalls(userObj,"users/termsandcondition", 9)
       .then( data=>{
         if(data){
           this.showSpinner = false;
           if(this.userIdentity.UserAccount.SelfSignup){
             this.userIdentity.UserAccount.IsTermAndConditionAccepted = 1;
+            this.userIdentity.UserAccount.UpdatePassword = 1;
             localStorage.setItem('userIdentity', JSON.stringify(this.userIdentity));
             this._route.navigate((['/user/dashboard']))
           }

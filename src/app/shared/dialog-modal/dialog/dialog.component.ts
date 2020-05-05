@@ -1,3 +1,4 @@
+import { LoginService } from './../../../components/authentication/login/login.service';
 import { loadingConfig } from './../../../constant/globalfunction';
 import { HttpErrorResponse } from '@angular/common/http';
 import { OrderService } from '../../../components/user/order/order.service';
@@ -24,6 +25,7 @@ export class DialogComponent implements OnInit {
     private _supportService: SupportService,
     private _dashboardService :DashboardService,
     private _orderService: OrderService,
+    private _loginService: LoginService,
     private _toast: ToastrService) { }
 
   ngOnInit() {
@@ -71,8 +73,25 @@ export class DialogComponent implements OnInit {
     }
     else if(this.dialogBoxObject.mode == 'confirmDialog'){
       this.showSpinner = true;
+      if(!Object.hasOwnProperty('type')){
       this.activeModal.close(true);
       this.showSpinner = false;
+      }
+      else if(this.dialogBoxObject.type == 'skip'){
+        this._loginService.postCalls({skip:true}, 'users/update')
+        .then((res: any) => {
+          if(res){
+            this.showSpinner = false;
+            this.activeModal.close(res);
+          }
+        })
+        .catch((err:HttpErrorResponse) => {
+          this.showSpinner = false;
+          if(err.error){
+            this._toast.error(err.error.message, "Error")
+          }
+        })
+      }
     }
     else if(this.dialogBoxObject.mode == 'order' && this.dialogBoxObject.type == 'delete'){
       this.showSpinner = true;

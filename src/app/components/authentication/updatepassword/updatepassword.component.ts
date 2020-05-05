@@ -84,12 +84,12 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
     if(this.updatePasswordForm.valid && this.updatePasswordForm.controls['ConfirmPassword'].value == this.updatePasswordForm.controls['NewPassword'].value){
       this.showSpinner = true;
       let endPoint = (this.accessToken)? "users/UpdatePasswordByLink" : "users/UpdatePassword";
-      this._loginService.PostCalls(this.updatePasswordForm.value, endPoint, 8)
+      this._loginService.postCalls(this.updatePasswordForm.value, endPoint, 8)
       .then(data => {
       this.showSpinner=false;
       this.updatePasswordForm.reset();
         if (data) {
-          this._toast.success("Profile has been changed successfully");
+          this._toast.success("Password has been changed successfully");
           this.logout();
         }
         else{
@@ -123,10 +123,11 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
         keyboard: false,
         backdrop:'static'
       });
-      modalRef.componentInstance.obj = {btnText: 'Skip', titleTextColor: 'warning', title: 'Skip Process', detail: 'Are you sure, you want to skip?', mode: 'confirmDialog'};
+      modalRef.componentInstance.obj = {btnText: 'Skip', titleTextColor: 'warning', title: 'Skip Process', detail: 'Are you sure, you want to skip?', type:'skip',  mode: 'confirmDialog'};
       modalRef.result.then((result) => {
         if(result){
           this.userIdentity.UserAccount.IsTermAndConditionAccepted = 1;
+          this.userIdentity.UserAccount.UpdatePassword = 1;
           localStorage.setItem('userIdentity', JSON.stringify(this.userIdentity));
           this._route.navigate(['/user/dashboard']);
         }

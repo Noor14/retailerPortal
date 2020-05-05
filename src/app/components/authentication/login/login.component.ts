@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     this.loginForm = new FormGroup ({
-      Username: new FormControl(null, [Validators.required]),
-      Password: new FormControl(null, [Validators.required]),
+      Username: new FormControl(null, Validators.required),
+      Password: new FormControl(null, Validators.required),
       grant_type: new FormControl("password")
     });
   }
@@ -62,6 +62,8 @@ export class LoginComponent implements OnInit, OnDestroy {
             localStorage.setItem('userIdentity', JSON.stringify(data)); // can be used if you want to use session storage other chnge would be in Authentication Guard and home
             if (!data.UserAccount.IsTermAndConditionAccepted) {
               this._router.navigate(['eula']);
+            }else if(data.UserAccount.IsTermAndConditionAccepted && !data.UserAccount.UpdatePassword){
+              this._router.navigate(['updatePassword']);
             }
             else {
               this._router.navigate(['/user/dashboard']);

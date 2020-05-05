@@ -40,7 +40,7 @@ export class LoginService {
     return promise;
   }
 
-  PostCalls(UserData, recourseName, rightId) {
+  postCalls(UserData, recourseName, rightId?) {
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${recourseName}`;
       this._http.post(apiURL, UserData)
