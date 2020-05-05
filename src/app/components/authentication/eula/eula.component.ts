@@ -21,7 +21,22 @@ export class EULAComponent implements OnInit {
     this.spinnerConfig = loadingConfig;
     this.userIdentity = (localStorage.getItem('userIdentity'))? JSON.parse(localStorage.getItem('userIdentity')) : undefined;
   }
+  disagree(){
+    if(localStorage.getItem('userIdentity')){
+      this.logout();
+    } 
+    this._route.navigate(["login"]);
+  }
 
+  logout(){
+    this._loginService.logoutUser()
+    .then((res:boolean)=>{
+        localStorage.clear();
+    })
+    .catch((err:HttpErrorResponse)=>{
+      localStorage.clear();
+      })
+  }
   agreeTermsAndConditions(){
     this.showSpinner = true;
       let userObj = { 
