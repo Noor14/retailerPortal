@@ -620,10 +620,12 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
         this.categoryListCopy = [...this.categoryList];
         
         if(!this.orderSummary.length){
-          if(this.onTypeSubscriber){
-            this.onTypeSubscriber.unsubscribe();
-          }
-          this.searchOntyping();
+          setTimeout(()=>{
+            if(this.onTypeSubscriber){
+              this.onTypeSubscriber.unsubscribe();
+            }
+            this.searchOntyping();
+        },0)
         }
         if(this.categoryList.length && this.orderSummary.length && this.selectedDraftID){
           this.fillProductsInfo(this.orderSummary);
