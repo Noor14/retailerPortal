@@ -31,7 +31,7 @@ export class EULAComponent implements OnInit {
       .then( data=>{
         if(data){
           this.showSpinner = false;
-          if(this.userIdentity.UserAccount.SelfSignup){
+          if(this.userIdentity.UserAccount.SelfSignUp){
             this.userIdentity.UserAccount.IsTermAndConditionAccepted = 1;
             this.userIdentity.UserAccount.UpdatePassword = 1;
             localStorage.setItem('userIdentity', JSON.stringify(this.userIdentity));
