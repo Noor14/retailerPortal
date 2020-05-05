@@ -225,7 +225,6 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
     else if(event.nextId == "placeOrder"){
       this.setTableTreeClass();
       setTimeout(()=>{
-        if(this.filterByMainCategory.length){
           if(this.selectedSearchProduct){
             this.search.nativeElement.value = this.selectedSearchProduct 
           }
@@ -233,7 +232,6 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
             this.onTypeSubscriber.unsubscribe();
           }
           this.searchOntyping();
-        }
 
       },0);
 
@@ -572,7 +570,6 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
       this.setTableTreeClass();
       this.toggleCompanyProductList = true;
       setTimeout(()=>{
-        if(this.filterByMainCategory.length){
           if(this.selectedSearchProduct){
             this.search.nativeElement.value = this.selectedSearchProduct 
           }
@@ -580,7 +577,6 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
             this.onTypeSubscriber.unsubscribe();
           }
           this.searchOntyping();
-        }
       },0)
     }
   }
@@ -623,7 +619,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
         this.categoryList = dataList;
         this.categoryListCopy = [...this.categoryList];
         
-        if(this.filterByMainCategory.length && !this.orderSummary.length){
+        if(!this.orderSummary.length){
           if(this.onTypeSubscriber){
             this.onTypeSubscriber.unsubscribe();
           }
