@@ -48,11 +48,11 @@ export class EULAComponent implements OnInit {
           this.showSpinner = false;
           if(this.userIdentity.UserAccount.SelfSignUp){
             this.userIdentity.UserAccount.IsTermAndConditionAccepted = 1;
-            this.userIdentity.UserAccount.UpdatePassword = 1;
             localStorage.setItem('userIdentity', JSON.stringify(this.userIdentity));
             this._route.navigate((['/user/dashboard']))
           }
           else{
+            this.userIdentity.UserAccount.IsTermAndConditionAccepted = 1;
             this._route.navigate(['/updatePassword'])
           }
 

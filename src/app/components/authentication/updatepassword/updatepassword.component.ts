@@ -126,10 +126,11 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
       modalRef.componentInstance.obj = {btnText: 'Skip', titleTextColor: 'warning', title: 'Skip Process', detail: 'Are you sure, you want to skip?', type:'skip',  mode: 'confirmDialog'};
       modalRef.result.then((result) => {
         if(result){
-          this.userIdentity.UserAccount.IsTermAndConditionAccepted = 1;
-          this.userIdentity.UserAccount.UpdatePassword = 1;
-          localStorage.setItem('userIdentity', JSON.stringify(this.userIdentity));
-          this._route.navigate(['/user/dashboard']);
+          if(this.userIdentity.UserAccount.IsTermAndConditionAccepted){
+            this.userIdentity.UserAccount.UpdatePassword = 1;
+            localStorage.setItem('userIdentity', JSON.stringify(this.userIdentity));
+            this._route.navigate(['/user/dashboard']);
+          }
         }
       },(reason) => {
         // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
