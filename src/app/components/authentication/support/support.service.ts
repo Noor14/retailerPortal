@@ -12,12 +12,9 @@ export class SupportService {
       this._http.get(apiURL)
         .toPromise()
         .then(
-          res => {
-            resolve(res);
-          },
-          err => {
-            reject(err);
-          }
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
         )
     });
     return promise;
@@ -28,12 +25,9 @@ export class SupportService {
       this._http.post(apiURL,obj)
         .toPromise()
         .then(
-          res => {
-            resolve(res);
-          },
-          err => {
-            reject(err);
-          }
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
         )
     });
     return promise;

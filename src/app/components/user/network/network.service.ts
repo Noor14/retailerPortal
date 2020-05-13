@@ -16,12 +16,9 @@ export class NetworkService {
       this._http.post(apiURL, obj)
         .toPromise()
         .then(
-          res => {
-            resolve(res);
-          },
-          err => {
-            reject(err);
-          }
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
         )
     });
     return promise;

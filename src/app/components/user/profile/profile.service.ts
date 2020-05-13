@@ -12,12 +12,11 @@ export class ProfileService {
       const apiURL = `${baseApi}/api/${resourceName}/${fetchingId}`;
       this._http.get(apiURL)
         .toPromise()
-        .then(res => {
-          resolve(res);
-        })
-        .catch(err => {
-          reject(err);
-        })
+        .then(
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
     })
     return promise;
   }
@@ -27,12 +26,11 @@ export class ProfileService {
       const apiURL = `${baseApi}/api/${resourceName}`;
       this._http.post(apiURL, obj)
         .toPromise()
-        .then(res => {
-          resolve(res);
-        })
-        .catch(err => {
-          reject(err);
-        })
+        .then(
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
     })
     return promise;
   }
