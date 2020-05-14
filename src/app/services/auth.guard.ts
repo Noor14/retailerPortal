@@ -54,7 +54,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                   this._toast.error("Link has been expired");
                   return false;
                   }else{
-                    if(this.validateToken(accessToken).then(val=> val)){
+                    localStorage.setItem('userIdentity', JSON.stringify({access_token: accessToken}))
+                    if(this.validateToken({access_token: accessToken}).then(val=> val)){
                       let obj =  this._jwtHelper.decodeToken(accessToken);
                       let object = {
                         access_token: accessToken,
