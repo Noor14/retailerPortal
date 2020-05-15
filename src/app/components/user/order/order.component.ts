@@ -110,8 +110,8 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
         this.categoryListCopy.forEach((obj)=>{
           let children = [];
           obj.children.forEach((item:any) => {
-            let regex = new RegExp(`^[${this.search.nativeElement.value}]`, "gi");
-            if(regex.test(item.data.ProductCode) || (!isNaN(this.search.nativeElement.value) && regex.test(item.data.Title))){
+            // let regex = new RegExp(`^[${this.search.nativeElement.value}]`, "gi");
+            if(item.data.ProductCode.indexOf(this.search.nativeElement.value) >= 0 || item.data.Title.indexOf(this.search.nativeElement.value) >= 0 ){
               children.push(item);
               let index = data.findIndex(obj => obj.data.CategoryId == item.data.ProductCategoryId)
               if(index >= 0){
@@ -132,8 +132,8 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
           category.forEach((obj)=>{
             let children = [];
             obj.children.forEach((item:any) => {
-            let regex = new RegExp(`^[${this.search.nativeElement.value}]`, "gi");
-              if(regex.test(item.data.ProductCode) || (!isNaN(this.search.nativeElement.value) && regex.test(item.data.Title))){
+            // let regex = new RegExp(`^[${this.search.nativeElement.value}]`, "gi");
+              if(item.data.ProductCode.indexOf(this.search.nativeElement.value) >= 0 || item.data.Title.indexOf(this.search.nativeElement.value) >= 0 ){
                 children.push(item);
                 let index = data.findIndex(obj => obj.data.CategoryId == item.data.ProductCategoryId)
                 if(index >= 0){
