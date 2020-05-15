@@ -1,4 +1,3 @@
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { CanComponentDeactivate } from './../../../services/deactivate.guard';
 import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
 import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
@@ -29,24 +28,11 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
     private _route:Router,
     private _toast: ToastrService,
     private _modalService : NgbModal,
-    public _jwtHelper: JwtHelperService,
     private activatedRoute: ActivatedRoute
     ) {
       let queryString = this.activatedRoute.snapshot.queryParams;
       if(queryString && Object.keys(queryString).length){
         this.accessToken = Object.keys(queryString).pop();
-        if(this.accessToken && !this._jwtHelper.isTokenExpired(this.accessToken)){
-         let obj =  _jwtHelper.decodeToken(this.accessToken);
-         let object = {
-          access_token: this.accessToken,
-          UserAccount: obj.user
-         }
-          localStorage.setItem('userIdentity', JSON.stringify(object))
-        }
-        else{
-          this._toast.error("Session has been expired");
-          this._route.navigate(['login']);
-        }
       }
    
    }

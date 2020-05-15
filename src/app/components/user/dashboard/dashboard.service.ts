@@ -15,12 +15,9 @@ export class DashboardService {
       this._http.post(apiURL, obj)
         .toPromise()
         .then(
-          res => {
-            resolve(res);
-          },
-          err => {
-            reject(err);
-          }
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
         )
     });
     return promise;
@@ -30,12 +27,11 @@ export class DashboardService {
       const apiURL = `${baseApi}/api/prepaidrequests/Delete/${id}`;
       this._http.delete(apiURL)
         .toPromise()
-        .then(res => {
-          resolve(res);
-        })
-        .catch(err => {
-          reject(err);
-        })
+        .then(
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
     })
     return promise;
   }
@@ -44,12 +40,11 @@ export class DashboardService {
       const apiURL = `${baseApi}/api/orders/deletedraft/${id}`;
       this._http.delete(apiURL)
         .toPromise()
-        .then(res => {
-          resolve(res);
-        })
-        .catch(err => {
-          reject(err);
-        })
+        .then(
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
     })
     return promise;
   }
@@ -58,12 +53,11 @@ export class DashboardService {
       const apiURL = `${baseApi}/api/orders/cancelorder`;
       this._http.post(apiURL, obj)
         .toPromise()
-        .then(res => {
-          resolve(res);
-        })
-        .catch(err => {
-          reject(err);
-        })
+        .then(
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
     })
     return promise;
   }

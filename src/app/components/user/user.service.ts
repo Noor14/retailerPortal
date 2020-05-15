@@ -14,12 +14,9 @@ export class UserService {
       this._http.post(apiURL, obj)
         .toPromise()
         .then(
-          res => {
-            resolve(res);
-          },
-          err => {
-            reject(err);
-          }
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
         )
     });
     return promise;
@@ -29,12 +26,11 @@ export class UserService {
       const apiURL = `${baseApi}/api/${resourceName}`;
       this._http.get(apiURL)
         .toPromise()
-        .then(res => {
-          resolve(res);
-        })
-        .catch(err => {
-          reject(err);
-        })
+        .then(
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
 
     });
   }
@@ -43,12 +39,11 @@ export class UserService {
       const apiURL = `${baseApi}/api/users/logout`;
       this._http.delete(apiURL)
         .toPromise()
-        .then(res => {
-          resolve(res);
-        })
-        .catch(err => {
-          reject(err);
-        })
+        .then(
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
     })
     return promise;
   }

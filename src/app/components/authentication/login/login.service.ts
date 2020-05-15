@@ -14,13 +14,10 @@ export class LoginService {
       this._http.post(apiURL, userCredentials)
         .toPromise()
         .then(
-          res => { // Success
-            resolve(res);
-          },
-          err => { // Error
-            reject(err);
-          }
-        );
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
     });
     return promise;
   }
@@ -30,12 +27,11 @@ export class LoginService {
       const apiURL = `${baseApi}/api/users/logout`;
       this._http.delete(apiURL)
         .toPromise()
-        .then(res => {
-          resolve(res);
-        })
-        .catch(err => {
-          reject(err);
-        })
+        .then(
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
     })
     return promise;
   }
@@ -46,12 +42,23 @@ export class LoginService {
       this._http.post(apiURL, UserData)
         .toPromise()
         .then(
-          res => {
-            resolve(res);
-          },
-          err => {
-            reject(err);
-          }
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
+    });
+    return promise;
+  }
+
+  tokenValidate(accesstoken) {
+    let promise = new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/users/ValidateToken`;
+      this._http.post(apiURL, accesstoken)
+        .toPromise()
+        .then(
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
         )
     });
     return promise;

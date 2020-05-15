@@ -14,12 +14,11 @@ export class SupportService {
       const apiURL = `${baseApi}/api/${resourceName}`;
       this._http.get(apiURL)
         .toPromise()
-        .then(res => {
-          resolve(res);
-        })
-        .catch(err => {
-          reject(err);
-        })
+        .then(
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
 
     });
   }
@@ -29,12 +28,9 @@ export class SupportService {
       this._http.post(apiURL, obj)
         .toPromise()
         .then(
-          res => {
-            resolve(res);
-          },
-          err => {
-            reject(err);
-          }
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
         )
     });
     return promise;
