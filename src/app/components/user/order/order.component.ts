@@ -174,9 +174,9 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
       ,distinctUntilChanged()
       // subscription for response
       ).subscribe((text: string) => {
-          if(text.trim()){
+          // if(text.trim()){
             this.selectedSearchProduct = text.trim();
-          }
+          // }
           this.filterCategoryAndProuct()
       });
 }
