@@ -180,7 +180,7 @@
                                     <input type="number" (focus)="checkValue(order.OrderQty)" min="1" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
                                      (blur)="checkOrderStage(order, i)"  />
                                 </td>
-                                <td>{{order.OrderQty * (order.ProductUnitPrice - order.DiscountAmount) * order.PackSize | currency:'PKR '}}</td>
+                                <td>{{order.OrderQty * (order.ProductUnitPrice - order.DiscountAmount) | currency:'PKR '}}</td>
                                 <td><img src="../../../../assets/_images/trash.svg" alt="delIcon" class="delIcon" (click)="deleteSummaryRow(i)"></td>
                             </tr>
                             </tbody>
