@@ -105,7 +105,7 @@
                                 <th>Price</th>
                                 <th class="dicountedPrice">Discounted Price</th>
                                 <th>UOM</th>
-                                <th class="packSize"x>Pack Size</th>
+                                <th class="taxValue">Tax Value</th>
                                 <th class="qty">Quantity</th>
                             </tr>
                         </ng-template>
@@ -122,7 +122,7 @@
                                     <ng-template #otherTemp> {{rowData.ProductUnitPrice | currency:'PKR '}}</ng-template>
                                 </td>
                                 <td>{{rowData.UnitOFMeasure}}</td>
-                                <td>{{rowData.PackSize}}</td>
+                                <td>{{rowData.TaxValue}}</td>
                                 <td>
                                     <input type="number" min="1" numbersOnly *ngIf="!rowNode.node.children || (rowNode.node.children && !rowNode.node.children.length)"
                                     class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="rowData.OrderQty"
@@ -159,7 +159,7 @@
                                 <th>Price</th>
                                 <th class="dicountedPrice">Discounted Price</th>
                                 <th>UOM</th>
-                                <th class="packSize"x>Pack Size</th>
+                                <th class="taxValue">Tax Value</th>
                                 <th class="qty">Quantity</th>
                                 <th>Amount</th>
                                 <th></th>
@@ -175,7 +175,7 @@
                                    <ng-template #other> {{order.ProductUnitPrice | currency:'PKR '}}</ng-template>
                                 </td>
                                 <td>{{order.UnitOFMeasure}}</td>
-                                <td>{{order.PackSize}}</td>
+                                <td>{{order.TaxValue}}</td>
                                 <td>
                                     <input type="number" (focus)="checkValue(order.OrderQty)" min="1" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
                                      (blur)="checkOrderStage(order, i)"  />
