@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
   public newToggle:boolean;
   public confirmToggle:boolean;
   public oldPasswordError: boolean;
-  public newPasswordError: boolean;
+  public newPasswordError: any;
   public updateBtnDisabled:boolean = true;
   private profileFormSubscriber:any;
   private passwordFormSubscriber:any;
@@ -117,13 +117,18 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     elem.readOnly= true;
   }
   changePassword(){
-    if(this.passwordForm.valid && this.passwordForm.controls['NewPassword'].value == this.passwordForm.controls['ConfirmPassword'].value){
+    if(this.passwordForm.valid && (this.passwordForm.controls['Password'].value != this.passwordForm.controls['NewPassword'].value) && (this.passwordForm.controls['NewPassword'].value == this.passwordForm.controls['ConfirmPassword'].value)){
     this.showSpinner = true;
     this._profileService.postCalls(this.passwordForm.value,8,"users/ChangePassword")
     .then((data:any)=>{
-      this.passwordForm.reset();
-      this._toast.success("Your password has been updated. You would be logged out of your account");
-      this.logout();
+        if(data && (/true/i).test(data)){
+        this.passwordForm.reset();
+        this._toast.success("Your password has been updated. You would be logged out of your account");
+        this.logout();
+      }else{
+        this.newPasswordError = data;
+      }
+  
     })
     .catch(err=>{
       this.showSpinner = false;
@@ -136,7 +141,11 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
       }
     })
   } else if(this.passwordForm.valid){
-    this.newPasswordError = true;
+    if(this.passwordForm.controls['NewPassword'].value != this.passwordForm.controls['ConfirmPassword'].value){
+      this.newPasswordError = "Password mismatch";
+    }else{
+      this.newPasswordError = "New password cannot be similar to old password";
+    }
     this.onChangesAtnewPassChange();
     this.onChangesAtnewConfirmChange();
 
@@ -149,6 +158,9 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
   onChangesAtPasswordChange(){
     this.passwordFormSubscriber = this.passwordForm.get('Password').valueChanges.subscribe(val => {
          this.oldPasswordError = false;
+         if(this.newPasswordError && this.newPasswordError != "Password mismatch"){
+          this.newPasswordError = false;
+         }
     });
   }
   onChangesAtnewPassChange(){
