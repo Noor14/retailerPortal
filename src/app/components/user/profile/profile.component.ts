@@ -121,7 +121,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     this.showSpinner = true;
     this._profileService.postCalls(this.passwordForm.value,8,"users/ChangePassword")
     .then((data:any)=>{
-        if(data && (/true/i).test(data)){
+      if(data && (/true/i).test(data)){
         this.passwordForm.reset();
         this._toast.success("Your password has been updated. You would be logged out of your account");
         this.logout();
