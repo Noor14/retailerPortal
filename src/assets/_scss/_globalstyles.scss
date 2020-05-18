@@ -168,9 +168,22 @@ html{
             margin: 3px 0 !important;
           }
         }
+     
+        ngb-tabset{
+          .nav-item{
+            width: 100%;
+            .nav-link{
+              text-align:center;
+              div{
+                margin:0 !important
+              }
+            }
+          }
+        }
+      }
+      @media only screen and (max-width:767.9px){
         .gridArea{
           &.table-responsive{
-            max-height: 380px;
             .table{
               th{
                 &:last-child
@@ -185,28 +198,25 @@ html{
                     {
                       position: sticky;
                       right: 0;  
-                      &:nth-child(odd) {
+                    }
+                  }
+                  &:nth-child(odd) {
+                    td{
+                      &:last-child{
                         background-color: #fff;
                       }
-                      &:nth-child(even) {
-                        background-color: #e9ecef;
+                    }
+                  }
+                  &:nth-child(even) {
+                    td{
+                      &:last-child{
+                      background-color: #e9ecef;
                       }
                     }
                   }
                 }
               }
         
-            }
-          }
-        }
-        ngb-tabset{
-          .nav-item{
-            width: 100%;
-            .nav-link{
-              text-align:center;
-              div{
-                margin:0 !important
-              }
             }
           }
         }
@@ -393,26 +403,8 @@ html{
               &:nth-child(even) {
                 background-color: #e9ecef;
               }
-              // td{
-              //   &:last-child
-              //   {
-              //     position: sticky;
-              //     right: 0;  
-              //     &:nth-child(odd) {
-              //       background-color: #fff;
-              //     }
-              //     &:nth-child(even) {
-              //       background-color: #e9ecef;
-              //     }
-              //   }
-              // }
             }
           }
-          // .last-col
-          // {
-          //   position: sticky;
-          //   right: 0;  
-          // }
         }
       }
     }
