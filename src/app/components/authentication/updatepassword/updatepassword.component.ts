@@ -94,12 +94,16 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
         }
       })
       .catch(err => {
-        this.showSpinner=false;
+        this.showSpinner=false; 
+        if(err == "Not Authorized"){
+          this._route.navigate(['login']);
+        }
+
       })
     }
     else if (this.updatePasswordForm.valid){
       this.passwordMisMatchError = true;
-      this.onChanges()
+      this.onChanges();
     }
     else{
       validateAllFormFields(this.updatePasswordForm);
