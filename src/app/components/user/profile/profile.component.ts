@@ -143,8 +143,12 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
   } else if(this.passwordForm.valid){
     if(this.passwordForm.controls['NewPassword'].value != this.passwordForm.controls['ConfirmPassword'].value){
       this.newPasswordError = "Password mismatch";
+      if(this.passwordFormSubscriber){
+        this.passwordFormSubscriber.unsubscribe();
+      }
     }else{
       this.newPasswordError = "New password cannot be similar to old password";
+      this.onChangesAtPasswordChange();
     }
     this.onChangesAtnewPassChange();
     this.onChangesAtnewConfirmChange();
