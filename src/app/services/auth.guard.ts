@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
 
+  private passwordPageShow: boolean;
   constructor(
     protected _sharedService: SharedService,
     protected _route: Router,
@@ -37,6 +38,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                 ){
                   return true;
                 }else{
+                  this._route.navigate(['login']);
                   return false;
                 }
             }
@@ -48,29 +50,25 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                 && !userIdentity.UserAccount.UpdatePassword){
                   return true;
                 }
-                else if(!userIdentity && state.url.split('/updatePassword?').pop().length){
-                  let accessToken = state.url.split('/updatePassword?').pop();
+                else if(state.url.split('/updatePassword?').pop().length){
+                  let accessToken = state.url.split('/updatePassword?').pop().slice(0, -1);
                   if(this._jwtHelper.isTokenExpired(accessToken)){
                   this._toast.error("Link has been expired");
                   return false;
                   }else{
-                    localStorage.setItem('userIdentity', JSON.stringify({access_token: accessToken}))
-                    if(this.validateToken({access_token: accessToken}).then(val=> val)){
-                      let obj =  this._jwtHelper.decodeToken(accessToken);
-                      let object = {
-                        access_token: accessToken,
-                        UserAccount: obj.user
-                      }
-                        localStorage.setItem('userIdentity', JSON.stringify(object));
-                    return true;
-                    }else{
-                     this._toast.error("Link has been expired");
-                     return false;
+                    if(!this._sharedService.validateTokenCall){
+                      localStorage.setItem('userIdentity', JSON.stringify({access_token: accessToken}));
+                      return this.validateToken({access_token: accessToken}).then(val=> val);
                     }
-                    
+                  else{
+                    if(this._sharedService.validateTokenCall){
+                      return this.passwordPageShow;
+                    }
+                   }
                   }
                 }
                 else{
+                  this._route.navigate(['login']);
                   return false;
                 }
             }
@@ -91,15 +89,31 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     state: RouterStateSnapshot): boolean | UrlTree | Promise<boolean | UrlTree>{
    return this.canActivate(route, state);
   }
-  validateToken(accessToken){
-      return this._loginService.tokenValidate(accessToken).then((res:boolean)=>{
+  validateToken(data): Promise<boolean | UrlTree>{
+    this._sharedService.validateTokenCall = true;
+      return this._loginService.tokenValidate(data).then((res:boolean)=>{
+        localStorage.clear();
         if(res){
+          let obj =  this._jwtHelper.decodeToken(data.access_token);
+          let object = {
+            access_token: data.access_token,
+            UserAccount: obj.user
+          }
+          localStorage.setItem('userIdentity', JSON.stringify(object));
+          this.passwordPageShow = true;
           return Promise.resolve(res);
         }else{
+          this._route.navigate(['login']);
+          this._sharedService.validateTokenCall = false;
+          this.passwordPageShow = false;
           return Promise.resolve(false);
-        }   
+        }  
       })
       .catch((err:HttpErrorResponse)=>{
+        localStorage.clear();
+        this._route.navigate(['login']);
+        this._sharedService.validateTokenCall = false;
+        this.passwordPageShow = false;
         return Promise.resolve(false);
         })
     }

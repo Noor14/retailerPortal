@@ -66,6 +66,10 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
       this.updatePasswordFormSubscriber.unsubscribe();
     }
   }
+  bacKToLogin(){
+    localStorage.clear();
+    this._route.navigate(["login"]);
+  }
   updatePassword() {
     if(this.updatePasswordForm.valid && this.updatePasswordForm.controls['ConfirmPassword'].value == this.updatePasswordForm.controls['NewPassword'].value){
       this.showSpinner = true;
@@ -76,7 +80,11 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
       this.updatePasswordForm.reset();
         if (data) {
           this._toast.success("Password has been changed successfully");
-          this.logout();
+          if(endPoint == "users/UpdatePassword"){
+            this.logout();
+          }else{
+            this._route.navigate(['login']);
+          }
         }
         else{
           this._toast.error("Password not updated please try after some few minutes");
@@ -129,7 +137,7 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
     .then((res:boolean)=>{
       if(res){
         localStorage.clear();
-        this._route.navigate(['login'])
+        this._route.navigate(['login']);
       }
       this.showSpinner=false;
     })

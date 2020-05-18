@@ -13,6 +13,7 @@ export class SharedService {
   public getUserInfo = this.userInfo.asObservable();
 
   public callLogout:boolean = false;
+  public validateTokenCall:boolean = false;
   constructor(public _jwtHelper: JwtHelperService) { }
 
   public setUser(data) {
