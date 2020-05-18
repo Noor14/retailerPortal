@@ -89,7 +89,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     state: RouterStateSnapshot): boolean | UrlTree | Promise<boolean | UrlTree>{
    return this.canActivate(route, state);
   }
-  validateToken(data): Promise<boolean | UrlTree>{
+  validateToken(data){
     this._sharedService.validateTokenCall = true;
       return this._loginService.tokenValidate(data).then((res:boolean)=>{
         localStorage.clear();
