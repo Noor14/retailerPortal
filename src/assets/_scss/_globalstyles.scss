@@ -168,6 +168,37 @@ html{
             margin: 3px 0 !important;
           }
         }
+        .gridArea{
+          &.table-responsive{
+            max-height: 380px;
+            .table{
+              th{
+                &:last-child
+                {
+                  position: sticky;
+                  right: 0; }
+              }
+              tbody{
+                tr{
+                  td{
+                    &:last-child
+                    {
+                      position: sticky;
+                      right: 0;  
+                      &:nth-child(odd) {
+                        background-color: #fff;
+                      }
+                      &:nth-child(even) {
+                        background-color: #e9ecef;
+                      }
+                    }
+                  }
+                }
+              }
+        
+            }
+          }
+        }
         ngb-tabset{
           .nav-item{
             width: 100%;
@@ -185,7 +216,6 @@ html{
         &:focus, &:disabled, &:not(:disabled):not(.disabled):active:focus{
           box-shadow: unset;
           // background: $baseColor;
-
         }
         &-outline-light{
           color: #212529;
@@ -346,10 +376,14 @@ html{
             position: sticky;
             top: 0;
             z-index: 2;
-  
+            &:last-child
+            {
+              position: sticky;
+              right: 0; }
           }
           tbody{
             tr{
+            
               &:focus{
                 outline: unset;
               }
@@ -359,9 +393,26 @@ html{
               &:nth-child(even) {
                 background-color: #e9ecef;
               }
+              // td{
+              //   &:last-child
+              //   {
+              //     position: sticky;
+              //     right: 0;  
+              //     &:nth-child(odd) {
+              //       background-color: #fff;
+              //     }
+              //     &:nth-child(even) {
+              //       background-color: #e9ecef;
+              //     }
+              //   }
+              // }
             }
           }
-  
+          // .last-col
+          // {
+          //   position: sticky;
+          //   right: 0;  
+          // }
         }
       }
     }
