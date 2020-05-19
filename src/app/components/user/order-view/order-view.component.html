@@ -20,7 +20,7 @@
             <app-order-detail [orderList]="orderDetailList"></app-order-detail>
           </ng-template>
         </ngb-tab>
-        <ngb-tab *ngIf="orderPaymentDetailForm.controls['InvoiceNumber'].value">
+        <ngb-tab *ngIf="orderPaymentDetailForm.controls['InvoiceNumber'].value && orderPaymentDetailForm.controls['InvoiceStatus'].value != 'Pending'">
           <ng-template ngbTabTitle>Payment</ng-template>
           <ng-template ngbTabContent>
             <div class="contentArea bg-white p-4">
