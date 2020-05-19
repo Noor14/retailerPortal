@@ -29,7 +29,7 @@ export class ForgetpasswordComponent  implements OnInit, CanComponentDeactivate 
   canDeactivate(){
       if(this.forgetPasswordForm.dirty){
         let object = this.forgetPasswordForm.value;
-        if(object.Email.length){
+        if(object.Email){
           return false;
         }else{
           return true;
