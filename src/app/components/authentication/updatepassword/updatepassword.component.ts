@@ -39,7 +39,7 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
   canDeactivate(){
     if(this.updatePasswordForm.dirty){
       let object = this.updatePasswordForm.value;
-      if(Object.values(object).filter(item => item).length){
+      if(Object.values(object).some(item => item)){
         return false;
       }else{
         return true;

@@ -52,7 +52,7 @@ export class RegistrationComponent implements OnInit, OnDestroy, CanComponentDea
   canDeactivate(){
       if(this.registerForm.dirty){
         let object = this.registerForm.value;
-        if(Object.values(object).filter(item => item).length){
+        if(Object.values(object).some(item => item)){
           return false;
         }else{
           return true;

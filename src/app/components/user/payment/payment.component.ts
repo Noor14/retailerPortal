@@ -45,7 +45,7 @@ export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactiva
    canDeactivate(){
       if(this.paymentForm.dirty && !this.paymentPrepaidNumber){
         let object = this.paymentForm.value;
-        if(Object.values(object).filter(item => item).length){
+        if(Object.values(object).some(item => item)){
           return false;
         }else{
           return true;

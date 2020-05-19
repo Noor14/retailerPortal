@@ -32,7 +32,7 @@ export class SupportComponent implements OnInit, OnDestroy, CanComponentDeactiva
   canDeactivate(){
       if(this.supportForm.dirty){
         let object = this.supportForm.value;
-        if(Object.values(object).filter(item => item).length){
+        if(Object.values(object).some(item => item)){
           return false;
         }else{
           return true;
