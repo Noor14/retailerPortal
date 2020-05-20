@@ -53,6 +53,7 @@ export class EULAComponent implements OnInit {
           }
           else{
             this.userIdentity.UserAccount.IsTermAndConditionAccepted = 1;
+            localStorage.setItem('userIdentity', JSON.stringify(this.userIdentity));
             this._route.navigate(['/updatePassword'])
           }
 

@@ -50,12 +50,17 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                 && !userIdentity.UserAccount.UpdatePassword){
                   return true;
                 }
-                else if(state.url.split('/updatePassword?').pop().length){
+                else if(state.url.split('/updatePassword?').pop().length && state.url.indexOf('?')>=0){
                   let accessToken = state.url.split('/updatePassword?').pop().slice(0, -1);
-                  if(this._jwtHelper.isTokenExpired(accessToken)){
+                  if(accessToken && this._jwtHelper.isTokenExpired(accessToken)){
                   this._toast.error("Link has been expired");
                   return false;
-                  }else{
+                  }
+                  else if(!accessToken){
+                    this._route.navigate(['login']);
+                    return false;
+                  }
+                  else{
                     if(!this._sharedService.validateTokenCall){
                       localStorage.setItem('userIdentity', JSON.stringify({access_token: accessToken}));
                       return this.validateToken({access_token: accessToken}).then(val=> val);
