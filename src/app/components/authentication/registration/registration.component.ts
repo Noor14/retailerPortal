@@ -79,22 +79,11 @@ export class RegistrationComponent implements OnInit, OnDestroy, CanComponentDea
     });
   }
   ngOnDestroy(){
-    if(this.registerFormMobileSubscriber){
-      this.registerFormMobileSubscriber.unsubscribe();
-    }
-    if(this.registerFormCNICSubscriber){
-      this.registerFormCNICSubscriber.unsubscribe();
-    }
-    if(this.registerFormUserNameSubscriber){
-      this.registerFormUserNameSubscriber.unsubscribe();
-    }
-    if(this.registerFormEmailSubscriber){
-      this.registerFormEmailSubscriber.unsubscribe();
-    }
-    if(this.registerFormCompanyNameSubscriber){
-      this.registerFormCompanyNameSubscriber.unsubscribe();
-    }
-  
+      this.registerFormMobileSubscriber && this.registerFormMobileSubscriber.unsubscribe();
+      this.registerFormCNICSubscriber && this.registerFormCNICSubscriber.unsubscribe();
+      this.registerFormUserNameSubscriber && this.registerFormUserNameSubscriber.unsubscribe();
+      this.registerFormEmailSubscriber && this.registerFormEmailSubscriber.unsubscribe();
+      this.registerFormCompanyNameSubscriber && this.registerFormCompanyNameSubscriber.unsubscribe();
   }
   onChanges(){
     if(this.registerFormMobileSubscriber){

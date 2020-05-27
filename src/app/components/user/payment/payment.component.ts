@@ -89,9 +89,7 @@ export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactiva
   })
 }
   ngOnDestroy(){
-    if(this.paymentFormSubscriber){
-      this.paymentFormSubscriber.unsubscribe();
-    }
+      this.paymentFormSubscriber && this.paymentFormSubscriber.unsubscribe();
   }
 
   onChanges():void{

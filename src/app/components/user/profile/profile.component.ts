@@ -74,18 +74,10 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
   }
 
   ngOnDestroy(){
-    if(this.profileFormSubscriber){
-      this.profileFormSubscriber.unsubscribe();
-    }
-    if(this.passwordFormSubscriber){
-      this.passwordFormSubscriber.unsubscribe();
-    }
-    if(this.newPasswordSubscriber){
-      this.newPasswordSubscriber.unsubscribe();
-    }
-    if(this.confirmpasswordSubscriber){
-      this.confirmpasswordSubscriber.unsubscribe();
-    }
+      this.profileFormSubscriber && this.profileFormSubscriber.unsubscribe();
+      this.passwordFormSubscriber && this.passwordFormSubscriber.unsubscribe();
+      this.newPasswordSubscriber && this.newPasswordSubscriber.unsubscribe();
+      this.confirmpasswordSubscriber && this.confirmpasswordSubscriber.unsubscribe();
   }
 
   getProfile() {

@@ -62,21 +62,11 @@ export class SearchingComponent implements OnInit, OnDestroy {
   }
 
   unSubscriber(){
-    if(this.onTypeSubscriber){
-      this.onTypeSubscriber.unsubscribe();
-    }
-    if(this.onRangeSubscriberOne){
-      this.onRangeSubscriberOne.unsubscribe();
-    }
-    if(this.onRangeSubscriberTwo){
-      this.onRangeSubscriberTwo.unsubscribe();
-    }
-    if(this.onDateSubscriberOne){
-      this.onDateSubscriberOne.unsubscribe();
-    }
-    if(this.onDateSubscriberTwo){
-      this.onDateSubscriberTwo.unsubscribe();
-    }
+      this.onTypeSubscriber && this.onTypeSubscriber.unsubscribe();
+      this.onRangeSubscriberOne && this.onRangeSubscriberOne.unsubscribe();
+      this.onRangeSubscriberTwo && this.onRangeSubscriberTwo.unsubscribe();
+      this.onDateSubscriberOne && this.onDateSubscriberOne.unsubscribe();
+      this.onDateSubscriberTwo && this.onDateSubscriberTwo.unsubscribe();
   }
   selectedOption(option){
     this.fromDate = null;

@@ -32,9 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    if(this.loginFormSubscriber){
-      this.loginFormSubscriber.unsubscribe();
-    }
+      this.loginFormSubscriber && this.loginFormSubscriber.unsubscribe();
   }
 
   onChanges():void{

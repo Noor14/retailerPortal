@@ -16,7 +16,6 @@ export class SupportscreenComponent implements OnInit, OnDestroy, CanComponentDe
   public showSpinner: boolean;
   public spinnerConfig:any;
   private supportDropDownSubscriber:any;
-  private routeSubscriber: any;
   public supportDetail: any = {};
   public issueType: any[] = [];
   public criticality: any[] = [];
@@ -33,9 +32,7 @@ export class SupportscreenComponent implements OnInit, OnDestroy, CanComponentDe
     private _route: ActivatedRoute,
     private _sharedService: SharedService,
     private _toast : ToastrService) {
-
-   this.routeSubscriber= this._route.params.subscribe(params => {
-      this.supportID = +params['id'];
+      this.supportID = this._route.snapshot.url[1] && Number(this._route.snapshot.url[1].path)
       if (!this.supportID) {
         this.breadcrumbSupport = "Add Ticket";
       }
@@ -44,7 +41,6 @@ export class SupportscreenComponent implements OnInit, OnDestroy, CanComponentDe
         this.readonlyCheck = true;
 
       }
-    });
   }
   canDeactivate(){
     if(this.supportForm.dirty){
@@ -75,7 +71,6 @@ export class SupportscreenComponent implements OnInit, OnDestroy, CanComponentDe
   }
   ngOnDestroy(){
     this.supportDropDownSubscriber.unsubscribe();
-    this.routeSubscriber.unsubscribe();
   }
   elemFocus(elem){
     elem.readOnly= false;

@@ -47,9 +47,7 @@ export class ForgetpasswordComponent  implements OnInit, CanComponentDeactivate 
   })
   }
   ngOnDestroy(){
-    if(this.forgetPasswordFormSubscriber){
-      this.forgetPasswordFormSubscriber.unsubscribe();
-    }
+      this.forgetPasswordFormSubscriber && this.forgetPasswordFormSubscriber.unsubscribe();
   }
   onChanges():void{
     this.forgetPasswordFormSubscriber = this.forgetPasswordForm.valueChanges.subscribe(val => {

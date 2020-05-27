@@ -62,9 +62,7 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
  
   }
   ngOnDestroy(){
-    if(this.updatePasswordFormSubscriber){
-      this.updatePasswordFormSubscriber.unsubscribe();
-    }
+      this.updatePasswordFormSubscriber && this.updatePasswordFormSubscriber.unsubscribe();
   }
   bacKToLogin(){
     localStorage.clear();

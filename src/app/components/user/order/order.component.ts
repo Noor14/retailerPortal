@@ -92,9 +92,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
     }
   }
   ngOnDestroy(){
-    if(this.onTypeSubscriber){
-      this.onTypeSubscriber.unsubscribe();
-    }
+      this.onTypeSubscriber && this.onTypeSubscriber.unsubscribe();
   }
   filterCategoryAndProuct(){
     if(!this.categoryListCopy.length){

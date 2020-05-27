@@ -72,9 +72,7 @@ export class DashboardComponent implements OnInit {
     this.getOrderList(this.searchObjOrder);
   }
   ngOnDestroy(){
-    if(this.statusDropDownSubscriber){
-      this.statusDropDownSubscriber.unsubscribe();
-    }
+      this.statusDropDownSubscriber && this.statusDropDownSubscriber.unsubscribe();
   }
   getdropDownList() {
     this.statusDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
