@@ -16,7 +16,7 @@ const routes: Routes = [
     children: [
     { path: 'login', component: LoginComponent },
     { path: 'eula', component: EULAComponent },
-    { path: 'registration', component: RegistrationComponent, canDeactivate: [DeactivateGuard] },
+    // { path: 'registration', component: RegistrationComponent, canDeactivate: [DeactivateGuard] },
     { path: 'forgetPassword', component: ForgetpasswordComponent, canDeactivate: [DeactivateGuard] },
     { path: 'updatePassword', component: UpdatepasswordComponent, canDeactivate: [DeactivateGuard] },
     { path: 'support', component: SupportComponent, canDeactivate: [DeactivateGuard] },
