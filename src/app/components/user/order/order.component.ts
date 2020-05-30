@@ -194,7 +194,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
       obj.UnitOFMeasure = obj.UOMTitle;
       obj.Title = obj.ProductCode;
       obj.ProductCode = obj.ProductName;;
-      obj.DiscountAmount = (obj.Discount)? obj.UnitPrice - obj.Discount : 0;
+      obj.DiscountAmount = obj.Discount;
       return obj;
     });
     this.calculateSummary();
