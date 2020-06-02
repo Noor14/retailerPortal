@@ -19,7 +19,7 @@ header{
         outline: unset;
       }
     }
-    .notify{
+    .notifyBell{
       &.unread{
         position: relative;
       &::before{
@@ -31,6 +31,28 @@ header{
         background-color: #ffc107;
         top: 0;
       }
+      }
+      &.show{
+        &.dropdown{
+          &::after{
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-left: 11px solid transparent;
+            border-right: 11px solid transparent;
+            border-bottom: 11px solid #2f2f2f61;
+          }
+        }
+      }
+      .notifications{
+        width: 320px;
+        height: 250px;
+        overflow-y: auto;
+        top: 40px !important;
+        box-shadow: 0px 0px 6px 0px rgba(0,0,0,.15);
       }
       
     }

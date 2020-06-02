@@ -34,11 +34,11 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
         if(!this.socketSubscriber){
           this.socketService.emit('userId', this.userDetail.UserId);
         }
-        this.socketSubscriber = this.socketService.connect('userId', this.userDetail.UserId).subscribe((res)=>{
+        this.socketSubscriber = this.socketService.connect('userId', this.userDetail.UserId).subscribe((res: any)=>{
           console.log(res)
-          this.notifications = res;
-          if(this.notifications.count){
-            this.unreadMessages = this.notifications.data.some(elem => !elem.seen)
+          this.notifications = res.data;
+          if(res && res.count){
+            this.unreadMessages = this.notifications.some(elem => !elem.seen)
           }
         })
         this.navToggler = this.navigationState;
