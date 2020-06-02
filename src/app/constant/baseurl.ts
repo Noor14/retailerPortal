@@ -1,5 +1,6 @@
 import { environment } from '../../environments/environment';
 export let baseApi :string;
+export const socketURL :string = "http://192.168.200.9:3020";
 if (environment.qa) {
     // QA URL
     baseApi = "http://192.168.200.46:3020";

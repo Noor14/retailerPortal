@@ -1,3 +1,4 @@
+import { WebsocketService } from './../../services/websocket.service';
 import { DeactivateGuard } from './../../services/deactivate.guard';
 import { TreeTableModule } from 'primeng/treetable';
 import { SharedModule } from './../../shared/shared.module';
@@ -60,7 +61,8 @@ import { OrderDescriptionComponent } from './order-description/order-description
     NetworkService,
     PaymentViewService,
     OrderService,
-    DeactivateGuard
+    DeactivateGuard,
+    WebsocketService
   ]
 
 })
