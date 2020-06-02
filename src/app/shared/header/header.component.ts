@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, OnDestroy } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
 import { WebsocketService } from './../../services/websocket.service';
 import { Subject} from 'rxjs';
@@ -8,11 +8,12 @@ import { Subject} from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
 
   public userDetail: any = {};
   private navToggler:boolean = false;
-  public notifications: Subject<any>;
+  public notifications:any;
+  public unreadMessages : boolean = false;
   @Output() navToggling = new EventEmitter();
   @Input() navigationState: boolean;
   private socketSubscriber:any;
@@ -35,6 +36,10 @@ export class HeaderComponent implements OnInit, OnChanges {
         }
         this.socketSubscriber = this.socketService.connect('userId', this.userDetail.UserId).subscribe((res)=>{
           console.log(res)
+          this.notifications = res;
+          if(this.notifications.count){
+            this.unreadMessages = this.notifications.data.some(elem => !elem.seen)
+          }
         })
         this.navToggler = this.navigationState;
     }

@@ -19,6 +19,21 @@ header{
         outline: unset;
       }
     }
+    .notify{
+      &.unread{
+        position: relative;
+      &::before{
+        position: absolute;
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #ffc107;
+        top: 0;
+      }
+      }
+      
+    }
   
   }
   

@@ -26,6 +26,5 @@ export class WebsocketService {
   emit(eventName: string, id: number){
     this.socket = io(socketURL);
     this.socket.emit(eventName, id)
-
   }
 }
