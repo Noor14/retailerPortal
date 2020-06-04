@@ -20,17 +20,13 @@ header{
       }
     }
     .notifyBell{
-      &.unread{
-        position: relative;
-      &::before{
-        position: absolute;
-        content: '';
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: #ffc107;
-        top: 0;
+      svg{
+        filter: grayscale(100%);
       }
+      &.unread{
+        svg{
+          filter: grayscale(0);
+        }
       }
       &.show{
         &.dropdown{
@@ -49,10 +45,13 @@ header{
       }
       .notifications{
         width: 320px;
-        height: 250px;
+        height: 350px;
         overflow-y: auto;
         top: 40px !important;
         box-shadow: 0px 0px 6px 0px rgba(0,0,0,.15);
+        .list-group-item{
+          font-size: 15px;
+        }
       }
       
     }
