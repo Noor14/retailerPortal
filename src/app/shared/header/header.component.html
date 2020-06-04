@@ -25,10 +25,22 @@
                                 </g>
                             </g>
                         </svg>
-                        <div ngbDropdownMenu aria-labelledby="notificationIcon" class="notifications" id="nav-scrollbar">
-                            <ul class="list-group">
-                                <li class="list-group-item" *ngFor="let obj of notifications">{{obj.AlertMessage}}</li>
-                              </ul>
+                        <div ngbDropdownMenu aria-labelledby="notificationIcon" class="notifications">
+                            <div class="modal-header pt-2 pb-2 pl-3">
+                                <h5 class="modal-title">Notification</h5>
+                            </div>
+                            <ul class="list-group" id="nav-scrollbar">
+                                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let obj of notifications" [ngClass]="{'unreadNotify': !obj.ReadStatus}">
+                                   <div class="d-flex flex-column message">
+                                       <span><strong>{{obj.Subject}}</strong></span>
+                                       <span>{{obj.AlertMessage}}</span>
+                                   </div>
+                                   <span class="close">&times;</span>
+                                </li>
+                            </ul>
+                            <div class="modal-footer pt-2 pb-2">
+                                <button type="button" class="btn btn-outline-dark" >Load More</button>
+                            </div>
                         </div>
 
                     </div>

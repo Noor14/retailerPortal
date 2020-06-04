@@ -1,3 +1,4 @@
+@import '../../../assets/_scss/_variables';
 header{
   box-shadow: 0px 0px 7px -2px #7a7979;
   border-bottom: 1.5px solid #a7a7a7;
@@ -44,14 +45,48 @@ header{
         }
       }
       .notifications{
-        width: 320px;
-        height: 350px;
-        overflow-y: auto;
         top: 40px !important;
         box-shadow: 0px 0px 6px 0px rgba(0,0,0,.15);
-        .list-group-item{
-          font-size: 15px;
+        .modal-header{
+          .modal-title{
+           color: $baseFontColor;
+          }
         }
+        .list-group{
+          width: 320px;
+          height: 315px;
+          overflow-y: auto;
+          .list-group-item{
+            &:first-child{
+              border-top-left-radius: unset;
+              border-top-right-radius: unset;
+            }
+            .message{
+            font-size: 13px;
+            }
+            &.unreadNotify{
+              background-color: #f8f8f8;
+            }
+            .close{
+              font-size: 22px;
+            }
+          }
+        }
+        .modal-footer{
+          justify-content: center;
+          cursor: default;
+          button{
+            background: unset;
+            outline: unset;
+            border: unset;
+            padding: 0;
+            font-family: $baseSourceSansproSemiBold;
+            &:hover{
+              color: #000;
+            }
+          }
+        }
+     
       }
       
     }
