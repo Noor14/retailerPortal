@@ -57,6 +57,7 @@ header{
           height: 315px;
           overflow-y: auto;
           .list-group-item{
+            padding: .4rem 0.9rem;
             &:first-child{
               border-top-left-radius: unset;
               border-top-right-radius: unset;
