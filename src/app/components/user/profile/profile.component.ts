@@ -119,6 +119,11 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
         this.logout();
       }else{
         this.newPasswordError = data;
+        if(this.passwordFormSubscriber){
+          this.passwordFormSubscriber.unsubscribe();
+        }
+        this.onChangesAtnewPassChange();
+        this.onChangesAtnewConfirmChange();
       }
   
     })
@@ -139,7 +144,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
         this.passwordFormSubscriber.unsubscribe();
       }
     }else{
-      this.newPasswordError = "New password cannot be similar to old password";
+      this.newPasswordError = "New password cannot be similar to last 5 passwords";
       this.onChangesAtPasswordChange();
     }
     this.onChangesAtnewPassChange();
