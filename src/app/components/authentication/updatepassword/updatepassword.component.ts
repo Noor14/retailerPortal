@@ -75,8 +75,8 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
       this._loginService.postCalls(this.updatePasswordForm.value, endPoint, 8)
       .then(data => {
       this.showSpinner=false;
-      this.updatePasswordForm.reset();
-        if (data && typeof data == "boolean") {
+      if (data && typeof data == "boolean") {
+          this.updatePasswordForm.reset();
           this._toast.success("Password has been changed successfully");
           if(endPoint == "users/UpdatePassword"){
             this.logout();
