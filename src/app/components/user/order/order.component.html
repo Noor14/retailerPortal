@@ -103,7 +103,7 @@
                                 <th class="productCode">Product Code</th>
                                 <th class="productTitle">Product Title</th>
                                 <th>Price</th>
-                                <th class="dicountedPrice">Discounted Price</th>
+                                <th class="dicountValue">Discount Value</th>
                                 <th>UOM</th>
                                 <th class="taxValue">Tax Value</th>
                                 <th class="qty">Quantity</th>
@@ -118,7 +118,7 @@
                                 <td>{{rowData.ProductCode}}</td>
                                 <td>{{rowData.ProductUnitPrice  | currency:'PKR '}}</td>
                                 <td>
-                                    <span *ngIf="rowData.DiscountAmount; else otherTemp">{{rowData.ProductUnitPrice - rowData.DiscountAmount  | currency:'PKR '}}</span>
+                                    <span *ngIf="rowData.DiscountAmount; else otherTemp">{{rowData.DiscountAmount  | currency:'PKR '}}</span>
                                     <ng-template #otherTemp> {{rowData.ProductUnitPrice | currency:'PKR '}}</ng-template>
                                 </td>
                                 <td>{{rowData.UnitOFMeasure}}</td>
@@ -157,7 +157,7 @@
                                 <th class="productCode">Product Code</th>
                                 <th class="productTitle">Product Title</th>
                                 <th>Price</th>
-                                <th class="dicountedPrice">Discounted Price</th>
+                                <th class="dicountValue">Discount Value</th>
                                 <th>UOM</th>
                                 <th class="taxValue">Tax Value</th>
                                 <th class="qty">Quantity</th>
@@ -171,7 +171,7 @@
                                 <td>{{order.ProductCode}}</td>
                                 <td>{{order.ProductUnitPrice  | currency:'PKR '}}</td>
                                 <td> 
-                                   <span *ngIf="order.DiscountAmount; else other">{{order.ProductUnitPrice - order.DiscountAmount  | currency:'PKR '}}</span>
+                                   <span *ngIf="order.DiscountAmount; else other">{{order.DiscountAmount  | currency:'PKR '}}</span>
                                    <ng-template #other> {{order.ProductUnitPrice | currency:'PKR '}}</ng-template>
                                 </td>
                                 <td>{{order.UnitOFMeasure}}</td>

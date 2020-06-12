@@ -253,7 +253,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
           this.orderSummary = data.OrderTemplateDetails.map(obj => {
             obj.ProductUnitPrice = obj.UnitPrice;
             obj.UnitOFMeasure = obj.UOMTitle;
-            obj.ProductCode = obj.Title;;
+            obj.ProductCode = obj.Title;
             obj.Title = obj.Code;
             obj.DiscountAmount = obj.Discount;
             return obj;

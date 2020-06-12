@@ -12,7 +12,7 @@ export class OrderDetailComponent implements OnInit {
   public orderDetailList: any[] =[];
   public netAmount: number = 0;
   public totalDiscount: number = 0;
-  public grossAmount: number =0;
+  public grossAmount: number = 0;
   constructor() {
    }
 
@@ -26,5 +26,4 @@ export class OrderDetailComponent implements OnInit {
       });
     }
   }
-  
 }
