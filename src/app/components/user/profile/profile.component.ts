@@ -125,7 +125,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
         this.onChangesAtnewPassChange();
         this.onChangesAtnewConfirmChange();
       }
-  
+      this.showSpinner = false;
     })
     .catch(err=>{
       this.showSpinner = false;
