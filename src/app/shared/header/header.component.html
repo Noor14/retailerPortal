@@ -30,15 +30,16 @@
                                 <h5 class="modal-title">Notifications</h5>
                             </div>
                             <ul class="list-group" id="nav-scrollbar">
-                                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let obj of notifications" [ngClass]="{'unreadNotify': !obj.ReadStatus}">
+                                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let obj of notifications?.data" [ngClass]="{'unreadNotify': !obj.ReadStatus}">
                                    <div class="d-flex flex-column message">
                                        <span><strong>{{obj.Subject}}</strong></span>
                                        <span>{{obj.AlertMessage}}</span>
                                    </div>
                                    <span class="close">&times;</span>
                                 </li>
+                                <li class="list-group-item text-center no-notification" *ngIf="!notifications || (notifications?.data && !notifications?.data.length)">No notification yet</li>
                             </ul>
-                            <div class="modal-footer pt-1 pb-1">
+                            <div class="modal-footer pt-1 pb-1" *ngIf="notifications?.count && notifications?.count > 10 ">
                                 <button type="button" class="btn" > <u> Load More </u> </button>
                             </div>
                         </div>
