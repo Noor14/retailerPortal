@@ -35,7 +35,6 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
           this.socketService.emit('userId', this.userDetail.UserId);
         }
         this.socketSubscriber = this.socketService.connect('userId', this.userDetail.UserId).subscribe((res: any)=>{
-          console.log(res)
           this.notifications = res.data;
           if(res && res.count){
             this.unreadMessages = this.notifications.some(elem => !elem.seen)
