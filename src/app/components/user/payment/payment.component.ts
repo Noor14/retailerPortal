@@ -28,7 +28,7 @@ export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactiva
   public requestId:Number;
   public requestType: Number;
   public orderInfo:any;
-  public orderDetailList: any[] =[];
+  public orderDetailList: any;
 
   constructor(
     private _paymentService: PaymentService,
@@ -71,11 +71,11 @@ export class PaymentComponent implements OnInit, OnDestroy, CanComponentDeactiva
   }
 
   getPaymentDetails(resourceName, requestId){
-    this.showSpinner=true;
+    this.showSpinner = true;
     this._paymentViewService.getDetail(resourceName, requestId).then((data: any) => {
-    this.showSpinner=false;
-    if(!this.requestType && this.requestId){
-      this.orderDetailList = data.OrderDetails;
+    this.showSpinner = false;
+    if (!this.requestType && this.requestId) {
+      this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: data.Invoice && data.Invoice.OrderTotalDiscount};
       data = data.Invoice;
       data.PaidAmount = data.TotalAmount;
       this.orderInfo = data;

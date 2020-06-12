@@ -39,7 +39,7 @@
                 Gross Amount: <span>{{grossAmount | currency : "PKR "}}</span> 
             </div>
             <div class="d-sm-flex flex-sm-row flex-xs-column">
-            <div class="flex-fill">Total Discount: <span>{{totalDiscount | currency:'PKR '}}</span></div>
+            <div class="flex-fill">Total Discount: <span>{{(orderList?.orderTotalDiscount || 0) | currency:'PKR '}}</span></div>
             <div class="flex-fill">Net Amount: <span>{{netAmount | currency : "PKR "}}</span></div>
             </div>
         </div>

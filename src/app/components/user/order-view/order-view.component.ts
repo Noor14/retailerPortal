@@ -14,7 +14,7 @@ export class OrderViewComponent implements OnInit {
   public spinnerConfig:any;
   public orderPaymentDetailForm: FormGroup;
   private requestId: Number;
-  public orderDetailList: any[] =[];
+  public orderDetailList: any;
   public orderInfo:any;
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -43,11 +43,11 @@ export class OrderViewComponent implements OnInit {
   }
 
   getOrderDetails(requestId){
-    this.showSpinner=true;
+    this.showSpinner = true;
     this._orderService.getDetail(requestId).then((data: any) => {
-    this.showSpinner=false;
+    this.showSpinner = false;
     this.orderInfo = data.OrderPaymentDetails;
-    this.orderDetailList = data.OrderDetails;
+    this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount};
     data.OrderPaymentDetails.InvoiceCreatedDate =  moment(data.OrderPaymentDetails.InvoiceCreatedDate).format('DD-MM-YYYY');
     if(data.OrderPaymentDetails.TransactionDate){
       data.OrderPaymentDetails.TransactionDate =  moment(data.OrderPaymentDetails.TransactionDate).format('DD-MM-YYYY');
