@@ -20,7 +20,7 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
   public passToggle:boolean;
   public confirmPassToggle:boolean;
   private userIdentity:any;
-  public passwordMisMatchError:boolean;
+  public passwordMisMatchError:any;
   private updatePasswordFormSubscriber:any;
   public accessToken:string;
   constructor(
@@ -76,13 +76,17 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
       .then(data => {
       this.showSpinner=false;
       this.updatePasswordForm.reset();
-        if (data) {
+        if (data && typeof data == "boolean") {
           this._toast.success("Password has been changed successfully");
           if(endPoint == "users/UpdatePassword"){
             this.logout();
           }else{
             this._route.navigate(['login']);
           }
+        }
+        else if(data && typeof data == "string"){
+          this.passwordMisMatchError = "New password cannot be similar to last 5 passwords";
+          this.onChanges();
         }
         else{
           this._toast.error("Password not updated please try after some few minutes");
@@ -100,7 +104,7 @@ export class UpdatepasswordComponent implements OnInit, CanComponentDeactivate {
       })
     }
     else if (this.updatePasswordForm.valid){
-      this.passwordMisMatchError = true;
+      this.passwordMisMatchError = "Password mismatch";
       this.onChanges();
     }
     else{
