@@ -20,10 +20,10 @@ import { NgxCaptchaModule } from 'ngx-captcha';
   declarations: [
     // RegistrationComponent,
     LoginComponent,
-    AuthenticationComponent, 
-    ForgetpasswordComponent, 
-    UpdatepasswordComponent, 
-    EULAComponent, 
+    AuthenticationComponent,
+    ForgetpasswordComponent,
+    UpdatepasswordComponent,
+    EULAComponent,
     SupportComponent
   ],
   imports: [

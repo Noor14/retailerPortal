@@ -19,10 +19,7 @@
                     <td>{{order.ProductCode}}</td>
                     <td>{{order.ProductName}}</td>
                     <td>{{order.UnitPrice  | currency:'PKR '}}</td>
-                    <td>
-                        <span *ngIf="order.Discount; else otherTemp">{{order.Discount  | currency:'PKR '}}</span>
-                        <ng-template #otherTemp>{{order.UnitPrice  | currency:'PKR '}}</ng-template>
-                    </td>
+                    <td>{{order.Discount  | currency:'PKR '}}</td>
                     <td>{{order.UOMTitle}}</td>
                     <td>{{order.TaxValue}}</td>
                     <td>{{order.OrderQty}}</td>
