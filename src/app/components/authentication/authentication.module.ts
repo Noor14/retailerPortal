@@ -18,7 +18,7 @@ import { NgxCaptchaModule } from 'ngx-captcha';
 
 @NgModule({
   declarations: [
-    // RegistrationComponent,
+    RegistrationComponent,
     LoginComponent,
     AuthenticationComponent,
     ForgetpasswordComponent,
