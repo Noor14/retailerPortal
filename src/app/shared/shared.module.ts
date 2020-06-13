@@ -36,7 +36,7 @@ import { FooterComponent } from './footer/footer.component';
     FormsModule,
     NgbModule,
   ],
-  entryComponents:[
+  entryComponents: [
     DialogComponent,
     PaymentInstructionComponent
   ],
@@ -46,6 +46,7 @@ import { FooterComponent } from './footer/footer.component';
     SidebarComponent,
     SearchingComponent,
     NoWhiteSpaceDirective,
+    UserRoleDirective,
     NumberDirective,
     AlphaNumericOnlyDirective,
     NgbModule,

@@ -136,12 +136,12 @@ export class DashboardComponent implements OnInit {
   onTabChange(event){
       if(event.nextId == "order" && this.searchingByKeyOrder){
         this.getOrderList(this.searchObjOrder);
-        this.searchingByKeyOrder =undefined;
+        this.searchingByKeyOrder = undefined;
 
       }
       else if(event.nextId == "payment" && this.searchingByKeyPayment){
         this.getPaymentList(this.searchObjPayment);
-        this.searchingByKeyPayment =undefined;
+        this.searchingByKeyPayment = undefined;
       }
  
   }
