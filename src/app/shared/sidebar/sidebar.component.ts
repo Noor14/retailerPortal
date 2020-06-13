@@ -1,3 +1,4 @@
+import { RoleAuthorizationService } from './../../services/role-authorization.service';
 import { loadingConfig } from './../../constant/globalfunction';
 import { SharedService } from 'src/app/services/shared.service';
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
@@ -15,6 +16,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private loadingSubscriber:any;
   constructor(
      private _route: Router,
+     private _roleAuthorizationService: RoleAuthorizationService,
      private _sharedService: SharedService) { }
 
   @Output() navToggling = new EventEmitter();
@@ -32,6 +34,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   ngOnDestroy(){
     this.loadingSubscriber.unsubscribe();
   }

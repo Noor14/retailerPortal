@@ -6,6 +6,7 @@ import { CanActivate, CanActivateChild, Route, UrlSegment, ActivatedRouteSnapsho
 import { SharedService } from './shared.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
+import { RoleAuthorizationService } from './role-authorization.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     private _userService: UserService,
     private _loginService: LoginService,
     private _jwtHelper: JwtHelperService,
+    protected _roleAuthorizationService : RoleAuthorizationService,
     private _toast: ToastrService
-
     ){
   }
   canActivate(next: ActivatedRouteSnapshot,
@@ -147,18 +148,27 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   providedIn: 'root'
 })
 export class UserGuard extends AuthGuard {
-  constructor(_sharedService: SharedService,
+  constructor(
+    _sharedService: SharedService,
     _route: Router,  
     _userService: UserService,
     _loginService: LoginService,
     _jwtHelper: JwtHelperService,
+    _roleAuthorizationService : RoleAuthorizationService,
     _toast: ToastrService){
-    super(_sharedService, _route, _userService, _loginService, _jwtHelper, _toast)
+    super(_sharedService, _route, _userService, _loginService, _jwtHelper, _roleAuthorizationService, _toast)
   }
   canActivate(next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
       if (this._sharedService.isAuthenticated()) {
         this._sharedService.callLogout = false;
+        if(!this._roleAuthorizationService.isAuthorized()){
+          return false;
+        }
+        const roles = next.data.roles;
+        if (roles && !roles.some(r => this._roleAuthorizationService.hasRole(r))) {
+            return false;
+        }
         return true;
       }
       else if(this._route && this._route.url && this._route.url != '/'){
@@ -170,5 +180,15 @@ export class UserGuard extends AuthGuard {
         return false;
    
   }
- 
+    canLoad(route: Route): boolean {
+        if (!this._roleAuthorizationService.isAuthorized()) {
+            return false;
+        }
+        const roles = route.data && route.data.roles;
+        if (roles && !roles.some(r => this._roleAuthorizationService.hasRole(r))) {
+            return false;
+        }
+
+        return true;
+    }
 }

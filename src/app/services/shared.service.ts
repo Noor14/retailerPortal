@@ -11,6 +11,8 @@ export class SharedService {
   
   private userInfo = new BehaviorSubject<any>(undefined);
   public getUserInfo = this.userInfo.asObservable();
+  
+  private userRoles: any = new BehaviorSubject<any>(null);
 
   public callLogout:boolean = false;
   public validateTokenCall:boolean = false;
@@ -22,6 +24,16 @@ export class SharedService {
   public getUser() {
     return this.userInfo.getValue();
   }
+
+  public setUserRole(data) {
+    this.userRoles.next(data);
+  }
+  public getUserRole() {
+    return this.userRoles.getValue();
+  }
+
+
+
   public isAuthenticated(): boolean {
     const obj = JSON.parse(localStorage.getItem('userIdentity'));
       if(obj && obj.access_token && obj.UserAccount && obj.UserAccount.IsTermAndConditionAccepted && obj.UserAccount.UpdatePassword){

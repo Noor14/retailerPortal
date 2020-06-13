@@ -1,3 +1,4 @@
+import { RoleAuthorizationService } from './../../../services/role-authorization.service';
 import { SharedService } from './../../../services/shared.service';
 import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private _loginService: LoginService,
     private _sharedService: SharedService,
+    private _roleAuthorizationService: RoleAuthorizationService,
     private _router: Router) {
   }
 
@@ -66,6 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             else {
               this._router.navigate(['/user/dashboard']);
               this._sharedService.setUser(data.UserAccount);
+              this._roleAuthorizationService.setUserRole(data.UserAccount.UserRights);
 
             }
           }

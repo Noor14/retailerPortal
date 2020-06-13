@@ -1,3 +1,4 @@
+import { UserGuard } from './../../services/auth.guard';
 import { OrderViewComponent } from './order-view/order-view.component';
 import { DeactivateGuard } from './../../services/deactivate.guard';
 import { NgModule } from '@angular/core';
@@ -17,17 +18,85 @@ const routes: Routes = [
     path: '',
     component: UserComponent,
     children: [
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'profile', component: ProfileComponent, canDeactivate: [DeactivateGuard] },
+    {path: 'dashboard', component: DashboardComponent},
+    {
+    path: 'profile',
+    canLoad: [UserGuard],
+    component: ProfileComponent,
+    data: {
+      roles: [
+        '3',
+      ]
+    }, canDeactivate: [DeactivateGuard] 
+    },
     { path: 'support', component: SupportgridComponent },
     { path: 'support/:id', component: SupportscreenComponent, canDeactivate: [DeactivateGuard] },
-    { path: 'payment', component: PaymentComponent, canDeactivate: [DeactivateGuard]},
-    { path: 'payment/:id/:viewType', component: PaymentComponent, canDeactivate: [DeactivateGuard] },
-    { path: 'paymentView/:id/:viewType', component: PaymentViewComponent },
-    { path: 'order', component: OrderComponent, canDeactivate: [DeactivateGuard] },
-    { path: 'order/:id', component: OrderComponent, canDeactivate: [DeactivateGuard] },
-    { path: 'orderView/:id', component: OrderViewComponent },
-    { path: 'network', component: NetworkComponent },
+    {
+    path: 'payment',
+    canLoad: [UserGuard],
+    component: PaymentComponent,
+    data: {
+      roles: [
+        '9',
+      ]
+    },
+    canDeactivate: [DeactivateGuard]},
+    {
+    path: 'payment/:id/:viewType',
+    canLoad: [UserGuard],
+    component: PaymentComponent,
+    data: {
+      roles: [
+        '9',
+      ]
+    }, canDeactivate: [DeactivateGuard] },
+    {
+      path: 'paymentView/:id/:viewType',
+      canLoad: [UserGuard],
+      component: PaymentViewComponent,
+      data: {
+        roles: [
+          '10',
+        ]
+      } },
+    {
+      path: 'order',
+      canLoad: [UserGuard],
+      component: OrderComponent,
+      data: {
+        roles: [
+          '4',
+        ]
+      },
+      canDeactivate: [DeactivateGuard] },
+    {
+    path: 'order/:id',
+    canLoad: [UserGuard],
+    component: OrderComponent,
+    data: {
+      roles: [
+        '4',
+      ]
+    },
+    canDeactivate: [DeactivateGuard] },
+    {
+    path: 'orderView/:id',
+    canLoad: [UserGuard],
+    component: OrderViewComponent,
+    data: {
+      roles: [
+        '6',
+      ]
+    }},
+    {
+      path: 'network',
+      canLoad: [UserGuard],
+      component: NetworkComponent,
+      data: {
+        roles: [
+          '7',
+        ]
+      }},
     { path: '**', redirectTo: 'dashboard' }
     ]
   }

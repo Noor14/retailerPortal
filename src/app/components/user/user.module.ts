@@ -1,3 +1,4 @@
+import { RoleAuthorizationService } from './../../services/role-authorization.service';
 import { WebsocketService } from './../../services/websocket.service';
 import { DeactivateGuard } from './../../services/deactivate.guard';
 import { TreeTableModule } from 'primeng/treetable';
@@ -31,7 +32,7 @@ import { OrderDescriptionComponent } from './order-description/order-description
 @NgModule({
   declarations: [
     DashboardComponent,
-    UserComponent, 
+    UserComponent,
     ProfileComponent,
     SupportgridComponent,
     SupportscreenComponent,
@@ -52,7 +53,8 @@ import { OrderDescriptionComponent } from './order-description/order-description
     TreeTableModule,
     SharedModule
   ],
-  providers:[
+  providers: [
+    RoleAuthorizationService,
     ProfileService,
     SupportService,
     DashboardService,

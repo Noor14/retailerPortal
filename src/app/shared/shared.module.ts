@@ -1,3 +1,4 @@
+import { UserRoleDirective } from './../directives/user-role.directive';
 import { AlphaNumericOnlyDirective } from '../directives/alpha-numeric-only.directive';
 import { NumberDirective } from 'src/app/directives/numbers-only.directive';
 import { NoWhiteSpaceDirective } from './../directives/no-white-space.directive';
@@ -17,11 +18,12 @@ import { FooterComponent } from './footer/footer.component';
 @NgModule({
   
   declarations: [
-    NoWhiteSpaceDirective, 
+    UserRoleDirective,
+    NoWhiteSpaceDirective,
     NumberDirective,
     AlphaNumericOnlyDirective,
     HeaderComponent,
-    SidebarComponent, 
+    SidebarComponent,
     DialogComponent,
     PaymentInstructionComponent,
     SearchingComponent,
@@ -38,7 +40,7 @@ import { FooterComponent } from './footer/footer.component';
     DialogComponent,
     PaymentInstructionComponent
   ],
-  exports:[
+  exports: [
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
