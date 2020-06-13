@@ -2,7 +2,6 @@ import { DeactivateGuard } from './../../services/deactivate.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { AuthenticationComponent } from './authentication.component';
 import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
 import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
@@ -16,7 +15,6 @@ const routes: Routes = [
     children: [
     { path: 'login', component: LoginComponent },
     { path: 'eula', component: EULAComponent },
-    // { path: 'registration', component: RegistrationComponent, canDeactivate: [DeactivateGuard] },
     { path: 'forgetPassword', component: ForgetpasswordComponent, canDeactivate: [DeactivateGuard] },
     { path: 'updatePassword', component: UpdatepasswordComponent, canDeactivate: [DeactivateGuard] },
     { path: 'support', component: SupportComponent, canDeactivate: [DeactivateGuard] },
