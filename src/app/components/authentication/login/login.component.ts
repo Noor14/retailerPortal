@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             else {
               this._router.navigate(['/user/dashboard']);
               this._sharedService.setUser(data.UserAccount);
-              this._roleAuthorizationService.setUserRole(data.UserAccount.UserRights);
+              this._sharedService.setUserRole(data.UserAccount.UserRights);
 
             }
           }

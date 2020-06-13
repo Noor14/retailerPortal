@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 })
 export class RoleAuthorizationService {
   
-  private userRoles = null ;
+  private userRoles: any;
   constructor(private _sharedService : SharedService) {
     this.userRoles = this._sharedService.getUserRole();
     if(!this.userRoles){
@@ -26,11 +26,6 @@ export class RoleAuthorizationService {
     hasRole(role) {
         return this.isAuthorized() && this.userRoles.some(obj => obj.RightId == role);
     }
-    public setUserRole(data) {
-      this.userRoles.next(data);
-    }
-    public getUserRole() {
-      return this.userRoles.getValue();
-    }
+
  }
 
