@@ -161,14 +161,14 @@ export class UserGuard extends AuthGuard {
   canActivate(next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
       if (this._sharedService.isAuthenticated()) {
-        this._sharedService.callLogout = false;
         if(!this._roleAuthorizationService.isAuthorized()){
           return false;
         }
         const roles = next.data.roles;
         if (roles && !roles.some(r => this._roleAuthorizationService.hasRole(r))) {
-            return false;
+          return false;
         }
+        this._sharedService.callLogout = false;
         return true;
       }
       else if(this._route && this._route.url && this._route.url != '/'){
