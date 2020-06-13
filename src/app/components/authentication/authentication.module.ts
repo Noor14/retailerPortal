@@ -32,8 +32,8 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     NgxCaptchaModule,
     SharedModule
   ],
-  providers:[
-    LoginService, 
+  providers: [
+    LoginService,
     SupportService,
     DeactivateGuard]
 })
