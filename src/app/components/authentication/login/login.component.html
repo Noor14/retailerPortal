@@ -19,7 +19,7 @@
           [ngClass]="{'validationError': loginFailure || (loginForm.controls['Password'].errors && (loginForm.controls.Password.dirty || loginForm.controls.Password.touched))}">
           <label for="password">Password</label>
           <span (click)="passToggle=!passToggle">
-            <img src="../../../../assets/_images/eye.svg"  width="17" />
+            <img src="../../../../assets/_images/eye.svg"  width="17" alt="icon" />
           </span>
           <p *ngIf="loginForm.controls['Password'].errors || loginFailure" class="errorMessage">
             <!-- <small *ngIf="loginForm.controls['Password'].hasError('required') && (loginForm.controls.Password.dirty || loginForm.controls.Password.touched)">This field is required</small> -->

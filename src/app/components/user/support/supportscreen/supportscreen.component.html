@@ -33,7 +33,7 @@
                             <input type="email" noWhiteSpace class="form-control" id="email" placeholder="Email" (focusout)="elemFocusOut(email)" #email readonly formControlName="Email"
                             [ngClass]="{'validationError': supportForm.controls['Email'].errors && (supportForm.controls.Email.dirty || supportForm.controls.Email.touched)}">
                             <label for="email">Email</label>                            
-                            <img src="../../../../assets/_images/edit.svg" width="15px" (click)="elemFocus(email)" 
+                            <img src="../../../../assets/_images/edit.svg" width="15px" alt="icon" (click)="elemFocus(email)" 
                             *ngIf="!supportDetail.ID && email.readOnly"  class="mr-3 position-absolute" style="right: 5px; top: 35%;" />
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                                 [textMask]="{mask: mobileMask}" formControlName="MobileNumber"
                                 [ngClass]="{'validationError': supportForm.controls['MobileNumber'].errors && (supportForm.controls.MobileNumber.dirty || supportForm.controls.MobileNumber.touched)}">
                                  <label for="mobile">Mobile No</label>                                                        
-                                <img src="../../../../assets/_images/edit.svg" (click)="elemFocus(mobile)"
+                                <img src="../../../../assets/_images/edit.svg" alt="icon" (click)="elemFocus(mobile)"
                                 *ngIf="!supportDetail.ID && mobile.readOnly" width="15px"
                                 class="mr-3 position-absolute" style="right: 5px; top: 35%;" />
                         </div>
