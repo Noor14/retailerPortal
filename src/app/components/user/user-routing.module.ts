@@ -27,8 +27,7 @@ const routes: Routes = [
       roles: [
         '3',
       ]
-    }, canDeactivate: [DeactivateGuard] 
-    },
+    }, canDeactivate: [DeactivateGuard]},
     { path: 'support', component: SupportgridComponent },
     { path: 'support/:id', component: SupportscreenComponent, canDeactivate: [DeactivateGuard] },
     {
