@@ -12,12 +12,14 @@ export class OrderDetailComponent implements OnInit {
   public orderDetailList: any[] =[];
   public netAmount: number = 0;
   public grossAmount: number = 0;
+  public discountColumn: boolean = false;
   constructor() {
    }
 
   ngOnInit() {
-    if(this.orderList && Object.keys(this.orderList).length && this.orderList.orderDetails && this.orderList.orderDetails.length){
+    if (this.orderList && Object.keys(this.orderList).length && this.orderList.orderDetails && this.orderList.orderDetails.length) {
       this.orderDetailList = this.orderList.orderDetails;
+      this.discountColumn = this.orderDetailList.every(obj => obj.Discount);
       this.orderDetailList.forEach(obj => {
         this.netAmount += obj.TotalPrice;
         this.grossAmount += obj.UnitPrice * obj.OrderQty;
