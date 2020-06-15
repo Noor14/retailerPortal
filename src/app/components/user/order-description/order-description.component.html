@@ -37,7 +37,23 @@
                     </div>
                 </div>
             </div>
-
+            <h6 class="contentSubTitle" *ngIf="orderDetailForm.controls['OrderReference'].value || orderDetailForm.controls['InvoiceReference'].value">References</h6>
+            <div class="row" *ngIf="orderDetailForm.controls['OrderReference'].value">
+                <div class="col-12">
+                    <div class="form-group has-float-label">
+                        <textarea rows="2" id="orderReference" class="form-control" placeholder="Order Reference No" formControlName="OrderReference"></textarea>
+                        <label for="orderReference">Order Reference No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="orderDetailForm.controls['InvoiceReference'].value">
+                <div class="col-12">
+                    <div class="form-group has-float-label">
+                        <textarea rows="2" id="invoiceReference" class="form-control" placeholder="Invoice Reference No" formControlName="InvoiceReference"></textarea>
+                        <label for="invoiceReference">Invoice Reference No</label>
+                    </div>
+                </div>
+            </div>
             <div class="text-right">
                 <button class="btn btn-primary ml-3" type="button" routerLink="/user/dashboard">Back</button>
             </div>

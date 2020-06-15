@@ -22,6 +22,8 @@ export class OrderDescriptionComponent implements OnInit, OnChanges {
       OrderCreatedDate: new FormControl({value:null, disabled:true}, [Validators.required]),
       OrderStatus: new FormControl({value:null, disabled:true}, [Validators.required]),
       Comment: new FormControl({value:null, disabled:true}, [Validators.required]),
+      OrderReference: new FormControl({value:null, disabled:true}, [Validators.required]),
+      InvoiceReference: new FormControl({value:null, disabled:true}, [Validators.required])
     });
     if(this.orderDescription && Object.keys(this.orderDescription).length){
       if(moment(this.orderDescription.OrderCreatedDate).isValid()){
