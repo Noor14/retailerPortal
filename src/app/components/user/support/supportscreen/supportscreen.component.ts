@@ -37,7 +37,7 @@ export class SupportscreenComponent implements OnInit, OnDestroy, CanComponentDe
         this.breadcrumbSupport = "Add Ticket";
       }
       else {
-        this.breadcrumbSupport = "Edit Ticket";
+        this.breadcrumbSupport = "View Ticket";
         this.readonlyCheck = true;
 
       }

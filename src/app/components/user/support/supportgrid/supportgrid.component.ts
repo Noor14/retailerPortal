@@ -26,7 +26,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
   };
   public filterObj = {
     searchBy:[
-      {name:'Token ID', placeholder: 'Token ID', type: 'typing', key: 'TicketNumber'},
+      {name:'Ticket ID', placeholder: 'Ticket ID', type: 'typing', key: 'TicketNumber'},
       {name:'Status', placeholder: 'Status', type: 'dropdown', key: 'Status', filterBy : undefined},
       {name:'Created Date', placeholder: ['From Date', 'To Date'], type: 'dateRange', key: ['DateFrom', 'DateTo']},
       {name:'Issue Type', placeholder: 'Issue Type', type: 'dropdown', key: 'IssueType', filterBy : undefined}
