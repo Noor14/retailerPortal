@@ -73,7 +73,7 @@ export class DialogComponent implements OnInit {
     }
     else if(this.dialogBoxObject.mode == 'confirmDialog'){
       this.showSpinner = true;
-      if(!Object.hasOwnProperty('type')){
+      if(!this.dialogBoxObject.hasOwnProperty('type')){
       this.activeModal.close(true);
       this.showSpinner = false;
       }
