@@ -18,7 +18,6 @@ export class WebsocketService {
     }
     return new Observable(observer => {
       this.socket.on(`${eventName}${id}`, (data)=>{
-        console.log('recieved')
         observer.next(data);
       })
     })

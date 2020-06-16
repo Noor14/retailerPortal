@@ -21,6 +21,19 @@ export class UserService {
     });
     return promise;
   }
+  removeNotification(id) {
+    let promise = new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/useralert/DismissAlert/${id}`;
+      this._http.post(apiURL, null)
+        .toPromise()
+        .then(
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
+    });
+    return promise;
+  }
   getCalls(resourceName) {
     return new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${resourceName}`;

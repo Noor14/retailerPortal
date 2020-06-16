@@ -30,12 +30,12 @@
                                 <h5 class="modal-title">Notifications</h5>
                             </div>
                             <ul class="list-group" id="nav-scrollbar">
-                                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let obj of notifications?.data" [ngClass]="{'unreadNotify': !obj.ReadStatus}">
+                                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let obj of notifications?.data; let i = index" [ngClass]="{'unreadNotify': !obj.ReadStatus}">
                                    <div class="d-flex flex-column message">
                                        <span><strong>{{obj.Subject}}</strong></span>
                                        <span>{{obj.AlertMessage}}</span>
                                    </div>
-                                   <span class="close">&times;</span>
+                                   <span class="close" (click)="removeNotification(i, obj.ID)">&times;</span>
                                 </li>
                                 <li class="list-group-item text-center no-notification" *ngIf="!notifications || (notifications?.data && !notifications?.data.length)">No notification yet</li>
                             </ul>

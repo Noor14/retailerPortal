@@ -1,3 +1,4 @@
+import { UserService } from './../../components/user/user.service';
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, OnDestroy } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
 import { WebsocketService } from './../../services/websocket.service';
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
   private socketSubscriber:any;
   constructor(
     private _sharedService : SharedService,
+    private _userService : UserService,
     private socketService: WebsocketService) { 
 
     }
@@ -48,6 +50,14 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
     }
     ngOnChanges(){
       this.navToggler = this.navigationState;
+    }
+    removeNotification(index, notId){
+      this._userService.removeNotification(notId).then(res => {
+        if(res){
+          this.notifications.data.splice(index, 1);
+          this.notifications.count--;
+        }
+      })
     }
     navToggle() {
         this.navToggling.emit(!this.navToggler);
