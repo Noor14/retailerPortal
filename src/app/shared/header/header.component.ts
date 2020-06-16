@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
   public userDetail: any = {};
   private navToggler:boolean = false;
   public notifications:any;
-  public unreadMessages : boolean = false;
   @Output() navToggling = new EventEmitter();
   @Input() navigationState: boolean;
   private socketSubscriber:any;
@@ -47,9 +46,6 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
         }
         this.socketSubscriber = this.socketService.connect('userId', this.userDetail.UserId).subscribe((res: any)=>{
           this.notifications = res;
-          if(res && res.count && this.notifications.data && this.notifications.data.length){
-            this.unreadMessages = this.notifications.data.some(elem => !elem.seen)
-          }
         })
         this.navToggler = this.navigationState;
     }
@@ -61,7 +57,7 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
       this.navToggler = this.navigationState;
     }
     seenNotification(){
-      if(this.unreadMessages){
+      if(this.notifications.UnSeenCount){
         this._userService.seenNotification().then(res => {
         }).catch((err: HttpErrorResponse)=>{
   
