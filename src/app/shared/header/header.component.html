@@ -8,7 +8,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="d-flex align-items-center">
-                    <div class="notifyBell mr-3 pointer" ngbDropdown  [ngClass]="{'unread': unreadMessages}">
+                    <div class="notifyBell mr-3 pointer" ngbDropdown  [ngClass]="{'unread': unreadMessages}" (click)="seenNotification()">
                         <svg id="notificationIcon" ngbDropdownToggle version="1.1" width="25px" fill="#96bb3d" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
                             <g>
@@ -42,6 +42,7 @@
                             <div class="modal-footer pt-1 pb-1" *ngIf="notifications?.count && notifications?.count > 10 ">
                                 <button type="button" class="btn" > <u> Load More </u> </button>
                             </div>
+                            <ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>
                         </div>
 
                     </div>

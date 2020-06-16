@@ -1,3 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { SPINNER_PLACEMENT } from '@hardpool/ngx-spinner';
+import { loadingConfig } from './../../constant/globalfunction';
 import { UserService } from './../../components/user/user.service';
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, OnDestroy } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
@@ -18,6 +21,8 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
   @Output() navToggling = new EventEmitter();
   @Input() navigationState: boolean;
   private socketSubscriber:any;
+  public spinnerConfig:any;
+  public showSpinner: boolean;
   constructor(
     private _sharedService : SharedService,
     private _userService : UserService,
@@ -26,6 +31,10 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
     }
 
   ngOnInit() {
+   let spinnerConfig = Object.assign({}, loadingConfig);
+   spinnerConfig.placement = SPINNER_PLACEMENT.block_ui;
+   spinnerConfig.size = "45px";
+   this.spinnerConfig = spinnerConfig;
     this.userDetail = this._sharedService.getUser();
         if(!this.userDetail){
           let info = localStorage.getItem('userIdentity');
@@ -51,12 +60,26 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
     ngOnChanges(){
       this.navToggler = this.navigationState;
     }
+    seenNotification(){
+      if(this.unreadMessages){
+        this._userService.seenNotification().then(res => {
+        }).catch((err: HttpErrorResponse)=>{
+  
+        })
+      }
+   
+    }
     removeNotification(index, notId){
+      this.showSpinner = true;
       this._userService.removeNotification(notId).then(res => {
         if(res){
           this.notifications.data.splice(index, 1);
           this.notifications.count--;
         }
+        this.showSpinner = false;
+      }).catch((err: HttpErrorResponse)=>{
+        this.showSpinner = false;
+
       })
     }
     navToggle() {

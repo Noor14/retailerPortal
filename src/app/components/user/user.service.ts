@@ -21,6 +21,19 @@ export class UserService {
     });
     return promise;
   }
+  seenNotification() {
+    let promise = new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/useralert/MarkSeen`;
+      this._http.put(apiURL, null)
+        .toPromise()
+        .then(
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
+    });
+    return promise;
+  }
   removeNotification(id) {
     let promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/useralert/DismissAlert/${id}`;

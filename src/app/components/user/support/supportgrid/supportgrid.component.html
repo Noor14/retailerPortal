@@ -10,7 +10,7 @@
     <div class="content">
         <div class="d-flex justify-content-between align-items-center contentHeader">
                 <h5>Support</h5>
-                <button class="btn btn-primary mb-2 ml-3" type="button" routerLink="/user/support/0">Add Ticket</button>
+                <button class="btn btn-primary mb-2 ml-3" *userRole="[12]" type="button" routerLink="/user/support/0">Add Ticket</button>
         </div>
         <app-searching [searchingCriteria]='filterObj' (filteredData)="onSearchResult($event)"></app-searching>
         <div class="gridArea table-responsive" id="nav-scrollbar">
@@ -34,8 +34,10 @@
                             <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
-                                <button ngbDropdownItem [routerLink] = "['/user/support', item.ID]">View</button>
-                                <button ngbDropdownItem *ngIf="item.Status == 'Pending'" (click)="openDialog(item.ID)">Delete</button>
+                                <button ngbDropdownItem *userRole="[11]" [routerLink] = "['/user/support', item.ID]">View</button>
+                                <div *userRole="[12]">
+                                    <button ngbDropdownItem *ngIf="item.Status == 'Pending'" (click)="openDialog(item.ID)">Delete</button>
+                                </div>
                               </div>
                             </div>
                            

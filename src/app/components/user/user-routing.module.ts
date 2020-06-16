@@ -28,8 +28,26 @@ const routes: Routes = [
         '3',
       ]
     }, canDeactivate: [DeactivateGuard]},
-    { path: 'support', component: SupportgridComponent },
-    { path: 'support/:id', component: SupportscreenComponent, canDeactivate: [DeactivateGuard] },
+    {
+      path: 'support',
+      canLoad: [UserGuard],
+      component: SupportgridComponent,
+      data: {
+        roles: [
+          '11',
+        ]
+      }
+   },
+    {
+      path: 'support/:id',
+      canLoad: [UserGuard],
+      component: SupportscreenComponent,
+      data: {
+        roles: [
+          '12',
+        ]
+      },
+      canDeactivate: [DeactivateGuard] },
     {
     path: 'payment',
     canLoad: [UserGuard],

@@ -16,7 +16,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private loadingSubscriber:any;
   constructor(
      private _route: Router,
-     private _roleAuthorizationService: RoleAuthorizationService,
      private _sharedService: SharedService) { }
 
   @Output() navToggling = new EventEmitter();
