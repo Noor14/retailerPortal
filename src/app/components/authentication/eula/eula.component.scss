@@ -1,19 +1,22 @@
+@import '../../../../assets/_scss/_variables';
+
 .termCondition{
     #nav-scrollbar{
         height: 400px;
         overflow-y: auto;
-        
+        margin-bottom: 20px;
         .content{
             text-align: justify;
             font-size: .8rem;
+            padding: 1rem 1rem 0;
             .content-area{
                 h1{
-                  font-size: 20px !important;
-                  color: #96bb3d !important;
+                  font-size: 20px;
+                  color: $baseColor;
                 }
                 table{
                     td{
-                        border: 1px solid #cccccc !important;
+                        border: 1px solid #cccccc;
                         padding: 5px;
                         }
                     }
