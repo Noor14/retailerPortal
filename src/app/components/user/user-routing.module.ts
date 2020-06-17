@@ -64,7 +64,8 @@ const routes: Routes = [
     component: PaymentComponent,
     data: {
       roles: [
-        '9',
+        '10',
+        '9'
       ]
     }, canDeactivate: [DeactivateGuard] },
     {
