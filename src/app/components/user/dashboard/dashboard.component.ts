@@ -111,8 +111,7 @@ export class DashboardComponent implements OnInit {
     this.loadAvailableCount = data.RecordCount;
     })
     .catch(err => {
-    this.showSpinner=false;
-      console.log(err);
+    this.showSpinner = false;
     })
   }
 
@@ -129,8 +128,7 @@ export class DashboardComponent implements OnInit {
     this.loadAvailableOrderCount = data[1].RecordCount;
     })
     .catch(err => {
-    this.showSpinner=false;
-      console.log(err);
+    this.showSpinner = false;
     })
   }
   onTabChange(event){

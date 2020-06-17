@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class EULAComponent implements OnInit {
   public showSpinner: boolean;
   public spinnerConfig: any;
-  private userIdentity:any;
+  public userIdentity:any;
 
   constructor(private _loginService : LoginService,private _route:Router) {
   }
