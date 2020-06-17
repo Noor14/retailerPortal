@@ -35,17 +35,30 @@
                             <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
+                              <ng-container *userRole="[10]">
                                 <button ngbDropdownItem *ngIf="(payment.IsEditable && payment.Status == 'Paid') || (!payment.IsEditable && (payment.Status == 'Cancelled' || payment.Status == 'Blocked' || payment.Status == 'Payment Processing' || payment.Status == 'Paid' || payment.Status == 'Un-paid'))" [routerLink] = "['/user/paymentView', payment.RetailerInvoiceId, payment.IsEditable]">View</button>
+                              </ng-container>
+                              <ng-container *userRole="[10, 9]">
                                 <button ngbDropdownItem *ngIf="payment.Status == 'Un-Paid'" [routerLink] = "['/user/payment', payment.RetailerInvoiceId, payment.IsEditable]">
-                                  <span *ngIf="payment.IsEditable; else temp">Edit</span>
-                                  <ng-template #temp>View</ng-template>
+                                  <ng-container *userRole="[9]">
+                                    <span *ngIf="payment.IsEditable">Edit</span>
+                                  </ng-container>
+                                  <ng-container *userRole="[10]">
+                                    <span *ngIf="!payment.IsEditable">View</span>
+                                  </ng-container>
                                 </button>
-                                <button ngbDropdownItem *ngIf="payment.IsEditable && payment.Status == 'Un-Paid'" (click)="openDialog(payment.RetailerInvoiceId, 'delete', 'payment')">Delete</button>
+                              </ng-container>
+                               <ng-container *userRole="[9]">
+                                 <button ngbDropdownItem *ngIf="payment.IsEditable && payment.Status == 'Un-Paid'" (click)="openDialog(payment.RetailerInvoiceId, 'delete', 'payment')">Delete</button>
+                               </ng-container>
+                               <ng-container>
                                 <button ngbDropdownItem class="payBy" *ngIf="payment.IsEditable && payment.Status == 'Un-Paid'" (mouseenter)="payBygroupList = true" (mouseleave)="payBygroupList = false">Pay By
                                   <ul class="list-group paymentPayBY" *ngIf="payBygroupList">
                                     <li class="list-group-item" (click)= "openDialogPSID(payment.InvoiceNumber, payment.RetailerInvoiceId)">PS ID </li>
                                   </ul>
                                 </button>
+                               </ng-container>
+
                               </div>
                             </div>
                            
