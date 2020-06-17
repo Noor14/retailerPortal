@@ -5,7 +5,6 @@ import { UserService } from './../../components/user/user.service';
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, OnDestroy } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
 import { WebsocketService } from './../../services/websocket.service';
-import { Subject} from 'rxjs';
 
 @Component({
   selector: 'app-header',
