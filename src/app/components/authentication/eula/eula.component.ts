@@ -1,13 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { loadingConfig } from './../../../constant/globalfunction';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-eula',
   templateUrl: './eula.component.html',
-  styleUrls: ['./eula.component.scss']
+  styleUrls: ['./eula.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class EULAComponent implements OnInit {
   public showSpinner: boolean;
