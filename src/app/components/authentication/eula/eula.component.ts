@@ -19,7 +19,6 @@ export class EULAComponent implements OnInit {
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     this.userIdentity = (localStorage.getItem('userIdentity'))? JSON.parse(localStorage.getItem('userIdentity')) : undefined;
-    console.log(this.userIdentity.UserAccount.TermAndCondition)
   }
 
   
