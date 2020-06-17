@@ -115,8 +115,8 @@
                               <ng-container *userRole="[4]">
                                 <button ngbDropdownItem *ngIf="order.Status == 'Draft'" (click)="openDialog(order.ID, 'delete', 'order')">Delete</button>
                               </ng-container>
-                              <ng-container *userRole="[4]">
-                                <button ngbDropdownItem *ngIf="(order.Status == 'Approved' && order.InvoiceStatus == 'Un-Paid') || order.Status == 'Pending'" (click)="openDialog(order.ID, 'cancel', 'order')">Cancel</button>
+                              <ng-container *userRole="[13]">
+                                <button ngbDropdownItem *ngIf="(order.Status == 'Approved' && (order.InvoiceStatus == 'Un-Paid' || order.InvoiceStatus == 'Pending')) || order.Status == 'Pending'" (click)="openDialog(order.ID, 'cancel', 'order')">Cancel</button>
                               </ng-container>
                               </div>
                             </div>
