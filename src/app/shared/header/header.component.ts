@@ -65,12 +65,15 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
       }
    
     }
-    removeNotification(index, notId){
+    removeNotification(notId){
       this.showSpinner = true;
       this._userService.removeNotification(notId).then(res => {
         if(res){
-          this.notifications.data.splice(index, 1);
-          this.notifications.count--;
+          let index = this.notifications.data.findIndex(obj => obj.ID == notId);
+          if(index >=0){
+            this.notifications.data.splice(index, 1);
+            this.notifications.TotalCount--;
+          }
         }
         this.showSpinner = false;
       }).catch((err: HttpErrorResponse)=>{
