@@ -16,11 +16,13 @@ export class EULAComponent implements OnInit {
 
   constructor(private _loginService : LoginService,private _route:Router) {
   }
-  // users/termsandcondition
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
     this.userIdentity = (localStorage.getItem('userIdentity'))? JSON.parse(localStorage.getItem('userIdentity')) : undefined;
+    console.log(this.userIdentity.UserAccount.TermAndCondition)
   }
+
+  
   disagree(){
     if(localStorage.getItem('userIdentity')){
       this.logout();
