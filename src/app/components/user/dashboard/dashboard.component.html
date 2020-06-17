@@ -39,14 +39,16 @@
                                 <button ngbDropdownItem *ngIf="(payment.IsEditable && payment.Status == 'Paid') || (!payment.IsEditable && (payment.Status == 'Cancelled' || payment.Status == 'Blocked' || payment.Status == 'Payment Processing' || payment.Status == 'Paid' || payment.Status == 'Un-paid'))" [routerLink] = "['/user/paymentView', payment.RetailerInvoiceId, payment.IsEditable]">View</button>
                               </ng-container>
                               <ng-container *userRole="[10, 9]">
-                                <button ngbDropdownItem *ngIf="payment.Status == 'Un-Paid'" [routerLink] = "['/user/payment', payment.RetailerInvoiceId, payment.IsEditable]">
                                   <ng-container *userRole="[9]">
-                                    <span *ngIf="payment.IsEditable">Edit</span>
+                                    <button ngbDropdownItem *ngIf="payment.Status == 'Un-Paid' && payment.IsEditable" [routerLink] = "['/user/payment', payment.RetailerInvoiceId, payment.IsEditable]">
+                                      Edit
+                                  </button>
                                   </ng-container>
                                   <ng-container *userRole="[10]">
-                                    <span *ngIf="!payment.IsEditable">View</span>
+                                    <button ngbDropdownItem *ngIf="payment.Status == 'Un-Paid' && !payment.IsEditable" [routerLink] = "['/user/payment', payment.RetailerInvoiceId, payment.IsEditable]">
+                                      View
+                                  </button>
                                   </ng-container>
-                                </button>
                               </ng-container>
                                <ng-container *userRole="[9]">
                                  <button ngbDropdownItem *ngIf="payment.IsEditable && payment.Status == 'Un-Paid'" (click)="openDialog(payment.RetailerInvoiceId, 'delete', 'payment')">Delete</button>
