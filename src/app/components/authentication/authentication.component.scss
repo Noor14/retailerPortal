@@ -28,6 +28,9 @@
         .support{
             @extend .login;
         }
+        .termCondition{
+            @extend .login;
+        }
 
     }
 
