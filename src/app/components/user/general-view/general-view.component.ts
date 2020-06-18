@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class GeneralViewComponent implements OnInit {
   public showSpinner: boolean;
   public spinnerConfig:any;
+  public activeTab: string = "order";
   private requestId: number;
   public orderDetailList: any;
   public orderInfo:any;
@@ -33,6 +34,7 @@ export class GeneralViewComponent implements OnInit {
     }
     else if(this.requestId && this.viewType == 'invoiceView'){
         this.getPaymentDetails('invoices', this.requestId);
+        this.activeTab = "payment"
     }
   }
   getPaymentDetails(resourceName, requestId){

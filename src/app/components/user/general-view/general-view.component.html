@@ -8,20 +8,20 @@
             <ng-template #other><a class="breadcrumb-item">Payment</a></ng-template>
         </li>
     </ol>
-    <ngb-tabset>
-        <ngb-tab>
+    <ngb-tabset [activeId]="activeTab">
+        <ngb-tab id="order">
           <ng-template ngbTabTitle>Order</ng-template>
           <ng-template ngbTabContent>
             <app-order-description [orderDescription]="orderInfo"></app-order-description>
           </ng-template>
         </ngb-tab>
-        <ngb-tab>
+        <ngb-tab id="orderDetail">
           <ng-template ngbTabTitle>Order Detail</ng-template>
           <ng-template ngbTabContent>
             <app-order-detail [orderList]="orderDetailList"></app-order-detail>
           </ng-template>
         </ngb-tab>
-        <ngb-tab>
+        <ngb-tab id="payment">
             <ng-template ngbTabTitle>Payment</ng-template>
             <ng-template ngbTabContent>
                 <app-payment-view [paymentDetail]="orderInfo" [viewType]='viewType'></app-payment-view>
