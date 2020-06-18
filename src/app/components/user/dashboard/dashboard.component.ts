@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { loadingConfig } from './../../../constant/globalfunction';
 import { SharedService } from 'src/app/services/shared.service';
 import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
@@ -63,6 +64,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private _dashboardService: DashboardService,
     private _modalService: NgbModal,
+    private _route: Router,
     private _sharedService: SharedService) { }
 
   ngOnInit() {
@@ -73,6 +75,13 @@ export class DashboardComponent implements OnInit {
   }
   ngOnDestroy(){
       this.statusDropDownSubscriber && this.statusDropDownSubscriber.unsubscribe();
+  }
+  viewDetail(invoiceID, isEditable){
+    if(isEditable){
+      this._route.navigate(['/user/paymentView', invoiceID])
+    }else{
+      this._route.navigate(['/user', 'invoiceView', invoiceID])
+    }
   }
   getdropDownList() {
     this.statusDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
@@ -188,7 +197,7 @@ export class DashboardComponent implements OnInit {
       this.loadAvailableOrderCount = event.data[1].RecordCount;
     }
   }
-  openDialog(id :Number, type, mode){
+  openDialog(id :number, type, mode){
     const modalRef = this._modalService.open(DialogComponent,{ 
       centered: true,
       keyboard: false,

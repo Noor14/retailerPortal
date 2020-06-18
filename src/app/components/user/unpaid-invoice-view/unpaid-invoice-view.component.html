@@ -1,0 +1,34 @@
+<section class="view">
+    <ol class="breadcrumb m-0">
+        <li class="breadcrumb-item">
+            <a routerLink="/user/dashboard">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="breadcrumb-item">Payment</a>
+        </li>
+    </ol>
+    <ngb-tabset>
+        <ngb-tab>
+          <ng-template ngbTabTitle>Payment</ng-template>
+          <ng-template ngbTabContent>
+            <app-payment-creation [paymentDetail]="orderInfo" [requestType]="requestType" [distributorList]="distributorList"></app-payment-creation>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab>
+            <ng-template ngbTabTitle>Order</ng-template>
+            <ng-template ngbTabContent>
+                <app-order-description [orderDescription]="orderInfo"></app-order-description>
+            </ng-template>
+          </ngb-tab>
+        <ngb-tab>
+          <ng-template ngbTabTitle>Order Detail</ng-template>
+          <ng-template ngbTabContent>
+            <app-order-detail [orderList]="orderDetailList"></app-order-detail>
+          </ng-template>
+        </ngb-tab>
+       
+    </ngb-tabset>
+  
+</section>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>
+

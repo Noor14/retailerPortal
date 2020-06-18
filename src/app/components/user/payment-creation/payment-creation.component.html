@@ -1,0 +1,64 @@
+<section class="payment">
+    <ol class="breadcrumb m-0" *ngIf="requestType">
+        <li class="breadcrumb-item">
+            <a routerLink="/user/dashboard">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="breadcrumb-item">Payment</a>
+        </li>
+    </ol>
+    <div class="content">
+        <div class="contentHeader" *ngIf="requestType">
+            <h5>Payment</h5>
+        </div>
+        <div class="text-right makePaymentBtn" *ngIf="paymentPrepaidNumber && requestType">
+            <button class="btn btn-primary" type="button" (click)="resetForm()">Make New Payment</button>
+        </div>
+        <div class="contentArea bg-white p-4">
+            <form [formGroup]="paymentForm">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group has-float-label">
+                            <select  class="form-control" id="company" formControlName="DealerCode"
+                            [ngClass]="{'validationError': paymentForm.controls['DealerCode'].errors && (paymentForm.controls.DealerCode.dirty || paymentForm.controls.DealerCode.touched)}">
+                                <option value="null" disabled selected>Select Company</option>
+                                <option *ngFor="let distributor of distributorList" [value]="distributor.DealerCode">{{distributor.CompanyName}}</option>
+                            </select>
+                            <label for="company">Company</label>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group has-float-label">
+                            <input type="number" min="1" id="amount" autocomplete="off" numbersOnly formControlName="PaidAmount" class="form-control" placeholder="Amount" 
+                            [ngClass]="{'validationError': paymentForm.controls['PaidAmount'].errors && (paymentForm.controls.PaidAmount.dirty || paymentForm.controls.PaidAmount.touched)}">
+                            <label for="amount">Amount</label>
+                            <p *ngIf="paymentForm.controls['PaidAmount'].errors" class="errorMessage">
+                                <small *ngIf="!paymentForm.controls['PaidAmount'].hasError('pattern') && paymentForm.controls['PaidAmount'].hasError('min') && (paymentForm.controls.PaidAmount.dirty || paymentForm.controls.PaidAmount.touched)">Amount cannot be less than 500</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
+                    <button class="btn btn-primary mr-3" type="button" *ngIf="!paymentPrepaidNumber" [disabled]="paymentForm.invalid" (click)="savePayment()" >Next</button>
+                    <button class="btn btn-primary mr-3" type="button" *ngIf="paymentPrepaidNumber" (click)="viewVoucher()" >View Voucher</button>
+                    <button class="btn btn-primary ml-3" type="button" *ngIf="paymentPrepaidNumber && !updateBtn" routerLink="/user/dashboard">Back</button>
+                    <button class="btn btn-primary ml-3" type="button" *ngIf="paymentPrepaidNumber && updateBtn" [disabled]="paymentForm.invalid"  (click)="savePayment()">Update</button>
+                </div>
+            </form>
+        </div>
+        <div class="contentArea bg-white p-4 mt-3" *ngIf="paymentPrepaidNumber">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group has-float-label">
+                            <input type="text" id="paymentid" class="form-control" placeholder="Payment ID" [value]="paymentPrepaidNumber" readonly>
+                            <label for="paymentid">Payment ID</label>
+                        </div>
+                    </div>
+                </div>
+                <h6 class="contentSubTitle">Payment Options</h6>
+                <button class="btn btn-outline-light bankingChannelBtn" (click)= "openDialog()"><img src="../../../../assets/_images/bank.svg" alt="icon"> Banking Channel</button>
+        </div>
+    </div>
+</section>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

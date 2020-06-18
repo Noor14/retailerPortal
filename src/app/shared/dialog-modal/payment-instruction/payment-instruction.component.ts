@@ -1,5 +1,5 @@
+import { PaymentViewService } from './../../../components/user/payment-view/payment-view.service';
 import { loadingConfig } from './../../../constant/globalfunction';
-import { PaymentService } from './../../../components/user/payment/payment.service';
 import { Component, OnInit, Input, SecurityContext } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -18,7 +18,7 @@ export class PaymentInstructionComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private _paymentService: PaymentService,
+    private _paymentViewService: PaymentViewService,
     private _domSanitizer: DomSanitizer,
     private _toast: ToastrService,
 
@@ -32,7 +32,7 @@ export class PaymentInstructionComponent implements OnInit {
   }
   viewVoucher(){
     this.showSpinner=true;
-    this._paymentService.getVoucher(this.paymentInstructions.endPoint, this.paymentInstructions.VoucherNo)
+    this._paymentViewService.getVoucher(this.paymentInstructions.endPoint, this.paymentInstructions.VoucherNo)
     .then((res:any)=>{
       this.showSpinner=false;
       if(res.data && res.data.length){

@@ -107,7 +107,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
     let obj = {...this.searchObj , ...this.searchingByKey};
     this.getSupportList(obj);
   }
-  openDialog(id :Number){
+  openDialog(id :number){
     const modalRef = this._modalService.open(DialogComponent,{ 
       centered: true,
       keyboard: false,

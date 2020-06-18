@@ -1,6 +1,6 @@
 import { loadingConfig } from '../../../constant/globalfunction';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, SecurityContext } from '@angular/core';
+import { Component, OnInit, SecurityContext, Input, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PaymentViewService } from './payment-view.service';
@@ -13,13 +13,15 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './payment-view.component.html',
   styleUrls: ['./payment-view.component.scss']
 })
-export class PaymentViewComponent implements OnInit {
+export class PaymentViewComponent implements OnInit, OnChanges {
 
+  @Input() paymentDetail: any;
+  @Input() viewType: string = 'payment';
   public showSpinner: boolean;
-  public spinnerConfig:any;
+  public spinnerConfig: any;
   public paymentDetailForm: FormGroup;
-  private requestId: Number;
-  public requestType: Number;
+  private requestId: number;
+  public requestType: number = 1;
 
  constructor(
    private activatedRoute: ActivatedRoute,
@@ -28,16 +30,44 @@ export class PaymentViewComponent implements OnInit {
    private _domSanitizer: DomSanitizer
    ) {
       this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path)
-      this.requestType = (this.activatedRoute.snapshot.url[2])? Number(this.activatedRoute.snapshot.url[2].path) : 1;
+      // this.requestType = (this.activatedRoute.snapshot.url[2])? Number(this.activatedRoute.snapshot.url[2].path) : 1;
    }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
-      if(this.requestType){
+      if(this.viewType == 'payment'){
+        this.createForm()
         this.getPaymentDetails('prepaidrequests', this.requestId);
-      }else{
-        this.getPaymentDetails('invoices', this.requestId);
       }
+  }
+  ngOnChanges(){
+    this.createForm();
+    if(this.paymentDetail){
+      if(this.viewType == 'orderView'){
+        this.paymentDetail.PrePaidNumber = this.paymentDetail.InvoiceNumber;
+        this.paymentDetail.Status = this.paymentDetail.InvoiceStatus;
+        this.paymentDetail.PaidAmount = this.paymentDetail.InvoiceTotalAmount;
+        if(this.paymentDetail.InvoiceCreatedDate && moment(this.paymentDetail.InvoiceCreatedDate).isValid()){
+          this.paymentDetail.CreatedDate =  moment(this.paymentDetail.InvoiceCreatedDate).format('DD-MM-YYYY');
+        } else{
+          this.paymentDetail.CreatedDate =  this.paymentDetail.InvoiceCreatedDate;
+        }
+      }
+      else if (this.viewType == 'invoiceView'){
+        if(this.paymentDetail.OrderCreatedDate && moment(this.paymentDetail.OrderCreatedDate).isValid()){
+          this.paymentDetail.CreatedDate =  moment(this.paymentDetail.OrderCreatedDate).format('DD-MM-YYYY');
+        } else{
+          this.paymentDetail.CreatedDate =  this.paymentDetail.OrderCreatedDate;
+        }
+      }
+      if(this.paymentDetail.TransactionDate){
+        this.paymentDetail.TransactionDate =  moment(this.paymentDetail.TransactionDate).format('DD-MM-YYYY');
+      }
+     
+      this.paymentDetailForm.patchValue(this.paymentDetail);
+    }
+  }
+  createForm(){
     this.paymentDetailForm = new FormGroup({
       PrePaidNumber:  new FormControl({value:null, disabled:true}, [Validators.required]),
       PaidAmount: new FormControl({value:null, disabled:true}, [Validators.required]),
@@ -55,9 +85,6 @@ export class PaymentViewComponent implements OnInit {
   getPaymentDetails(resourceName, requestId){
       this.showSpinner=true;
     this._paymentViewService.getDetail(resourceName, requestId).then((data: any) => {
-      if(!this.requestType && this.requestId){
-        data = data.Invoice;
-      }
       data.CreatedDate =  moment(data.CreatedDate).format('DD-MM-YYYY');
       if(data.TransactionDate){
         data.TransactionDate =  moment(data.TransactionDate).format('DD-MM-YYYY');

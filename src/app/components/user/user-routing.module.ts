@@ -1,8 +1,8 @@
+import { UnpaidInvoiceViewComponent } from './unpaid-invoice-view/unpaid-invoice-view.component';
+import { PaymentCreationComponent } from './payment-creation/payment-creation.component';
 import { UserGuard } from './../../services/auth.guard';
-import { OrderViewComponent } from './order-view/order-view.component';
 import { DeactivateGuard } from './../../services/deactivate.guard';
 import { NgModule } from '@angular/core';
-import { PaymentComponent } from './payment/payment.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user.component';
@@ -12,6 +12,7 @@ import { SupportscreenComponent } from './support/supportscreen/supportscreen.co
 import { NetworkComponent } from './network/network.component';
 import { PaymentViewComponent } from './payment-view/payment-view.component';
 import { OrderComponent } from './order/order.component';
+import { GeneralViewComponent } from './general-view/general-view.component';
 
 const routes: Routes = [
   {
@@ -51,7 +52,7 @@ const routes: Routes = [
     {
     path: 'payment',
     canLoad: [UserGuard],
-    component: PaymentComponent,
+    component: PaymentCreationComponent,
     data: {
       roles: [
         '9',
@@ -59,17 +60,28 @@ const routes: Routes = [
     },
     canDeactivate: [DeactivateGuard]},
     {
-    path: 'payment/:id/:viewType',
+      path: 'payment/:id',
+      canLoad: [UserGuard],
+      component: PaymentCreationComponent,
+      data: {
+        roles: [
+          '9',
+        ]
+      },
+      canDeactivate: [DeactivateGuard]},
+    {
+    path: 'invoice/:id',
     canLoad: [UserGuard],
-    component: PaymentComponent,
+    component: UnpaidInvoiceViewComponent,
     data: {
       roles: [
         '10',
         '9'
       ]
-    }, canDeactivate: [DeactivateGuard] },
+     }
+    },
     {
-      path: 'paymentView/:id/:viewType',
+      path: 'paymentView/:id',
       canLoad: [UserGuard],
       component: PaymentViewComponent,
       data: {
@@ -98,9 +110,9 @@ const routes: Routes = [
     },
     canDeactivate: [DeactivateGuard] },
     {
-    path: 'orderView/:id',
+    path: ':viewType/:id',
     canLoad: [UserGuard],
-    component: OrderViewComponent,
+    component: GeneralViewComponent,
     data: {
       roles: [
         '6',

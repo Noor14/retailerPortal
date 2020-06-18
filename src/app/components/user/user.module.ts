@@ -17,8 +17,6 @@ import { SupportgridComponent } from './support/supportgrid/supportgrid.componen
 import { SupportscreenComponent } from './support/supportscreen/supportscreen.component';
 import { DashboardService } from './dashboard/dashboard.service';
 import { SupportService } from './support/support.service';
-import { PaymentComponent } from './payment/payment.component';
-import { PaymentService } from './payment/payment.service';
 import { NetworkComponent } from './network/network.component';
 import { NetworkService } from './network/network.service';
 import { PaymentViewComponent } from './payment-view/payment-view.component';
@@ -26,8 +24,10 @@ import { PaymentViewService } from './payment-view/payment-view.service';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { OrderService } from './order/order.service';
 import { OrderComponent } from './order/order.component';
-import { OrderViewComponent } from './order-view/order-view.component';
 import { OrderDescriptionComponent } from './order-description/order-description.component';
+import { PaymentCreationComponent } from './payment-creation/payment-creation.component';
+import { UnpaidInvoiceViewComponent } from './unpaid-invoice-view/unpaid-invoice-view.component';
+import { GeneralViewComponent } from './general-view/general-view.component';
 
 @NgModule({
   declarations: [
@@ -36,13 +36,15 @@ import { OrderDescriptionComponent } from './order-description/order-description
     ProfileComponent,
     SupportgridComponent,
     SupportscreenComponent,
-    PaymentComponent,
     NetworkComponent,
     PaymentViewComponent,
     OrderDetailComponent,
     OrderComponent,
-    OrderViewComponent,
-    OrderDescriptionComponent
+    GeneralViewComponent,
+    OrderDescriptionComponent,
+    PaymentCreationComponent,
+    UnpaidInvoiceViewComponent,
+    GeneralViewComponent
   ],
 
   imports: [
@@ -58,7 +60,6 @@ import { OrderDescriptionComponent } from './order-description/order-description
     ProfileService,
     SupportService,
     DashboardService,
-    PaymentService,
     UserService,
     NetworkService,
     PaymentViewService,

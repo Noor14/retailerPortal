@@ -1,5 +1,5 @@
 <section class="paymentDetail">
-        <ol class="breadcrumb m-0">
+        <ol class="breadcrumb m-0" *ngIf="viewType =='payment'">
             <li class="breadcrumb-item">
                 <a routerLink="/user/dashboard">Dashboard</a>
             </li>
@@ -8,10 +8,10 @@
             </li>
         </ol>
         <div class="content">
-            <div class="contentHeader">
+            <div class="contentHeader" *ngIf="viewType =='payment'">
                 <h5>Payments</h5>
             </div>
-            <div class="text-right makePaymentBtn"  *ngIf="requestType">
+            <div *ngIf="viewType == 'payment'" class="text-right makePaymentBtn">
                 <button class="btn btn-primary" type="button" routerLink="/user/payment">Make New Payment</button>
             </div>
             <div class="contentArea bg-white p-4" id="nav-scrollbar">
@@ -97,7 +97,7 @@
                                 </div>
                     </div>
                     <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
-                        <button class="btn btn-primary mr-3" type="button" (click)="viewReceipt()">View Receipt</button>
+                        <button class="btn btn-primary mr-3" type="button" (click)="viewReceipt()" *ngIf=" viewType== 'payment'">View Receipt</button>
                         <button class="btn btn-primary ml-3" type="button" routerLink="/user/dashboard">Back</button>
                     </div>
                 </form>
