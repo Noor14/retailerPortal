@@ -29,8 +29,7 @@ export class PaymentViewComponent implements OnInit, OnChanges {
    private _toast: ToastrService,
    private _domSanitizer: DomSanitizer
    ) {
-      this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path)
-      // this.requestType = (this.activatedRoute.snapshot.url[2])? Number(this.activatedRoute.snapshot.url[2].path) : 1;
+      this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path);
    }
 
   ngOnInit() {
@@ -101,7 +100,7 @@ export class PaymentViewComponent implements OnInit, OnChanges {
   }
   viewReceipt(){
       this.showSpinner=true;
-      let endPoint = (!this.requestType && this.requestId)? 'invoices/receipt' : 'prepaidrequests/paymentreceipt';
+      let endPoint = (this.viewType != 'payment')? 'invoices/receipt' : 'prepaidrequests/paymentreceipt';
       this._paymentViewService.getDetail(endPoint, this.requestId)
       .then((res:any)=>{
         this.showSpinner=false;

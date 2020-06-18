@@ -36,7 +36,7 @@
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
                               <ng-container *userRole="[10]">
-                                <button ngbDropdownItem *ngIf="(payment.IsEditable && payment.Status == 'Paid') || (!payment.IsEditable && (payment.Status == 'Cancelled' || payment.Status == 'Blocked' || payment.Status == 'Payment Processing' || payment.Status == 'Paid' || payment.Status == 'Un-paid'))" (click)="viewDetail('payment', payment.RetailerInvoiceId, payment.IsEditable)">View</button>
+                                <button ngbDropdownItem *ngIf="(payment.IsEditable && payment.Status == 'Paid') || (!payment.IsEditable && (payment.Status == 'Cancelled' || payment.Status == 'Blocked' || payment.Status == 'Payment Processing' || payment.Status == 'Paid' || payment.Status == 'Un-paid'))" (click)="viewDetail('payment', payment.RetailerInvoiceId, payment.IsEditable, payment.Status)">View</button>
                               </ng-container>
                               <ng-container *userRole="[9]">
                                   <button ngbDropdownItem *ngIf="payment.Status == 'Un-Paid' && payment.IsEditable" [routerLink] = "['/user/payment', payment.RetailerInvoiceId]">

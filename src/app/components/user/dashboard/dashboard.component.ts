@@ -76,12 +76,15 @@ export class DashboardComponent implements OnInit {
   ngOnDestroy(){
       this.statusDropDownSubscriber && this.statusDropDownSubscriber.unsubscribe();
   }
-  viewDetail(type, id, status, payStatus?){
+  viewDetail(type, id, status, payStatus){
     if(type == 'payment'){
-      if(status){
+      if(status && payStatus == 'Paid'){
         this._route.navigate(['/user/paymentView', id]);
-      }else{
+      }else if(!status && payStatus == 'Paid'){
         this._route.navigate(['/user', 'invoiceView', id]);
+      }
+      else{
+        this._route.navigate(['/user/payment-invoice', id]);
       }
     }else{
       if(status == 'Approved' && payStatus == 'Paid'){
