@@ -1,4 +1,4 @@
-<section class="generalView">
+<section class="generalView" [ngClass]="{'orderChange': viewType == 'invoiceView'}">
     <ol class="breadcrumb m-0">
         <li class="breadcrumb-item">
             <a routerLink="/user/dashboard">Dashboard</a>

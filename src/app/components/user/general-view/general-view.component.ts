@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { loadingConfig } from './../../../constant/globalfunction';
 import { OrderService } from '../order/order.service';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-general-view',
   templateUrl: './general-view.component.html',
-  styleUrls: ['./general-view.component.scss']
+  styleUrls: ['./general-view.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class GeneralViewComponent implements OnInit {
   public showSpinner: boolean;

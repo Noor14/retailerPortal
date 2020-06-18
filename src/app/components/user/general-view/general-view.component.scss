@@ -1,0 +1,19 @@
+.generalView{
+    &.orderChange{
+        ngb-tabset{
+            ul {
+                .nav-item:last-child{
+                    order: -1;
+                    .nav-link {
+                        padding-left: 0;
+                    }
+                }
+                .nav-item:first-child{
+                    .nav-link{
+                        padding-left: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}
