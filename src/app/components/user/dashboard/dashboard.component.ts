@@ -84,7 +84,7 @@ export class DashboardComponent implements OnInit {
         this._route.navigate(['/user', 'invoiceView', id]);
       }
     }else{
-      if(status == 'approved'){
+      if(status == 'Approved'){
         this._route.navigate(['/user', 'orderView', id]);
       }else{
         this._route.navigate(['/user/order-invoice', id]);
