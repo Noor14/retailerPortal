@@ -1,26 +1,27 @@
-<section class="view">
+<section class="invoiceView" [ngClass]="{'orderChange': viewType == 'order-invoice'}">
     <ol class="breadcrumb m-0">
         <li class="breadcrumb-item">
             <a routerLink="/user/dashboard">Dashboard</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="breadcrumb-item">Payment</a>
+            <a class="breadcrumb-item" *ngIf="viewType == 'payment-invoice'; else other">Payment</a>
+            <ng-template #other><a class="breadcrumb-item">Order</a></ng-template>
         </li>
     </ol>
-    <ngb-tabset>
-        <ngb-tab>
+    <ngb-tabset [activeId]="activeTab">
+        <ngb-tab id="payment">
           <ng-template ngbTabTitle>Payment</ng-template>
           <ng-template ngbTabContent>
             <app-payment-creation [paymentDetail]="orderInfo" [requestType]="requestType" [distributorList]="distributorList"></app-payment-creation>
           </ng-template>
         </ngb-tab>
-        <ngb-tab>
+        <ngb-tab id="order">
             <ng-template ngbTabTitle>Order</ng-template>
             <ng-template ngbTabContent>
                 <app-order-description [orderDescription]="orderInfo"></app-order-description>
             </ng-template>
           </ngb-tab>
-        <ngb-tab>
+        <ngb-tab id="orderDetail">
           <ng-template ngbTabTitle>Order Detail</ng-template>
           <ng-template ngbTabContent>
             <app-order-detail [orderList]="orderDetailList"></app-order-detail>

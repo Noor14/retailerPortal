@@ -70,16 +70,25 @@ const routes: Routes = [
       },
       canDeactivate: [DeactivateGuard]},
     {
-    path: 'invoice/:id',
+    path: 'payment-invoice/:id',
     canLoad: [UserGuard],
     component: UnpaidInvoiceViewComponent,
     data: {
       roles: [
-        '10',
-        '9'
+        '10'
       ]
      }
     },
+    {
+      path: 'order-invoice/:id',
+      canLoad: [UserGuard],
+      component: UnpaidInvoiceViewComponent,
+      data: {
+        roles: [
+          '6'
+        ]
+       }
+      },
     {
       path: 'paymentView/:id',
       canLoad: [UserGuard],
@@ -116,6 +125,7 @@ const routes: Routes = [
     data: {
       roles: [
         '6',
+        '10'
       ]
     }},
     {

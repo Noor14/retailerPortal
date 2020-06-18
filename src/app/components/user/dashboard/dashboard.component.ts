@@ -76,12 +76,21 @@ export class DashboardComponent implements OnInit {
   ngOnDestroy(){
       this.statusDropDownSubscriber && this.statusDropDownSubscriber.unsubscribe();
   }
-  viewDetail(invoiceID, isEditable){
-    if(isEditable){
-      this._route.navigate(['/user/paymentView', invoiceID])
+  viewDetail(type, id, status){
+    if(type == 'payment'){
+      if(status){
+        this._route.navigate(['/user/paymentView', id]);
+      }else{
+        this._route.navigate(['/user', 'invoiceView', id]);
+      }
     }else{
-      this._route.navigate(['/user', 'invoiceView', invoiceID])
+      if(status == 'approved'){
+        this._route.navigate(['/user', 'orderView', id]);
+      }else{
+        this._route.navigate(['/user/order-invoice', id]);
+      }
     }
+    
   }
   getdropDownList() {
     this.statusDropDownSubscriber = this._sharedService.dropDownValues.subscribe((res:any)=>{
