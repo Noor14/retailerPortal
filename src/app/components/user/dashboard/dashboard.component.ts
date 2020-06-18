@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
   ngOnDestroy(){
       this.statusDropDownSubscriber && this.statusDropDownSubscriber.unsubscribe();
   }
-  viewDetail(type, id, status){
+  viewDetail(type, id, status, payStatus?){
     if(type == 'payment'){
       if(status){
         this._route.navigate(['/user/paymentView', id]);
@@ -84,7 +84,7 @@ export class DashboardComponent implements OnInit {
         this._route.navigate(['/user', 'invoiceView', id]);
       }
     }else{
-      if(status == 'Approved'){
+      if(status == 'Approved' && payStatus == 'Paid'){
         this._route.navigate(['/user', 'orderView', id]);
       }else{
         this._route.navigate(['/user/order-invoice', id]);
