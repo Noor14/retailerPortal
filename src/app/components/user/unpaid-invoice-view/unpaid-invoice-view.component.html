@@ -1,4 +1,4 @@
-<section class="invoiceView" [ngClass]="{'orderChange': viewType == 'order-invoice'}">
+<section class="invoiceView" [ngClass]="{'orderChange': viewType == 'order-invoice' && orderInfo && orderInfo.PrePaidNumber && orderInfo.OrderStatus != 'Pending'}">
     <ol class="breadcrumb m-0">
         <li class="breadcrumb-item">
             <a routerLink="/user/dashboard">Dashboard</a>
@@ -8,8 +8,8 @@
             <ng-template #other><a class="breadcrumb-item">Order</a></ng-template>
         </li>
     </ol>
-    <ngb-tabset [activeId]="activeTab">
-        <ngb-tab id="payment">
+    <ngb-tabset [activeId]="activeTab" *ngIf="!showSpinner">
+        <ngb-tab id="payment" *ngIf="viewType == 'payment-invoice' || (viewType == 'order-invoice' && orderInfo && orderInfo.PrePaidNumber && orderInfo.OrderStatus != 'Pending')">
           <ng-template ngbTabTitle>Payment</ng-template>
           <ng-template ngbTabContent>
             <app-payment-creation [paymentDetail]="orderInfo" [requestType]="requestType" [distributorList]="distributorList"></app-payment-creation>

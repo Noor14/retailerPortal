@@ -39,26 +39,24 @@ export class UnpaidInvoiceViewComponent implements OnInit {
     
     }
     getOrderDetails(requestId){
-      this.showSpinner = true;
       this._orderService.getDetail(requestId).then((data: any) => {
-      this.showSpinner = false;
-      this.orderInfo = data.OrderPaymentDetails;
-      this.orderInfo.PaidAmount = this.orderInfo.TotalAmount;
-      this.orderInfo.PrePaidNumber = this.orderInfo.InvoiceNumber
-      this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount};
+        this.orderInfo = data.OrderPaymentDetails;
+        this.orderInfo.PaidAmount = this.orderInfo.TotalAmount;
+        this.orderInfo.PrePaidNumber = this.orderInfo.InvoiceNumber
+        this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount};
+        this.showSpinner = false;
     })
     .catch(err => {
       this.showSpinner=false;
     })
   }
   getPaymentDetails(resourceName, requestId){
-    this.showSpinner = true;
     this._paymentViewService.getDetail(resourceName, requestId).then((data: any) => {
-    this.showSpinner = false;
       this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: data.Invoice && data.Invoice.OrderTotalDiscount};
       data = data.Invoice;
       data.PaidAmount = data.TotalAmount;
       this.orderInfo = data;
+      this.showSpinner = false;
     
   })
   .catch(err => {
@@ -66,10 +64,9 @@ export class UnpaidInvoiceViewComponent implements OnInit {
   })
   }
   getDistributionList(){
-    this.showSpinner=true;
+    this.showSpinner = true;
     this._paymentViewService.getDistributorsList()
     .then((res:any)=>{
-      this.showSpinner=false;
       if(res && res.length){
         this.distributorList = res;
         if(this.viewType == 'payment-invoice'){
@@ -78,6 +75,8 @@ export class UnpaidInvoiceViewComponent implements OnInit {
         else if (this.viewType == 'order-invoice'){
           this.getOrderDetails(this.requestId)
         }
+      }else{
+        this.showSpinner=false;
       }
     })
     .catch(err=>{
