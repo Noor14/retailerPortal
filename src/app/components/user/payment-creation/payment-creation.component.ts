@@ -172,9 +172,10 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
     }
   
     viewVoucher(){
-      this.showSpinner=true;
+      this.showSpinner = true;
+      let id =  (this.paymentDetail && this.paymentDetail.InvoiceID)? this.paymentDetail.InvoiceID : this.requestId;
       let endPoint = (!this.requestType && this.requestId)? 'invoices/PrintInvoice' : 'prepaidrequests/printRecipt';
-      this._paymentViewService.getVoucher(endPoint, this.requestId)
+      this._paymentViewService.getVoucher(endPoint, id)
       .then((res:any)=>{
         this.showSpinner=false;
         if(res.data && res.data.length){
