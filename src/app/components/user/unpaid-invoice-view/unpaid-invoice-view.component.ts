@@ -42,7 +42,7 @@ export class UnpaidInvoiceViewComponent implements OnInit {
       this._orderService.getDetail(requestId).then((data: any) => {
         this.orderInfo = data.OrderPaymentDetails;
         this.orderInfo.PaidAmount = this.orderInfo.TotalAmount;
-        this.orderInfo.PrePaidNumber = this.orderInfo.InvoiceNumber
+        this.orderInfo.PrePaidNumber = this.orderInfo.InvoiceNumber;
         this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount};
         this.showSpinner = false;
     })
