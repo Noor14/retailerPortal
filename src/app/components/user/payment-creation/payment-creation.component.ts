@@ -209,8 +209,9 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
         backdrop:'static',
         size:'lg'
        });
+      let id =  (this.paymentDetail && this.paymentDetail.InvoiceID)? this.paymentDetail.InvoiceID : this.requestId;
       let endPoint = (!this.requestType && this.requestId)? 'invoices/PrintInvoice' : 'prepaidrequests/printRecipt';
-      modalRef.componentInstance.obj = {PSID : this.paymentPrepaidNumber, VoucherNo: this.requestId, endPoint: endPoint};
+      modalRef.componentInstance.obj = {PSID : this.paymentPrepaidNumber, VoucherNo: id, endPoint: endPoint};
       modalRef.result.then((result) => {
         if(result){
         }
