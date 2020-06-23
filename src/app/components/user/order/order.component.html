@@ -105,7 +105,6 @@
                                 <th>Price</th>
                                 <th class="dicountValue">Discount Value</th>
                                 <th>UOM</th>
-                                <th class="taxValue">Tax Value</th>
                                 <th class="qty">Quantity</th>
                             </tr>
                         </ng-template>
@@ -123,7 +122,6 @@
                                     </ng-container>
                                 </td>
                                 <td>{{rowData.UnitOFMeasure}}</td>
-                                <td>{{rowData.TaxValue}}</td>
                                 <td>
                                     <input type="number" min="1" numbersOnly *ngIf="!rowNode.node.children || (rowNode.node.children && !rowNode.node.children.length)"
                                     class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="rowData.OrderQty"
@@ -160,7 +158,6 @@
                                 <th>Price</th>
                                 <th class="dicountValue">Discount Value</th>
                                 <th>UOM</th>
-                                <th class="taxValue">Tax Value</th>
                                 <th class="qty">Quantity</th>
                                 <th>Amount</th>
                                 <th></th>
@@ -173,7 +170,6 @@
                                 <td>{{order.ProductUnitPrice  | currency:'PKR '}}</td>
                                 <td>{{(order.DiscountAmount || 0) | currency:'PKR '}}</td>
                                 <td>{{order.UnitOFMeasure}}</td>
-                                <td>{{order.TaxValue || 0}}</td>
                                 <td>
                                     <input type="number" (focus)="checkValue(order.OrderQty)" min="1" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
                                      (blur)="checkOrderStage(order, i)"  />

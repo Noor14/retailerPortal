@@ -496,7 +496,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy, CanComp
     this.orderSummary.filter(obj => obj.OrderQty).forEach(obj => {
       this.netAmount += obj.OrderQty * (obj.ProductUnitPrice - obj.DiscountAmount) ;
       this.grossAmount += obj.ProductUnitPrice * obj.OrderQty;
-      this.totalDiscount += obj.DiscountAmount;
+      this.totalDiscount += obj.DiscountAmount  * obj.OrderQty;
     });
   }
   deleteSummaryRow(index){
