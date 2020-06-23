@@ -86,14 +86,14 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="col-md-3" *ngIf="templateList && templateList.length">
+                            <!-- <div class="col-md-3" *ngIf="templateList && templateList.length">
                                 <div class="form-group">
                                     <select class="form-control"  [(ngModel)]="selectedTemplateID" (change)="onSelectedTemplate(selectedTemplateID)">
                                         <option value="undefined">Select Template</option>
                                         <option [value]="item.ID" *ngFor="let item of templateList">{{item.Name}}</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                     </div>
              
                   <div class="content bg-white" [@fadeAnimation]>
@@ -143,11 +143,11 @@
         <ngb-tab id="orderSummary">
             <ng-template ngbTabTitle>Order Summary</ng-template>
             <ng-template ngbTabContent>
-                <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end mb-3 templateBtn" *ngIf="orderSummary.length">
+                <!-- <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end mb-3 templateBtn" *ngIf="orderSummary.length">
                     <button class="btn btn-primary" type="button" [ngClass]="{'mutedBtn': !orderplacementStage}" [disabled]="!orderSummary.length" (click)="openDialog()">
                        Save Template
                     </button>
-                </div>
+                </div> -->
                 <div class="content bg-white" *ngIf="orderSummary && orderSummary.length">
                     <div class="gridArea table-responsive" id="nav-scrollbar">
                       <table class="table" >

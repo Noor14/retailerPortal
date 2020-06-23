@@ -88,8 +88,8 @@
                           <th>Order ID</th>
                           <th>Company</th>
                           <th>Created Date</th>
-                          <th>Amount</th>
                           <th>Status</th>
+                          <th>Amount</th>
                           <th>Action</th>
                       </tr>
                       </thead>
@@ -98,8 +98,8 @@
                           <td>{{order.OrderNumber}}</td>
                           <td>{{order.CompanyName}}</td>
                           <td class="createDateWidth">{{order.CreatedDate |  date: 'dd-MM-yyyy'}}</td>
-                          <td>{{order.TotalPrice | currency:'PKR '}}</td>
                           <td class="statusWidth">{{order.Status}}</td>
+                          <td>{{order.TotalPrice | currency:'PKR '}}</td>
                           <td>
                             <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
