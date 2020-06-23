@@ -13,6 +13,8 @@ export class OrderDetailComponent implements OnInit {
   public netAmount: number = 0;
   public grossAmount: number = 0;
   public discountColumn: boolean = false;
+  public taxColumn: boolean = false;
+  public invoiceUpload: boolean = false;
   constructor() {
    }
 
@@ -20,6 +22,8 @@ export class OrderDetailComponent implements OnInit {
     if (this.orderList && Object.keys(this.orderList).length && this.orderList.orderDetails && this.orderList.orderDetails.length) {
       this.orderDetailList = this.orderList.orderDetails;
       this.discountColumn = this.orderDetailList.some(obj => obj.Discount);
+      this.taxColumn = this.orderDetailList.some(obj => obj.TaxValue);
+      this.invoiceUpload = this.orderList.invoiceUpload;
       this.orderDetailList.forEach(obj => {
         this.netAmount += obj.TotalPrice;
         this.grossAmount += obj.UnitPrice * obj.OrderQty;

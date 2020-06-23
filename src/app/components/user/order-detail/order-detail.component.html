@@ -9,7 +9,7 @@
                     <th>Price</th>
                     <th *ngIf="discountColumn">Discount Value</th>
                     <th>UOM</th>
-                    <th>Tax Value</th>
+                    <th *ngIf="taxColumn && invoiceUpload">Tax Value</th>
                     <th>Quantity</th>
                     <th>Amount</th>
                 </tr>
@@ -21,7 +21,7 @@
                     <td>{{order.UnitPrice  | currency:'PKR '}}</td>
                     <td *ngIf="discountColumn">{{(order.Discount || 0) | currency:'PKR '}}</td>
                     <td>{{order.UOMTitle}}</td>
-                    <td>{{order.TaxValue || 0}}</td>
+                    <td *ngIf="taxColumn && invoiceUpload">{{order.TaxValue || 0}}</td>
                     <td>{{order.OrderQty}}</td>
                     <td>{{order.TotalPrice  | currency:'PKR '}}</td>
                

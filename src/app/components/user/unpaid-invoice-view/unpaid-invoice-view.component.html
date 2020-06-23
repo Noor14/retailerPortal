@@ -1,5 +1,5 @@
 <section class="invoiceView" [ngClass]="{'orderChange': viewType == 'order-invoice' && orderInfo && orderInfo.PrePaidNumber && orderInfo.InvoiceStatus != 'Pending'}">
-    <ol class="breadcrumb m-0" *ngIf="orderInfo && !showSpinner">
+    <ol class="breadcrumb m-0">
         <li class="breadcrumb-item">
             <a routerLink="/user/dashboard">Dashboard</a>
         </li>
