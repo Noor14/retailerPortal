@@ -14,13 +14,13 @@ export class NetworkComponent implements OnInit {
   public spinnerConfig:any;
   public loadAvailable: boolean;
   private searchObj: any = {
-	  KYCNumber : null,
+	  KYCNumber: null,
     TotalRecords: 10,
-    PageNumber : 0,
-    CompanyName:null,
-    DateFrom:null,
-    DateTo:null,
-    Status:null,
+    PageNumber: 0,
+    CompanyName: null,
+    DateFrom: null,
+    DateTo: null,
+    Status: null
   };
   private modifySearchObj = Object.assign({}, this.searchObj);
 
