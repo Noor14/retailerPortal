@@ -286,7 +286,7 @@ export class DashboardComponent implements OnInit {
   bankPayment(selectedItem,identifier): void {
 
 
-    console.log(selectedItem);
+   
    if(identifier == 1)
    {
     this._dashboardService.getJazzPaymentData('payaxis/PrePaidPay', selectedItem.InvoiceNumber).then((data: any) => {
