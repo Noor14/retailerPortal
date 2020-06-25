@@ -61,4 +61,20 @@ export class DashboardService {
     })
     return promise;
   }
+  getJazzPaymentData(resourceName,selectedItem)
+{
+  let promise = new Promise((resolve, reject) => {
+   const apiURL = `${baseApi}/api/${resourceName}/${selectedItem}`;
+    //const apiURL = `${baseApi}/api/payaxis/PrePaidPay`;
+    this._http.get(apiURL)
+      .toPromise()
+      .then(
+       
+        res => resolve(res)
+      )
+      .catch(err => reject(err)
+      )
+  })
+  return promise;
+}
 }

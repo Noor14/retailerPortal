@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+
 import { loadingConfig } from './../../../constant/globalfunction';
 import { SharedService } from 'src/app/services/shared.service';
 import { DialogComponent } from './../../../shared/dialog-modal/dialog/dialog.component';
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentInstructionComponent } from '../../../shared/dialog-modal/payment-instruction/payment-instruction.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -16,6 +19,7 @@ import { PaymentInstructionComponent } from '../../../shared/dialog-modal/paymen
 
 export class DashboardComponent implements OnInit {
 
+  
   public payBygroupList: boolean = false;
   private searchObjPayment: any = {
     TotalRecords: 10,
@@ -60,12 +64,16 @@ export class DashboardComponent implements OnInit {
   private statusDropDownSubscriber: any;
   private searchingByKeyOrder:any;
   private searchingByKeyPayment:any;
+  public lstPayAxis: any = {};
+  public errorState:any;
 
   constructor(
     private _dashboardService: DashboardService,
     private _modalService: NgbModal,
     private _route: Router,
-    private _sharedService: SharedService) { }
+    private _sharedService: SharedService,
+    private _activatedRoute:ActivatedRoute,
+    private _toast: ToastrService, ) { }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
@@ -270,4 +278,82 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+
+
+
+  
+
+  bankPayment(selectedItem,identifier): void {
+
+
+    console.log(selectedItem);
+   if(identifier == 1)
+   {
+    this._dashboardService.getJazzPaymentData('payaxis/PrePaidPay', selectedItem.InvoiceNumber).then((data: any) => {
+      //this.showSpinner = false;
+      this.lstPayAxis = data;
+      console.log(data);
+      setTimeout(() => {
+        const frmPayment = <HTMLFormElement>document.getElementById('frmPayment');
+        frmPayment.submit();
+    }, 100);
+      
+    }).catch(err=>{
+      //this.showSpinner=false;
+        if(err.error){
+          this._toast.error(err.error.message, "Error")
+        }
+      })
+   }
+
+   //for invoice
+   else
+   {
+    this._dashboardService.getJazzPaymentData('payaxis/InvoicePay', selectedItem.InvoiceNumber).then((data: any) => {
+      //this.showSpinner = false;
+      this.lstPayAxis = data;
+      console.log(data);
+      setTimeout(() => {
+        const frmPayment = <HTMLFormElement>document.getElementById('frmPayment');
+        frmPayment.submit();
+    }, 100);
+      
+    }).catch(err=>{
+      //this.showSpinner=false;
+        if(err.error){
+          this._toast.error(err.error.message, "Error")
+        }
+      })
+    
+     
+   }
+
 }
+
+payAxisMessage(): void {
+  
+
+  this._activatedRoute.queryParams.subscribe(params => {
+    if (params['error'] != undefined) {
+        this.errorState = params['error'];
+        
+    }
+  
+    if(this.errorState == 'true')
+    {
+      this._toast.error("Payment has not been paid.","Error")
+    }
+    else if(this.errorState == 'false')
+    {
+      this._toast.success("Payment has been sent successfully");
+    }
+    
+  });
+            
+    }
+
+
+
+}
+
+

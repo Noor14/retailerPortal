@@ -30,9 +30,11 @@ export class PaymentViewComponent implements OnInit, OnChanges {
    private _domSanitizer: DomSanitizer
    ) {
       this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path);
+     
    }
 
   ngOnInit() {
+    console.log('this is test');
     this.spinnerConfig = loadingConfig;
       if(this.viewType == 'payment'){
         this.createForm()
@@ -127,5 +129,9 @@ export class PaymentViewComponent implements OnInit, OnChanges {
           }
         })
   }
+
+
+
+  
 
 }

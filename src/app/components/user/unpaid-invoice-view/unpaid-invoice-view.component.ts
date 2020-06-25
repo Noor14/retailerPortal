@@ -20,6 +20,8 @@ export class UnpaidInvoiceViewComponent implements OnInit {
   public orderDetailList: any;
   public viewType: string = "payment-invoice";
   public activeTab: string = "payment";
+  public errorState:any;
+  public lstPayAxis: any = {};
   constructor(
     private activatedRoute: ActivatedRoute,
     private _toast: ToastrService,
@@ -86,5 +88,73 @@ export class UnpaidInvoiceViewComponent implements OnInit {
         }
       })
   }
+
+
+  bankPayment(selectedItem): void {
+
+
+    console.log('button has been created');
+    console.log(selectedItem);
+
+    this._paymentViewService.getJazzPaymentData('payaxis/PrePaidPay', selectedItem).then((data: any) => {
+      //this.showSpinner = false;
+      this.lstPayAxis = data;
+      console.log(data);
+      setTimeout(() => {
+        const frmPayment = <HTMLFormElement>document.getElementById('frmPayment');
+        frmPayment.submit();
+    }, 100);
+      
+    }).catch(err=>{
+      //this.showSpinner=false;
+        if(err.error){
+          this._toast.error(err.error.message, "Error")
+        }
+      })
+
+   /* this.dataservice.GetById('payaxis/PrePaidPay', selectedItem.ID, Rights.PrepaidRequest)
+        .subscribe(data => {
+            this.lstPayAxis = data;
+            setTimeout(() => {
+                const frmPayment = <HTMLFormElement>document.getElementById('frmPayment');
+                frmPayment.submit();
+            }, 100);
+
+        }, error => {
+            return error;
+        });
+        */
+
+
+
+      
+
+
+
+
+}
+
+         // JazzCash Message
+payAxisMessage(): void {
+
+
+this.activatedRoute.queryParams.subscribe(params => {
+if (params['error'] != undefined) {
+    this.errorState = params['error'];
+    
+}
+
+if(this.errorState == 'true')
+{
+  this._toast.error("Payment has not been paid.","Error")
+}
+else if(this.errorState == 'false')
+{
+  this._toast.success("Payment has been sent successfully");
+}
+
+});
+        
+}
 
 }

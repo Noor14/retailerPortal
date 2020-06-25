@@ -55,6 +55,7 @@
                                 <button ngbDropdownItem class="payBy" *ngIf="payment.IsEditable && payment.Status == 'Un-Paid'" (mouseenter)="payBygroupList = true" (mouseleave)="payBygroupList = false">Pay By
                                   <ul class="list-group paymentPayBY" *ngIf="payBygroupList">
                                     <li class="list-group-item" (click)= "openDialogPSID(payment.InvoiceNumber, payment.RetailerInvoiceId)">PS ID </li>
+                                    <li class="list-group-item" (click)= "bankPayment(payment,payment.IsEditable)">JazzCash</li>
                                   </ul>
                                 </button>
                                </ng-container>
@@ -135,3 +136,35 @@
       </ngb-tabset>
 </section>
 <ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>
+
+
+<div id="paymentform">
+
+  <form action="https://sandbox.jazzcash.com.pk/CustomerPortal/transactionmanagement/merchantform/" method="POST"
+      id="frmPayment">
+
+      <input type="hidden" name="pp_Version" id="pp_Version" [value]="lstPayAxis.pp_Version">
+      <input type="hidden" name="pp_TxnType" id="pp_TxnType" [value]="lstPayAxis.pp_TxnType">
+      <input type="hidden" name="pp_Language" id="pp_Language" [value]="lstPayAxis.pp_Language">
+      <input type="hidden" name="pp_TxnRefNo" id="pp_TxnRefNo" [value]="lstPayAxis.pp_TxnRefNo">
+      <input type="hidden" name="pp_MerchantID" id="pp_MerchantID" [value]="lstPayAxis.pp_MerchantID">
+      <input type="hidden" name="pp_SubMerchantID" id="pp_SubMerchantID" [value]="lstPayAxis.pp_SubMerchantID">
+      <input type="hidden" name="pp_Password" id="pp_Password" [value]="lstPayAxis.pp_Password">
+      <input type="hidden" name="pp_Amount" id="pp_Amount" [value]="lstPayAxis.pp_Amount">
+      <input type="hidden" name="pp_TxnCurrency" id="pp_TxnCurrency" [value]="lstPayAxis.pp_TxnCurrency">
+      <input type="hidden" name="pp_TxnDateTime" id="pp_TxnDateTime" [value]="lstPayAxis.pp_TxnDateTime">
+      <input type="hidden" name="pp_TxnExpiryDateTime" id="pp_TxnExpiryDateTime"
+          [value]="lstPayAxis.pp_TxnExpiryDateTime">
+      <input type="hidden" name="pp_BillReference" id="pp_BillReference" [value]="lstPayAxis.pp_BillReference">
+      <input type="hidden" name="pp_Description" id="pp_Description" [value]="lstPayAxis.pp_Description">
+      <input type="hidden" name="pp_ReturnURL" id="pp_ReturnURL" [value]="lstPayAxis.pp_ReturnURL">
+      <input type="hidden" name="ppmpf_1" id="ppmpf_1" [value]="lstPayAxis.ppmpf_1">
+      <input type="hidden" name="ppmpf_2" id="ppmpf_2" [value]="lstPayAxis.ppmpf_2">
+      <input type="hidden" name="ppmpf_3" id="ppmpf_3" [value]="lstPayAxis.ppmpf_3">
+      <input type="hidden" name="ppmpf_4" id="ppmpf_4" [value]="lstPayAxis.ppmpf_4">
+      <input type="hidden" name="ppmpf_5" id="ppmpf_5" [value]="lstPayAxis.ppmpf_5">
+      <input type="hidden" name="pp_SecureHash" id="pp_SecureHash" [value]="lstPayAxis.pp_SecureHash">
+
+
+  </form>
+</div>

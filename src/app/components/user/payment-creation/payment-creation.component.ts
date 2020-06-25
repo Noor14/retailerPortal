@@ -30,6 +30,8 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
   public requestId:number;
   public orderInfo:any;
   public orderDetailList: any;
+  public lstPayAxis: any = {};
+  public errorState:any;
 
   constructor(
     private _toast: ToastrService,
@@ -40,6 +42,7 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
     private _domSanitizer: DomSanitizer
     ) {
       this.requestId = this.activatedRoute.snapshot.url[1] && Number(this.activatedRoute.snapshot.url[1].path);
+      
      }
     canDeactivate(){
       if(this.paymentForm.dirty && !this.paymentPrepaidNumber){
@@ -58,7 +61,10 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
       }
     }
 
-    ngOnInit() {
+    ngOnInit() 
+    {
+      
+      this.payAxisMessage();
       this.spinnerConfig = loadingConfig;
       if(this.requestType){
         this.createForm();
@@ -219,4 +225,97 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
         // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
     }
+
+
+    bankPayment(selectedItem): void {
+
+
+      console.log('button has been created');
+      console.log(selectedItem);
+      console.log(this.requestType);
+     if(this.requestType && this.requestId)
+     {
+      this._paymentViewService.getJazzPaymentData('payaxis/PrePaidPay', selectedItem).then((data: any) => {
+        //this.showSpinner = false;
+        this.lstPayAxis = data;
+        console.log(data);
+        setTimeout(() => {
+          const frmPayment = <HTMLFormElement>document.getElementById('frmPayment');
+          frmPayment.submit();
+      }, 100);
+        
+      }).catch(err=>{
+        //this.showSpinner=false;
+          if(err.error){
+            this._toast.error(err.error.message, "Error")
+          }
+        })
+     }
+
+     //for invoice
+     else
+     {
+      this._paymentViewService.getJazzPaymentData('payaxis/InvoicePay', selectedItem).then((data: any) => {
+        //this.showSpinner = false;
+        this.lstPayAxis = data;
+        console.log(data);
+        setTimeout(() => {
+          const frmPayment = <HTMLFormElement>document.getElementById('frmPayment');
+          frmPayment.submit();
+      }, 100);
+        
+      }).catch(err=>{
+        //this.showSpinner=false;
+          if(err.error){
+            this._toast.error(err.error.message, "Error")
+          }
+        })
+       
+     }
+      
+
+     /* this.dataservice.GetById('payaxis/PrePaidPay', selectedItem.ID, Rights.PrepaidRequest)
+          .subscribe(data => {
+              this.lstPayAxis = data;
+              setTimeout(() => {
+                  const frmPayment = <HTMLFormElement>document.getElementById('frmPayment');
+                  frmPayment.submit();
+              }, 100);
+
+          }, error => {
+              return error;
+          });
+          */
+
+
+
+        
+
+ 
+
+
+  }
+
+           // JazzCash Message
+payAxisMessage(): void {
+  
+
+this.activatedRoute.queryParams.subscribe(params => {
+  if (params['error'] != undefined) {
+      this.errorState = params['error'];
+      
+  }
+
+  if(this.errorState == 'true')
+  {
+    this._toast.error("Payment has not been paid.","Error")
+  }
+  else if(this.errorState == 'false')
+  {
+    this._toast.success("Payment has been sent successfully");
+  }
+  
+});
+          
+  }
 }
