@@ -349,6 +349,9 @@ payAxisMessage(): void {
     }
     
   });
+
+  const url: string = this._route.url.substring(0, this._route.url.indexOf('?'));
+  this._route.navigateByUrl(url);
             
     }
 

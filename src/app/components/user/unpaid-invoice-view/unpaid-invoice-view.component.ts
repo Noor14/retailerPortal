@@ -3,7 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { loadingConfig } from './../../../constant/globalfunction';
 import { PaymentViewService } from './../payment-view/payment-view.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-unpaid-invoice-view',
   templateUrl: './unpaid-invoice-view.component.html',
@@ -24,6 +24,7 @@ export class UnpaidInvoiceViewComponent implements OnInit {
   public lstPayAxis: any = {};
   constructor(
     private activatedRoute: ActivatedRoute,
+    private _Router:Router,
     private _toast: ToastrService,
     private _orderService: OrderService,
     private _paymentViewService: PaymentViewService
@@ -154,6 +155,9 @@ else if(this.errorState == 'false')
 }
 
 });
+
+const url: string = this._Router.url.substring(0, this._Router.url.indexOf('?'));
+this._Router.navigateByUrl(url);
         
 }
 

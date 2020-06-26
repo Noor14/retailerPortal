@@ -32,6 +32,7 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
   public orderDetailList: any;
   public lstPayAxis: any = {};
   public errorState:any;
+  public orderStatus:any;
 
   constructor(
     private _toast: ToastrService,
@@ -84,6 +85,7 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
         if(this.paymentDetail){
           this.paymentForm.patchValue(this.paymentDetail);
           this.paymentPrepaidNumber = this.paymentDetail.PrePaidNumber;
+          this.orderStatus = this.paymentDetail.OrderStatus;
           this.paymentFormSubscriber && this.paymentFormSubscriber.unsubscribe();
           this.onChanges();
         }
@@ -314,6 +316,9 @@ this.activatedRoute.queryParams.subscribe(params => {
   {
     this._toast.success("Payment has been sent successfully");
   }
+
+  const url: string = this._route.url.substring(0, this._route.url.indexOf('?'));
+  this._route.navigateByUrl(url);
   
 });
           
