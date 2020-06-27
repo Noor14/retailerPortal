@@ -58,7 +58,7 @@
                 </div>
                 <h6 class="contentSubTitle">Payment Options</h6>
                 <button class="btn btn-outline-light bankingChannelBtn mr-3" (click)= "openDialog()"><img src="../../../../assets/_images/bank.svg" alt="icon"> Banking Channel</button>
-                <button class="btn btn-outline-light bankingChannelBtn" *ngIf="orderStatus == Cancelled" (click)= "bankPayment(paymentPrepaidNumber)"><img src="../../../../assets/_images/bank.svg" alt="icon"> Jazz Cash</button>
+                <button class="btn btn-outline-light bankingChannelBtn" *ngIf="status" (click)= "bankPayment(paymentPrepaidNumber)"><img src="../../../../assets/_images/bank.svg" alt="icon"> Jazz Cash</button>
         </div>
 
 

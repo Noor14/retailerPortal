@@ -33,6 +33,7 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
   public lstPayAxis: any = {};
   public errorState:any;
   public orderStatus:any;
+  public status:any;
 
   constructor(
     private _toast: ToastrService,
@@ -87,6 +88,7 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
           this.paymentPrepaidNumber = this.paymentDetail.PrePaidNumber;
           this.orderStatus = this.paymentDetail.OrderStatus;
           this.paymentFormSubscriber && this.paymentFormSubscriber.unsubscribe();
+          this.status = (this.orderStatus  == 'Cancelled') ? true : false;
           this.onChanges();
         }
     }
