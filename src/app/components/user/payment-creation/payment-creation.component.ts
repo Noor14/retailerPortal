@@ -33,7 +33,7 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
   public lstPayAxis: any = {};
   public errorState:any;
   public orderStatus:any;
-  public status:any;
+  public status:any = false;
 
   constructor(
     private _toast: ToastrService,
