@@ -101,9 +101,10 @@ export class PaymentViewComponent implements OnInit, OnChanges {
     })
   }
   viewReceipt(){
-      this.showSpinner=true;
+      this.showSpinner = true;
+      let id =  (this.paymentDetail && this.paymentDetail.InvoiceID) ? this.paymentDetail.InvoiceID : this.requestId;
       let endPoint = (this.viewType != 'payment')? 'invoices/receipt' : 'prepaidrequests/paymentreceipt';
-      this._paymentViewService.getDetail(endPoint, this.requestId)
+      this._paymentViewService.getDetail(endPoint, id)
       .then((res:any)=>{
         this.showSpinner=false;
         if(res.data && res.data.length){
