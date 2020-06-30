@@ -101,10 +101,10 @@
                         <ng-template pTemplate="header">
                             <tr>
                                 <th class="productCode">Product Code</th>
-                                <th class="productTitle">Product Title</th>
-                                <th>Price</th>
-                                <th class="dicountValue">Discount Value</th>
+                                <th class="productTitle">Product Name</th>
                                 <th>UOM</th>
+                                <th class="dicountValue">Discount Value</th>
+                                <th>Price</th>
                                 <th class="qty">Quantity</th>
                             </tr>
                         </ng-template>
@@ -115,13 +115,13 @@
                                     <span>{{rowData.Title}}</span>
                                 </td>
                                 <td>{{rowData.ProductCode}}</td>
-                                <td>{{rowData.ProductUnitPrice  | currency:'PKR '}}</td>
+                                <td>{{rowData.UnitOFMeasure}}</td>
                                 <td>
                                     <ng-container *ngIf="!rowNode.node.children || (rowNode.node.children && !rowNode.node.children.length)">
-                                    {{(rowData.DiscountAmount || 0) | currency:'PKR '}}
+                                        {{(rowData.DiscountAmount || 0) | currency:'PKR '}}
                                     </ng-container>
                                 </td>
-                                <td>{{rowData.UnitOFMeasure}}</td>
+                                <td>{{rowData.ProductUnitPrice  | currency:'PKR '}}</td>
                                 <td>
                                     <input type="number" min="1" numbersOnly *ngIf="!rowNode.node.children || (rowNode.node.children && !rowNode.node.children.length)"
                                     class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="rowData.OrderQty"
@@ -165,10 +165,10 @@
                             <thead>
                             <tr>
                                 <th class="productCode">Product Code</th>
-                                <th class="productTitle">Product Title</th>
-                                <th>Price</th>
-                                <th class="dicountValue">Discount Value</th>
+                                <th class="productName">Product Name</th>
                                 <th>UOM</th>
+                                <th class="dicountValue">Discount Value</th>
+                                <th>Price</th>
                                 <th class="qty">Quantity</th>
                                 <th>Amount</th>
                                 <th></th>
@@ -178,12 +178,12 @@
                             <tr *ngFor="let order of orderSummary; let i = index">
                                 <td>{{order.Title}}</td>
                                 <td>{{order.ProductCode}}</td>
-                                <td>{{order.ProductUnitPrice  | currency:'PKR '}}</td>
-                                <td>{{(order.DiscountAmount || 0) | currency:'PKR '}}</td>
                                 <td>{{order.UnitOFMeasure}}</td>
+                                <td>{{(order.DiscountAmount || 0) | currency:'PKR '}}</td>
+                                <td>{{order.ProductUnitPrice  | currency:'PKR '}}</td>
                                 <td>
                                     <input type="number" (focus)="checkValue(order.OrderQty)" min="1" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
-                                     (blur)="checkOrderStage(order, i)"  />
+                                    (blur)="checkOrderStage(order, i)"  />
                                 </td>
                                 <td>{{order.OrderQty * (order.ProductUnitPrice - order.DiscountAmount) | currency:'PKR '}}</td>
                                 <td><img src="../../../../assets/_images/trash.svg" alt="delIcon" class="delIcon" (click)="deleteSummaryRow(i)"></td>
