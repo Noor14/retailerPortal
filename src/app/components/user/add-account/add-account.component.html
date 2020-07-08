@@ -24,16 +24,16 @@
                 <ng-container>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label position-relative">
-                            <input type="email" noWhiteSpace id="email" class="form-control" formControlName="Email" placeholder="Email Address"
+                            <input type="email" noWhiteSpace id="accountno" class="form-control" formControlName="Email" placeholder="Account No:"
                             [ngClass]="{'validationError': accountLinkingForm.controls['Email'].errors && (accountLinkingForm.controls.Email.dirty || accountLinkingForm.controls.Email.touched)}">
-                            <label for="Email">Email Address</label>
+                            <label for="accountno">Account No:</label>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">
                             <input type="text" readOnly id="cnic"  class="form-control" formControlName="CNIC" placeholder="CNIC No"
                             [ngClass]="{'validationError': accountLinkingForm.controls['CNIC'].errors && (accountLinkingForm.controls.CNIC.dirty || accountLinkingForm.controls.CNIC.touched)}">
-                            <label for="cnic">CNIC No</label>                                        
+                            <label for="cnic">CNIC No:</label>                                        
                         </div>
                     </div>
                 </ng-container>

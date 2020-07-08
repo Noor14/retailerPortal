@@ -1,0 +1,41 @@
+<section class="createMPIN">
+    <div class="contentArea bg-white p-4">
+        <h6 class="contentSubTitle">Create MPIN</h6>
+        <form [formGroup]="accountLinkingForm">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group has-float-label">
+                        <input type="email" readonly noWhiteSpace id="selectaccount" class="form-control" formControlName="Email" placeholder="Select Account | Wallet">
+                        <label for="selectaccount">Select Account | Wallet</label>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12" >
+                    <div class="form-group has-float-label">
+                        <input type="email" readonly noWhiteSpace id="accountno" class="form-control" formControlName="Email" placeholder="Account No:">
+                        <label for="accountno">Account No:</label>
+                    </div>
+                </div>
+                <ng-container>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group has-float-label position-relative">
+                            <input type="Number" readOnly noWhiteSpace id="cnicno" class="form-control" formControlName="Email" placeholder="CNIC No:">
+                            <label for="cnicno">CNIC No:</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group has-float-label">
+                            <input type="text"  id="mpin"  class="form-control" formControlName="CNIC" placeholder="Enter MPIN">
+                            <label for="mpin">Enter MPIN</label>                                        
+                        </div>
+                    </div>
+                </ng-container>
+         
+            </div>
+            <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
+                <button class="btn btn-primary" type="button" (click)="gotoBack()">Back</button>
+                <button class="btn btn-primary ml-3" type="button">Link Account</button>
+            </div>
+    
+        </form>
+    </div>
+</section>

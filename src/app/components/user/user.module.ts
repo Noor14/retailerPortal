@@ -32,6 +32,7 @@ import { AddAccountComponent } from './add-account/add-account.component';
 import { LinkedAccountsComponent } from './linked-accounts/linked-accounts.component';
 import { ResetMPINComponent } from './reset-mpin/reset-mpin.component';
 import { ChangeMPINComponent } from './change-mpin/change-mpin.component';
+import { CreateMPINComponent } from './create-mpin/create-mpin.component';
 
 @NgModule({
   declarations: [
@@ -52,13 +53,15 @@ import { ChangeMPINComponent } from './change-mpin/change-mpin.component';
     AddAccountComponent,
     LinkedAccountsComponent,
     ResetMPINComponent,
-    ChangeMPINComponent
+    ChangeMPINComponent,
+    CreateMPINComponent
     ],
   entryComponents: [
     AddAccountComponent,
     LinkedAccountsComponent,
     ResetMPINComponent,
-    ChangeMPINComponent
+    ChangeMPINComponent,
+    CreateMPINComponent
   ],
   imports: [
     CommonModule,

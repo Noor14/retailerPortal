@@ -1,3 +1,4 @@
+import { CreateMPINComponent } from './../create-mpin/create-mpin.component';
 import { ResetMPINComponent } from './../reset-mpin/reset-mpin.component';
 import { ChangeMPINComponent } from './../change-mpin/change-mpin.component';
 import { SharedService } from 'src/app/services/shared.service';
@@ -252,4 +253,5 @@ export const rendererType = {
   resetMPIN : ResetMPINComponent,
   linkedAccounts : LinkedAccountsComponent,
   addAccount : AddAccountComponent,
+  createMPIN: CreateMPINComponent
 };
