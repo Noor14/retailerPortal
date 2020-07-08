@@ -5,15 +5,14 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group has-float-label password">
-                        <input noWhiteSpace [type]="passToggle ? 'text':'password'" id="oldpassword" class="form-control" formControlName="Password" placeholder="Old Password"
-                        [ngClass]="{'validationError':  oldPasswordError || (passwordForm.controls['Password'].errors && (passwordForm.controls.Password.dirty || passwordForm.controls.Password.touched))}">
-                        <label for="oldpassword">OTP</label>
+                        <input noWhiteSpace [type]="passToggle ? 'text':'password'" id="otp" class="form-control" formControlName="Password" placeholder="OTP">
+                        <label for="otp">OTP</label>
                         <span (click)="passToggle=!passToggle">
                             <img src="../../../../assets/_images/eye.svg" alt="icon" width="17" />
                         </span>
-                        <p *ngIf="passwordForm.controls['Password'].errors || oldPasswordError" class="errorMessage">
+                        <!-- <p *ngIf="passwordForm.controls['Password'].errors || oldPasswordError" class="errorMessage">
                             <small *ngIf="oldPasswordError && !passwordForm.controls['Password'].errors">Password mismatch</small>
-                        </p>
+                        </p> -->
                     </div>
                 </div>
             </div>
@@ -21,9 +20,8 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group has-float-label password">
-                        <input noWhiteSpace [type]="newToggle ? 'text':'password'" id="newpassword" class="form-control" formControlName="NewPassword"  placeholder="New Password"
-                        [ngClass]="{'validationError': newPasswordError || passwordForm.controls['NewPassword'].errors && (passwordForm.controls.NewPassword.dirty || passwordForm.controls.NewPassword.touched)}">
-                        <label for="newpassword">New MPIN</label>
+                        <input noWhiteSpace [type]="newToggle ? 'text':'password'" id="newmpin" class="form-control" formControlName="NewPassword"  placeholder="New MPIN">
+                        <label for="newmpin">New MPIN</label>
                         <span (click)="newToggle=!newToggle">
                             <img src="../../../../assets/_images/eye.svg" width="17" alt="icon" />
                         </span>
@@ -33,15 +31,14 @@
                 </div>
                 <div class="col-md-6 ">
                     <div class="form-group has-float-label password">
-                        <input  noWhiteSpace [type]="confirmToggle ? 'text':'password'" id="confirmpassword"  class="form-control" formControlName="ConfirmPassword" placeholder="Confirm Password"
-                        [ngClass]="{'validationError': newPasswordError || passwordForm.controls['ConfirmPassword'].errors && (passwordForm.controls.ConfirmPassword.dirty || passwordForm.controls.ConfirmPassword.touched)}">
-                        <label for="confirmpassword">Confirm MPIN</label>
+                        <input  noWhiteSpace [type]="confirmToggle ? 'text':'password'" id="confirmmpin"  class="form-control" formControlName="ConfirmPassword" placeholder="Confirm MPIN">
+                        <label for="confirmmpin">Confirm MPIN</label>
                         <span (click)="confirmToggle=!confirmToggle">
                             <img src="../../../../assets/_images/eye.svg" alt="icon" width="17" />
                         </span>
-                        <p *ngIf="newPasswordError" class="errorMessage">
+                        <!-- <p *ngIf="newPasswordError" class="errorMessage">
                             <small>{{newPasswordError}}</small>
-                        </p>
+                        </p> -->
                     </div>
                 </div>
             </div>
