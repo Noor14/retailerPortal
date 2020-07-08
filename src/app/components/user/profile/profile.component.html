@@ -7,8 +7,8 @@
                 <a class="breadcrumb-item">Profile</a>
             </li>
         </ol>
-        <ngb-tabset>
-            <ngb-tab>
+        <ngb-tabset (tabChange)="onTabChange($event)">
+            <ngb-tab id="profile">
                 <ng-template ngbTabTitle>Profile</ng-template>
                 <ng-template ngbTabContent>
 
@@ -96,19 +96,7 @@
                     </div>
                 </ng-template>
             </ngb-tab>
-            <!-- <ngb-tab>
-                <ng-template ngbTabTitle>Account & Wallet</ng-template>
-                <ng-template ngbTabContent>
-
-                        <div class="contentArea bg-white p-4">
-                            <h6 class="contentSubTitle">Add Wallet & Account</h6>
-                           
-                        </div>
-
-                </ng-template>
-            </ngb-tab> -->
-
-            <ngb-tab *userRole="[8]">
+            <ngb-tab *userRole="[8]" id="chngPassword">
                 <ng-template ngbTabTitle >Change Password </ng-template>
                 <ng-template ngbTabContent>
                     <div class="contentArea bg-white p-4">
@@ -166,7 +154,12 @@
                     </div>
                 </ng-template>
             </ngb-tab>
-
+            <ngb-tab id="accountLinking">
+                <ng-template ngbTabTitle>Link Accounts</ng-template>
+                <ng-template ngbTabContent>
+                        <ng-template #renderingContainer></ng-template>
+                </ng-template>
+            </ngb-tab>
         </ngb-tabset>
 </section>
 <ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

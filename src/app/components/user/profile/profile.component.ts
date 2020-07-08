@@ -1,6 +1,11 @@
+import { ResetMPINComponent } from './../reset-mpin/reset-mpin.component';
+import { ChangeMPINComponent } from './../change-mpin/change-mpin.component';
+import { SharedService } from 'src/app/services/shared.service';
+import { LinkedAccountsComponent } from './../linked-accounts/linked-accounts.component';
+import { AddAccountComponent } from './../add-account/add-account.component';
 import { Router } from '@angular/router';
 import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from '../../../shared/app.mask';
@@ -33,11 +38,21 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
   private passwordFormSubscriber:any;
   private newPasswordSubscriber:any;
   private confirmpasswordSubscriber:any;
+//   @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) set content(container: ViewContainerRef) {
+//     if (container) { // initially setter gets called with undefined
+//         this.container = container;
+//     }
+//  }
+  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  private componentRef: ComponentRef<any>;
+
   constructor(
     private _profileService: ProfileService,
     private _toast:ToastrService,
     private _userService: UserService,
-    private _route :Router
+    private _route :Router,
+    private _sharedService: SharedService,
+    private resolver: ComponentFactoryResolver
     ) { }
 
   canDeactivate(){
@@ -71,17 +86,36 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
         ConfirmPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)])
       })
     this.getProfile();
+
+    this._sharedService.renderComponent.subscribe(res => {
+      if (res){
+        this.renderingComponent(rendererType[res]);
+      }
+    })
+ 
+  }
+  renderingComponent(type) {
+    this.container && this.container.clear(); 
+    const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(type);
+    this.componentRef = this.container.createComponent(factory);
+    this.componentRef.instance.type = type;
   }
 
+  onTabChange(event){
+    if(event.nextId == 'accountLinking'){
+      setTimeout(()=>this.renderingComponent(LinkedAccountsComponent), 0)
+    }
+  }
   ngOnDestroy(){
       this.profileFormSubscriber && this.profileFormSubscriber.unsubscribe();
       this.passwordFormSubscriber && this.passwordFormSubscriber.unsubscribe();
       this.newPasswordSubscriber && this.newPasswordSubscriber.unsubscribe();
       this.confirmpasswordSubscriber && this.confirmpasswordSubscriber.unsubscribe();
+      this.componentRef.destroy();    
   }
 
   getProfile() {
-    this.showSpinner = true;
+    // this.showSpinner = true;
     this._profileService.getById(this.userObject.RetailerID, 1, "retailer")
       .then((data: any) => {
       this.showSpinner = false;
@@ -202,7 +236,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     })
     .catch(err=>{
       this.showSpinner = false;
-      if(err.error && err.error.status==405){
+      if(err.error && err.error.status == 405){
         this._toast.error(err.error.message,"Error")
       }
     })
@@ -213,3 +247,9 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
   }
 
 }
+export const rendererType = {
+  changeMPIN : ChangeMPINComponent,
+  resetMPIN : ResetMPINComponent,
+  linkedAccounts : LinkedAccountsComponent,
+  addAccount : AddAccountComponent,
+};

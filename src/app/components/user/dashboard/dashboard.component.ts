@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
     private _route: Router,
     private _sharedService: SharedService,
     private _activatedRoute:ActivatedRoute,
-    private _toast: ToastrService, ) { }
+    private _toast: ToastrService) { }
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;

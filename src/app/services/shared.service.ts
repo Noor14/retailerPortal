@@ -9,6 +9,9 @@ export class SharedService {
   public btnToggling = new BehaviorSubject<any>(undefined);
   public loadingLogOut = new BehaviorSubject<any>(undefined);
   
+  private renderComponentInfo = new BehaviorSubject<any>(null);
+  public renderComponent = this.renderComponentInfo.asObservable();
+
   private userInfo = new BehaviorSubject<any>(undefined);
   public getUserInfo = this.userInfo.asObservable();
   
@@ -18,6 +21,9 @@ export class SharedService {
   public validateTokenCall:boolean = false;
   constructor(public _jwtHelper: JwtHelperService) { }
 
+  public setRenderComponent(data){
+    this.renderComponentInfo.next(data);
+  }
   public setUser(data) {
     this.userInfo.next(data);
   }

@@ -1,0 +1,20 @@
+.accounts{
+    .connectionDetail{
+        height: 450px;
+        .addAccountbtn{
+            margin-bottom: 15px;
+          }
+        .accountList{
+            max-height: 450px;
+            overflow-y: auto;
+            .card{
+                min-height: 160px;
+                border: 1px solid #BCBEC0;
+                box-shadow: 0px 0px 2px 2px #f3f3f3;
+            }
+        }
+
+    }
+
+
+}

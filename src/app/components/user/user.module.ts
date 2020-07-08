@@ -28,6 +28,10 @@ import { OrderDescriptionComponent } from './order-description/order-description
 import { PaymentCreationComponent } from './payment-creation/payment-creation.component';
 import { UnpaidInvoiceViewComponent } from './unpaid-invoice-view/unpaid-invoice-view.component';
 import { GeneralViewComponent } from './general-view/general-view.component';
+import { AddAccountComponent } from './add-account/add-account.component';
+import { LinkedAccountsComponent } from './linked-accounts/linked-accounts.component';
+import { ResetMPINComponent } from './reset-mpin/reset-mpin.component';
+import { ChangeMPINComponent } from './change-mpin/change-mpin.component';
 
 @NgModule({
   declarations: [
@@ -44,9 +48,18 @@ import { GeneralViewComponent } from './general-view/general-view.component';
     OrderDescriptionComponent,
     PaymentCreationComponent,
     UnpaidInvoiceViewComponent,
-    GeneralViewComponent
+    GeneralViewComponent,
+    AddAccountComponent,
+    LinkedAccountsComponent,
+    ResetMPINComponent,
+    ChangeMPINComponent
+    ],
+  entryComponents: [
+    AddAccountComponent,
+    LinkedAccountsComponent,
+    ResetMPINComponent,
+    ChangeMPINComponent
   ],
-
   imports: [
     CommonModule,
     UserRoutingModule,

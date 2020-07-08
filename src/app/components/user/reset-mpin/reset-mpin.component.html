@@ -1,0 +1,49 @@
+<section class="resetMPIN">
+    <div class="contentArea bg-white p-4">
+        <h6 class="contentSubTitle">Reset MPIN</h6>
+        <form [formGroup]="accountLinkingForm">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group has-float-label">
+                        <select id="account" class="form-control" [(ngModel)]="selectedAccount" (change)="accountInfo(selectedAccount)">
+                            <option disabled value='undefined'>Select Account | Wallet</option>
+                            <!-- <option *ngFor="let obj of kycList" [value]="obj.DealerCode">{{obj.CompanyName}}</option> -->
+                        </select>
+                        <label for="account">Select Account | Wallet</label>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12" *ngIf="selectedAccount">
+                    <div class="form-group has-float-label">
+                        <select id="accountType" class="form-control" [(ngModel)]="selectedAccountType" (change)="accountInfo(selectedAccountType)">
+                            <option disabled value='undefined'>Select Account Type</option>
+                            <!-- <option *ngFor="let obj of kycList" [value]="obj.DealerCode">{{obj.CompanyName}}</option> -->
+                        </select>
+                        <label for="accountType">Select Account Type</label>
+                    </div>
+                </div>
+                <ng-container *ngIf="selectedAccountType">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group has-float-label position-relative">
+                            <input type="email" noWhiteSpace id="email" class="form-control" formControlName="Email" placeholder="Email Address"
+                            [ngClass]="{'validationError': accountLinkingForm.controls['Email'].errors && (accountLinkingForm.controls.Email.dirty || accountLinkingForm.controls.Email.touched)}">
+                            <label for="Email">Email Address</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group has-float-label">
+                            <input type="text" readOnly id="cnic"  class="form-control" formControlName="CNIC" placeholder="CNIC No"
+                            [ngClass]="{'validationError': accountLinkingForm.controls['CNIC'].errors && (accountLinkingForm.controls.CNIC.dirty || accountLinkingForm.controls.CNIC.touched)}">
+                            <label for="cnic">CNIC No</label>                                        
+                        </div>
+                    </div>
+                </ng-container>
+         
+            </div>
+            <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
+                <button class="btn btn-primary" type="button" (click)="gotoBack()">Back</button>
+                <button class="btn btn-primary ml-3" type="button">Link Account</button>
+            </div>
+    
+        </form>
+    </div>
+</section>
