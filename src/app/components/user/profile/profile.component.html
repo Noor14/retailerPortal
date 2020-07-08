@@ -132,7 +132,7 @@
                                         triggers="click" placement="bottom-right" [autoClose]="'outside'" ngbTooltip="Password must be minimum 6 characters long including 1 numeric value, 1 upper or lower case alphabet and 1 special character"/>
                                     </div>
                                 </div>
-                                <div class="col-md-6 ">
+                                <div class="col-md-6 col-sm-12">
                                     <div class="form-group has-float-label password">
                                         <input  noWhiteSpace [type]="confirmToggle ? 'text':'password'" id="confirmpassword"  class="form-control" formControlName="ConfirmPassword" placeholder="Confirm Password"
                                         [ngClass]="{'validationError': newPasswordError || passwordForm.controls['ConfirmPassword'].errors && (passwordForm.controls.ConfirmPassword.dirty || passwordForm.controls.ConfirmPassword.touched)}">
