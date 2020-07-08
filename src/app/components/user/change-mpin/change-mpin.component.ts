@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./change-mpin.component.scss']
 })
 export class ChangeMPINComponent implements OnInit {
+  public oldMPINToggle: boolean = false;
+  public newMPINToggle: boolean = false;
+  public confirmMPINToggle: boolean = false;
 
   constructor(private _sharedService: SharedService) { }
 
