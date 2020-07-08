@@ -1,13 +1,13 @@
 <section class="changeMPIN">
     <div class="contentArea bg-white p-4">
-        <h6 class="contentSubTitle">Change MPIN</h6>
+        <h6 class="contentSubTitle">Enter Old MPIN</h6>
         <form [formGroup]="accountLinkingForm">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group has-float-label password">
                         <input noWhiteSpace [type]="passToggle ? 'text':'password'" id="oldpassword" class="form-control" formControlName="Password" placeholder="Old Password"
                         [ngClass]="{'validationError':  oldPasswordError || (passwordForm.controls['Password'].errors && (passwordForm.controls.Password.dirty || passwordForm.controls.Password.touched))}">
-                        <label for="oldpassword">Old Password</label>
+                        <label for="oldpassword">Old MPIN</label>
                         <span (click)="passToggle=!passToggle">
                             <img src="../../../../assets/_images/eye.svg" alt="icon" width="17" />
                         </span>
@@ -17,13 +17,13 @@
                     </div>
                 </div>
             </div>
-            <h6 class="contentSubTitle">Enter new password</h6>
+            <h6 class="contentSubTitle">Enter new MPIN</h6>
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group has-float-label password">
                         <input noWhiteSpace [type]="newToggle ? 'text':'password'" id="newpassword" class="form-control" formControlName="NewPassword"  placeholder="New Password"
                         [ngClass]="{'validationError': newPasswordError || passwordForm.controls['NewPassword'].errors && (passwordForm.controls.NewPassword.dirty || passwordForm.controls.NewPassword.touched)}">
-                        <label for="newpassword">New Password</label>
+                        <label for="newpassword">New MPIN</label>
                         <span (click)="newToggle=!newToggle">
                             <img src="../../../../assets/_images/eye.svg" width="17" alt="icon" />
                         </span>
@@ -35,7 +35,7 @@
                     <div class="form-group has-float-label password">
                         <input  noWhiteSpace [type]="confirmToggle ? 'text':'password'" id="confirmpassword"  class="form-control" formControlName="ConfirmPassword" placeholder="Confirm Password"
                         [ngClass]="{'validationError': newPasswordError || passwordForm.controls['ConfirmPassword'].errors && (passwordForm.controls.ConfirmPassword.dirty || passwordForm.controls.ConfirmPassword.touched)}">
-                        <label for="confirmpassword">Confirm Password</label>
+                        <label for="confirmpassword">Confirm MPIN</label>
                         <span (click)="confirmToggle=!confirmToggle">
                             <img src="../../../../assets/_images/eye.svg" alt="icon" width="17" />
                         </span>
