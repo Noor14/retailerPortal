@@ -1,3 +1,4 @@
+import { Component, OnInit, ViewEncapsulation, OnDestroy, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef } from '@angular/core';
 import { CreateMPINComponent } from './../create-mpin/create-mpin.component';
 import { ResetMPINComponent } from './../reset-mpin/reset-mpin.component';
 import { ChangeMPINComponent } from './../change-mpin/change-mpin.component';
@@ -6,7 +7,6 @@ import { LinkedAccountsComponent } from './../linked-accounts/linked-accounts.co
 import { AddAccountComponent } from './../add-account/add-account.component';
 import { Router } from '@angular/router';
 import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
-import { Component, OnInit, ViewEncapsulation, OnDestroy, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppPattern, AppMasks } from '../../../shared/app.mask';
