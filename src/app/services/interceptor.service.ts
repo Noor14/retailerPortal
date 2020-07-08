@@ -20,7 +20,7 @@ export class InterceptorService implements HttpInterceptor {
     const loggedUser = storageUser ? JSON.parse(storageUser) : null;
     if (loggedUser) {
       request = request.clone({
-          setHeaders:{
+          setHeaders: {
             'Content-Type': 'application/json; charset=utf-8',
             'dataType': 'json',
           },
@@ -28,6 +28,11 @@ export class InterceptorService implements HttpInterceptor {
             'authorization', `Bearer ${loggedUser.access_token}`
           )
       });
+      if(request.url.includes('4000')){
+        request.headers.set('client_id', '1036849c-dce2-11e8-9e75-000c29970617');
+        request.headers.set('password', '3da99c1148a7972ad96daa5b6210594da310eb905876e3a634192a2e068b72b7');
+        request.headers.set('userType', '0');
+      }
     }
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
@@ -35,7 +40,7 @@ export class InterceptorService implements HttpInterceptor {
         if (err.status === 401 || err.status === 498) {
           // <Log the user out of your application code>
           if(err.status === 498){
-            this._toast.error("Session has been expired");
+            this._toast.error('Session has been expired');
           }
           localStorage.clear()
           this._router.navigate([ '/login' ]);

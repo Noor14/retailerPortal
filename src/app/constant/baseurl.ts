@@ -1,5 +1,6 @@
 import { environment } from '../../environments/environment';
 export let baseApi :string;
+export let meezanbaseApi :string;
 export const socketURL :string = "http://192.168.200.9:3020";
 if (environment.qa) {
     // QA URL
@@ -22,4 +23,5 @@ else if (environment.prod) {
 else {
     // PERSONAL URL
     baseApi = "http://192.168.200.9:3020";
+    meezanbaseApi = "http://192.168.200.9:4000";
 }
