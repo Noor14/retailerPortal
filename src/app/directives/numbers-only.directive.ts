@@ -14,7 +14,7 @@ constructor(private el: ElementRef) {
  }
  @HostListener('keydown', [ '$event' ])
  onKeyDown(event: KeyboardEvent) {
-    let regex=AppPattern.number;
+    const regex = AppPattern.number;
       // Allow Backspace, tab, end, and home keys
       if (this.specialKeys.indexOf(event.key) !== -1) {
       return;

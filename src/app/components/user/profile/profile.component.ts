@@ -111,7 +111,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
       this.passwordFormSubscriber && this.passwordFormSubscriber.unsubscribe();
       this.newPasswordSubscriber && this.newPasswordSubscriber.unsubscribe();
       this.confirmpasswordSubscriber && this.confirmpasswordSubscriber.unsubscribe();
-      this.componentRef.destroy();    
+      this.componentRef && this.componentRef.destroy();    
   }
 
   getProfile() {
