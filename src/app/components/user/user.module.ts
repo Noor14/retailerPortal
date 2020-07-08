@@ -1,3 +1,4 @@
+
 import { RoleAuthorizationService } from './../../services/role-authorization.service';
 import { WebsocketService } from './../../services/websocket.service';
 import { DeactivateGuard } from './../../services/deactivate.guard';
@@ -28,11 +29,12 @@ import { OrderDescriptionComponent } from './order-description/order-description
 import { PaymentCreationComponent } from './payment-creation/payment-creation.component';
 import { UnpaidInvoiceViewComponent } from './unpaid-invoice-view/unpaid-invoice-view.component';
 import { GeneralViewComponent } from './general-view/general-view.component';
-import { AddAccountComponent } from './add-account/add-account.component';
-import { LinkedAccountsComponent } from './linked-accounts/linked-accounts.component';
-import { ResetMPINComponent } from './reset-mpin/reset-mpin.component';
-import { ChangeMPINComponent } from './change-mpin/change-mpin.component';
-import { CreateMPINComponent } from './create-mpin/create-mpin.component';
+import { CreateMPINComponent } from './accounts/create-mpin/create-mpin.component';
+import { ChangeMPINComponent } from './accounts/change-mpin/change-mpin.component';
+import { ResetMPINComponent } from './accounts/reset-mpin/reset-mpin.component';
+import { LinkedAccountsComponent } from './accounts/linked-accounts/linked-accounts.component';
+import { AddAccountComponent } from './accounts/add-account/add-account.component';
+import { AccountService } from './accounts/account.service';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,7 @@ import { CreateMPINComponent } from './create-mpin/create-mpin.component';
   providers: [
     RoleAuthorizationService,
     ProfileService,
+    AccountService,
     SupportService,
     DashboardService,
     UserService,

@@ -23,7 +23,7 @@ export class SupportService {
     });
   }
   postCalls(recourseName, obj, rightId) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${recourseName}`;
       this._http.post(apiURL, obj)
         .toPromise()

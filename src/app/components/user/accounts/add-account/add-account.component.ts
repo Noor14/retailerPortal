@@ -1,5 +1,5 @@
-import { SharedService } from 'src/app/services/shared.service';
-import { AppPattern } from 'src/app/shared/app.mask';
+import { AppPattern } from '../../../../shared/app.mask';
+import { SharedService } from '../../../../services/shared.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 

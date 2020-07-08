@@ -9,7 +9,7 @@ export class UserService {
 
   constructor(private _http: HttpClient) { }
   postCalls(recourseName, obj) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${recourseName}`;
       this._http.post(apiURL, obj)
         .toPromise()
@@ -22,7 +22,7 @@ export class UserService {
     return promise;
   }
   seenNotification() {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/useralert/MarkSeen`;
       this._http.put(apiURL, null)
         .toPromise()
@@ -35,7 +35,7 @@ export class UserService {
     return promise;
   }
   removeNotification(id) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/useralert/DismissAlert/${id}`;
       this._http.post(apiURL, null)
         .toPromise()
@@ -61,7 +61,7 @@ export class UserService {
     });
   }
   logoutUser() {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/users/logout`;
       this._http.delete(apiURL)
         .toPromise()

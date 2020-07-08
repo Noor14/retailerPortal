@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef } from '@angular/core';
-import { CreateMPINComponent } from './../create-mpin/create-mpin.component';
-import { ResetMPINComponent } from './../reset-mpin/reset-mpin.component';
-import { ChangeMPINComponent } from './../change-mpin/change-mpin.component';
+import { CreateMPINComponent } from './../accounts/create-mpin/create-mpin.component';
+import { ResetMPINComponent } from './../accounts/reset-mpin/reset-mpin.component';
+import { ChangeMPINComponent } from './../accounts/change-mpin/change-mpin.component';
 import { SharedService } from 'src/app/services/shared.service';
-import { LinkedAccountsComponent } from './../linked-accounts/linked-accounts.component';
-import { AddAccountComponent } from './../add-account/add-account.component';
+import { LinkedAccountsComponent } from './../accounts/linked-accounts/linked-accounts.component';
+import { AddAccountComponent } from './../accounts/add-account/add-account.component';
 import { Router } from '@angular/router';
 import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
 import { ProfileService } from './profile.service';

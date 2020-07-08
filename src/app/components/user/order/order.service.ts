@@ -10,7 +10,7 @@ export class OrderService {
   constructor(private _http: HttpClient) { }
 
   getDetail(requestId) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/Orders/${requestId}`;
       this._http.get(apiURL)
         .toPromise()
@@ -23,7 +23,7 @@ export class OrderService {
     return promise;
   }
   getKYCAndTemplateListDetail(apiEndPath,requestId){
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${apiEndPath}/${requestId}`;
       this._http.get(apiURL)
         .toPromise()
@@ -36,7 +36,7 @@ export class OrderService {
     return promise;
   }
   getTemplateDetail(apiEndPath, requestId, dealerCode){
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${apiEndPath}/${requestId}/${dealerCode}`;
       this._http.get(apiURL)
         .toPromise()
@@ -50,7 +50,7 @@ export class OrderService {
   }
 
   save(apiEndPath, obj){
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${apiEndPath}`;
       this._http.post(apiURL, obj)
         .toPromise()

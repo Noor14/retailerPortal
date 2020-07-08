@@ -10,7 +10,7 @@ export class DashboardService {
   constructor(private _http: HttpClient) { }
   
   postCalls(recourseName, obj) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${recourseName}`;
       this._http.post(apiURL, obj)
         .toPromise()
@@ -23,7 +23,7 @@ export class DashboardService {
     return promise;
   }
   deletePayment(id) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/prepaidrequests/Delete/${id}`;
       this._http.delete(apiURL)
         .toPromise()
@@ -36,7 +36,7 @@ export class DashboardService {
     return promise;
   }
   deleteOrder(id) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/orders/deletedraft/${id}`;
       this._http.delete(apiURL)
         .toPromise()
@@ -49,7 +49,7 @@ export class DashboardService {
     return promise;
   }
   cancelOrder(obj) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/orders/cancelorder`;
       this._http.post(apiURL, obj)
         .toPromise()
@@ -63,7 +63,7 @@ export class DashboardService {
   }
   getJazzPaymentData(resourceName,selectedItem)
 {
-  let promise = new Promise((resolve, reject) => {
+  const promise = new Promise((resolve, reject) => {
    const apiURL = `${baseApi}/api/${resourceName}/${selectedItem}`;
     //const apiURL = `${baseApi}/api/payaxis/PrePaidPay`;
     this._http.get(apiURL)

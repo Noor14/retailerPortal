@@ -7,7 +7,7 @@ import { baseApi } from 'src/app/constant/baseurl';
 export class SupportService {
   constructor(private _http: HttpClient) {}
   getCalls(recourseName) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${recourseName}`;
       this._http.get(apiURL)
         .toPromise()
@@ -20,7 +20,7 @@ export class SupportService {
     return promise;
 }
   postCalls(recourseName, obj) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${recourseName}`;
       this._http.post(apiURL,obj)
         .toPromise()

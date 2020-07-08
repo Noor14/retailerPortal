@@ -1,7 +1,9 @@
-import { SharedService } from 'src/app/services/shared.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AccountService } from './../account.service';
+import { SharedService } from '../../../../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DialogComponent } from 'src/app/shared/dialog-modal/dialog/dialog.component';
+import { DialogComponent } from '../../../../shared/dialog-modal/dialog/dialog.component';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,12 +16,25 @@ export class LinkedAccountsComponent implements OnInit {
   constructor(
     private _modalService: NgbModal,
     private _toast: ToastrService,
-    private _sharedService: SharedService
+    private _sharedService: SharedService,
+    private _accountService: AccountService
   ) { }
 
   ngOnInit() {
+    const userIdentity = (localStorage.getItem('userIdentity')) ? JSON.parse(localStorage.getItem('userIdentity')) : undefined;
+    const retailerCode = (userIdentity && userIdentity.UserAccount) ? userIdentity.UserAccount.RetailerCode : null;
+    this.getLinkedAccounts(retailerCode);
   }
-  addAccount(){
+  getLinkedAccounts(retailerCode){
+    this._accountService.getCall(`account/${retailerCode}`).then(res => {
+      if(res){
+        console.log(res);
+      }
+    }, ((err: HttpErrorResponse) => {
+      console.log(err);
+    }));
+  }
+  addAccount() {
     this._sharedService.setRenderComponent('addAccount');
   }
   removeAccount(id :number){

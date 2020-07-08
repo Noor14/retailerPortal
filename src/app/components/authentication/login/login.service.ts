@@ -9,7 +9,7 @@ export class LoginService {
   constructor(private _http: HttpClient) {
    }
   login(userCredentials: any) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/Token`;
       this._http.post(apiURL, userCredentials)
         .toPromise()
@@ -23,7 +23,7 @@ export class LoginService {
   }
   
   logoutUser() {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/users/logout`;
       this._http.delete(apiURL)
         .toPromise()
@@ -37,7 +37,7 @@ export class LoginService {
   }
 
   postCalls(UserData, recourseName, rightId?) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${recourseName}`;
       this._http.post(apiURL, UserData)
         .toPromise()
@@ -51,7 +51,7 @@ export class LoginService {
   }
 
   tokenValidate(accesstoken) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/users/ValidateToken`;
       this._http.post(apiURL, accesstoken)
         .toPromise()

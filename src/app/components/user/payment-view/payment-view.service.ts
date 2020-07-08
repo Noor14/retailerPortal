@@ -10,7 +10,7 @@ export class PaymentViewService {
   constructor(private _http: HttpClient) { }
 
   getDetail(resourceName, requestId) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${resourceName}/${requestId}`;
       this._http.get(apiURL)
         .toPromise()
@@ -24,7 +24,7 @@ export class PaymentViewService {
   }
 
   makePayment(obj, rightId, resourceName) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${resourceName}`;
       this._http.post(apiURL, obj)
         .toPromise()
@@ -37,7 +37,7 @@ export class PaymentViewService {
     return promise;
   }
   getVoucher(endPoint, id){
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${endPoint}/${id}`;
       this._http.get(apiURL)
         .toPromise()
@@ -50,7 +50,7 @@ export class PaymentViewService {
     return promise;
   }
   getDistributorsList(){
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/prepaidrequests/GetByRetailerCode`;
       this._http.get(apiURL)
         .toPromise()
@@ -67,7 +67,7 @@ export class PaymentViewService {
 
   getJazzPaymentData(resourceName,selectedItem)
   {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
      const apiURL = `${baseApi}/api/${resourceName}/${selectedItem}`;
       //const apiURL = `${baseApi}/api/payaxis/PrePaidPay`;
       this._http.get(apiURL)
