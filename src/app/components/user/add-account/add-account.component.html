@@ -12,7 +12,7 @@
                         <label for="account">Select Account | Wallet</label>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-12" *ngIf="selectedAccount">
+                <div class="col-md-6 col-sm-12" >
                     <div class="form-group has-float-label">
                         <select id="accountType" class="form-control" [(ngModel)]="selectedAccountType" (change)="accountInfo(selectedAccountType)">
                             <option disabled value='undefined'>Select Account Type</option>
@@ -21,7 +21,7 @@
                         <label for="accountType">Select Account Type</label>
                     </div>
                 </div>
-                <ng-container *ngIf="selectedAccountType">
+                <ng-container>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label position-relative">
                             <input type="email" noWhiteSpace id="email" class="form-control" formControlName="Email" placeholder="Email Address"

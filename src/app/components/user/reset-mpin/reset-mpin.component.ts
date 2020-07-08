@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reset-mpin.component.scss']
 })
 export class ResetMPINComponent implements OnInit {
-
+  public otpToggle: boolean = false;
+  public newMPINToggle: boolean = false;
+  public confirmMPINToggle: boolean = false;
   constructor(private _sharedService: SharedService) { }
 
   ngOnInit() {
