@@ -1,3 +1,5 @@
+import { AccountService } from './../accounts/account.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation, OnDestroy, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef } from '@angular/core';
 import { CreateMPINComponent } from './../accounts/create-mpin/create-mpin.component';
 import { ResetMPINComponent } from './../accounts/reset-mpin/reset-mpin.component';
@@ -22,9 +24,9 @@ import { CanComponentDeactivate } from '../../../services/deactivate.guard';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactivate {
+  private linkedAccountsList: any[] = [];
   public profileForm: FormGroup;
   public passwordForm: FormGroup;
-  private userObject: any;
   public cnicMask = AppMasks.cnic_Mask;
   public mobileMask = AppMasks.mobile_Mask;
   public showSpinner:boolean;
@@ -53,6 +55,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     private _userService: UserService,
     private _route :Router,
     private _sharedService: SharedService,
+    private _accountService: AccountService,
     private resolver: ComponentFactoryResolver
     ) { }
 
@@ -66,7 +69,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
 
   ngOnInit() {
     this.spinnerConfig = loadingConfig;
-    this.userObject = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
+    const userObject = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
     this.profileForm = new FormGroup({
       ID: new FormControl(null, [Validators.required, Validators.min(0)]),
       Name: new FormControl(null, [Validators.required]),
@@ -79,15 +82,14 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
       CompanyName: new FormControl(null, [Validators.required]),
       
     });
-     
-      this.passwordForm = new FormGroup ({
-        Username: new FormControl(this.userObject.Username,[Validators.required]),
-        Password: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
-        NewPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
-        ConfirmPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)])
-      })
-    this.getProfile();
-
+    this.passwordForm = new FormGroup ({
+      Username: new FormControl(userObject.Username,[Validators.required]),
+      Password: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
+      NewPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)]),
+      ConfirmPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)])
+    });
+    this.getProfile(userObject.RetailerID);
+    this.getLinkedAccounts(userObject.RetailerCode)
     this._sharedService.renderComponent.subscribe(res => {
       if (res){
         this.renderingComponent(rendererType[res]);
@@ -95,16 +97,25 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     })
  
   }
-  renderingComponent(type) {
+  renderingComponent(type, data?) {
     this.container && this.container.clear(); 
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(type);
     this.componentRef = this.container.createComponent(factory);
-    this.componentRef.instance.type = type;
+    this.componentRef.instance.data = data;
   }
-
+  getLinkedAccounts(retailerCode){
+    this._accountService.getCall(`account/${retailerCode}`).then((res: any[]) => {
+      if (res) {
+        this.linkedAccountsList = res;
+        console.log(res);
+      }
+    }, ((err: HttpErrorResponse) => {
+      console.log(err);
+    }));
+  }
   onTabChange(event){
     if(event.nextId == 'accountLinking'){
-      setTimeout(()=>this.renderingComponent(LinkedAccountsComponent), 0)
+      setTimeout(()=>this.renderingComponent(LinkedAccountsComponent, this.linkedAccountsList), 0);
     }
   }
   ngOnDestroy(){
@@ -115,9 +126,9 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
       this.componentRef && this.componentRef.destroy();    
   }
 
-  getProfile() {
+  getProfile(retailerID) {
     // this.showSpinner = true;
-    this._profileService.getById(this.userObject.RetailerID, 1, "retailer")
+    this._profileService.getById(retailerID, 1, "retailer")
       .then((data: any) => {
       this.showSpinner = false;
       data.CreatedDate =  moment(data.CreatedDate).format('DD-MM-YYYY');
