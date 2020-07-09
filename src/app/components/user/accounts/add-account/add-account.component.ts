@@ -13,7 +13,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-account.component.scss']
 })
 export class AddAccountComponent implements OnInit {
-  public cnicMask = AppMasks.cnic_Mask;
   public accountLinkingForm: FormGroup;
   public channels: any[] = [];
   public selectedChannel;
@@ -33,10 +32,12 @@ export class AddAccountComponent implements OnInit {
       ID: new FormControl(0, [Validators.required, Validators.min(0)]),
       UserName: new FormControl(userInfo.Username, Validators.required),
       UserCode: new FormControl(userInfo.RetailerCode, Validators.required),
+      MobileNumber: new FormControl(userInfo.RetailerMobile, Validators.required),
       AccountNumber: new FormControl(null, [Validators.required, Validators.maxLength(14)]),
       BankID: new FormControl(null, Validators.required),
       ChannelID: new FormControl(null, Validators.required),
-      CNIC: new FormControl(null, [Validators.required, Validators.pattern(AppPattern.cnic_Pattern)]),
+      AccountTitle: new FormControl(null),
+      CNIC: new FormControl(null, [Validators.required, Validators.maxLength(13)]),
     });
     this.getChannel();
   }
@@ -68,6 +69,7 @@ export class AddAccountComponent implements OnInit {
       
     }else{
       this.showSpinner = true;
+      this.accountLinkingForm.controls.AccountTitle.setValue(this.channels.find(obj => obj.ID == this.selectedChannel).Name);
       this._accountService.postCall(this.accountLinkingForm.value, 'account/linking').then((res: any[]) => {
         if (res && res.length) {
           this.accountTypes = res;

@@ -10,15 +10,12 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./linked-accounts.component.scss']
 })
 export class LinkedAccountsComponent implements OnInit {
-  public linkedAccounts: any[] = new Array(14);
   @Input() data: any[] = [];
   constructor(
     private _modalService: NgbModal,
     private _toast: ToastrService,
     private _sharedService: SharedService
   ) { 
-    // this.linkedAccounts = this.data;
-    console.log(this.data)
   }
 
   ngOnInit() {

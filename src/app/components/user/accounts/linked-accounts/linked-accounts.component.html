@@ -4,24 +4,29 @@
             <button class="btn btn-primary" type="button" (click)="addAccount()">Add Account</button>
         </div>
         <div class="row accountList" id="nav-scrollbar">
-            <div class="col-md-4 col-sm-6 col-xs-12 mb-4" *ngFor="let network of linkedAccounts">
+            <div class="col-md-4 col-sm-6 col-xs-12 mb-4" *ngFor="let obj of data">
                 <div class="card" >
                     <div class="card-body d-flex flex-column justify-content-between">
                      <div class="d-flex justify-content-between">
-                         <h5 class="card-title">Meezan Bank Ltd</h5>
+                         <div>
+                            <h5 class="card-title mb-0">{{obj.AccountTitle}}</h5>
+                            <span class="font-weight-bold">{{obj.AccountType}}</span>
+                         </div>
                          <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
-                                <button ngbDropdownItem (click)="mpin('createMPIN')">Create MPIN</button>
-                                <button ngbDropdownItem (click)="removeAccount()">Remove</button>
-                                <button ngbDropdownItem (click)="mpin('changeMPIN')">Change MPIN</button>
-                                <button ngbDropdownItem (click)="mpin('resetMPIN')">Reset MPIN</button>
+                                <button ngbDropdownItem *ngIf ="!obj.AccountStatus" (click)="mpin('createMPIN')">Create MPIN</button>
+                                <button ngbDropdownItem *ngIf ="obj.AccountStatus < 2"(click)="removeAccount()">Remove</button>
+                                <ng-container *ngIf ="obj.AccountStatus == 1">
+                                    <button ngbDropdownItem  (click)="mpin('changeMPIN')">Change MPIN</button>
+                                    <button ngbDropdownItem  (click)="mpin('resetMPIN')">Reset MPIN</button>
+                                </ng-container>
                               </div>
-                            </div>
+                        </div>
                         </div>
                         <div>
-                          <small>Status : <b>Connected</b></small><br>
-                          <small>Account No : 23232323233232</small>
+                          <small>Status : <b>{{obj.AccountStatusDesc}}</b></small><br>
+                          <small>Account No : {{obj.AccountNumber}}</small>
                       </div>
                     </div>
                   </div>
