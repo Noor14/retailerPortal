@@ -107,7 +107,6 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     this._accountService.getCall(`account/${retailerCode}`).then((res: any[]) => {
       if (res) {
         this.linkedAccountsList = res;
-        console.log(res);
       }
     }, ((err: HttpErrorResponse) => {
       console.log(err);

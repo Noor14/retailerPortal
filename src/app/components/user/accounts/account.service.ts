@@ -9,7 +9,7 @@ export class AccountService {
 
   constructor(private _http: HttpClient) { }
 
-  getById(fetchingId, rightId, resourceName) {
+  getById(resourceName, fetchingId) {
     const promise = new Promise((resolve, reject) => {
       const apiURL = `${meezanbaseApi}/api/${resourceName}/${fetchingId}`;
       this._http.get(apiURL)

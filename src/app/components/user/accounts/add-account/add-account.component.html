@@ -5,35 +5,33 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group has-float-label">
-                        <select id="account" class="form-control" [(ngModel)]="selectedAccount" (change)="accountInfo(selectedAccount)">
+                        <select id="account" class="form-control" [(ngModel)]="selectedChannel" formControlName="ChannelID" (change)="accountInfo(selectedChannel)">
                             <option disabled value='undefined'>Select Account | Wallet</option>
-                            <!-- <option *ngFor="let obj of kycList" [value]="obj.DealerCode">{{obj.CompanyName}}</option> -->
+                            <option *ngFor="let obj of channels" [value]="obj.ID">{{obj.Name}}</option>
                         </select>
                         <label for="account">Select Account | Wallet</label>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-12" >
+                <div class="col-md-6 col-sm-12" *ngIf="bankTypeContainer">
                     <div class="form-group has-float-label">
-                        <select id="accountType" class="form-control" [(ngModel)]="selectedAccountType" (change)="accountInfo(selectedAccountType)">
+                        <select id="accountType" class="form-control" formControlName="BankID" [(ngModel)]="selectedAccountType" >
                             <option disabled value='undefined'>Select Account Type</option>
-                            <!-- <option *ngFor="let obj of kycList" [value]="obj.DealerCode">{{obj.CompanyName}}</option> -->
+                            <option *ngFor="let obj of accountTypes" [value]="obj.ID">{{obj.Name}}</option>
                         </select>
                         <label for="accountType">Select Account Type</label>
                     </div>
                 </div>
-                <ng-container>
+                <ng-container *ngIf="selectedAccountType">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label position-relative">
-                            <input type="email" noWhiteSpace id="accountno" class="form-control" formControlName="Email" placeholder="Account No:"
-                            [ngClass]="{'validationError': accountLinkingForm.controls['Email'].errors && (accountLinkingForm.controls.Email.dirty || accountLinkingForm.controls.Email.touched)}">
-                            <label for="accountno">Account No:</label>
+                            <input maxlength='14' type="text" noWhiteSpace id="accountno" class="form-control" formControlName="AccountNumber" placeholder="Account No">
+                            <label for="accountno">Account No</label>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">
-                            <input type="text" readOnly id="cnic"  class="form-control" formControlName="CNIC" placeholder="CNIC No"
-                            [ngClass]="{'validationError': accountLinkingForm.controls['CNIC'].errors && (accountLinkingForm.controls.CNIC.dirty || accountLinkingForm.controls.CNIC.touched)}">
-                            <label for="cnic">CNIC No:</label>                                        
+                            <input type="text" id="cnic" [textMask]="{mask: cnicMask}" class="form-control" formControlName="CNIC" placeholder="CNIC No">
+                            <label for="cnic">CNIC No</label>                                        
                         </div>
                     </div>
                 </ng-container>
@@ -41,9 +39,9 @@
             </div>
             <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
                 <button class="btn btn-primary" type="button" (click)="gotoBack()">Back</button>
-                <button class="btn btn-primary ml-3" type="button">Link Account</button>
+                <button class="btn btn-primary ml-3" type="button" [disabled]="accountLinkingForm.invalid" (click)="addAccount()">Link Account</button>
             </div>
-    
         </form>
     </div>
 </section>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>
