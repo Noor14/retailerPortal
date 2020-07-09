@@ -89,10 +89,10 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
       ConfirmPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)])
     });
     this.getProfile(userObject.RetailerID);
-    this.getLinkedAccounts(userObject.RetailerCode)
+    this.getLinkedAccounts(userObject.RetailerCode);
     this._sharedService.renderComponent.subscribe(res => {
       if (res){
-        this.renderingComponent(rendererType[res]);
+        this.renderingComponent(rendererType[res], this.linkedAccountsList);
       }
     })
  
