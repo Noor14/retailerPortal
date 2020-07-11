@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { loadingConfig, validateAllFormFields } from './../../../../constant/globalfunction';
 import { AppMasks } from '../../../../shared/app.mask';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -23,6 +24,7 @@ export class AddAccountComponent implements OnInit {
   public spinnerConfig:any;
   constructor(
     private _sharedService: SharedService,
+    private _toast: ToastrService,
     private _accountService : AccountService) { }
 
   ngOnInit() {
@@ -70,21 +72,24 @@ export class AddAccountComponent implements OnInit {
     }else{
       this.showSpinner = true;
       this.accountLinkingForm.controls.AccountTitle.setValue(this.channels.find(obj => obj.ID == this.selectedChannel).Name);
-      this._accountService.postCall(this.accountLinkingForm.value, 'account/linking').then((res: any[]) => {
-        if (res && res.length) {
-          this.accountTypes = res;
-          this.bankTypeContainer = true;
+      this._accountService.postCall(this.accountLinkingForm.value, 'account/linking').then((res: any) => {
+        if (res) {
+        this._toast.success('Your Meezan Bank account has been lined successfully.', 'Account Linked');
+        this.gotoBack(res);
         }
       this.showSpinner = false;
       }, ((err: HttpErrorResponse) => {
-        console.log(err);
-      this.showSpinner = false;
+        this._toast.error(err.message);
+        this.showSpinner = false;
       }));
     }
   
   }
-  gotoBack(){
-    this._sharedService.setRenderComponent('linkedAccounts');
+  gotoBack(obj?){
+    this._sharedService.setRenderComponent({
+      redirect: 'linkedAccounts',
+      data: obj
+    });
   }
 
 }

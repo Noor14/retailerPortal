@@ -92,10 +92,12 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     this.getLinkedAccounts(userObject.RetailerCode);
     this._sharedService.renderComponent.subscribe(res => {
       if (res){
-        this.renderingComponent(rendererType[res], this.linkedAccountsList);
+        if(res.redirect == 'linkedAccounts'){
+          res.data = this.linkedAccountsList;
+        }
+        this.renderingComponent(rendererType[res.redirect], res.data);
       }
-    })
- 
+    });
   }
   renderingComponent(type, data?) {
     this.container && this.container.clear(); 

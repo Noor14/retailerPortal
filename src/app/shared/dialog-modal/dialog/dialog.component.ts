@@ -1,3 +1,4 @@
+import { AccountService } from './../../../components/user/accounts/account.service';
 import { LoginService } from './../../../components/authentication/login/login.service';
 import { loadingConfig } from './../../../constant/globalfunction';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -26,6 +27,7 @@ export class DialogComponent implements OnInit {
     private _dashboardService :DashboardService,
     private _orderService: OrderService,
     private _loginService: LoginService,
+    private _accountService: AccountService,
     private _toast: ToastrService) { }
 
   ngOnInit() {
@@ -77,20 +79,37 @@ export class DialogComponent implements OnInit {
       this.activeModal.close(true);
       this.showSpinner = false;
       }
-      else if(this.dialogBoxObject.type == 'skip'){
-        this._loginService.postCalls({skip:true}, 'users/update')
-        .then((res: any) => {
-          if(res){
+      else {
+        if(this.dialogBoxObject.type == 'skip'){
+          this._loginService.postCalls({skip:true}, 'users/update')
+          .then((res: any) => {
+            if(res){
+              this.showSpinner = false;
+              this.activeModal.close(res);
+            }
+          })
+          .catch((err: HttpErrorResponse) => {
             this.showSpinner = false;
-            this.activeModal.close(res);
-          }
-        })
-        .catch((err:HttpErrorResponse) => {
-          this.showSpinner = false;
-          if(err.error){
-            this._toast.error(err.error.message, "Error")
-          }
-        })
+            if(err.error){
+              this._toast.error(err.error.message, "Error")
+            }
+          });
+        } else if(this.dialogBoxObject.type == 'accountDelinking'){
+          this._accountService.postCall({
+            accountNumber: this.dialogBoxObject.accountNumber,
+            CNIC: this.dialogBoxObject.CNIC
+          }, 'account/deLinking')
+          .then((res: any) => {
+            if (res) {
+              this.showSpinner = false;
+              this.activeModal.close(res);
+            }
+          })
+          .catch((err: HttpErrorResponse) => {
+            this._toast.error(err.message);
+            this.showSpinner = false;
+          });
+        }
       }
     }
     else if(this.dialogBoxObject.mode == 'order' && this.dialogBoxObject.type == 'delete'){

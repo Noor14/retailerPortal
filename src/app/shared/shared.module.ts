@@ -54,6 +54,6 @@ import { FooterComponent } from './footer/footer.component';
     FormsModule
   ],
 
-  providers:[]
+  providers: []
 })
 export class SharedModule { }

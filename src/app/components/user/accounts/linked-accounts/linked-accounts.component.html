@@ -15,12 +15,12 @@
                          <div ngbDropdown class="d-inline" placement="bottom-right">
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
-                                <button ngbDropdownItem *ngIf ="!obj.AccountStatus" (click)="mpin('createMPIN')">Create MPIN</button>
-                                <button ngbDropdownItem *ngIf ="obj.AccountStatus < 2"(click)="removeAccount()">Remove</button>
-                                <ng-container *ngIf ="obj.AccountStatus == 1">
-                                    <button ngbDropdownItem  (click)="mpin('changeMPIN')">Change MPIN</button>
-                                    <button ngbDropdownItem  (click)="mpin('resetMPIN')">Reset MPIN</button>
-                                </ng-container>
+                                <button ngbDropdownItem *ngIf ="!obj.AccountStatus" (click)="mpin('createMPIN', obj)">Create MPIN</button>
+                                <button ngbDropdownItem *ngIf ="obj.AccountStatus < 2"(click)="removeAccount(obj.AccountNumber, obj.CNIC)">Remove</button>
+                                <!-- <ng-container *ngIf ="obj.AccountStatus == 1"> -->
+                                    <button ngbDropdownItem  (click)="mpin('changeMPIN', obj.CNIC)">Change MPIN</button>
+                                    <button ngbDropdownItem  (click)="mpin('resetMPIN', obj)">Reset MPIN</button>
+                                <!-- </ng-container> -->
                               </div>
                         </div>
                         </div>

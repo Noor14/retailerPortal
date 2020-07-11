@@ -22,15 +22,26 @@ export class LinkedAccountsComponent implements OnInit {
   }
 
   addAccount() {
-    this._sharedService.setRenderComponent('addAccount');
+    this._sharedService.setRenderComponent({
+      redirect: 'addAccount'
+    });
   }
-  removeAccount(id: number){
-    const modalRef = this._modalService.open(DialogComponent,{ 
+  removeAccount(accNumber, cnic){
+    const modalRef = this._modalService.open(DialogComponent, {
       centered: true,
       keyboard: false,
       backdrop: 'static'
      });
-    modalRef.componentInstance.obj = {id : id, title: 'Remove Account', titleTextColor: 'warning', mode: 'confirmDialog', type:'account', btnText: 'Remove', detail: `Are you sure, you want to remove this account? `};
+    modalRef.componentInstance.obj = {
+      accountNumber: accNumber,
+      CNIC: cnic,
+      title: 'Remove Account',
+      titleTextColor: 'warning',
+      mode: 'confirmDialog',
+      type: 'accountDelinking',
+      btnText: 'Remove',
+      detail: 'Are you sure, you want to remove this account?'
+    };
     modalRef.result.then((result) => {
       if(result){
           // let index = this.linkedAccounts.findIndex(obj => obj.id == result)
@@ -42,8 +53,12 @@ export class LinkedAccountsComponent implements OnInit {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
-  mpin(type){
-      this._sharedService.setRenderComponent(type);
+
+  mpin(type, obj?){
+      this._sharedService.setRenderComponent({
+        redirect: type,
+        data: obj
+      });
   }
   
 }
