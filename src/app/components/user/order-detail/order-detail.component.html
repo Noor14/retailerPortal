@@ -40,7 +40,7 @@
             </div> -->
             <div class="d-sm-flex flex-sm-row flex-xs-column">
             <div class="flex-fill">Total Discount: <span>{{(orderList?.orderTotalDiscount || 0) | currency:'PKR '}}</span></div>
-            <div class="flex-fill">Total Amount: <span>{{netAmount | currency : "PKR "}}</span></div>
+            <div class="flex-fill">Total Amount: <span>{{orderList?.orderTotalAmount | currency : "PKR "}}</span></div>
             </div>
             <div *ngIf="!orderList?.invoiceUpload">
                 <span class="text-danger font-weight-bold">
