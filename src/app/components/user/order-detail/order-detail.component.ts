@@ -10,7 +10,6 @@ export class OrderDetailComponent implements OnInit {
  
   @Input() orderList: any;
   public orderDetailList: any[] =[];
-  public netAmount: number = 0;
   public grossAmount: number = 0;
   public discountColumn: boolean = false;
   public taxColumn: boolean = false;
@@ -22,10 +21,9 @@ export class OrderDetailComponent implements OnInit {
       this.orderDetailList = this.orderList.orderDetails;
       this.discountColumn = this.orderDetailList.some(obj => obj.Discount);
       this.taxColumn = this.orderDetailList.some(obj => obj.TaxValue);
-      this.orderDetailList.forEach(obj => {
-        this.netAmount += obj.TotalPrice;
-        this.grossAmount += obj.UnitPrice * obj.OrderQty;
-      });
+      this.grossAmount =  this.orderDetailList.reduce((total, obj) => {
+        return total + obj.UnitPrice * obj.OrderQty;
+      }, 0);
     }
   }
 }

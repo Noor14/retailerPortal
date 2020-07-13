@@ -46,7 +46,7 @@ export class UnpaidInvoiceViewComponent implements OnInit {
         this.orderInfo = data.OrderPaymentDetails;
         this.orderInfo.PaidAmount = this.orderInfo.InvoiceTotalAmount;
         this.orderInfo.PrePaidNumber = this.orderInfo.InvoiceNumber;
-        this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount, invoiceUpload: this.orderInfo.InvoiceUpload,orderTotalAmount:this.orderInfo.TotalAmount};
+        this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount, invoiceUpload: this.orderInfo.InvoiceUpload, orderTotalAmount:this.orderInfo.TotalAmount};
         this.showSpinner = false;
     })
     .catch(err => {
@@ -55,8 +55,7 @@ export class UnpaidInvoiceViewComponent implements OnInit {
   }
   getPaymentDetails(resourceName, requestId){
     this._paymentViewService.getDetail(resourceName, requestId).then((data: any) => {
-      
-      this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: data.Invoice && data.Invoice.OrderTotalDiscount, invoiceUpload: data.Invoice.InvoiceUpload,orderTotalAmount:data.Invoice.TotalAmount};
+      this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: data.Invoice && data.Invoice.OrderTotalDiscount, invoiceUpload: data.Invoice.InvoiceUpload, orderTotalAmount:data.Invoice.TotalAmount};
       data = data.Invoice;
       data.PaidAmount = data.Amount;
       this.orderInfo = data;
