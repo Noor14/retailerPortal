@@ -2,7 +2,7 @@ import { AccountService } from './../accounts/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation, OnDestroy, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef } from '@angular/core';
 import { CreateMPINComponent } from './../accounts/create-mpin/create-mpin.component';
-import { ResetMPINComponent } from './../accounts/reset-mpin/reset-mpin.component';
+//import { ResetMPINComponent } from './../accounts/reset-mpin/reset-mpin.component';
 import { ChangeMPINComponent } from './../accounts/change-mpin/change-mpin.component';
 import { SharedService } from 'src/app/services/shared.service';
 import { LinkedAccountsComponent } from './../accounts/linked-accounts/linked-accounts.component';
@@ -262,7 +262,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
 }
 export const rendererType = {
   changeMPIN : ChangeMPINComponent,
-  resetMPIN : ResetMPINComponent,
+  //resetMPIN : ResetMPINComponent,
   linkedAccounts : LinkedAccountsComponent,
   addAccount : AddAccountComponent,
   createMPIN: CreateMPINComponent
