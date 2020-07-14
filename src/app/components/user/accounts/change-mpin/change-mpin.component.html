@@ -1,12 +1,18 @@
 <section class="changeMPIN">
     <div class="contentArea bg-white p-4">
-        <h6 class="contentSubTitle">Enter Old MPIN</h6>
+        <h6 class="contentSubTitle">
+            <ng-container *ngIf="data?.redirectFor == 'resetMPIN'; else other">Enter OTP</ng-container>
+            <ng-template #other>Enter Old MPIN</ng-template>
+        </h6>
         <form [formGroup]="changeMPINForm">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group has-float-label password">
-                        <input minlength="4" maxlength="4" noWhiteSpace [type]="oldMPINToggle? 'text':'password'" id="oldmpin" class="form-control" formControlName="oldPin" placeholder="Old MPIN">
-                        <label for="oldmpin">Old MPIN</label>
+                        <input minlength="4" maxlength="4" noWhiteSpace [type]="oldMPINToggle? 'text':'password'" id="oldmpin" class="form-control" formControlName="oldPin" [placeholder]="(data?.redirectFor == 'resetMPIN')? 'OTP' : 'Old MPIN'">
+                        <label for="oldmpin">
+                            <ng-container *ngIf="data?.redirectFor == 'resetMPIN'; else changempin">OTP</ng-container>
+                            <ng-template #changempin>Old MPIN</ng-template>
+                        </label>
                         <span (click)="oldMPINToggle=!oldMPINToggle">
                             <img src="../../../../assets/_images/eye.svg" alt="icon" width="17" />
                         </span>

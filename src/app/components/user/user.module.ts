@@ -31,7 +31,6 @@ import { UnpaidInvoiceViewComponent } from './unpaid-invoice-view/unpaid-invoice
 import { GeneralViewComponent } from './general-view/general-view.component';
 import { CreateMPINComponent } from './accounts/create-mpin/create-mpin.component';
 import { ChangeMPINComponent } from './accounts/change-mpin/change-mpin.component';
-import { ResetMPINComponent } from './accounts/reset-mpin/reset-mpin.component';
 import { LinkedAccountsComponent } from './accounts/linked-accounts/linked-accounts.component';
 import { AddAccountComponent } from './accounts/add-account/add-account.component';
 import { AccountService } from './accounts/account.service';
@@ -54,14 +53,12 @@ import { AccountService } from './accounts/account.service';
     GeneralViewComponent,
     AddAccountComponent,
     LinkedAccountsComponent,
-    ResetMPINComponent,
     ChangeMPINComponent,
     CreateMPINComponent
     ],
   entryComponents: [
     AddAccountComponent,
     LinkedAccountsComponent,
-    ResetMPINComponent,
     ChangeMPINComponent,
     CreateMPINComponent
   ],

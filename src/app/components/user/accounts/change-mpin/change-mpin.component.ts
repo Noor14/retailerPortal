@@ -12,7 +12,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./change-mpin.component.scss']
 })
 export class ChangeMPINComponent implements OnInit {
-  @Input() data: string;
+  @Input() data: any;
   public changeMPINForm: FormGroup;
   public oldMPINToggle: boolean = false;
   public newMPINToggle: boolean = false;
@@ -26,12 +26,13 @@ export class ChangeMPINComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    console.log(this.data.redirectFor)
     this.spinnerConfig = loadingConfig;
     this.changeMPINForm = new FormGroup({
       newPin: new FormControl(null, [Validators.required, Validators.maxLength(4), Validators.minLength(4)]),
       oldPin: new FormControl(null, [Validators.required, Validators.maxLength(4), Validators.minLength(4)]),
       confirmmPin: new FormControl(null, [Validators.required, Validators.maxLength(4), Validators.minLength(4)]),
-      CNIC: new FormControl(this.data, [Validators.required, Validators.maxLength(13)]),
+      CNIC: new FormControl(this.data.CNIC, [Validators.required, Validators.maxLength(13)]),
     });
   }
   gotoBack(){

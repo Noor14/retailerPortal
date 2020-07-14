@@ -64,9 +64,10 @@ export class LinkedAccountsComponent implements OnInit {
     });
   }
 
-  mpin(type, obj?){
+  redirectMPIN(type, obj){
+      obj.redirectFor = type;
       this._sharedService.setRenderComponent({
-        redirect: type,
+        redirect: (type == 'resetMPIN')? 'changeMPIN' : type,
         data: obj
       });
   }
@@ -75,8 +76,7 @@ export class LinkedAccountsComponent implements OnInit {
     this._accountService.postCall(obj, 'account/mPinReset').then((res: any) => {
       if (res) {
       this._toast.success('OTP send');
-      console.log(res);
-      this.mpin('changeMPIN', obj.CNIC);
+      this.redirectMPIN('resetMPIN', obj);
       }
     this.showSpinner = false;
     }, ((err: HttpErrorResponse) => {
