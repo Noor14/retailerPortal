@@ -43,6 +43,7 @@ export class DialogComponent implements OnInit {
 
   performAction(){
     if(this.dialogBoxObject.mode == 'support'){
+     if (this.dialogBoxObject.type == 'delete'){
       this.showSpinner = true;
       this._supportService.postCalls('support/Delete', { ID: this.dialogBoxObject.id }, 7)
       .then((res: any) => {
@@ -57,6 +58,22 @@ export class DialogComponent implements OnInit {
         }
 
       })
+     } else if (this.dialogBoxObject.type == 'resolve'){
+      this.showSpinner = true;
+      this._supportService.postCalls('support/Resolve', { ID: this.dialogBoxObject.id }, 7)
+      .then((res: any) => {
+        this._toast.success('Ticket resolved');
+        this.showSpinner = false;
+        this.activeModal.close(this.dialogBoxObject.id);
+      })
+      .catch((err:HttpErrorResponse) => {
+        this.showSpinner = false;
+        if(err.error){
+          this._toast.error(err.error.message, "Error")
+        }
+
+      })
+     }
     }
     else if(this.dialogBoxObject.mode == 'payment'){
       this.showSpinner = true;

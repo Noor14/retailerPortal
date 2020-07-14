@@ -107,18 +107,30 @@ export class SupportgridComponent implements OnInit, OnDestroy {
     let obj = {...this.searchObj , ...this.searchingByKey};
     this.getSupportList(obj);
   }
-  openDialog(id :number){
+  openDialog(id :number, type){
     const modalRef = this._modalService.open(DialogComponent,{ 
       centered: true,
       keyboard: false,
       backdrop:'static'
      });
-    modalRef.componentInstance.obj = {id : id, title: 'Delete Ticket', titleTextColor: 'warning', mode: 'support', btnText: 'Delete', detail:'Are you sure, you want to delete this ticket?'};
+     const title = type.charAt(0).toUpperCase() + type.slice(1);
+     const btnText = (type == 'delete')? title : 'Yes, I want';
+    modalRef.componentInstance.obj = {id : id, title: `${title} Ticket`, titleTextColor: 'warning', mode: 'support', type: type, btnText: btnText, detail: `Are you sure, you want to ${type} this ticket?`};
     modalRef.result.then((result) => {
       if(result){
-        let index = this.supportList.findIndex(obj => obj.ID == result)
-        this.supportList.splice(index, 1);
-        this.loadAvailableCount--
+        if(type == 'delete'){
+          const index = this.supportList.findIndex(obj => obj.ID == result);
+          this.supportList.splice(index, 1);
+          this.loadAvailableCount--
+        }else {
+          const index = this.supportList.findIndex(obj => obj.ID == result);
+          const obj = this.supportList.find(obj => obj.ID == result);
+          if(index >=0){
+            obj.Status = 'Resolved';
+            this.supportList.splice(index, 1, obj);
+          }
+        }
+
       }
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
