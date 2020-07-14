@@ -55,7 +55,7 @@
                                 <button ngbDropdownItem class="payBy" *ngIf="payment.IsEditable && payment.Status == 'Un-Paid'" (mouseenter)="payBygroupList = true" (mouseleave)="payBygroupList = false">Pay By
                                   <ul class="list-group paymentPayBY" *ngIf="payBygroupList">
                                     <li class="list-group-item" (click)= "openDialogPSID(payment.InvoiceNumber, payment.RetailerInvoiceId)">PS ID </li>
-                                    <li class="list-group-item" (click)= "bankPayment(payment,payment.IsEditable)">JazzCash</li>
+                                    <!-- <li class="list-group-item" (click)= "bankPayment(payment,payment.IsEditable)">JazzCash</li> -->
                                   </ul>
                                 </button>
                                </ng-container>
