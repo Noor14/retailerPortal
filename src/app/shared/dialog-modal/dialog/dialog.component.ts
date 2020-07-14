@@ -114,7 +114,8 @@ export class DialogComponent implements OnInit {
         } else if(this.dialogBoxObject.type == 'accountDelinking'){
           this._accountService.postCall({
             accountNumber: this.dialogBoxObject.accountNumber,
-            CNIC: this.dialogBoxObject.CNIC
+            CNIC: this.dialogBoxObject.CNIC,
+            ID: this.dialogBoxObject.ID
           }, 'account/deLinking')
           .then((res: any) => {
             if (res) {
@@ -123,7 +124,7 @@ export class DialogComponent implements OnInit {
             }
           })
           .catch((err: HttpErrorResponse) => {
-            this._toast.error(err.message);
+            this._toast.error(err.error.message || err.message);
             this.showSpinner = false;
           });
         }

@@ -111,7 +111,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
         this.linkedAccountsList = res;
       }
     }, ((err: HttpErrorResponse) => {
-      console.log(err);
+        this._toast.error(err.error.message || err.message);
     }));
   }
   onTabChange(event){

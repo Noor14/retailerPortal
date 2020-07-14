@@ -31,12 +31,9 @@ export class ResetMPINComponent implements OnInit {
       mPin: new FormControl(null, [Validators.required, Validators.maxLength(4), Validators.minLength(4)]),
       confirmmPin: new FormControl(null, Validators.required),
     });
+    this.resetMPIN();
   }
   resetMPIN(){
-    if(this.resetMPINForm.invalid){
-      validateAllFormFields(this.resetMPINForm);
-      
-    }else{
       this.showSpinner = true;
       this._accountService.postCall(this.data, 'account/mPinReset').then((res: any) => {
         if (res) {
@@ -45,10 +42,9 @@ export class ResetMPINComponent implements OnInit {
         }
       this.showSpinner = false;
       }, ((err: HttpErrorResponse) => {
-        this._toast.error(err.message)
+        this._toast.error(err.error.message || err.message)
       this.showSpinner = false;
       }));
-    }
   }
   gotoBack(){
     this._sharedService.setRenderComponent({

@@ -28,6 +28,7 @@ export class CreateMPINComponent implements OnInit {
       AccountNumber: new FormControl({value:null, disabled:true}, [Validators.required, Validators.maxLength(14)]),
       AccountTitle: new FormControl({value:null, disabled:true}, Validators.required),
       CNIC: new FormControl(null, [Validators.required, Validators.maxLength(13)]),
+      ID: new FormControl(null, Validators.required),
     });
     this.createMPINForm.patchValue(this.data);
   }
@@ -45,7 +46,7 @@ export class CreateMPINComponent implements OnInit {
         }
       this.showSpinner = false;
       }, ((err: HttpErrorResponse) => {
-        this._toast.error(err.message)
+        this._toast.error(err.error.message || err.message);
       this.showSpinner = false;
       }));
     }

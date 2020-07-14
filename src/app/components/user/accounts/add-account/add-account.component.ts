@@ -79,7 +79,7 @@ export class AddAccountComponent implements OnInit {
         }
       this.showSpinner = false;
       }, ((err: HttpErrorResponse) => {
-        this._toast.error(err.message);
+        this._toast.error(err.error.message || err.message);
         this.showSpinner = false;
       }));
     }

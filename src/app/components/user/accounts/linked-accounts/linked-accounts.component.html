@@ -16,11 +16,11 @@
                             <img class="pointer" src="../../../../assets/_images/menu.svg" alt="menu" width="15" ngbDropdownToggle>
                             <div ngbDropdownMenu>
                                 <button ngbDropdownItem *ngIf ="!obj.AccountStatus" (click)="mpin('createMPIN', obj)">Create MPIN</button>
-                                <button ngbDropdownItem *ngIf ="obj.AccountStatus < 2"(click)="removeAccount(obj.AccountNumber, obj.CNIC)">Remove</button>
-                                <!-- <ng-container *ngIf ="obj.AccountStatus == 1"> -->
+                                <button ngbDropdownItem *ngIf ="obj.AccountStatus < 2"(click)="removeAccount(obj)">Remove</button>
+                                <ng-container *ngIf ="obj.AccountStatus == 1">
                                     <button ngbDropdownItem  (click)="mpin('changeMPIN', obj.CNIC)">Change MPIN</button>
-                                    <button ngbDropdownItem  (click)="mpin('resetMPIN', obj)">Reset MPIN</button>
-                                <!-- </ng-container> -->
+                                    <button ngbDropdownItem  (click)="resetMPIN(obj)">Reset MPIN</button>
+                                </ng-container>
                               </div>
                         </div>
                         </div>
@@ -38,3 +38,4 @@
         <button class="btn" (click)="loadMore()" >Load More</button>
     </div> -->
 </section>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>

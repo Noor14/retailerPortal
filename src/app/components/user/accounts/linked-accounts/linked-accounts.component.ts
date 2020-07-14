@@ -1,3 +1,6 @@
+import { AccountService } from './../account.service';
+import { loadingConfig } from './../../../../constant/globalfunction';
+import { HttpErrorResponse } from '@angular/common/http';
 import { SharedService } from '../../../../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,14 +14,19 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LinkedAccountsComponent implements OnInit {
   @Input() data: any[] = [];
+  public showSpinner: boolean = false;
+  public spinnerConfig:any;
   constructor(
     private _modalService: NgbModal,
     private _toast: ToastrService,
-    private _sharedService: SharedService
+    private _sharedService: SharedService,
+    private _accountService: AccountService
   ) { 
   }
 
   ngOnInit() {
+    this.spinnerConfig = loadingConfig;
+
   }
 
   addAccount() {
@@ -26,15 +34,16 @@ export class LinkedAccountsComponent implements OnInit {
       redirect: 'addAccount'
     });
   }
-  removeAccount(accNumber, cnic){
+  removeAccount(item){
     const modalRef = this._modalService.open(DialogComponent, {
       centered: true,
       keyboard: false,
       backdrop: 'static'
      });
     modalRef.componentInstance.obj = {
-      accountNumber: accNumber,
-      CNIC: cnic,
+      accountNumber: item.AccountNumber,
+      CNIC: item.CNIC,
+      ID: item.ID,
       title: 'Remove Account',
       titleTextColor: 'warning',
       mode: 'confirmDialog',
@@ -44,10 +53,11 @@ export class LinkedAccountsComponent implements OnInit {
     };
     modalRef.result.then((result) => {
       if(result){
-          // let index = this.linkedAccounts.findIndex(obj => obj.id == result)
-          // this.linkedAccounts.splice(index, 1);
-          // this.loadAvailableCount--
-          this._toast.success('Account removed')
+          const index = this.data.findIndex(obj => obj.ID == item.ID);
+          if(index >=0){
+            this.data.splice(index, 1);
+          }
+          this._toast.success('Account removed');
       }
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -60,5 +70,19 @@ export class LinkedAccountsComponent implements OnInit {
         data: obj
       });
   }
+  resetMPIN(obj){
+    this.showSpinner = true;
+    this._accountService.postCall(obj, 'account/mPinReset').then((res: any) => {
+      if (res) {
+      this._toast.success('OTP send');
+      console.log(res);
+      this.mpin('changeMPIN', obj.CNIC);
+      }
+    this.showSpinner = false;
+    }, ((err: HttpErrorResponse) => {
+      this._toast.error(err.error.message || err.message);
+    this.showSpinner = false;
+    }));
+}
   
 }
