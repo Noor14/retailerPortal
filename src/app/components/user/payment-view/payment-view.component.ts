@@ -34,7 +34,7 @@ export class PaymentViewComponent implements OnInit, OnChanges {
    }
 
   ngOnInit() {
-    console.log('this is test');
+    
     this.spinnerConfig = loadingConfig;
       if(this.viewType == 'payment'){
         this.createForm()

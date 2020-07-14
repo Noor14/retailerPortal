@@ -39,10 +39,11 @@ export class GeneralViewComponent implements OnInit {
     }
   }
   getPaymentDetails(resourceName, requestId){
+    
     this.showSpinner=true;
     this._paymentViewService.getDetail(resourceName, requestId).then((data: any) => {
     this.orderInfo =  data.Invoice;
-    this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount, invoiceUpload: this.orderInfo.InvoiceUpload};
+    this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount, invoiceUpload: this.orderInfo.InvoiceUpload,orderTotalAmount:this.orderInfo.TotalAmount};
     this.showSpinner = false;
   })
   .catch((err:HttpErrorResponse) => {
@@ -53,6 +54,7 @@ export class GeneralViewComponent implements OnInit {
   })
 }
   getOrderDetails(requestId){
+    
     this.showSpinner = true;
     this._orderService.getDetail(requestId).then((data: any) => {
     this.showSpinner = false;
