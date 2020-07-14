@@ -42,7 +42,7 @@ export class GeneralViewComponent implements OnInit {
     this.showSpinner = true;
     this._paymentViewService.getDetail(resourceName, requestId).then((data: any) => {
     this.orderInfo =  data.Invoice;
-    this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount, invoiceUpload: this.orderInfo.InvoiceUpload, orderTotalAmount: this.orderInfo.InvoiceTotalAmount};
+    this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount, invoiceUpload: this.orderInfo.InvoiceUpload, orderTotalAmount: this.orderInfo.Amount};
     this.showSpinner = false;
   })
   .catch((err:HttpErrorResponse) => {
@@ -57,7 +57,7 @@ export class GeneralViewComponent implements OnInit {
     this._orderService.getDetail(requestId).then((data: any) => {
     this.showSpinner = false;
     this.orderInfo = data.OrderPaymentDetails;
-    this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount, invoiceUpload: this.orderInfo.InvoiceUpload, orderTotalAmount: this.orderInfo.TotalAmount};
+    this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount, invoiceUpload: this.orderInfo.InvoiceUpload, orderTotalAmount: this.orderInfo.InvoiceTotalAmount};
   })
   .catch(err => {
     this.showSpinner=false;
