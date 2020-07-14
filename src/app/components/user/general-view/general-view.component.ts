@@ -57,7 +57,7 @@ export class GeneralViewComponent implements OnInit {
     this._orderService.getDetail(requestId).then((data: any) => {
     this.showSpinner = false;
     this.orderInfo = data.OrderPaymentDetails;
-    this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount, invoiceUpload: this.orderInfo.InvoiceUpload};
+    this.orderDetailList = {orderDetails: data.OrderDetails, orderTotalDiscount: this.orderInfo.OrderTotalDiscount, invoiceUpload: this.orderInfo.InvoiceUpload, orderTotalAmount: this.orderInfo.TotalAmount};
   })
   .catch(err => {
     this.showSpinner=false;
