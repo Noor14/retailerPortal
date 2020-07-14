@@ -6,7 +6,7 @@ import { AccountService } from './../account.service';
 import { AppPattern } from '../../../../shared/app.mask';
 import { SharedService } from '../../../../services/shared.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-add-account',
@@ -14,8 +14,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-account.component.scss']
 })
 export class AddAccountComponent implements OnInit {
+  @Input() data: any[] = [];
   public accountLinkingForm: FormGroup;
-  public channels: any[] = [];
   public selectedChannel;
   public selectedAccountType;
   public accountTypes: any[] = [];
@@ -41,18 +41,9 @@ export class AddAccountComponent implements OnInit {
       AccountTitle: new FormControl(null),
       CNIC: new FormControl(null, [Validators.required, Validators.maxLength(13)]),
     });
-    this.getChannel();
   }
 
-  getChannel(){
-    this._accountService.getCall('channel').then((res: any[]) => {
-      if (res && res.length) {
-        this.channels = res;
-      }
-    }, ((err: HttpErrorResponse) => {
-      console.log(err);
-    }));
-  }
+
 
   accountInfo(id){
     this._accountService.getById('channel', id).then((res: any[]) => {
@@ -71,7 +62,7 @@ export class AddAccountComponent implements OnInit {
       
     }else{
       this.showSpinner = true;
-      this.accountLinkingForm.controls.AccountTitle.setValue(this.channels.find(obj => obj.ID == this.selectedChannel).Name);
+      this.accountLinkingForm.controls.AccountTitle.setValue(this.data.find(obj => obj.ID == this.selectedChannel).Name);
       this._accountService.postCall(this.accountLinkingForm.value, 'account/linking').then((res: any) => {
         if (res) {
         this._toast.success('Your Meezan Bank account has been lined successfully.', 'Account Linked');

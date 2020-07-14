@@ -7,7 +7,7 @@
                     <div class="form-group has-float-label">
                         <select id="account" class="form-control" [(ngModel)]="selectedChannel" formControlName="ChannelID" (change)="accountInfo(selectedChannel)">
                             <option disabled value='undefined'>Select Account | Wallet</option>
-                            <option *ngFor="let obj of channels" [value]="obj.ID">{{obj.Name}}</option>
+                            <option *ngFor="let obj of data" [value]="obj.ID">{{obj.Name}}</option>
                         </select>
                         <label for="account">Select Account | Wallet</label>
                     </div>

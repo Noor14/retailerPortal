@@ -2,7 +2,6 @@ import { AccountService } from './../accounts/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation, OnDestroy, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef } from '@angular/core';
 import { CreateMPINComponent } from './../accounts/create-mpin/create-mpin.component';
-//import { ResetMPINComponent } from './../accounts/reset-mpin/reset-mpin.component';
 import { ChangeMPINComponent } from './../accounts/change-mpin/change-mpin.component';
 import { SharedService } from 'src/app/services/shared.service';
 import { LinkedAccountsComponent } from './../accounts/linked-accounts/linked-accounts.component';
@@ -25,6 +24,7 @@ import { CanComponentDeactivate } from '../../../services/deactivate.guard';
 })
 export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   private linkedAccountsList: any[] = [];
+  private channels: any[] = [];
   public profileForm: FormGroup;
   public passwordForm: FormGroup;
   public cnicMask = AppMasks.cnic_Mask;
@@ -41,11 +41,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
   private passwordFormSubscriber:any;
   private newPasswordSubscriber:any;
   private confirmpasswordSubscriber:any;
-//   @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) set content(container: ViewContainerRef) {
-//     if (container) { // initially setter gets called with undefined
-//         this.container = container;
-//     }
-//  }
+  private redererSubscriber: any;
   @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
 
@@ -89,11 +85,14 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
       ConfirmPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)])
     });
     this.getProfile(userObject.RetailerID);
-   // this.getLinkedAccounts(userObject.RetailerCode);
-    this._sharedService.renderComponent.subscribe(res => {
+    this.getLinkedAccounts(userObject.RetailerCode);
+    this.getChannel();
+    this.redererSubscriber = this._sharedService.renderComponent.subscribe(res => {
       if (res){
         if(res.redirect == 'linkedAccounts'){
           res.data = this.linkedAccountsList;
+        }else if(res.redirect == 'addAccount'){
+          res.data = this.channels;
         }
         this.renderingComponent(rendererType[res.redirect], res.data);
       }
@@ -105,15 +104,24 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     this.componentRef = this.container.createComponent(factory);
     this.componentRef.instance.data = data;
   }
-  // getLinkedAccounts(retailerCode){
-  //   this._accountService.getCall(`account/${retailerCode}`).then((res: any[]) => {
-  //     if (res) {
-  //       this.linkedAccountsList = res;
-  //     }
-  //   }, ((err: HttpErrorResponse) => {
-  //       this._toast.error(err.error.message || err.message);
-  //   }));
-  // }
+  getLinkedAccounts(retailerCode){
+    this._accountService.getCall(`account/${retailerCode}`).then((res: any[]) => {
+      if (res) {
+        this.linkedAccountsList = res;
+      }
+    }, ((err: HttpErrorResponse) => {
+        this._toast.error(err.error.message || err.message);
+    }));
+  }
+  getChannel(){
+    this._accountService.getCall('channel').then((res: any[]) => {
+      if (res && res.length) {
+        this.channels = res;
+      }
+    }, ((err: HttpErrorResponse) => {
+      this._toast.error(err.error.message || err.message);
+    }));
+  }
   onTabChange(event){
     if(event.nextId == 'accountLinking'){
       setTimeout(()=>this.renderingComponent(LinkedAccountsComponent, this.linkedAccountsList), 0);
@@ -124,6 +132,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
       this.passwordFormSubscriber && this.passwordFormSubscriber.unsubscribe();
       this.newPasswordSubscriber && this.newPasswordSubscriber.unsubscribe();
       this.confirmpasswordSubscriber && this.confirmpasswordSubscriber.unsubscribe();
+      this.redererSubscriber && this.redererSubscriber.unsubscribe();
       this.componentRef && this.componentRef.destroy();    
   }
 
@@ -262,7 +271,6 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
 }
 export const rendererType = {
   changeMPIN : ChangeMPINComponent,
-  //resetMPIN : ResetMPINComponent,
   linkedAccounts : LinkedAccountsComponent,
   addAccount : AddAccountComponent,
   createMPIN: CreateMPINComponent
