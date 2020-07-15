@@ -85,18 +85,18 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
       ConfirmPassword: new FormControl(null,[Validators.required,Validators.pattern(AppPattern.password)])
     });
     this.getProfile(userObject.RetailerID);
-    // this.getLinkedAccounts(userObject.RetailerCode);
-    // this.getChannel();
-    // this.redererSubscriber = this._sharedService.renderComponent.subscribe(res => {
-    //   if (res){
-    //     if(res.redirect == 'linkedAccounts'){
-    //       res.data = this.linkedAccountsList;
-    //     }else if(res.redirect == 'addAccount'){
-    //       res.data = this.channels;
-    //     }
-    //     this.renderingComponent(rendererType[res.redirect], res.data);
-    //   }
-    // });
+    this.getLinkedAccounts(userObject.RetailerCode);
+    this.getChannel();
+    this.redererSubscriber = this._sharedService.renderComponent.subscribe(res => {
+      if (res){
+        if(res.redirect == 'linkedAccounts'){
+          res.data = this.linkedAccountsList;
+        }else if(res.redirect == 'addAccount'){
+          res.data = this.channels;
+        }
+        this.renderingComponent(rendererType[res.redirect], res.data);
+      }
+    });
   }
   renderingComponent(type, data?) {
     this.container && this.container.clear(); 
@@ -104,24 +104,24 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     this.componentRef = this.container.createComponent(factory);
     this.componentRef.instance.data = data;
   }
-  // getLinkedAccounts(retailerCode){
-  //   this._accountService.getCall(`account/${retailerCode}`).then((res: any[]) => {
-  //     if (res) {
-  //       this.linkedAccountsList = res;
-  //     }
-  //   }, ((err: HttpErrorResponse) => {
-  //       this._toast.error(err.error.message || err.message);
-  //   }));
-  // }
-  // getChannel(){
-  //   this._accountService.getCall('channel').then((res: any[]) => {
-  //     if (res && res.length) {
-  //       this.channels = res;
-  //     }
-  //   }, ((err: HttpErrorResponse) => {
-  //     this._toast.error(err.error.message || err.message);
-  //   }));
-  // }
+  getLinkedAccounts(retailerCode){
+    this._accountService.getCall(`account/${retailerCode}`).then((res: any[]) => {
+      if (res) {
+        this.linkedAccountsList = res;
+      }
+    }, ((err: HttpErrorResponse) => {
+        this._toast.error(err.error.message || err.message);
+    }));
+  }
+  getChannel(){
+    this._accountService.getCall('channel').then((res: any[]) => {
+      if (res && res.length) {
+        this.channels = res;
+      }
+    }, ((err: HttpErrorResponse) => {
+      this._toast.error(err.error.message || err.message);
+    }));
+  }
   onTabChange(event){
     if(event.nextId == 'accountLinking'){
       setTimeout(()=>this.renderingComponent(LinkedAccountsComponent, this.linkedAccountsList), 0);
