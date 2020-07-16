@@ -34,6 +34,7 @@ import { ChangeMPINComponent } from './accounts/change-mpin/change-mpin.componen
 import { LinkedAccountsComponent } from './accounts/linked-accounts/linked-accounts.component';
 import { AddAccountComponent } from './accounts/add-account/add-account.component';
 import { AccountService } from './accounts/account.service';
+import { PayAccountComponent } from './accounts/pay-account/pay-account.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { AccountService } from './accounts/account.service';
     AddAccountComponent,
     LinkedAccountsComponent,
     ChangeMPINComponent,
-    CreateMPINComponent
+    CreateMPINComponent,
+    PayAccountComponent
     ],
   entryComponents: [
     AddAccountComponent,
