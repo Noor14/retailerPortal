@@ -87,7 +87,11 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     this.getProfile(userObject.RetailerID);
     this.getLinkedAccounts(userObject.RetailerCode);
     this.getChannel();
-    this.redererSubscriber = this._sharedService.renderComponent.subscribe(res => {
+    this.rendererSubscriberRun();
+  }
+
+  rendererSubscriberRun(){
+        this.redererSubscriber = this._sharedService.renderComponent.subscribe(res => {
       if (res){
         if(res.redirect == 'linkedAccounts'){
           res.data = this.linkedAccountsList;
@@ -99,10 +103,13 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
     });
   }
   renderingComponent(type, data?) {
-    this.container && this.container.clear(); 
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(type);
-    this.componentRef = this.container.createComponent(factory);
-    this.componentRef.instance.data = data;
+    if(this.container){
+      this.container.clear();
+      this.componentRef = this.container.createComponent(factory);
+      this.componentRef.instance.data = data;
+    }
+
   }
   getLinkedAccounts(retailerCode){
     this._accountService.getCall(`account/${retailerCode}`).then((res: any[]) => {
@@ -133,7 +140,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
       this.newPasswordSubscriber && this.newPasswordSubscriber.unsubscribe();
       this.confirmpasswordSubscriber && this.confirmpasswordSubscriber.unsubscribe();
       this.redererSubscriber && this.redererSubscriber.unsubscribe();
-      this.componentRef && this.componentRef.destroy();    
+      this.componentRef && this.componentRef.destroy();
   }
 
   getProfile(retailerID) {
