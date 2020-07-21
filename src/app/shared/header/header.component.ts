@@ -16,6 +16,10 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
   public userDetail: any = {};
   private navToggler:boolean = false;
   public notifications:any;
+  private notificationObj = {
+     TotalRecords: 10,
+     PageNumber : 0
+   }
   @Output() navToggling = new EventEmitter();
   @Input() navigationState: boolean;
   private socketSubscriber:any;
@@ -67,6 +71,16 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy {
     removeNotification(notId){
       this.showSpinner = true;
       this._userService.removeNotification(notId).then(res => {
+        this.showSpinner = false;
+      }).catch((err: HttpErrorResponse)=>{
+        this.showSpinner = false;
+
+      })
+    }
+    loadMoreNotify(){
+      this.notificationObj.PageNumber++
+      this.showSpinner = true;
+      this._userService.getNotification(this.notificationObj).then(res => {
         this.showSpinner = false;
       }).catch((err: HttpErrorResponse)=>{
         this.showSpinner = false;

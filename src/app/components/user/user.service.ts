@@ -47,6 +47,19 @@ export class UserService {
     });
     return promise;
   }
+  getNotification(obj){
+    return new Promise((resolve, reject) => {
+      const apiURL = `${baseApi}/api/useralert/ShowAll`;
+      this._http.get(apiURL, obj)
+        .toPromise()
+        .then(
+          res => resolve(res)
+        )
+        .catch(err => reject(err)
+        )
+
+    });
+  }
   getCalls(resourceName) {
     return new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${resourceName}`;

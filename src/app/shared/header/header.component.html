@@ -39,8 +39,8 @@
                                 </li>
                                 <li class="list-group-item text-center no-notification" *ngIf="!notifications || (notifications?.data && !notifications?.data.length)">No notification yet</li>
                             </ul>
-                            <div class="modal-footer pt-1 pb-1" *ngIf="notifications?.TotalCount && notifications?.TotalCount > 10 ">
-                                <button type="button" class="btn" > <u> Load More </u> </button>
+                            <div class="modal-footer pt-1 pb-1" *ngIf="notifications?.TotalCount && notifications?.TotalCount > 10">
+                                <button type="button" class="btn" (click)="loadMoreNotify()"> <u> Load More </u> </button>
                             </div>
                             <ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>
                         </div>
