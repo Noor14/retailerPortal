@@ -114,7 +114,7 @@ export class SupportgridComponent implements OnInit, OnDestroy {
       backdrop:'static'
      });
      const title = type.charAt(0).toUpperCase() + type.slice(1);
-     const btnText = (type == 'delete')? title : 'Yes, I want';
+     const btnText = (type == 'delete')? title : 'Resolve Ticket';
     modalRef.componentInstance.obj = {id : id, title: `${title} Ticket`, titleTextColor: 'warning', mode: 'support', type: type, btnText: btnText, detail: `Are you sure, you want to ${type} this ticket?`};
     modalRef.result.then((result) => {
       if(result){
