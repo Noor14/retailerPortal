@@ -23,7 +23,7 @@ export class PaymentViewService {
     return promise;
   }
 
-  makePayment(obj, rightId, resourceName) {
+  postCall(obj, resourceName) {
     const promise = new Promise((resolve, reject) => {
       const apiURL = `${baseApi}/api/${resourceName}`;
       this._http.post(apiURL, obj)

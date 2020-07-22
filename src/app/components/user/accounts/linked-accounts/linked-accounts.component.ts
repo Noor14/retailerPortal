@@ -73,6 +73,7 @@ export class LinkedAccountsComponent implements OnInit {
   }
   resetMPIN(obj){
     this.showSpinner = true;
+    obj.key = obj.CNIC;
     this._accountService.postCall(obj, 'account/mPinReset').then((res: any) => {
       if (res) {
       this._toast.success('OTP send');

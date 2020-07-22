@@ -50,7 +50,10 @@
             </div>
             <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
                 <button class="btn btn-primary" type="button" (click)="gotoBack()">Back</button>
-                <button class="btn btn-primary ml-3" type="button" [disabled]="changeMPINForm.invalid" (click)="changeMPIN()">Change MPIN</button>
+                <button class="btn btn-primary ml-3" type="button" [disabled]="changeMPINForm.invalid" (click)="changeMPIN()">
+                    <ng-container *ngIf="data?.redirectFor == 'resetMPIN'; else otherText">Reset MPIN</ng-container>
+                    <ng-template #otherText>Change MPIN</ng-template>
+                </button>
             </div>
     
         </form>

@@ -1,3 +1,4 @@
+import { PayAccountComponent } from './accounts/pay-account/pay-account.component';
 import { UnpaidInvoiceViewComponent } from './unpaid-invoice-view/unpaid-invoice-view.component';
 import { PaymentCreationComponent } from './payment-creation/payment-creation.component';
 import { UserGuard } from './../../services/auth.guard';
@@ -117,7 +118,18 @@ const routes: Routes = [
         '4',
       ]
     },
-    canDeactivate: [DeactivateGuard] },
+    canDeactivate: [DeactivateGuard]
+    },
+    {
+      path: 'pay/:id/:psID/:amount/:dealerCode',
+      canLoad: [UserGuard],
+      component: PayAccountComponent,
+      data: {
+        roles: [
+          '9'
+        ]
+      },
+      },
     {
     path: ':viewType/:id',
     canLoad: [UserGuard],

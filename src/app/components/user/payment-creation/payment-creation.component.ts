@@ -1,3 +1,4 @@
+import { AccountService } from './../accounts/account.service';
 import { CanComponentDeactivate } from './../../../services/deactivate.guard';
 import { AppPattern } from '../../../shared/app.mask';
 import { validateAllFormFields, loadingConfig } from './../../../constant/globalfunction';
@@ -21,6 +22,7 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
   @Input() paymentDetail:any;
   @Input() requestType: number = 1;
   @Input() distributorList: any[] = [];
+  public payByAccounts: any[] = []
   public showSpinner:boolean;
   public spinnerConfig:any;
   public paymentForm: FormGroup; 
@@ -40,6 +42,7 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
     private _modalService: NgbModal,
     private activatedRoute: ActivatedRoute,
     private _paymentViewService: PaymentViewService,
+    private _accountService: AccountService,
     private _route: Router,
     private _domSanitizer: DomSanitizer
     ) {
@@ -63,11 +66,11 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
       }
     }
 
-    ngOnInit() 
-    {
-      
+    ngOnInit() {
+     const userObject = JSON.parse(localStorage.getItem('userIdentity')).UserAccount;
       this.payAxisMessage();
       this.spinnerConfig = loadingConfig;
+      this.getpayByAccounts(userObject.RetailerCode);
       if(this.requestType){
         this.createForm();
         this.getDistributionList();
@@ -76,8 +79,8 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
     createForm(){
       this.paymentForm= new FormGroup ({
         ID: new FormControl(0, Validators.required),
-        DealerCode: new FormControl({value:null, disabled: !this.requestType && this.requestId},Validators.required),
-        PaidAmount: new FormControl({value:null, disabled: !this.requestType && this.requestId},[
+        DealerCode: new FormControl({value:null, disabled: !this.requestType && this.requestId}, Validators.required),
+        PaidAmount: new FormControl({value:null, disabled: !this.requestType && this.requestId}, [
         Validators.required, Validators.min(500), Validators.maxLength(9), Validators.pattern(AppPattern.number)])
       })
     }
@@ -93,6 +96,18 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
         }
     }
 
+    getpayByAccounts(code){
+      this.showSpinner = true;
+      this._accountService.getById('account/getLinkAccount', code).then((res: any) => {
+        if(res){
+         this.payByAccounts = res;
+        }
+      this.showSpinner = false;
+    })
+    .catch(err => {
+      this.showSpinner=false;
+    })
+    }
     getPaymentDetails(resourceName, requestId){
       this.showSpinner = true;
       this._paymentViewService.getDetail(resourceName, requestId).then((data: any) => {
@@ -141,7 +156,7 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
     savePayment(){
       if(this.paymentForm.valid){
       this.showSpinner=true;
-      this._paymentViewService.makePayment(this.paymentForm.value,8,"prepaidrequests/save")
+      this._paymentViewService.postCall(this.paymentForm.value ,"prepaidrequests/save")
       .then((data:any)=>{
       this.showSpinner=false;
         if(data && data.ID){
@@ -179,6 +194,9 @@ export class PaymentCreationComponent implements OnInit, OnDestroy, OnChanges, C
       // if(this.requestId){
       //   this._route.navigate(['/user/payment'])
       // }
+    }
+    navigateToPay(id){
+      this._route.navigate(['/user/pay', id, this.paymentPrepaidNumber, this.paymentForm.controls['PaidAmount'].value, this.paymentForm.controls['DealerCode'].value])
     }
   
     viewVoucher(){
