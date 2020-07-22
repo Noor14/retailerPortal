@@ -94,6 +94,14 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
         this.redererSubscriber = this._sharedService.renderComponent.subscribe(res => {
       if (res){
         if(res.redirect == 'linkedAccounts'){
+          if(res.data && !res.data.hasOwnProperty('NewCreated')){
+           const index = this.linkedAccountsList.findIndex(obj => obj.ID == res.data.ID);
+           if (index >= 0) {
+             this.linkedAccountsList.splice(index, 1, res.data);
+           }
+          }else if(res.data && res.data.hasOwnProperty('NewCreated') && res.data.NewCreated){
+            this.linkedAccountsList.unshift(res.data);
+          }
           res.data = this.linkedAccountsList;
         }else if(res.redirect == 'addAccount'){
           res.data = this.channels;

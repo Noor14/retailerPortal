@@ -66,7 +66,8 @@ export class AddAccountComponent implements OnInit {
       this._accountService.postCall(this.accountLinkingForm.value, 'account/linking').then((res: any) => {
         if (res) {
         this._toast.success('Your Meezan Bank account has been lined successfully.', 'Account Linked');
-        this.gotoBack(res);
+        res.NewCreated = true;
+        this.redirectMPIN('createMPIN', res);
         }
       this.showSpinner = false;
       }, ((err: HttpErrorResponse) => {
@@ -76,6 +77,13 @@ export class AddAccountComponent implements OnInit {
     }
   
   }
+  redirectMPIN(type, obj){
+    obj.redirectFor = type;
+    this._sharedService.setRenderComponent({
+      redirect: type,
+      data: obj
+    });
+}
   gotoBack(obj?){
     this._sharedService.setRenderComponent({
       redirect: 'linkedAccounts',

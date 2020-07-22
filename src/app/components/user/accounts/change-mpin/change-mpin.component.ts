@@ -26,7 +26,6 @@ export class ChangeMPINComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    console.log(this.data.redirectFor)
     this.spinnerConfig = loadingConfig;
     this.changeMPINForm = new FormGroup({
       newPin: new FormControl(null, [Validators.required, Validators.maxLength(4), Validators.minLength(4)]),

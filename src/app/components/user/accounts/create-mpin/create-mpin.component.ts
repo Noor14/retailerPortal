@@ -42,7 +42,9 @@ export class CreateMPINComponent implements OnInit {
       this._accountService.postCall(this.createMPINForm.value, 'account/mPinGeneration').then((res: any) => {
         if (res) {
         this._toast.success('MPIN created');
-        this.gotoBack();
+        this.data.AccountStatusDesc = 'Connected';
+        this.data.AccountStatus = 1;
+        this.gotoBack(this.data);
         }
       this.showSpinner = false;
       }, ((err: HttpErrorResponse) => {
@@ -52,9 +54,10 @@ export class CreateMPINComponent implements OnInit {
     }
   }
 
-  gotoBack(){
+  gotoBack(data?){
     this._sharedService.setRenderComponent({
-      redirect: 'linkedAccounts'
+      redirect: 'linkedAccounts',
+      data: data || this.data
     });
   }
 
