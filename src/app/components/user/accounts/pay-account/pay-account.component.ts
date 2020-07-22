@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AccountService } from './../account.service';
 import { ActivatedRoute } from '@angular/router';
-import { loadingConfig } from './../../../../constant/globalfunction';
+import { loadingConfig, validateAllFormFields } from './../../../../constant/globalfunction';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -21,6 +21,7 @@ export class PayAccountComponent implements OnInit {
   private dealerCode: number;
   private psID: number;
   public MPINToggle: boolean = false;
+  private accountInfo:any
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -79,6 +80,7 @@ export class PayAccountComponent implements OnInit {
         res.BankAccountNumber = data.AccountNumber;
         res.CNIC = data.CNIC;
         res.creditCNIC = res.creditCNIC.split('-').join('');
+        this.accountInfo = res;
         this.payAccountForm.controls['Charges'].setValue(res.Charges);
         this.payAccountForm.controls['Total'].setValue(res.TotalAmount);
         this.getTitleFetch(res);
@@ -107,7 +109,40 @@ export class PayAccountComponent implements OnInit {
   }
 
   pay(){
-    console.log("pay")
+    if(this.payAccountForm.invalid) {
+      validateAllFormFields(this.payAccountForm);
+      
+    }else{
+      const obj ={
+        Amount: this.payAccountForm.controls['Amount'].value,
+        BankAccountNumber: this.payAccountForm.controls['BankAccountNumber'].value,
+        BankIMD: this.accountInfo.BankIMD,
+        BankName: this.accountInfo.BankName,
+        Beneficiary: this.payAccountForm.controls['Beneficiary'].value,
+        CNIC: this.accountInfo.CNIC,
+        Charges: this.payAccountForm.controls['Charges'].value,
+        DealerCode: this.dealerCode,
+        Total: this.payAccountForm.controls['Total'].value,
+        creditAccount: this.accountInfo.creditBankAccountNumber,
+        creditCNIC: this.accountInfo.creditCNIC,
+        debitAccount: this.payAccountForm.controls['BankAccountNumber'].value,
+        debitCNIC: this.accountInfo.CNIC,
+        mPin: this.payAccountForm.controls['mPin'].value,
+        paymentNumber: this.psID
+      };
+      this.showSpinner = true;
+      this._accountService.postCall(obj, 'payment/fundTransfer').then((res: any) => {
+        if (res) {
+        this._toast.success('Paid successfully');
+        }
+          this.showSpinner = false;
+      }, ((err: HttpErrorResponse) => {
+          this.showSpinner = false;
+          this._toast.error(err.error.message || err.message);
+  
+      }));
+    }
+  
   }
 
 }
