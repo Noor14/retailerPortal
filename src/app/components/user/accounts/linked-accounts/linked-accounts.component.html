@@ -3,7 +3,7 @@
         <div class="text-right addAccountbtn">
             <button class="btn btn-primary" type="button" (click)="addAccount()">Add Account</button>
         </div>
-        <div class="row accountList" id="nav-scrollbar">
+        <div class="row accountList" id="nav-scrollbar" *ngIf="data && data.length">
             <div class="col-md-4 col-sm-6 col-xs-12 mb-4" *ngFor="let obj of data">
                 <div class="card" >
                     <div class="card-body d-flex flex-column justify-content-between">
@@ -32,10 +32,8 @@
                   </div>
             </div>
         </div>
-      <!-- <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!lstTotalNetwork.length && !showSpinner">No Accounts</span> -->
+      <span class="d-flex align-items-center justify-content-center h-100" *ngIf="!data.length && !showSpinner">No Account Linked</span>
     </div>
-    <!-- <div class="col-md-12 text-center" *ngIf="loadAvailable">
-        <button class="btn" (click)="loadMore()" >Load More</button>
-    </div> -->
+   
 </section>
 <ngx-spinner [visible]="showSpinner" [config]="spinnerConfig"></ngx-spinner>
