@@ -45,7 +45,7 @@ export class CreateMPINComponent implements OnInit {
         this._toast.success('MPIN created');
         this.data.AccountStatusDesc = 'Connected';
         this.data.AccountStatus = 1;
-        this.gotoBack(this.data);
+        this.gotoBack();
         }
       this.showSpinner = false;
       }, ((err: HttpErrorResponse) => {
@@ -55,13 +55,13 @@ export class CreateMPINComponent implements OnInit {
     }
   }
 
-  gotoBack(value?){
-    let obj = {
+  gotoBack(type?){
+    const obj = {
       redirect: 'linkedAccounts',
-      data: value
+      data: this.data
     };
-    if(typeof value == 'string'){
-      delete obj.data
+    if(type &&  (!this.data.hasOwnProperty('redirectFrom') || this.data.redirectFrom != 'addAccount')){
+      delete obj.data;
     }
     this._sharedService.setRenderComponent(obj);
   }
