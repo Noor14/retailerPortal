@@ -138,7 +138,7 @@ export class PayAccountComponent implements OnInit {
       this.showSpinner = true;
       this._accountService.postCall(obj, 'payment/fundTransfer').then((res: any) => {
         if (res) {
-          this._toast.success('Paid successfully');
+          this._toast.success(res);
           this._route.navigate(['/user/dashboard']);
         }
           this.showSpinner = false;

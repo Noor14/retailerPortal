@@ -55,11 +55,15 @@ export class CreateMPINComponent implements OnInit {
     }
   }
 
-  gotoBack(data?){
-    this._sharedService.setRenderComponent({
+  gotoBack(value?){
+    let obj = {
       redirect: 'linkedAccounts',
-      data: data || this.data
-    });
+      data: value
+    };
+    if(typeof value == 'string'){
+      delete obj.data
+    }
+    this._sharedService.setRenderComponent(obj);
   }
 
 }

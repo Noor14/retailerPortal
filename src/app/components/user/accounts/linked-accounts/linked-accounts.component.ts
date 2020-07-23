@@ -66,6 +66,7 @@ export class LinkedAccountsComponent implements OnInit {
 
   redirectMPIN(type, obj){
       obj.redirectFor = type;
+      obj.redirectFrom = 'linkedAccounts';
       this._sharedService.setRenderComponent({
         redirect: (type == 'resetMPIN')? 'changeMPIN' : type,
         data: obj

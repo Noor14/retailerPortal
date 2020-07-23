@@ -99,7 +99,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
            if (index >= 0) {
              this.linkedAccountsList.splice(index, 1, res.data);
            }
-          }else if(res.data && res.data.hasOwnProperty('NewCreated') && res.data.NewCreated){
+          }else if(res.data && res.data.hasOwnProperty('NewCreated') && res.data.NewCreated && res.data.redirectFrom == 'addAccount'){
             this.linkedAccountsList.unshift(res.data);
           }
           res.data = this.linkedAccountsList;
