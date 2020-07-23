@@ -1,9 +1,7 @@
 import { ToastrService } from 'ngx-toastr';
 import { loadingConfig, validateAllFormFields } from './../../../../constant/globalfunction';
-import { AppMasks } from '../../../../shared/app.mask';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AccountService } from './../account.service';
-import { AppPattern } from '../../../../shared/app.mask';
 import { SharedService } from '../../../../services/shared.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';

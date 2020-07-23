@@ -24,13 +24,13 @@
                 <ng-container *ngIf="selectedAccountType">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label position-relative">
-                            <input maxlength='14' type="text" noWhiteSpace id="accountno" class="form-control" formControlName="AccountNumber" placeholder="Account No">
+                            <input numberOnly maxlength='14' type="text" noWhiteSpace id="accountno" class="form-control" formControlName="AccountNumber" placeholder="Account No">
                             <label for="accountno">Account No</label>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group has-float-label">
-                            <input maxlength='13' type="text" id="cnic"  class="form-control" formControlName="CNIC" placeholder="CNIC No">
+                            <input maxlength='13' type="text" id="cnic" numberOnly class="form-control" formControlName="CNIC" placeholder="CNIC No">
                             <label for="cnic">CNIC No</label>                                        
                         </div>
                     </div>

@@ -1,6 +1,7 @@
+import { NumberDirective } from '../directives/number.directive';
+import { AmountDirective } from './../directives/amount-only.directive';
 import { UserRoleDirective } from './../directives/user-role.directive';
 import { AlphaNumericOnlyDirective } from '../directives/alpha-numeric-only.directive';
-import { NumberDirective } from 'src/app/directives/numbers-only.directive';
 import { NoWhiteSpaceDirective } from './../directives/no-white-space.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,6 +21,7 @@ import { FooterComponent } from './footer/footer.component';
   declarations: [
     UserRoleDirective,
     NoWhiteSpaceDirective,
+    AmountDirective,
     NumberDirective,
     AlphaNumericOnlyDirective,
     HeaderComponent,
@@ -47,6 +49,7 @@ import { FooterComponent } from './footer/footer.component';
     SearchingComponent,
     NoWhiteSpaceDirective,
     UserRoleDirective,
+    AmountDirective,
     NumberDirective,
     AlphaNumericOnlyDirective,
     NgbModule,

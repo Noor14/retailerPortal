@@ -2,9 +2,9 @@ import { AppPattern } from 'src/app/shared/app.mask';
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[numbersOnly]'
+  selector: '[amountsOnly]'
 })
-export class NumberDirective {
+export class AmountDirective {
 
  // Allow key codes for special events. Reflect :
  // Backspace, tab, end, home
@@ -14,7 +14,7 @@ constructor(private el: ElementRef) {
  }
  @HostListener('keydown', [ '$event' ])
  onKeyDown(event: KeyboardEvent) {
-    const regex = AppPattern.number;
+    const regex = AppPattern.amount;
       // Allow Backspace, tab, end, and home keys
       if (this.specialKeys.indexOf(event.key) !== -1) {
       return;

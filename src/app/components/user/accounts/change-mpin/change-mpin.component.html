@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group has-float-label password">
-                        <input minlength="4" maxlength="4" noWhiteSpace [type]="oldMPINToggle? 'text':'password'" id="oldmpin" class="form-control" formControlName="oldPin" [placeholder]="(data?.redirectFor == 'resetMPIN')? 'OTP' : 'Old MPIN'">
+                        <input numberOnly minlength="4" maxlength="4" noWhiteSpace [type]="oldMPINToggle? 'text':'password'" id="oldmpin" class="form-control" formControlName="oldPin" [placeholder]="(data?.redirectFor == 'resetMPIN')? 'OTP' : 'Old MPIN'">
                         <label for="oldmpin">
                             <ng-container *ngIf="data?.redirectFor == 'resetMPIN'; else changempin">OTP</ng-container>
                             <ng-template #changempin>Old MPIN</ng-template>
@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group has-float-label password">
-                        <input minlength="4" maxlength="4" noWhiteSpace [type]="newMPINToggle? 'text':'password'" id="newmpin" class="form-control" formControlName="newPin"  placeholder="New MPIN">
+                        <input numberOnly minlength="4" maxlength="4" noWhiteSpace [type]="newMPINToggle? 'text':'password'" id="newmpin" class="form-control" formControlName="newPin"  placeholder="New MPIN">
                         <label for="newmpin">New MPIN</label>
                         <span (click)="newMPINToggle = !newMPINToggle">
                             <img src="../../../../assets/_images/eye.svg" width="17" alt="icon" />
@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group has-float-label password">
-                        <input minlength="4" maxlength="4" noWhiteSpace [type]="confirmMPINToggle ? 'text':'password'" id="confirmmpin"  class="form-control" formControlName="confirmmPin" placeholder="Confirm MPIN">
+                        <input numberOnly minlength="4" maxlength="4" noWhiteSpace [type]="confirmMPINToggle ? 'text':'password'" id="confirmmpin"  class="form-control" formControlName="confirmmPin" placeholder="Confirm MPIN">
                         <label for="confirmmpin">Confirm MPIN</label>
                         <span (click)="confirmMPINToggle=!confirmMPINToggle">
                             <img src="../../../../assets/_images/eye.svg" alt="icon" width="17" />

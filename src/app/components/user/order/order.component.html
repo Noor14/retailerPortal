@@ -123,7 +123,7 @@
                                 </td>
                                 <td>{{rowData.ProductUnitPrice  | currency:'PKR '}}</td>
                                 <td>
-                                    <input type="number" min="1" numbersOnly *ngIf="!rowNode.node.children || (rowNode.node.children && !rowNode.node.children.length)"
+                                    <input type="number" min="1" amountsOnly *ngIf="!rowNode.node.children || (rowNode.node.children && !rowNode.node.children.length)"
                                     class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="rowData.OrderQty"
                                       (blur)="selectProduct(rowData)" />
                                 </td>
@@ -182,7 +182,7 @@
                                 <td>{{(order.DiscountAmount || 0) | currency:'PKR '}}</td>
                                 <td>{{order.ProductUnitPrice  | currency:'PKR '}}</td>
                                 <td>
-                                    <input type="number" (focus)="checkValue(order.OrderQty)" min="1" numbersOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
+                                    <input type="number" (focus)="checkValue(order.OrderQty)" min="1" amountsOnly class="form-control w-50 text-center" placeholder="Enter Qty" [(ngModel)]="order.OrderQty"
                                     (blur)="checkOrderStage(order, i)"  />
                                 </td>
                                 <td>{{order.OrderQty * (order.ProductUnitPrice - order.DiscountAmount) | currency:'PKR '}}</td>
