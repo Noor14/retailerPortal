@@ -15,6 +15,7 @@ export class CreateMPINComponent implements OnInit {
   @Input() data: any = {};
   public createMPINForm: FormGroup;
   public showSpinner: boolean = false;
+  public MPINToggle: boolean = false;
   public spinnerConfig:any;
   constructor(
     private _sharedService: SharedService,

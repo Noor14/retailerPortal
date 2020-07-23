@@ -23,9 +23,14 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <div class="form-group has-float-label">
-                            <input numberOnly type="text" minlength="4" maxlength="4" id="mpin"  class="form-control" formControlName="mPin" placeholder="Enter MPIN">
-                            <label for="mpin">Enter MPIN</label>                                        
+                        <div class="form-group has-float-label password">
+                            <input numberOnly type="text" minlength="4" maxlength="4" [type]="MPINToggle? 'text':'password'" id="mpin"  class="form-control" formControlName="mPin" placeholder="Enter MPIN">
+                            <label for="mpin">Enter MPIN</label>
+                            <span (click)="MPINToggle = !MPINToggle">
+                                <img src="../../../../assets/_images/eye.svg" width="17" alt="icon" />
+                            </span>
+                            <img src="../../../../assets/_images/info.svg" width="14" alt="icon" class="infoIcon"
+                            triggers="click" placement="bottom-right" [autoClose]="'outside'" ngbTooltip="MPIN must be 4 digits long"/>                                  
                         </div>
                     </div>
                 </ng-container>
