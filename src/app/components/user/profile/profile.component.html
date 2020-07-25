@@ -8,7 +8,7 @@
             </li>
         </ol>
         <ngb-tabset (tabChange)="onTabChange($event)">
-            <ngb-tab id="profile">
+            <ngb-tab id="profile" [disabled]="tabDisabled">
                 <ng-template ngbTabTitle>Profile</ng-template>
                 <ng-template ngbTabContent>
 
@@ -96,7 +96,7 @@
                     </div>
                 </ng-template>
             </ngb-tab>
-            <ngb-tab *userRole="[8]" id="chngPassword">
+            <ngb-tab [disabled]="tabDisabled" *userRole="[8]" id="chngPassword">
                 <ng-template ngbTabTitle >Change Password </ng-template>
                 <ng-template ngbTabContent>
                     <div class="contentArea bg-white p-4">

@@ -65,7 +65,7 @@ export class AddAccountComponent implements OnInit {
         if (res) {
         this._toast.success('Your Meezan Bank account has been lined successfully.', 'Account Linked');
         res.NewCreated = true;
-        res.redirectFrom = 'addAccount'
+        res.redirectFrom = 'addAccount';
         this.redirectMPIN('createMPIN', res);
         }
       this.showSpinner = false;

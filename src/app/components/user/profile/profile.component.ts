@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
   private newPasswordSubscriber:any;
   private confirmpasswordSubscriber:any;
   private redererSubscriber: any;
+  public tabDisabled: boolean = false;
   @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
 
@@ -93,6 +94,7 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
   rendererSubscriberRun(){
         this.redererSubscriber = this._sharedService.renderComponent.subscribe(res => {
       if (res){
+        this.tabDisabled = false;
         if(res.redirect == 'linkedAccounts'){
           if(res.data && !res.data.hasOwnProperty('NewCreated')){
            const index = this.linkedAccountsList.findIndex(obj => obj.ID == res.data.ID);
@@ -103,7 +105,13 @@ export class ProfileComponent implements OnInit, OnDestroy, CanComponentDeactiva
             this.linkedAccountsList.unshift(res.data);
           }
           res.data = this.linkedAccountsList;
-        }else if(res.redirect == 'addAccount'){
+        }
+        else if(res.redirect == 'createMPIN' && res.data 
+        && res.data.hasOwnProperty('NewCreated') && res.data.NewCreated 
+        && res.data.redirectFrom == 'addAccount'){
+          this.tabDisabled = true;
+        }
+        else if(res.redirect == 'addAccount'){
           res.data = this.channels;
         }
         this.renderingComponent(rendererType[res.redirect], res.data);

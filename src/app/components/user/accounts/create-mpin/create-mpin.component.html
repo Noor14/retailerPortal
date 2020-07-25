@@ -37,7 +37,7 @@
          
             </div>
             <div class="d-sm-flex flex-sm-row flex-xs-column justify-content-end">
-                <button class="btn btn-primary" type="button" (click)="gotoBack('back')">Back</button>
+                <button class="btn btn-primary" type="button" (click)="gotoBack('back')" *ngIf="data.redirectFrom != 'addAccount'">Back</button>
                 <button class="btn btn-primary ml-3" type="button" [disabled]="createMPINForm.invalid" (click)="createMPIN()">Create MPIN</button>
             </div>
     
