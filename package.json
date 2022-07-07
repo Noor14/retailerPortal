@@ -30,7 +30,7 @@
     "angular2-text-mask": "^9.0.0",
     "bootstrap": "^4.4.1",
     "float-label-css": "^1.0.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng-connection-service": "^1.0.4",
     "ngx-captcha": "^8.0.1",
     "ngx-toastr": "^11.3.2",
